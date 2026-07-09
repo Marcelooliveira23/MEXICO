@@ -1,0 +1,117 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+  .login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 80px);
+    background:
+      radial-gradient(
+        circle at top left,
+        rgba(255, 255, 255, 0.18),
+        transparent 32%
+      ),
+      radial-gradient(
+        circle at bottom right,
+        rgba(144, 202, 249, 0.18),
+        transparent 28%
+      ),
+      var(--colors-brand-gradient);
+    border-radius: 18px;
+    padding: 1rem;
+  }
+  .login-card {
+    width: 100%;
+    max-width: 420px;
+    padding: 2rem;
+    border-radius: 14px;
+    box-shadow: 0 16px 42px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(7px);
+    border: 1px solid rgba(0, 90, 175, 0.14);
+  }
+  .login-card h1 {
+    text-align: center;
+    margin-bottom: 1.8rem;
+    font-weight: bold;
+    color: var(--colors-brand-secondary);
+    font-family: "Rubik", "Roboto", sans-serif;
+  }
+  .login-card .form-label {
+    font-weight: 600;
+    color: var(--colors-brand-secondary);
+  }
+  .login-card .form-control {
+    border-radius: 5px;
+    padding: 0.75rem;
+    background: #fff;
+    color: var(--colors-black100);
+    border: 1px solid var(--colors-gray400);
+  }
+  .login-card .btn-primary {
+    padding: 0.75rem;
+    font-weight: bold;
+    border-radius: 5px;
+    background: var(--colors-brand-gradient);
+    border: none;
+  }
+  .login-card .btn-primary:hover {
+    background: linear-gradient(
+      135deg,
+      var(--colors-brand-dark) 0%,
+      var(--colors-brand-primary) 100%
+    );
+  }
+  .login-footer {
+    text-align: center;
+    color: rgba(0, 50, 127, 0.7);
+    font-size: 0.85rem;
+    margin-top: 1rem;
+  }
+</style>
+<div class="login-container">
+  <div class="card login-card bg-white">
+    <div class="card-body">
+      <h1 class="card-title">
+        <i class="bi bi-shield-lock-fill me-2"></i>Login
+      </h1>
+      <form method="post" action="{{ url_for('login') }}">
+        <div class="mb-3">
+          <label class="form-label" for="username"
+            ><i class="bi bi-person-fill me-1"></i>Username</label
+          >
+          <input
+            class="form-control"
+            type="text"
+            id="username"
+            name="username"
+            autocomplete="username"
+            required
+            autofocus
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="password"
+            ><i class="bi bi-key-fill me-1"></i>Password</label
+          >
+          <input
+            class="form-control"
+            type="password"
+            id="password"
+            name="password"
+            autocomplete="current-password"
+            required
+          />
+        </div>
+        <button class="btn btn-primary w-100" type="submit">
+          <i class="bi bi-box-arrow-in-right me-1"></i>Sign In
+        </button>
+      </form>
+      <hr />
+      <p class="login-footer">
+        <strong>Mexicana Troubleshooting System</strong><br />
+        <small>Maintenance Management Platform</small>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

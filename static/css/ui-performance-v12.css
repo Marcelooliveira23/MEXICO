@@ -1,0 +1,15 @@
+/* P07 UI performance baseline */
+[data-lazy-section] {
+  content-visibility: auto;
+  contain-intrinsic-size: 320px;
+  opacity: 0.98;
+  transition: opacity 160ms ease-out;
+}
+
+[data-lazy-section].lazy-visible {
+  opacity: 1;
+}
+
+.ui-perf-show-more-wrap {
+  margin: 0.5rem 0 1rem;
+}

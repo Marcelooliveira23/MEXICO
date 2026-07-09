@@ -1,0 +1,116 @@
+{
+  "name": "Mexicana Troubleshooting System",
+  "short_name": "Mexicana",
+  "description": "Sistema de Troubleshooting para controle de falhas e manutenção",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#002E5D",
+  "background_color": "#FFFFFF",
+  "categories": [
+    "productivity",
+    "business"
+  ],
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/static/mexicana-symbol.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/static/img/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/static/img/icon-192-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/static/img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/static/img/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/static/screenshots/desktop-1.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Dashboard principal"
+    },
+    {
+      "src": "/static/screenshots/mobile-1.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Cadastro de falhas"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Nova Falha",
+      "short_name": "Nova Falha",
+      "description": "Cadastrar nova falha",
+      "url": "/cadastro?quick=true",
+      "icons": [
+        {
+          "src": "/static/img/icon-new-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Consultar",
+      "short_name": "Consultar",
+      "description": "Consultar falhas",
+      "url": "/consulta",
+      "icons": [
+        {
+          "src": "/static/img/icon-search-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "iarc_rating_id": "",
+  "protocol_handlers": [],
+  "share_target": {
+    "action": "/share-target",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url",
+      "files": [
+        {
+          "name": "attachment",
+          "accept": [
+            "image/*",
+            "application/pdf"
+          ]
+        }
+      ]
+    }
+  }
+}

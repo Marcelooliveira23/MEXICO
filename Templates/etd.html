@@ -1,0 +1,934 @@
+{% extends 'base.html' %} {% block title %}ETD - Mexicana Technical
+Disposition{% endblock %} {% block content %}
+
+<style>
+  /* Responsive layout */
+  .container-fluid {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  @media (min-width: 768px) {
+    .container-fluid {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container-fluid {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+  }
+
+  @media (min-width: 1400px) {
+    .container-fluid {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .container-fluid {
+      max-width: 1900px;
+      margin: 0 auto;
+    }
+  }
+
+  /* ETD Header */
+  .etd-header {
+    background: var(--colors-brand-gradient);
+    color: white;
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+  }
+
+  .etd-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+
+  .etd-header p {
+    opacity: 0.95;
+    font-size: 1.1rem;
+  }
+
+  /* ETD Summary Cards */
+  .etd-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: 128px;
+    align-items: stretch;
+    gap: 16px;
+    margin-bottom: 25px;
+  }
+
+  @media (max-width: 768px) {
+    .etd-summary-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .etd-summary-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (min-width: 1400px) {
+    .etd-summary-grid {
+      grid-template-columns: repeat(4, minmax(280px, 1fr));
+    }
+  }
+
+  .etd-summary-card {
+    background: white;
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border-top: 4px solid var(--colors-brand-primary);
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .etd-summary-card.critical {
+    border-top-color: var(--colors-error);
+  }
+
+  .etd-summary-card.safety {
+    border-top-color: var(--colors-error);
+  }
+
+  .etd-summary-card.issued {
+    border-top-color: var(--colors-success);
+  }
+
+  .etd-summary-value {
+    display: block;
+    line-height: 1;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--colors-black100);
+    margin: 10px 0;
+  }
+
+  .etd-summary-label {
+    min-height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  /* ETD Item Card */
+  .etd-item-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border-left: 4px solid #ff9800;
+    transition: all 0.3s ease;
+  }
+
+  .etd-item-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .etd-item-card.critical {
+    border-left-color: #dc3545;
+  }
+
+  .etd-item-card.safety {
+    border-left-color: #d32f2f;
+  }
+
+  .etd-item-card.issued {
+    border-left-color: #28a745;
+  }
+
+  .etd-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e9ecef;
+  }
+
+  .etd-item-id {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #333;
+  }
+
+  .etd-item-meta {
+    font-size: 0.85rem;
+    color: #999;
+    margin-top: 2px;
+  }
+
+  .etd-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+
+  .etd-detail {
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 8px;
+  }
+
+  .etd-detail-label {
+    font-size: 0.75rem;
+    color: #999;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .etd-detail-value {
+    font-weight: 700;
+    color: #333;
+    font-size: 1rem;
+  }
+
+  /* Category Badges */
+  .category-badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 12px 0;
+  }
+
+  .category-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 16px;
+    font-weight: 600;
+    font-size: 0.75rem;
+  }
+
+  .category-safety {
+    background: #f3e5f5;
+    color: #6a1b9a;
+    border: 1px solid #ce93d8;
+  }
+
+  .category-hotline {
+    background: #e3f2fd;
+    color: #1565c0;
+    border: 1px solid #90caf9;
+  }
+
+  .category-systemas {
+    background: #f1f8e9;
+    color: #558b2f;
+    border: 1px solid #9ccc65;
+  }
+
+  .category-estruturas {
+    background: #fff3e0;
+    color: #e65100;
+    border: 1px solid #ffb74d;
+  }
+
+  .category-outros {
+    background: #e8eaf6;
+    color: #283593;
+    border: 1px solid #9fa8da;
+  }
+
+  /* Status Badge */
+  .etd-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+
+  .status-issued {
+    background: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #81c784;
+  }
+
+  .status-pending {
+    background: #fff3e0;
+    color: #e65100;
+    border: 1px solid #ffb74d;
+  }
+
+  .status-critical {
+    background: #ffebee;
+    color: #c41e3a;
+    border: 1px solid #ef9a9a;
+    animation: pulse-red 2s infinite;
+  }
+
+  @keyframes pulse-red {
+    0%,
+    100% {
+      background: #ffebee;
+    }
+    50% {
+      background: #ffcdd2;
+    }
+  }
+
+  /* Urgency Indicator */
+  .urgency-high {
+    color: #dc3545;
+    font-weight: 700;
+  }
+
+  .urgency-medium {
+    color: #ff9800;
+    font-weight: 600;
+  }
+
+  .urgency-low {
+    color: #28a745;
+    font-weight: 600;
+  }
+
+  /* Form Section */
+  .form-section {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  .form-section-title {
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .form-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+  }
+
+  .form-control,
+  .form-select {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px 12px;
+    transition: border-color 0.2s;
+  }
+
+  .form-control:focus,
+  .form-select:focus {
+    border-color: #ff9800;
+    box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.1);
+  }
+
+  .form-check {
+    margin-bottom: 8px;
+  }
+
+  .form-check-label {
+    margin-left: 6px;
+  }
+
+  /* Filter Section */
+  .filter-section {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  .filter-title {
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Operational Insight Box */
+  .ops-insight-box {
+    background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+    border-left: 4px solid #ff9800;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+
+  .ops-insight-title {
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .ops-insight-text {
+    color: #666;
+    font-size: 0.95rem;
+  }
+
+  /* Empty State */
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+  }
+
+  .empty-state-icon {
+    font-size: 3rem;
+    color: #ddd;
+    margin-bottom: 15px;
+  }
+
+  .empty-state p {
+    color: #999;
+    font-size: 1.1rem;
+  }
+</style>
+
+<div class="container-fluid mt-4">
+  <!-- Header -->
+  <div class="etd-header">
+    <div class="d-flex justify-content-between align-items-start">
+      <div>
+        <h1>
+          <i class="fas fa-box-open"></i> ETD - Mexicana Technical Disposition
+        </h1>
+        <p>
+          Tracking technical dispositions, affected components, and critical
+          items with prioritization insight.
+        </p>
+      </div>
+      <div class="d-flex gap-2 flex-wrap">
+        <button class="btn btn-light btn-sm" onclick="history.back()">
+          <i class="fas fa-arrow-left"></i> Back
+        </button>
+        <button class="btn btn-light btn-sm" onclick="location.reload()">
+          <i class="fas fa-sync"></i> Refresh
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ETD Summary Cards -->
+  <div class="etd-summary-grid">
+    <div class="etd-summary-card">
+      <div class="etd-summary-label">Total ETDs</div>
+      <div class="etd-summary-value">{{ total_etd|default(0) }}</div>
+    </div>
+
+    <div class="etd-summary-card critical">
+      <div class="etd-summary-label">Priority Pending (&gt; 7 Days)</div>
+      <div class="etd-summary-value">{{ critical_count|default(0) }}</div>
+    </div>
+
+    <div class="etd-summary-card safety">
+      <div class="etd-summary-label">Safety Critical Pending</div>
+      <div class="etd-summary-value">{{ safety_count|default(0) }}</div>
+    </div>
+
+    <div class="etd-summary-card issued">
+      <div class="etd-summary-label">Issued</div>
+      <div class="etd-summary-value">{{ issued_count|default(0) }}</div>
+    </div>
+  </div>
+
+  <!-- Operational Insights -->
+  <div class="ops-insight-box">
+    <div class="ops-insight-title">
+      <i class="fas fa-lightbulb"></i> Operational Insight
+    </div>
+    <div class="ops-insight-text">
+      {% if critical_count|default(0) > 0 %}
+      <strong
+        >{{ critical_count }} ETD record(s) have been pending for more than 7
+        days.</strong
+      >
+      Technical review and issuance follow-up are recommended. {% elif
+      safety_count|default(0) > 0 %}
+      <strong
+        >{{ safety_count }} pending item(s) are flagged as safety
+        critical.</strong
+      >
+      Assign maximum priority to technical evaluation and disposition issuance.
+      {% else %} All ETD items are within the normal evaluation and issuance
+      flow. {% endif %}
+    </div>
+  </div>
+
+  <!-- Register New ETD Form -->
+  <div class="form-section">
+    <h5 class="form-section-title">
+      <i class="fas fa-plus-circle" style="color: var(--colors-success)"></i>
+      Register New ETD
+    </h5>
+    <form method="POST" enctype="multipart/form-data" id="etdForm">
+      <div class="row">
+        <div class="col-md-3">
+          <label class="form-label">Tail *</label>
+          <input
+            type="text"
+            class="form-control"
+            name="tail"
+            required
+            placeholder="PR-XXX"
+          />
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Serial Number *</label>
+          <input
+            type="text"
+            class="form-control"
+            name="serial"
+            required
+            placeholder="Component serial number"
+          />
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">ETRACK ID</label>
+          <input
+            type="text"
+            class="form-control"
+            name="etrack"
+            placeholder="ETRACK code"
+          />
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Record Date</label>
+          <input type="date" class="form-control" name="data_cadastro" />
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-md-6">
+          <label class="form-label">Subject / Description *</label>
+          <input
+            type="text"
+            class="form-control"
+            name="subject"
+            required
+            placeholder="Component description"
+          />
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Hours at Creation</label>
+          <input
+            type="number"
+            step="0.01"
+            class="form-control"
+            name="hours_at_creation"
+            placeholder="FH"
+          />
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Cycles at Creation</label>
+          <input
+            type="number"
+            class="form-control"
+            name="cycles_at_creation"
+            placeholder="FC"
+          />
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-md-4">
+          <label class="form-label">Created By</label>
+          <input
+            type="text"
+            class="form-control"
+            name="created_by"
+            placeholder="Your name"
+          />
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Created At</label>
+          <input type="datetime-local" class="form-control" name="created_at" />
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Attachment</label>
+          <input type="file" class="form-control" name="attachment" />
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-12">
+          <label class="form-label">Categories</label>
+          <div class="d-flex gap-3 flex-wrap">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                name="safety"
+                value="1"
+                id="cat_safety"
+              />
+              <label class="form-check-label" for="cat_safety"
+                >Safety Critical</label
+              >
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                name="hotline"
+                value="1"
+                id="cat_hotline"
+              />
+              <label class="form-check-label" for="cat_hotline"
+                >Hotline / Urgent</label
+              >
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                name="systemas"
+                value="1"
+                id="cat_systemas"
+              />
+              <label class="form-check-label" for="cat_systemas">Systems</label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                name="estruturas"
+                value="1"
+                id="cat_estruturas"
+              />
+              <label class="form-check-label" for="cat_estruturas"
+                >Structures</label
+              >
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                name="outros"
+                value="1"
+                id="cat_outros"
+              />
+              <label class="form-check-label" for="cat_outros">Other</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-12">
+          <label class="form-label">ETD Issued?</label>
+          <select class="form-select" name="etd_emitida">
+            <option value="NO">No</option>
+            <option value="YES">Yes</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-12">
+          <button type="submit" class="btn btn-success">
+            <i class="fas fa-check-circle"></i> Register ETD
+          </button>
+          <button type="reset" class="btn btn-secondary ms-2">
+            <i class="fas fa-times-circle"></i> Clear
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Filters -->
+  <div class="filter-section">
+    <h5 class="filter-title"><i class="fas fa-filter"></i> Filter ETDs</h5>
+    <form
+      method="GET"
+      action="{{ url_for('etd') }}"
+      class="row g-2"
+      id="filterForm"
+    >
+      <div class="col-md-3">
+        <label class="form-label">Subject / Description:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="subject"
+          value="{{ filters.subject|default('') }}"
+          placeholder="Search"
+        />
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Serial Number:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="serial"
+          value="{{ filters.serial|default('') }}"
+          placeholder="S/N"
+        />
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Keyword:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="palavra"
+          value="{{ filters.palavra|default('') }}"
+          placeholder="Search"
+        />
+      </div>
+      <div
+        class="col-md-3"
+        style="display: flex; gap: 10px; align-items: flex-end"
+      >
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-search"></i> Search
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          onclick="clearFilters()"
+        >
+          <i class="fas fa-times-circle"></i> Clear
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- ETD Items -->
+  {% if rows %}
+  <div class="etd-items-section">
+    {% for row in rows %}
+    <div
+      class="etd-item-card {% if (row.days_pending|default(0, true)) > 7 %}critical{% elif row.safety %}safety{% endif %}"
+    >
+      <div class="etd-item-header">
+        <div>
+          <div class="etd-item-id">ETD #{{ row.id }}</div>
+          <div class="etd-item-meta">
+            <strong>{{ row.tail|default('—') }}</strong> | {{
+            row.serial|default('—') }} | {{ row.etrack|default('—') }}
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: flex-start">
+          <span
+            class="badge bg-{{ row.status_color|default('secondary') }}"
+            style="font-size: 0.9rem; padding: 6px 12px"
+          >
+            {% if row.status_color == 'success' %}
+            <i class="fas fa-check-circle"></i> {{
+            row.status_label|default('Issued') }} {% elif row.status_color ==
+            'danger' %} <i class="fas fa-exclamation-triangle"></i> {{
+            row.status_label|default('Priority Pending') }} {% else %}
+            <i class="fas fa-clock"></i> {{ row.status_label|default('Under
+            Evaluation') }} {% endif %} ({{ row.days_pending|default(0) }} days)
+          </span>
+        </div>
+      </div>
+
+      <!-- Subject/Description -->
+      <div
+        style="
+          margin: 12px 0;
+          padding: 12px;
+          background: #ffffff;
+          border-radius: 8px;
+          border-left: 3px solid var(--colors-yellow100);
+          border: 1px solid var(--colors-gray400);
+        "
+      >
+        <strong style="color: var(--colors-black100)">Subject:</strong>
+        <div
+          style="
+            color: var(--colors-gray200);
+            margin-top: 6px;
+            font-size: 0.95rem;
+          "
+        >
+          {{ row.subject|default('—') }}
+        </div>
+      </div>
+
+      <!-- Categories -->
+      {% if row.safety or row.hotline or row.systemas or row.estruturas or
+      row.outros %}
+      <div class="category-badges">
+        {% if row.safety %}<span class="category-badge category-safety"
+          ><i class="fas fa-exclamation-triangle"></i> Safety</span
+        >{% endif %} {% if row.hotline %}<span
+          class="category-badge category-hotline"
+          ><i class="fas fa-bolt"></i> Hotline</span
+        >{% endif %} {% if row.systemas %}<span
+          class="category-badge category-systemas"
+          ><i class="fas fa-cog"></i> Systems</span
+        >{% endif %} {% if row.estruturas %}<span
+          class="category-badge category-estruturas"
+          ><i class="fas fa-hammer"></i> Structures</span
+        >{% endif %} {% if row.outros %}<span
+          class="category-badge category-outros"
+          ><i class="fas fa-cube"></i> Other</span
+        >{% endif %}
+      </div>
+      {% endif %}
+
+      <!-- Details -->
+      <div class="etd-details-grid">
+        <div class="etd-detail">
+          <div class="etd-detail-label">Flight Hours</div>
+          <div class="etd-detail-value">
+            {{ row.hours_at_creation|default('—') }}
+          </div>
+        </div>
+        <div class="etd-detail">
+          <div class="etd-detail-label">Flight Cycles</div>
+          <div class="etd-detail-value">
+            {{ row.cycles_at_creation|default('—') }}
+          </div>
+        </div>
+        <div class="etd-detail">
+          <div class="etd-detail-label">Created By</div>
+          <div class="etd-detail-value">{{ row.created_by|default('—') }}</div>
+        </div>
+        <div class="etd-detail">
+          <div class="etd-detail-label">Record Date</div>
+          <div class="etd-detail-value">
+            {{ row.data_cadastro|default('—') }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Attachment -->
+      {% if row.attachment %}
+      <div
+        style="
+          margin-top: 12px;
+          padding-top: 12px;
+          border-top: 1px solid var(--colors-gray400);
+        "
+      >
+        <a
+          href="{{ row.attachment }}"
+          target="_blank"
+          class="btn btn-sm btn-outline-primary"
+        >
+          <i class="fas fa-paperclip"></i> View Attachment
+        </a>
+      </div>
+      {% endif %}
+
+      <div
+        style="
+          margin-top: 12px;
+          padding-top: 12px;
+          border-top: 1px solid var(--colors-gray400);
+          display: flex;
+          gap: 8px;
+          align-items: center;
+        "
+      >
+        {% if row.etd_emitida == 'YES' %}
+        <form
+          method="POST"
+          action="{{ url_for('etd_update_status', etd_id=row.id) }}"
+          style="display: inline"
+        >
+          <input type="hidden" name="etd_emitida" value="NO" />
+          <button type="submit" class="btn btn-sm btn-outline-warning">
+            <i class="fas fa-undo"></i> Return to Evaluation
+          </button>
+        </form>
+        {% else %}
+        <form
+          method="POST"
+          action="{{ url_for('etd_update_status', etd_id=row.id) }}"
+          style="display: inline"
+        >
+          <input type="hidden" name="etd_emitida" value="YES" />
+          <button type="submit" class="btn btn-sm btn-outline-success">
+            <i class="fas fa-check"></i> Mark as Issued
+          </button>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Pagination -->
+  {% if rows|length >= filters.per_page|default(50) %}
+  <div style="text-align: center; margin-top: 20px">
+    {% if filters.page|default(1)|int > 1 %}
+    <a
+      href="?page={{ filters.page|int - 1 }}"
+      class="btn btn-outline-secondary"
+    >
+      <i class="fas fa-chevron-left"></i> Previous
+    </a>
+    {% endif %} {% if rows|length >= filters.per_page|default(50) %}
+    <a
+      href="?page={{ filters.page|default(1)|int + 1 }}"
+      class="btn btn-outline-secondary"
+    >
+      Next <i class="fas fa-chevron-right"></i>
+    </a>
+    {% endif %}
+  </div>
+  {% endif %} {% else %}
+  <div class="empty-state">
+    <div class="empty-state-icon">📦</div>
+    <p><strong>No ETD records found</strong></p>
+    <p
+      style="font-size: 0.95rem; color: var(--colors-gray300); margin-top: 10px"
+    >
+      Register a new ETD or adjust the search filters.
+    </p>
+  </div>
+  {% endif %}
+
+  <!-- Return Button -->
+  <div class="mt-5 text-center">
+    <a href="{{ url_for('menu') }}" class="btn btn-secondary btn-lg">
+      <i class="fas fa-home"></i> Return to Main Menu
+    </a>
+  </div>
+</div>
+
+<script>
+  function clearFilters() {
+    document.querySelector('input[name="subject"]').value = "";
+    document.querySelector('input[name="serial"]').value = "";
+    document.querySelector('input[name="palavra"]').value = "";
+    document.getElementById("filterForm").submit();
+  }
+</script>
+
+{% endblock %}

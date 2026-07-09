@@ -1,0 +1,591 @@
+/* Shared operational theme aligned with MEL dashboard styling */
+
+body.app-shell {
+  background:
+    radial-gradient(circle at top left, rgba(23, 162, 184, 0.14), transparent 28%),
+    radial-gradient(circle at top right, rgba(252, 195, 23, 0.10), transparent 24%),
+    linear-gradient(180deg, #f3fbfd 0%, #f8fbfc 42%, #eef5f7 100%);
+  color: #1e3137;
+}
+
+.app-navbar {
+  background: linear-gradient(90deg, rgba(9, 58, 68, 0.97), rgba(15, 109, 124, 0.96)) !important;
+  box-shadow: 0 12px 30px rgba(15, 109, 124, 0.22);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.45rem 0 !important;
+  min-height: 64px;
+}
+
+.app-navbar .container-fluid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.app-navbar .navbar-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-right: 0;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.app-navbar .brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.app-navbar .brand-text {
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.app-navbar .navbar-brand,
+.app-navbar .navbar-brand:hover,
+.app-navbar .navbar-brand:focus,
+.app-navbar .navbar-brand:visited,
+.app-navbar .nav-link,
+.app-navbar .nav-link:hover,
+.app-navbar .nav-link:focus,
+.app-navbar .nav-link:visited,
+.app-navbar .btn-logout,
+.app-navbar .btn-logout:hover,
+.app-navbar .btn-logout:focus,
+.app-navbar .btn-logout:visited {
+  color: #ffffff !important;
+  text-decoration: none;
+}
+
+.app-navbar .navbar-toggler {
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  color: #ffffff;
+  padding: 0.28rem 0.55rem;
+}
+
+.app-navbar .navbar-collapse {
+  flex-basis: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.app-navbar .navbar-nav {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.app-navbar .navbar-nav .nav-link {
+  padding: 0.3rem 0.55rem !important;
+  min-height: auto;
+}
+
+.app-navbar .navbar-brand,
+.app-navbar .nav-link {
+  color: #ffffff !important;
+}
+
+.app-navbar .navbar-brand {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.app-navbar .btn-logout {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.app-navbar .btn-logout:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 991px) {
+  .app-navbar .container-fluid {
+    flex-wrap: wrap;
+  }
+
+  .app-navbar .navbar-collapse {
+    display: none;
+    width: 100%;
+    margin-top: 0.35rem;
+  }
+
+  .app-navbar .navbar-collapse.show,
+  .app-navbar .navbar-collapse.collapsing {
+    display: block;
+  }
+
+  .app-navbar .navbar-nav {
+    width: 100%;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.35rem;
+  }
+
+  .app-navbar .navbar-nav .nav-link,
+  .app-navbar .btn-logout {
+    width: 100%;
+    text-align: left;
+    justify-content: flex-start;
+    margin-left: 0 !important;
+  }
+
+  .app-navbar .nav-link {
+    padding: 0.4rem 0.25rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .app-navbar .navbar-collapse {
+    display: flex !important;
+  }
+}
+
+.model-filter-box {
+  border: 1px solid rgba(15, 109, 124, 0.22);
+  border-radius: 14px;
+  padding: 0.85rem 0.95rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(241, 248, 250, 0.96));
+}
+
+.model-filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 0.5rem 0.75rem;
+}
+
+.model-filter-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 0;
+  padding: 0.15rem 0.1rem;
+}
+
+.model-filter-item .form-check-input {
+  margin-top: 0;
+}
+
+.model-filter-item .form-check-label {
+  font-size: 0.92rem;
+  color: #1e3137;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  line-height: 1.2;
+}
+
+.app-footer {
+  background: rgba(255, 255, 255, 0.84);
+  backdrop-filter: blur(10px);
+}
+
+.btn-menu-return {
+  background: rgba(12, 54, 63, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.btn-menu-return:hover {
+  background: rgba(9, 43, 50, 0.95);
+  color: #ffffff;
+}
+
+.menu-page .page-hero,
+.ops-dashboard .fleet-header,
+.ops-dashboard .horas-header,
+.ops-dashboard .tail-header,
+.ops-dashboard .lru-header,
+.ops-dashboard .aog-header,
+.ops-dashboard .mel-header,
+.ops-dashboard .etd-header,
+.ops-dashboard .cadastro-hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(8, 51, 60, 0.96), rgba(15, 109, 124, 0.94) 48%, rgba(60, 184, 202, 0.88)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0));
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 24px 56px rgba(15, 109, 124, 0.22);
+  border-radius: 22px;
+}
+
+.menu-page .page-hero::after,
+.ops-dashboard .fleet-header::after,
+.ops-dashboard .horas-header::after,
+.ops-dashboard .tail-header::after,
+.ops-dashboard .lru-header::after,
+.ops-dashboard .aog-header::after,
+.ops-dashboard .mel-header::after,
+.ops-dashboard .etd-header::after,
+.ops-dashboard .cadastro-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto -8% -34% auto;
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(252, 195, 23, 0.28), rgba(252, 195, 23, 0) 68%);
+  pointer-events: none;
+}
+
+.menu-page .page-title,
+.ops-dashboard .fleet-header h1,
+.ops-dashboard .horas-header h1,
+.ops-dashboard .tail-header h1,
+.ops-dashboard .lru-header h1,
+.ops-dashboard .aog-header h1,
+.ops-dashboard .mel-header h1,
+.ops-dashboard .etd-header h1,
+.ops-dashboard .cadastro-hero h1 {
+  color: #ffffff;
+  letter-spacing: -0.04em;
+}
+
+.menu-page .page-subtitle,
+.ops-dashboard .fleet-header p,
+.ops-dashboard .horas-header p,
+.ops-dashboard .tail-header p,
+.ops-dashboard .lru-header p,
+.ops-dashboard .aog-header p,
+.ops-dashboard .mel-header p,
+.ops-dashboard .etd-header p,
+.ops-dashboard .cadastro-hero p {
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 64rem;
+}
+
+.menu-page .menu-grid {
+  gap: 1.35rem;
+}
+
+.menu-page .menu-card {
+  border: 1px solid rgba(15, 109, 124, 0.12);
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(241, 249, 250, 0.95));
+  box-shadow: 0 16px 36px rgba(15, 109, 124, 0.12);
+}
+
+.menu-page .menu-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(15, 109, 124, 0.26);
+  box-shadow: 0 24px 46px rgba(15, 109, 124, 0.18);
+}
+
+.menu-page .menu-icon-circle {
+  width: 4.2rem;
+  height: 4.2rem;
+  margin: 0 auto 1rem;
+  border-radius: 1.25rem;
+  background: linear-gradient(135deg, rgba(23, 162, 184, 0.14), rgba(252, 195, 23, 0.20));
+  color: #0f6d7c;
+}
+
+.menu-page .menu-footer-card,
+.ops-dashboard .filter-section,
+.ops-dashboard .form-section,
+.ops-dashboard .section-card,
+.ops-dashboard .ops-insight-box,
+.ops-dashboard .neo-card {
+  border: 1px solid rgba(15, 109, 124, 0.12);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 14px 34px rgba(15, 109, 124, 0.10);
+}
+
+.ops-dashboard .ops-insight-box {
+  background: linear-gradient(135deg, rgba(234, 248, 251, 0.98), rgba(213, 240, 245, 0.92));
+  border-left: 4px solid #17a2b8;
+}
+
+.ops-dashboard .fleet-summary-card,
+.ops-dashboard .horas-summary-card,
+.ops-dashboard .tail-summary-card,
+.ops-dashboard .lru-summary-card,
+.ops-dashboard .kpi-card,
+.ops-dashboard .mel-summary-card {
+  border-radius: 18px;
+  border: 1px solid rgba(15, 109, 124, 0.10);
+  background: linear-gradient(180deg, #ffffff 0%, #f5fafb 100%);
+  box-shadow: 0 16px 32px rgba(15, 109, 124, 0.10);
+}
+
+.ops-dashboard .aircraft-card,
+.ops-dashboard .aircraft-util-card,
+.ops-dashboard .tail-item-card,
+.ops-dashboard .lru-item-card,
+.ops-dashboard .aog-record-card,
+.ops-dashboard .mel-item-card {
+  border-radius: 18px;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgba(15, 109, 124, 0.08);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 251, 252, 0.96));
+  box-shadow: 0 16px 36px rgba(15, 109, 124, 0.10);
+}
+
+.ops-dashboard .aircraft-card:hover,
+.ops-dashboard .aircraft-util-card:hover,
+.ops-dashboard .tail-item-card:hover,
+.ops-dashboard .lru-item-card:hover,
+.ops-dashboard .aog-record-card:hover,
+.ops-dashboard .mel-item-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 44px rgba(15, 109, 124, 0.16);
+}
+
+.ops-dashboard .health-metric,
+.ops-dashboard .util-metric,
+.ops-dashboard .tail-metric,
+.ops-dashboard .lru-detail,
+.ops-dashboard .aog-info-item,
+.ops-dashboard .priority-metric {
+  background: linear-gradient(180deg, rgba(243, 249, 250, 0.98), rgba(235, 245, 247, 0.98));
+  border: 1px solid rgba(15, 109, 124, 0.08);
+  border-radius: 14px;
+}
+
+.ops-dashboard .form-control,
+.ops-dashboard .form-select {
+  border-radius: 12px;
+  border: 1px solid rgba(15, 109, 124, 0.18);
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.ops-dashboard .form-control:focus,
+.ops-dashboard .form-select:focus {
+  border-color: #17a2b8;
+  box-shadow: 0 0 0 0.22rem rgba(23, 162, 184, 0.16);
+}
+
+.ops-dashboard .table,
+.ops-dashboard .table-responsive {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Tail registry page (migrated from inline template style) */
+.ops-dashboard .tail-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 25px;
+}
+
+.ops-dashboard .tail-aircraft-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+.ops-dashboard .tail-summary-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border-top: 4px solid var(--colors-brand-primary);
+  text-align: center;
+}
+
+.ops-dashboard .tail-summary-card.active {
+  border-top-color: #4caf50;
+}
+
+.ops-dashboard .tail-summary-card.inactive {
+  border-top-color: #999;
+}
+
+.ops-dashboard .tail-summary-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--colors-black100);
+  margin: 10px 0;
+}
+
+.ops-dashboard .tail-summary-label {
+  font-size: 0.9rem;
+  color: var(--colors-gray200);
+}
+
+.ops-dashboard .tail-item-card.inactive {
+  opacity: 0.7;
+  border-left-color: #999;
+}
+
+.ops-dashboard .tail-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.ops-dashboard .tail-card-registration {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--colors-black100);
+}
+
+.ops-dashboard .tail-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.ops-dashboard .tail-metric {
+  padding: 12px;
+  text-align: center;
+}
+
+.ops-dashboard .tail-metric-value {
+  font-weight: 700;
+  color: var(--colors-black100);
+  font-size: 1.2rem;
+}
+
+.ops-dashboard .tail-metric-label {
+  font-size: 0.75rem;
+  color: var(--colors-gray300);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.ops-dashboard .status-active {
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.ops-dashboard .status-inactive {
+  background: #f5f5f5;
+  color: #666;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.ops-dashboard .action-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.ops-dashboard .action-buttons .btn,
+.ops-dashboard .action-buttons form,
+.ops-dashboard .action-buttons form .btn {
+  width: 100%;
+}
+
+.ops-dashboard .tail-meta-line {
+  color: #52666f;
+  font-size: 0.9rem;
+}
+
+.ops-dashboard .tail-meta-subline {
+  color: #7f939b;
+  font-size: 0.82rem;
+}
+
+@media (max-width: 768px) {
+  .ops-dashboard .tail-card-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .ops-dashboard .action-buttons {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ops-dashboard .table-light,
+.ops-dashboard thead.table-light {
+  --bs-table-bg: #edf7f9;
+  color: #0f6d7c;
+}
+
+.ops-dashboard .modal-content {
+  border: 1px solid rgba(15, 109, 124, 0.12);
+  border-radius: 18px;
+  box-shadow: 0 28px 64px rgba(15, 109, 124, 0.22);
+}
+
+.ops-dashboard .modal-header,
+.ops-dashboard .modal-header.success {
+  background: linear-gradient(135deg, rgba(8, 51, 60, 0.96), rgba(15, 109, 124, 0.94), rgba(60, 184, 202, 0.90));
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ops-dashboard .modal-header .btn-close,
+.ops-dashboard .modal-header.success .btn-close {
+  filter: brightness(0) invert(1);
+}
+
+.ops-dashboard .btn-light {
+  color: #0f6d7c;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+}
+
+.ops-dashboard .btn-light:hover {
+  color: #08333c;
+  background: #ffffff;
+}
+
+.ops-dashboard .empty-state {
+  border: 1px dashed rgba(15, 109, 124, 0.20);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+@media (max-width: 768px) {
+  .menu-page .page-hero,
+  .ops-dashboard .fleet-header,
+  .ops-dashboard .horas-header,
+  .ops-dashboard .tail-header,
+  .ops-dashboard .lru-header,
+  .ops-dashboard .aog-header,
+  .ops-dashboard .mel-header,
+  .ops-dashboard .etd-header,
+  .ops-dashboard .cadastro-hero {
+    border-radius: 18px;
+    padding: 1.5rem;
+  }
+
+  .menu-page .menu-card,
+  .ops-dashboard .fleet-summary-card,
+  .ops-dashboard .horas-summary-card,
+  .ops-dashboard .tail-summary-card,
+  .ops-dashboard .lru-summary-card,
+  .ops-dashboard .kpi-card,
+  .ops-dashboard .aircraft-card,
+  .ops-dashboard .aircraft-util-card,
+  .ops-dashboard .tail-item-card,
+  .ops-dashboard .lru-item-card,
+  .ops-dashboard .aog-record-card {
+    border-radius: 16px;
+  }
+}

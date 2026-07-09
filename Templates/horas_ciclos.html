@@ -1,0 +1,470 @@
+{% extends 'base.html' %}
+{% block title %}Hours and Cycles - Fleet Utilization{% endblock %}
+{% block content %}
+
+<style>
+/* Responsive layout */
+.container-fluid {
+  width: 100%;
+  max-width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media (min-width: 768px) {
+  .container-fluid {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-fluid {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container-fluid {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .container-fluid {
+    max-width: 1900px;
+    margin: 0 auto;
+  }
+}
+
+/* Horas Header */
+.horas-header {
+  background: var(--colors-brand-gradient);
+  color: white;
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+}
+
+.horas-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.horas-header p {
+  opacity: 0.95;
+  font-size: 1.1rem;
+}
+
+/* Summary Cards */
+.horas-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 25px;
+}
+
+.horas-summary-card {
+  background: white;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border-top: 4px solid var(--colors-brand-primary);
+  text-align: center;
+}
+
+.horas-summary-card.high-usage {
+  border-top-color: #ff9800;
+}
+
+.horas-summary-card.critical-usage {
+  border-top-color: #dc3545;
+}
+
+.horas-summary-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--colors-black100);
+  margin: 10px 0;
+}
+
+.horas-summary-label {
+  font-size: 0.9rem;
+  color: var(--colors-gray200);
+}
+
+/* Aircraft Card */
+.aircraft-util-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border-left: 4px solid var(--colors-brand-primary);
+  transition: all 0.3s ease;
+}
+
+.aircraft-util-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+  transform: translateY(-2px);
+}
+
+.aircraft-util-card.high-usage {
+  border-left-color: #ff9800;
+}
+
+.aircraft-util-card.critical-usage {
+  border-left-color: #dc3545;
+}
+
+.util-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.util-tail {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.util-meta {
+  font-size: 0.85rem;
+  color: #999;
+  margin-top: 2px;
+}
+
+/* Utilization Metrics Grid */
+.util-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.util-metric {
+  background: #f8f9fa;
+  padding: 14px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.util-metric-value {
+  font-weight: 700;
+  color: #333;
+  font-size: 1.3rem;
+}
+
+.util-metric-label {
+  font-size: 0.75rem;
+  color: #999;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* Utilization Progress */
+.util-progress-bar {
+  width: 100%;
+  height: 24px;
+  background: #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+
+.util-progress-fill {
+  height: 100%;
+  background: var(--colors-brand-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.util-progress-fill.high {
+  background: linear-gradient(90deg, #ff9800 0%, #f57c00 100%);
+}
+
+.util-progress-fill.critical {
+  background: linear-gradient(90deg, #dc3545 0%, #c82333 100%);
+  animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+  0%, 100% { box-shadow: inset 0 0 0 0 rgba(220, 53, 69, 0.5); }
+  50% { box-shadow: inset 0 0 0 3px rgba(220, 53, 69, 0.5); }
+}
+
+/* Trend Indicator */
+.trend-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.trend-normal {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.trend-high {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.trend-critical {
+  background: #ffebee;
+  color: #c41e3a;
+}
+
+/* Operational Insight Box */
+.ops-insight-box {
+  background: linear-gradient(135deg, rgba(0, 90, 175, 0.08) 0%, #ffffff 100%);
+  border-left: 4px solid var(--colors-brand-primary);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.ops-insight-title {
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ops-insight-text {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+/* Export Buttons */
+.export-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.export-buttons .btn {
+  font-size: 0.9rem;
+  padding: 10px 16px;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-state-icon {
+  font-size: 3rem;
+  color: #ddd;
+  margin-bottom: 15px;
+}
+
+.empty-state p {
+  color: #999;
+  font-size: 1.1rem;
+}
+</style>
+
+<div class="container-fluid mt-4 ops-dashboard">
+  <!-- Header -->
+  <div class="horas-header">
+    <div class="d-flex justify-content-between align-items-start">
+      <div>
+        <h1><i class="fas fa-tachometer-alt"></i> Hours and Cycles - Fleet Utilization</h1>
+        <p>Consolidated analysis of Flight Hours (FH) and Flight Cycles (FC) per aircraft with trend indicators</p>
+      </div>
+      <div class="d-flex gap-2 flex-wrap">
+        <button class="btn btn-light btn-sm" onclick="history.back()">
+          <i class="fas fa-arrow-left"></i> Back
+        </button>
+        <button class="btn btn-light btn-sm" onclick="location.reload()">
+          <i class="fas fa-sync"></i> Refresh
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary KPI Cards -->
+  <div class="horas-summary-grid">
+    <div class="horas-summary-card">
+      <div class="horas-summary-label">Total Flight Hours</div>
+      <div class="horas-summary-value">{{ "%.1f"|format(totals.total_fh|default(0)) }}</div>
+      <small style="color: var(--colors-gray300);">All aircraft</small>
+    </div>
+    
+    <div class="horas-summary-card">
+      <div class="horas-summary-label">Total Flight Cycles</div>
+      <div class="horas-summary-value">{{ totals.total_fc|default(0)|int }}</div>
+      <small style="color: var(--colors-gray300);">Consolidated</small>
+    </div>
+    
+    <div class="horas-summary-card high-usage">
+      <div class="horas-summary-label">Average FH / Aircraft</div>
+      <div class="horas-summary-value">{{ "%.0f"|format((totals.total_fh|default(0)) / (summary|length|default(1) or 1)) }}</div>
+      <small style="color: var(--colors-gray300);">FH per tail</small>
+    </div>
+    
+    <div class="horas-summary-card">
+      <div class="horas-summary-label">Average FC / Aircraft</div>
+      <div class="horas-summary-value">{{ (totals.total_fc|default(0)) / (summary|length|default(1) or 1)|int }}</div>
+      <small style="color: var(--colors-gray300);">FC per tail</small>
+    </div>
+  </div>
+
+  <!-- Operational Insights -->
+  <div class="ops-insight-box">
+    <div class="ops-insight-title">
+      <i class="fas fa-lightbulb"></i> Operational Insight
+    </div>
+    <div class="ops-insight-text">
+      {% if high_usage_aircraft|default([])|length > 0 %}
+        ⚠️ <strong>{{ high_usage_aircraft|default([])|length }} aircraft with high utilization</strong> 
+        (FH/month > average). Accelerated preventive maintenance review is recommended.
+      {% elif high_utilization_variance|default(false) %}
+        📊 <strong>Significant variation in utilization pattern</strong> 
+        in recent weeks. Investigate aircraft tails with abrupt cycle changes.
+      {% else %}
+        ✅ Fleet utilization is within normal operating patterns.
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Diagnostics -->
+  <div class="ops-insight-box" style="background: linear-gradient(135deg, rgba(0, 90, 175, 0.08) 0%, #ffffff 100%);">
+    <div class="ops-insight-title">
+      <i class="fas fa-stethoscope"></i> Totals Diagnostics (DB vs Page)
+    </div>
+    <div class="ops-insight-text" style="line-height: 1.8;">
+      <div><strong>Database:</strong> {{ diagnostics.db_rows|default(0) }} tails | FH {{ "%.2f"|format(diagnostics.db_total_fh|default(0)) }} | FC {{ diagnostics.db_total_fc|default(0) }}</div>
+      <div><strong>Page:</strong> {{ diagnostics.page_rows|default(0) }} tails | FH {{ "%.2f"|format(diagnostics.page_total_fh|default(0)) }} | FC {{ diagnostics.page_total_fc|default(0) }}</div>
+    </div>
+  </div>
+
+  <!-- Aircraft Utilization Cards -->
+  {% if summary %}
+  <div class="aircraft-utilization-list">
+    {% for item in summary %}
+    <div class="aircraft-util-card {% if item.utilization_rate > 85 %}critical-usage{% elif item.utilization_rate > 70 %}high-usage{% endif %}">
+      <div class="util-card-header">
+        <div>
+          <div class="util-tail">{{ item.tail }}</div>
+          <div class="util-meta">
+            Model: {{ item.modelo|default('—') }}
+          </div>
+        </div>
+        <div style="text-align: right;">
+          {% if item.utilization_rate > 85 %}
+            <span class="trend-indicator trend-critical">
+              <i class="fas fa-exclamation-triangle"></i> Critical
+            </span>
+          {% elif item.utilization_rate > 70 %}
+            <span class="trend-indicator trend-high">
+              <i class="fas fa-arrow-up"></i> High
+            </span>
+          {% else %}
+            <span class="trend-indicator trend-normal">
+              <i class="fas fa-check-circle"></i> Normal
+            </span>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Main Metrics -->
+      <div class="util-metrics-grid">
+        <div class="util-metric">
+          <div class="util-metric-value" style="color: var(--colors-brand-primary);">{{ "%.1f"|format(item.total_fh|default(0)) }}</div>
+          <div class="util-metric-label">Flight Hours</div>
+        </div>
+        <div class="util-metric">
+          <div class="util-metric-value" style="color: var(--colors-brand-secondary);">{{ item.total_fc|default(0)|int }}</div>
+          <div class="util-metric-label">Flight Cycles</div>
+        </div>
+        <div class="util-metric">
+          <div class="util-metric-value" style="color: var(--colors-yellow100);">{{ "%.1f"|format(item.avg_fh_per_month|default(0)) }}</div>
+          <div class="util-metric-label">FH/Month (Avg)</div>
+        </div>
+        <div class="util-metric">
+          <div class="util-metric-value" style="color: var(--colors-error);">{{ item.avg_fc_per_month|default(0)|int }}</div>
+          <div class="util-metric-label">FC/Month (Avg)</div>
+        </div>
+      </div>
+
+      <!-- Utilization Progress -->
+      <div>
+        <label style="font-size: 0.9rem; color: var(--colors-gray200); margin-bottom: 6px; display: block;">
+          <strong>Operational Utilization:</strong> {{ "%.1f"|format(item.utilization_rate|default(0)) }}%
+        </label>
+        <div class="util-progress-bar">
+          <div class="util-progress-fill {% if item.utilization_rate > 85 %}critical{% elif item.utilization_rate > 70 %}high{% endif %}" 
+               style="width: {{ [item.utilization_rate|default(0), 100]|min }}%">
+            {% if [item.utilization_rate|default(0), 100]|min > 20 %}
+              {{ "%.0f"|format(item.utilization_rate|default(0)) }}%
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional Info -->
+      <div style="font-size: 0.9rem; color: var(--colors-gray200); padding: 12px 0; border-top: 1px solid var(--colors-gray400); margin-top: 12px;">
+        <div>
+          <strong>Cycles/Hour:</strong> 
+          <span style="color: var(--colors-brand-secondary); font-weight: 600;">{{ "%.2f"|format((item.total_fc|default(0)) / (item.total_fh|default(1) or 1)) }}</span>
+        </div>
+        <div style="margin-top: 4px;">
+          <strong>Operational Status:</strong>
+          <span style="color: var(--colors-success); font-weight: 600;">{{ item.operational_status|default('Active') }}</span>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Export Buttons -->
+  <div class="export-buttons">
+    <form method="POST" action="{{ url_for('horas_ciclos_export_pdf') }}" style="display:inline;">
+      <button class="btn btn-danger" type="submit">
+        <i class="fas fa-file-pdf"></i> Export PDF
+      </button>
+    </form>
+    <form method="POST" action="{{ url_for('horas_ciclos_export_excel') }}" style="display:inline;">
+      <button class="btn btn-success" type="submit">
+        <i class="fas fa-file-excel"></i> Export Excel
+      </button>
+    </form>
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <div class="empty-state-icon">📊</div>
+    <p><strong>No hours/cycles records found</strong></p>
+    <p style="font-size: 0.95rem; color: var(--colors-gray300); margin-top: 10px;">Data will be displayed as soon as metrics are loaded from the database.</p>
+  </div>
+  {% endif %}
+
+  <!-- Return Button -->
+  <div class="mt-5 text-center">
+    <a href="{{ url_for('menu') }}" class="btn btn-secondary btn-lg">
+      <i class="fas fa-home"></i> Return to Main Menu
+    </a>
+  </div>
+</div>
+
+{% endblock %}

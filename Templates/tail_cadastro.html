@@ -1,0 +1,279 @@
+{% extends 'base.html' %} {% block title %}Tail/Aircraft Registry{% endblock %}
+{% block content %}
+
+<div class="container-fluid mt-4 ops-dashboard">
+  <!-- Alerts -->
+  {% with messages = get_flashed_messages() %} {% if messages %} {% for message
+  in messages %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <i class="fas fa-check-circle"></i> {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+  {% endfor %} {% endif %} {% endwith %}
+
+  <!-- Header -->
+  <div class="tail-header">
+    <div class="d-flex justify-content-between align-items-start">
+      <div>
+        <h1>
+          <i class="fas fa-plane"></i> Fleet Management - Aircraft Registry
+        </h1>
+        <p>
+          Aircraft registry with tail identity, operational status, and
+          accumulated utilization records
+        </p>
+      </div>
+      <div class="d-flex gap-2 flex-wrap align-items-center">
+        <button
+          class="btn btn-light btn-lg"
+          data-bs-toggle="modal"
+          data-bs-target="#addTailModal"
+        >
+          <i class="fas fa-plus-circle"></i> New Aircraft
+        </button>
+        <a href="{{ url_for('menu') }}" class="btn btn-outline-light btn-lg">
+          <i class="fas fa-home"></i> Back
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="tail-summary-grid">
+    <div class="tail-summary-card">
+      <div class="tail-summary-label">Total Aircraft</div>
+      <div class="tail-summary-value">{{ tails|length|default(0) }}</div>
+    </div>
+    <div class="tail-summary-card active">
+      <div class="tail-summary-label">Active</div>
+      <div class="tail-summary-value">{{ active_count|default(0) }}</div>
+    </div>
+    <div class="tail-summary-card inactive">
+      <div class="tail-summary-label">Inactive</div>
+      <div class="tail-summary-value">{{ inactive_count|default(0) }}</div>
+    </div>
+    <div class="tail-summary-card">
+      <div class="tail-summary-label">Total Flight Hours</div>
+      <div class="tail-summary-value">
+        {{ "%.0f"|format(total_fh|default(0)) }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Aircraft Cards or Empty State -->
+  {% if tails %}
+  <div class="tail-aircraft-grid">
+    {% for tail in tails %}
+    <div class="tail-item-card {% if not tail.ativo %}inactive{% endif %}">
+      <div class="tail-card-header">
+        <div>
+          <div class="tail-card-registration">{{ tail.tail }}</div>
+          <div class="tail-meta-line">
+            Serial: {{ tail.serial|default('—') }}
+          </div>
+          <div class="tail-meta-subline">
+            Registration Date: {{ tail.data_cadastro|default('—') }}
+          </div>
+        </div>
+        <div>
+          {% if tail.ativo %}
+          <span class="status-active"
+            ><i class="fas fa-check-circle"></i> Active</span
+          >
+          {% else %}
+          <span class="status-inactive"
+            ><i class="fas fa-times-circle"></i> Inactive</span
+          >
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Metrics -->
+      <div class="tail-metrics-grid">
+        <div class="tail-metric">
+          <div class="tail-metric-value metric-value-fh">
+            {{ "%.0f"|format(tail.total_fh|default(0)) }}
+          </div>
+          <div class="tail-metric-label">Flight Hours</div>
+        </div>
+        <div class="tail-metric">
+          <div class="tail-metric-value metric-value-fc">
+            {{ tail.total_fc|default(0)|int }}
+          </div>
+          <div class="tail-metric-label">Flight Cycles</div>
+        </div>
+        <div class="tail-metric">
+          <div class="tail-metric-value metric-value-ratio">
+            {{ "%.2f"|format((tail.fc_per_fh_display|default(tail.fc_per_fh|default(0), true))|float) }}
+          </div>
+          <div class="tail-metric-label">Cycles/Hour</div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="action-buttons">
+        <button
+          class="btn btn-sm btn-primary"
+          onclick="editTail({{ tail.id }}, '{{ tail.tail }}', '{{ tail.serial|default('') }}', '{{ tail.data_cadastro|default('') }}', {{ tail.total_fh|default(0) }}, {{ tail.total_fc|default(0) }})"
+        >
+          <i class="fas fa-edit"></i> Edit
+        </button>
+        <form
+          method="POST"
+          action="{{ url_for('tail_cadastro') }}"
+          class="d-inline"
+        >
+          <input type="hidden" name="action" value="delete" />
+          <input type="hidden" name="id" value="{{ tail.id }}" />
+          <button
+            class="btn btn-sm btn-danger"
+            type="submit"
+            onclick="return confirm('Delete this aircraft?');"
+          >
+            <i class="fas fa-trash"></i> Delete
+          </button>
+        </form>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <div class="empty-state-icon">🛩️</div>
+    <p><strong>No aircraft registered</strong></p>
+    <p class="ops-empty-text">Click "New Aircraft" to get started</p>
+  </div>
+  {% endif %}
+
+  <!-- Return Button -->
+  <div class="mt-5 text-center">
+    <a href="{{ url_for('menu') }}" class="btn btn-secondary btn-lg">
+      <i class="fas fa-home"></i> Back to Main Menu
+    </a>
+  </div>
+</div>
+
+<!-- Modal Add/Edit Tail -->
+<div class="modal fade" id="addTailModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle">New Aircraft</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+      <form method="POST" action="{{ url_for('tail_cadastro') }}" id="tailForm">
+        <input type="hidden" name="action" value="add" id="formAction" />
+        <input type="hidden" name="id" id="tailId" />
+
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label">Aircraft Tail Number *</label>
+            <input
+              type="text"
+              class="form-control"
+              name="tail"
+              id="tailInput"
+              required
+              placeholder="ex: PT-XYZ or PR-ABC"
+            />
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label class="form-label">Serial</label>
+              <input
+                type="text"
+                class="form-control"
+                name="serial"
+                id="serialInput"
+                placeholder="ex: 20186"
+              />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Registration Date</label>
+              <input
+                type="date"
+                class="form-control"
+                name="data_cadastro"
+                id="dataCadastroInput"
+              />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <label class="form-label">Flight Hours (FH)</label>
+              <input
+                type="number"
+                step="0.01"
+                class="form-control"
+                name="hours"
+                id="hoursInput"
+                placeholder="ex: 1234.5"
+              />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Flight Cycles (FC)</label>
+              <input
+                type="number"
+                class="form-control"
+                name="cycles"
+                id="cyclesInput"
+                placeholder="ex: 567"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-save"></i> Save Aircraft
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  function editTail(id, tail, serial, dataCadastro, hours, cycles) {
+    document.getElementById("modalTitle").textContent = "Edit Record: " + tail;
+    document.getElementById("formAction").value = "update";
+    document.getElementById("tailId").value = id;
+    document.getElementById("tailInput").value = tail;
+    document.getElementById("serialInput").value = serial || "";
+    document.getElementById("dataCadastroInput").value = (dataCadastro || "")
+      .toString()
+      .slice(0, 10);
+    document.getElementById("hoursInput").value = hours;
+    document.getElementById("cyclesInput").value = cycles;
+
+    const modal = new bootstrap.Modal(document.getElementById("addTailModal"));
+    modal.show();
+  }
+
+  // Reset modal on close
+  document
+    .getElementById("addTailModal")
+    .addEventListener("hidden.bs.modal", function () {
+      document.getElementById("modalTitle").textContent = "New Aircraft";
+      document.getElementById("formAction").value = "add";
+      document.getElementById("tailId").value = "";
+      document.getElementById("serialInput").value = "";
+      document.getElementById("dataCadastroInput").value = "";
+      document.getElementById("tailForm").reset();
+    });
+</script>
+
+{% endblock %}

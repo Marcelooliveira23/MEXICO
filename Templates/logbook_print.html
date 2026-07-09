@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Logbook Data - Print</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        font-size: 10px;
+        color: #222;
+        padding: 15px;
+      }
+      .print-header {
+        margin-bottom: 12px;
+        border-bottom: 2px solid #003366;
+        padding-bottom: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+      .print-header h1 {
+        font-size: 16px;
+        color: #003366;
+      }
+      .print-header .meta {
+        font-size: 9px;
+        color: #666;
+        text-align: right;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 8px;
+      }
+      thead tr {
+        background: #003366;
+        color: white;
+      }
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 4px 6px;
+        vertical-align: top;
+        word-break: break-word;
+      }
+      th {
+        font-size: 9px;
+        font-weight: 700;
+        text-align: center;
+      }
+      td {
+        font-size: 9px;
+      }
+      tbody tr:nth-child(even) {
+        background: #f5f5f5;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .footer {
+        margin-top: 12px;
+        font-size: 8px;
+        color: #999;
+        text-align: center;
+        border-top: 1px solid #eee;
+        padding-top: 6px;
+      }
+      @media print {
+        body {
+          padding: 0;
+        }
+        .no-print {
+          display: none !important;
+        }
+        table {
+          page-break-inside: auto;
+        }
+        tr {
+          page-break-inside: avoid;
+          page-break-after: auto;
+        }
+        thead {
+          display: table-header-group;
+        }
+      }
+      @page {
+        size: A4 landscape;
+        margin: 10mm;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="print-header">
+      <div>
+        <h1>Flight and Event Logbook</h1>
+        <div style="font-size: 9px; color: #555; margin-top: 4px">
+          Troubleshooting System - Mexicana
+        </div>
+      </div>
+      <div class="meta">
+        Generated: {{ generated_at }}<br />
+        Total records: {{ logbook_rows|length }}
+      </div>
+    </div>
+
+    <div class="no-print" style="margin-bottom: 10px">
+      <button
+        onclick="window.print()"
+        style="
+          padding: 6px 16px;
+          background: #003366;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 12px;
+        "
+      >
+        Print / Save PDF
+      </button>
+      <button
+        onclick="window.close()"
+        style="
+          padding: 6px 16px;
+          margin-left: 8px;
+          background: #666;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 12px;
+        "
+      >
+        Close
+      </button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 36px">ID</th>
+          <th style="width: 55px">Tail</th>
+          <th style="width: 55px">Model</th>
+          <th style="width: 50px">Priority</th>
+          <th style="width: 70px">Category</th>
+          <th>Problem</th>
+          <th style="width: 40px">ATA</th>
+          <th style="width: 70px">Location</th>
+          <th style="width: 40px">Est.(h)</th>
+          <th style="width: 60px">Status</th>
+          <th>Troubleshooting</th>
+          <th>Solution</th>
+          <th style="width: 68px">Record Date</th>
+          <th style="width: 55px">Created By</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in logbook_rows %}
+        <tr>
+          <td>{{ row.id or '' }}</td>
+          <td>{{ row.tail or '' }}</td>
+          <td>{{ row.modelo or '' }}</td>
+          <td>{{ row.prioridade or '' }}</td>
+          <td>{{ row.categoria or '' }}</td>
+          <td>{{ row.problema or '' }}</td>
+          <td>{{ row.ata or '' }}</td>
+          <td>{{ row.localizacao or '' }}</td>
+          <td style="text-align: center">
+            {{ row.tempo_estimado_horas or '' }}
+          </td>
+          <td>{{ row.status_atual or '' }}</td>
+          <td>{{ row.troubleshooting or '' }}</td>
+          <td>{{ row.solucao or '' }}</td>
+          <td>{{ row.data_cadastro or '' }}</td>
+          <td>{{ row.criado_por or '' }}</td>
+        </tr>
+        {% else %}
+        <tr>
+          <td
+            colspan="14"
+            style="text-align: center; padding: 20px; color: #999"
+          >
+            No records found.
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="footer">
+      Troubleshooting System - Mexicana | {{ generated_at }} | {{
+      logbook_rows|length }} records
+    </div>
+
+    <script>
+      // Auto-print when opened directly
+      window.addEventListener("load", function () {
+        // Small delay so browser renders fully before print dialog
+        // Uncomment the line below to auto-trigger print on open:
+        // setTimeout(() => window.print(), 300);
+      });
+    </script>
+  </body>
+</html>

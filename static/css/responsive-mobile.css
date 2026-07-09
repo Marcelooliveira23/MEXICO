@@ -1,0 +1,515 @@
+/* 
+FASE 5.1 - Responsive Design CSS
+Mobile-first responsive styles for all templates
+Tested at: 375px, 768px, 1024px+ viewports
+*/
+
+:root {
+    --touch-target: 48px; /* Minimum touch target size */
+    --mobile-padding: 12px;
+    --tablet-padding: 16px;
+    --desktop-padding: 20px;
+}
+
+/* ============================================
+   MOBILE-FIRST: Base styles for mobile (375px+)
+   ============================================ */
+
+body {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.container-fluid {
+    padding-left: var(--mobile-padding);
+    padding-right: var(--mobile-padding);
+}
+
+/* Buttons - Touch-friendly minimum 48px */
+.btn {
+    min-height: var(--touch-target);
+    min-width: var(--touch-target);
+    padding: 12px 16px;
+    font-size: 14px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-sm {
+    min-height: 40px;
+    padding: 8px 12px;
+    font-size: 12px;
+}
+
+/* Forms - Full width on mobile */
+.form-control,
+.form-select,
+.form-check-input {
+    font-size: 16px; /* Prevents zoom on iOS */
+    border-radius: 6px;
+}
+
+.form-control,
+.form-select {
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+/* Cards - Stack on mobile */
+.card {
+    margin-bottom: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Tables - Responsive */
+.table-responsive {
+    font-size: 12px;
+    border-radius: 8px;
+}
+
+.table {
+    margin-bottom: 0;
+    font-size: 13px;
+}
+
+.table th {
+    background: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    padding: 10px 6px;
+    font-weight: 600;
+}
+
+.table td {
+    padding: 8px 6px;
+    vertical-align: middle;
+}
+
+/* Badges - Responsive */
+.badge {
+    font-size: 11px;
+    padding: 4px 8px;
+    display: inline-block;
+    margin-bottom: 4px;
+}
+
+/* Alert boxes */
+.alert {
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+/* Grid layout - Full width on mobile */
+.row {
+    margin-left: -6px;
+    margin-right: -6px;
+}
+
+.col-md-6,
+.col-md-4,
+.col-md-3 {
+    padding-left: 6px;
+    padding-right: 6px;
+    margin-bottom: 12px;
+}
+
+/* Modal - Fullscreen on mobile */
+.modal-dialog {
+    margin: 12px;
+}
+
+@media (max-width: 375px) {
+    .modal-dialog {
+        margin: 6px;
+    }
+    
+    .btn {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+}
+
+/* Navigation - Mobile-friendly */
+@media (max-width: 991px) {
+    .navbar {
+        padding: 8px;
+    }
+
+    .navbar-collapse {
+        margin-top: 12px;
+    }
+
+    .navbar-nav .nav-link {
+        padding: 12px 0;
+        min-height: var(--touch-target);
+        display: flex;
+        align-items: center;
+    }
+}
+
+/* Dropdowns - Touch-friendly */
+.dropdown-menu {
+    min-width: 180px;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.dropdown-item {
+    padding: 12px 16px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Headers - Responsive text */
+h1 {
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+h4 {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+h5 {
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+/* Flex utilities - Mobile stack */
+.flex-column-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Utility - Hide/Show by viewport */
+.hide-mobile {
+    display: none;
+}
+
+.hide-tablet {
+    display: block;
+}
+
+/* Scrollable containers */
+.table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+
+/* ============================================
+   TABLET: Optimization for 768px+
+   ============================================ */
+
+@media (min-width: 768px) {
+    :root {
+        --mobile-padding: var(--tablet-padding);
+    }
+    
+    body {
+        font-size: 15px;
+    }
+    
+    .container-fluid {
+        padding-left: var(--tablet-padding);
+        padding-right: var(--tablet-padding);
+    }
+    
+    .col-md-6,
+    .col-md-4,
+    .col-md-3 {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    /* On tablet, some columns can still be full width or half */
+    .col-md-6 {
+        flex: 0 0 calc(50% - 12px);
+    }
+    
+    .col-md-4 {
+        flex: 0 0 calc(33.333% - 12px);
+    }
+    
+    .col-md-3 {
+        flex: 0 0 calc(25% - 12px);
+    }
+    
+    .btn {
+        font-size: 15px;
+        padding: 10px 16px;
+    }
+    
+    .table {
+        font-size: 14px;
+    }
+    
+    .table td,
+    .table th {
+        padding: 10px 8px;
+    }
+    
+    h1 { font-size: 28px; }
+    h2 { font-size: 22px; }
+    h3 { font-size: 19px; }
+    
+    .hide-mobile {
+        display: block;
+    }
+    
+    .hide-tablet {
+        display: none;
+    }
+}
+
+/* ============================================
+   DESKTOP: Full optimization for 1024px+
+   ============================================ */
+
+@media (min-width: 1024px) {
+    :root {
+        --mobile-padding: var(--desktop-padding);
+    }
+    
+    body {
+        font-size: 15px;
+    }
+    
+    .container-fluid {
+        padding-left: var(--desktop-padding);
+        padding-right: var(--desktop-padding);
+    }
+    
+    .col-md-6 {
+        flex: 0 0 calc(50% - 15px);
+    }
+    
+    .col-md-4 {
+        flex: 0 0 calc(33.333% - 15px);
+    }
+    
+    .col-md-3 {
+        flex: 0 0 calc(25% - 15px);
+    }
+    
+    .btn {
+        font-size: 16px;
+        padding: 12px 20px;
+    }
+    
+    .table {
+        font-size: 15px;
+    }
+    
+    .table td,
+    .table th {
+        padding: 12px 10px;
+    }
+    
+    h1 { font-size: 32px; }
+    h2 { font-size: 24px; }
+    h3 { font-size: 20px; }
+}
+
+/* ============================================
+   Card Grid Layout - Responsive
+   ============================================ */
+
+.card-grid {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 1fr; /* Mobile: 1 column */
+}
+
+@media (min-width: 768px) {
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr); /* Tablet: 2 columns */
+        gap: 16px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .card-grid {
+        grid-template-columns: repeat(3, 1fr); /* Desktop: 3 columns */
+        gap: 20px;
+    }
+}
+
+/* ============================================
+   Table Card View (for very small screens)
+   ============================================ */
+
+@media (max-width: 576px) {
+    .table-responsive {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .table thead {
+        display: none;
+    }
+    
+    .table tbody,
+    .table tr,
+    .table td {
+        display: block;
+        width: 100%;
+    }
+    
+    .table tr {
+        margin-bottom: 16px;
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        overflow: hidden;
+    }
+    
+    .table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+        border: none;
+        border-bottom: 1px solid #f1f3f5;
+    }
+    
+    .table td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        font-weight: 600;
+        text-align: left;
+        color: #495057;
+    }
+}
+
+/* ============================================
+   Flex Buttons - Responsive
+   ============================================ */
+
+.btn-group-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .btn-group-horizontal {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+}
+
+/* ============================================
+   Input Group - Mobile friendly
+   ============================================ */
+
+.input-group {
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+@media (min-width: 768px) {
+    .input-group {
+        flex-wrap: nowrap;
+        gap: 0;
+    }
+}
+
+/* ============================================
+   Navbar - Mobile-optimized
+   ============================================ */
+
+.app-navbar .navbar-brand {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.app-navbar .navbar-toggler {
+    min-height: var(--touch-target);
+    min-width: var(--touch-target);
+    padding: 8px 12px;
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+.text-truncate-mobile {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+    .text-truncate-mobile {
+        overflow: visible;
+        text-overflow: initial;
+        white-space: normal;
+    }
+}
+
+.mt-mobile { margin-top: 8px; }
+.mb-mobile { margin-bottom: 8px; }
+
+@media (min-width: 768px) {
+    .mt-mobile { margin-top: 16px; }
+    .mb-mobile { margin-bottom: 16px; }
+}
+
+/* ============================================
+   Accessibility - Focus states
+   ============================================ */
+
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+.btn:focus {
+    outline: 2px solid #0d6efd;
+    outline-offset: 2px;
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+
+@media print {
+    .btn,
+    .navbar,
+    .modal,
+    .alert-dismissible .btn-close {
+        display: none !important;
+    }
+    
+    .card {
+        page-break-inside: avoid;
+    }
+    
+    body {
+        font-size: 12pt;
+    }
+}

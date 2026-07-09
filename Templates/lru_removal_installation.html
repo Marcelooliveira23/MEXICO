@@ -1,0 +1,404 @@
+{% extends 'base.html' %}
+{% block title %}LRU - Removal and Installation Control{% endblock %}
+{% block content %}
+
+<style>
+.container-fluid { width: 100%; max-width: 100%; padding-left: 15px; padding-right: 15px; }
+@media (min-width: 768px) { .container-fluid { padding-left: 20px; padding-right: 20px; } }
+@media (min-width: 1024px) { .container-fluid { padding-left: 30px; padding-right: 30px; } }
+@media (min-width: 1400px) { .container-fluid { padding-left: 40px; padding-right: 40px; } }
+@media (min-width: 1920px) { .container-fluid { max-width: 1900px; margin: 0 auto; } }
+
+.lru-header { background: var(--colors-brand-gradient); color: white; padding: 30px; border-radius: 12px; margin-bottom: 30px; }
+.lru-header h1 { font-size: 2.5rem; margin-bottom: 8px; font-weight: 700; }
+.lru-header p { opacity: 0.95; font-size: 1.1rem; }
+
+.lru-summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 25px; }
+.lru-summary-card { background: white; border-radius: 10px; padding: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-top: 4px solid var(--colors-brand-primary); text-align: center; }
+.lru-summary-card.removals { border-top-color: #ff9800; }
+.lru-summary-card.installations { border-top-color: #4caf50; }
+
+.lru-summary-value { font-size: 2rem; font-weight: 700; color: var(--colors-black100); margin: 10px 0; }
+.lru-summary-label { font-size: 0.9rem; color: var(--colors-gray200); }
+
+.form-section, .filter-section { background: white; border-radius: 12px; padding: 20px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.form-section-title, .filter-title { font-weight: 700; color: var(--colors-black100); margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+
+.lru-item-card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 4px solid var(--colors-brand-primary); transition: all 0.3s ease; }
+.lru-item-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.10); transform: translateY(-2px); }
+
+.lru-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid #e9ecef; }
+.lru-card-tail { font-size: 1.1rem; font-weight: 700; color: var(--colors-black100); }
+.lru-card-meta { font-size: 0.85rem; color: var(--colors-gray300); margin-top: 2px; }
+
+.lru-details-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin: 16px 0; }
+.lru-detail { background: #f8f9fa; padding: 12px; border-radius: 8px; }
+.lru-detail-label { font-size: 0.75rem; color: var(--colors-gray300); text-transform: uppercase; margin-bottom: 4px; }
+.lru-detail-value { font-weight: 700; color: var(--colors-black100); }
+
+.ops-insight-box { background: linear-gradient(135deg, rgba(0, 90, 175, 0.08) 0%, #ffffff 100%); border-left: 4px solid var(--colors-brand-primary); border-radius: 8px; padding: 16px; margin-bottom: 20px; }
+.ops-insight-title { font-weight: 700; color: var(--colors-black100); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.ops-insight-text { color: var(--colors-gray200); font-size: 0.95rem; }
+
+.form-label { font-weight: 600; color: var(--colors-black100); margin-bottom: 8px; }
+.form-control, .form-select { border: 1px solid var(--colors-gray400); border-radius: 8px; padding: 10px 12px; transition: border-color 0.2s; background:#fff; color:var(--colors-black100); }
+.form-control:focus, .form-select:focus { border-color: var(--colors-brand-primary); box-shadow: 0 0 0 3px rgba(0, 90, 175, 0.18); }
+
+.reason-badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 16px; font-weight: 600; font-size: 0.8rem; }
+.reason-maintenance { background: rgba(0, 90, 175, 0.10); color: var(--colors-brand-primary); }
+.reason-failure { background: #ffebee; color: #c41e3a; }
+.reason-repair { background: #f3e5f5; color: #6a1b9a; }
+.reason-other { background: #f1f8e9; color: #558b2f; }
+
+.empty-state { text-align: center; padding: 60px 20px; }
+.empty-state-icon { font-size: 3rem; color: #ddd; margin-bottom: 15px; }
+.empty-state p { color: #999; font-size: 1.1rem; }
+</style>
+
+<div class="container-fluid mt-4 ops-dashboard">
+  <!-- Header -->
+  <div class="lru-header">
+    <div class="d-flex justify-content-between align-items-start">
+      <div>
+        <h1><i class="fas fa-tools"></i> LRU - Removal and Installation</h1>
+        <p>Line replaceable unit tracking with serialized movement history, exposure patterns, and audit visibility. Showing {{ displayed_records|default(0) }} of {{ total_records|default(0) }} records.</p>
+      </div>
+      <div class="d-flex gap-2 flex-wrap">
+        <button class="btn btn-light btn-sm" onclick="history.back()">
+          <i class="fas fa-arrow-left"></i> Back
+        </button>
+        <button class="btn btn-light btn-sm" onclick="location.reload()">
+          <i class="fas fa-sync"></i> Refresh
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="lru-summary-grid">
+    <div class="lru-summary-card removals">
+      <div class="lru-summary-label">Total Removed</div>
+      <div class="lru-summary-value">{{ total_removed|default(0) }}</div>
+    </div>
+    <div class="lru-summary-card installations">
+      <div class="lru-summary-label">Total Installed</div>
+      <div class="lru-summary-value">{{ total_installed|default(0) }}</div>
+    </div>
+    <div class="lru-summary-card">
+      <div class="lru-summary-label">Unique P/N Moved</div>
+      <div class="lru-summary-value">{{ unique_pn|default(0) }}</div>
+    </div>
+    <div class="lru-summary-card">
+      <div class="lru-summary-label">Records Visible</div>
+      <div class="lru-summary-value">{{ displayed_records|default(0) }}</div>
+    </div>
+    <div class="lru-summary-card">
+      <div class="lru-summary-label">Database Total</div>
+      <div class="lru-summary-value">{{ total_records|default(0) }}</div>
+    </div>
+    <div class="lru-summary-card removals">
+      <div class="lru-summary-label">Identified Issues</div>
+      <div class="lru-summary-value">{{ failure_removals|default(0) }}</div>
+    </div>
+  </div>
+
+  <!-- Operational Insights -->
+  <div class="ops-insight-box">
+    <div class="ops-insight-title">
+      <i class="fas fa-lightbulb"></i> Operational Analysis
+    </div>
+    <div class="ops-insight-text">
+      {% if high_removal_pn %}
+        ⚠️ <strong>P/N {{ high_removal_pn }} with high removal frequency.</strong>
+        Technical investigation is recommended to identify root cause.
+      {% else %}
+        ✅ Normal removal and installation pattern according to operational cycle.
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Register New LRU Form -->
+  <div class="form-section">
+    <h5 class="form-section-title">
+      <i class="fas fa-plus-circle" style="color: var(--colors-brand-primary);"></i> Register New Removal/Installation
+    </h5>
+    <form method="POST" class="row g-2">
+      <div class="col-md-3">
+        <label class="form-label">Removed P/N *</label>
+        <input type="text" name="pn_off" class="form-control" required placeholder="XXX-XXX-XXX">
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Installed P/N *</label>
+        <input type="text" name="pn_on" class="form-control" required placeholder="XXX-XXX-XXX">
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Aircraft *</label>
+        <select class="form-select" name="acft_registration" required>
+          <option value="">Select...</option>
+          {% for tail in tails|default([]) %}
+            <option value="{{ tail }}">{{ tail }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Classification</label>
+        <input type="text" name="removal_classification" class="form-control" placeholder="TSI/TSO/TSN">
+      </div>
+
+      <div class="col-md-2">
+        <label class="form-label">TSI</label>
+        <input type="number" step="0.01" name="tsi" class="form-control" placeholder="Flight Hours">
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">TSO</label>
+        <input type="number" name="tso" class="form-control" placeholder="Cycles">
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">TSN</label>
+        <input type="number" name="tsn" class="form-control" placeholder="Events">
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Position</label>
+        <input type="text" name="position" class="form-control" placeholder="Position">
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Removal Date</label>
+        <input type="date" name="removal_date" class="form-control">
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">Removed S/N</label>
+        <input type="text" name="sn_off" class="form-control">
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Installed S/N</label>
+        <input type="text" name="sn_on" class="form-control">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Removal Reason</label>
+        <input type="text" name="removal_reason" class="form-control" placeholder="Maintenance, Failure, Repair, etc">
+      </div>
+
+      <div class="col-12">
+        <button class="btn btn-primary" type="submit">
+          <i class="fas fa-save"></i> Register LRU
+        </button>
+        <form method="POST" action="{{ url_for('lru_export_pdf') }}" class="d-inline">
+          <button class="btn btn-danger" type="submit"><i class="fas fa-file-pdf"></i> PDF</button>
+        </form>
+        <form method="POST" action="{{ url_for('lru_export_excel') }}" class="d-inline">
+          <button class="btn btn-success" type="submit"><i class="fas fa-file-excel"></i> Excel</button>
+        </form>
+      </div>
+    </form>
+  </div>
+
+  <!-- Filters -->
+  <div class="filter-section">
+    <div class="filter-title"><i class="fas fa-filter" style="color:var(--colors-brand-primary);"></i> Filter Records</div>
+    <div class="row g-2 align-items-end">
+      <div class="col-sm-6 col-md-3">
+        <label class="form-label mb-1" style="font-size:0.85rem;">Aircraft (tail)</label>
+        <input type="text" id="lru-filter-tail" class="form-control form-control-sm" placeholder="e.g. XA-MXA">
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <label class="form-label mb-1" style="font-size:0.85rem;">P/N (off or on)</label>
+        <input type="text" id="lru-filter-pn" class="form-control form-control-sm" placeholder="e.g. 1010">
+      </div>
+      <div class="col-sm-6 col-md-2">
+        <label class="form-label mb-1" style="font-size:0.85rem;">Reason type</label>
+        <select id="lru-filter-reason" class="form-select form-select-sm">
+          <option value="">All reasons</option>
+          <option value="failure">Failure</option>
+          <option value="repair">Repair</option>
+          <option value="maintenance">Maintenance</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="col-sm-6 col-md-2">
+        <label class="form-label mb-1" style="font-size:0.85rem;">Date from</label>
+        <input type="date" id="lru-filter-date-from" class="form-control form-control-sm">
+      </div>
+      <div class="col-sm-6 col-md-2">
+        <label class="form-label mb-1" style="font-size:0.85rem;">Date to</label>
+        <input type="date" id="lru-filter-date-to" class="form-control form-control-sm">
+      </div>
+      <div class="col-sm-6 col-md-auto">
+        <button class="btn btn-outline-secondary btn-sm w-100" onclick="lruClearFilters()" title="Clear all filters">
+          <i class="fas fa-times"></i> Clear
+        </button>
+      </div>
+    </div>
+    <div class="mt-2" id="lru-filter-counter" style="font-size:0.85rem;color:var(--colors-gray200);"></div>
+  </div>
+
+  <!-- LRU Records -->
+  {% if lru_registros %}
+  <div class="lru-records" id="lru-records-list">
+    {% for row in lru_registros %}
+    <div class="lru-item-card"
+         data-tail="{{ row.acft_registration|default('')|lower }}"
+         data-pn="{{ (row.pn_off|default('') ~ ' ' ~ row.pn_on|default(''))|lower }}"
+         data-reason="{{ row.removal_reason|default('')|lower }}"
+         data-date="{{ row.removal_date|default('') }}">
+      <div class="lru-card-header">
+        <div>
+          <div class="lru-card-tail">{{ row.acft_registration|default('—') }}</div>
+          <div class="lru-card-meta">
+            <strong>P/N Off:</strong> {{ row.pn_off|default('—') }} | <strong>P/N On:</strong> {{ row.pn_on|default('—') }}
+          </div>
+        </div>
+        <div>
+          {% if 'Failure' in row.removal_reason or 'failure' in row.removal_reason|lower %}
+            <span class="reason-badge reason-failure"><i class="fas fa-exclamation-triangle"></i> Failure</span>
+          {% elif 'Repair' in row.removal_reason or 'repair' in row.removal_reason|lower %}
+            <span class="reason-badge reason-repair"><i class="fas fa-wrench"></i> Repair</span>
+          {% elif 'Maintenance' in row.removal_reason or 'maintenance' in row.removal_reason|lower %}
+            <span class="reason-badge reason-maintenance"><i class="fas fa-tools"></i> Maintenance</span>
+          {% else %}
+            <span class="reason-badge reason-other"><i class="fas fa-bookmark"></i> Other</span>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="lru-details-grid">
+        <div class="lru-detail">
+          <div class="lru-detail-label">Removed S/N</div>
+          <div class="lru-detail-value">{{ row.sn_off|default('—') }}</div>
+        </div>
+        <div class="lru-detail">
+          <div class="lru-detail-label">Installed S/N</div>
+          <div class="lru-detail-value">{{ row.sn_on|default('—') }}</div>
+        </div>
+        <div class="lru-detail">
+          <div class="lru-detail-label">Position</div>
+          <div class="lru-detail-value">{{ row.position|default('—') }}</div>
+        </div>
+        <div class="lru-detail">
+          <div class="lru-detail-label">Classification</div>
+          <div class="lru-detail-value">{{ row.removal_classification|default('—') }}</div>
+        </div>
+        <div class="lru-detail">
+          <div class="lru-detail-label">TSI</div>
+          <div class="lru-detail-value">{{ row.tsi|default('—') }}</div>
+        </div>
+        <div class="lru-detail">
+          <div class="lru-detail-label">TSO</div>
+          <div class="lru-detail-value">{{ row.tso|default('—') }}</div>
+        </div>
+        <div class="lru-detail">
+          <div class="lru-detail-label">TSN</div>
+          <div class="lru-detail-value">{{ row.tsn|default('—') }}</div>
+        </div>
+        <div class="lru-detail">
+          <div class="lru-detail-label">Removal Date</div>
+          <div class="lru-detail-value">{{ row.removal_date|default('—') }}</div>
+        </div>
+      </div>
+
+      {% if row.removal_reason %}
+      <div style="padding: 12px; background: #ffffff; border-radius: 8px; margin-top: 12px; border-left: 3px solid var(--colors-brand-primary); border: 1px solid var(--colors-gray400);">
+        <strong style="color: var(--colors-black100);">Reason:</strong>
+        <div style="color: var(--colors-gray200); margin-top: 4px;">{{ row.removal_reason }}</div>
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <div class="empty-state-icon">🔧</div>
+    <p><strong>No LRU records found</strong></p>
+    <p style="font-size: 0.95rem; color: var(--colors-gray300); margin-top: 10px;">Register the first removal/installation using the form above</p>
+  </div>
+  {% endif %}
+
+  <!-- Return Button -->
+  <div class="mt-5 text-center">
+    <a href="{{ url_for('menu') }}" class="btn btn-secondary btn-lg">
+      <i class="fas fa-home"></i> Back to Main Menu
+    </a>
+  </div>
+</div>
+
+<script>
+(function () {
+  var totalCount = {{ total_records|default(0) }};
+  var displayedCount = {{ displayed_records|default(0) }};
+
+  function getCards() {
+    return document.querySelectorAll('#lru-records-list .lru-item-card');
+  }
+
+  function renderBaselineCounter() {
+    var counter = document.getElementById('lru-filter-counter');
+    if (!counter) return;
+    var renderedCards = getCards().length;
+    if (renderedCards !== displayedCount || displayedCount !== totalCount) {
+      counter.textContent = 'Loaded on page: ' + renderedCards + ' card(s). Server returned: ' + displayedCount + '. Total in DB: ' + totalCount + '.';
+      return;
+    }
+    counter.textContent = 'Loaded on page: ' + renderedCards + ' of ' + totalCount + ' record(s).';
+  }
+
+  function reasonCategory(reasonStr) {
+    var r = (reasonStr || '').toLowerCase();
+    if (r.includes('fail') || r.includes('falha')) return 'failure';
+    if (r.includes('repair') || r.includes('reparo')) return 'repair';
+    if (r.includes('maintenance') || r.includes('manutencao') || r.includes('manutenção')) return 'maintenance';
+    return 'other';
+  }
+
+  function applyLruFilters() {
+    var tail = (document.getElementById('lru-filter-tail').value || '').trim().toLowerCase();
+    var pn   = (document.getElementById('lru-filter-pn').value || '').trim().toLowerCase();
+    var reason = document.getElementById('lru-filter-reason').value;
+    var dateFrom = document.getElementById('lru-filter-date-from').value;
+    var dateTo   = document.getElementById('lru-filter-date-to').value;
+
+    var visible = 0;
+    var cards = getCards();
+    cards.forEach(function (card) {
+      var show = true;
+      if (tail && !card.dataset.tail.includes(tail)) show = false;
+      if (pn   && !card.dataset.pn.includes(pn))     show = false;
+      if (reason) {
+        if (reasonCategory(card.dataset.reason) !== reason) show = false;
+      }
+      var cardDate = card.dataset.date || '';
+      if (dateFrom && cardDate && cardDate < dateFrom) show = false;
+      if (dateTo   && cardDate && cardDate > dateTo)   show = false;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    var counter = document.getElementById('lru-filter-counter');
+    if (tail || pn || reason || dateFrom || dateTo) {
+      counter.textContent = 'Filter: ' + visible + ' of ' + displayedCount + ' records shown (total in DB: ' + totalCount + ')';
+    } else {
+      renderBaselineCounter();
+    }
+  }
+
+  window.lruClearFilters = function () {
+    document.getElementById('lru-filter-tail').value = '';
+    document.getElementById('lru-filter-pn').value = '';
+    document.getElementById('lru-filter-reason').value = '';
+    document.getElementById('lru-filter-date-from').value = '';
+    document.getElementById('lru-filter-date-to').value = '';
+    applyLruFilters();
+  };
+
+  ['lru-filter-tail','lru-filter-pn'].forEach(function(id) {
+    document.getElementById(id).addEventListener('input', applyLruFilters);
+  });
+  ['lru-filter-reason','lru-filter-date-from','lru-filter-date-to'].forEach(function(id) {
+    document.getElementById(id).addEventListener('change', applyLruFilters);
+  });
+
+  renderBaselineCounter();
+}());
+</script>
+
+{% endblock %}
+

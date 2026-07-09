@@ -1,0 +1,102 @@
+/* (cole aqui exatamente o conteúdo do arquivo static/css/etd.css fornecido anteriormente) */
+:root {
+  --aviacao-comercial: #FCC317;
+  --azul-mexicana: #1677ff;
+  --azul-claro: #69b1ff;
+  --azul-escuro: #0958d9;
+  --branco: #ffffff;
+  --cinza-01: #f5f5f5;
+  --cinza-03: #e3f0fb;
+  --cinza-04: #00327f;
+  --bg-dark: #001529;
+  --bg-darker: #002140;
+  --font-mexicana: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji';
+  --font-size-mexicana: 14px;
+}
+
+/* highlight box */
+.highlight-box {
+  border-radius: 8px;
+  border: 1px solid rgba(16,6,144,0.12);
+  background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(245,250,255,0.9));
+  box-shadow: 0 6px 20px rgba(10,26,92,0.06);
+  padding: 0.5rem;
+}
+
+/* highlight header + title */
+.highlight-header {
+  background: linear-gradient(90deg, rgba(0,91,175,0.12), rgba(16,6,144,0.06));
+  border-radius: 6px;
+  padding: 0.6rem 0.9rem;
+  margin-bottom: 0.6rem;
+  display: inline-block;
+}
+
+.highlight-title {
+  margin: 0;
+  color: var(--azul-mexicana);
+  font-weight: 700;
+  font-family: var(--font-mexicana);
+  font-size: var(--font-size-mexicana);
+}
+
+/* fancy inputs (usa paleta do tema) */
+
+.fancy-input {
+  background: linear-gradient(180deg, var(--branco), var(--cinza-01));
+  border: 1px solid var(--azul-mexicana);
+  border-radius: 8px;
+  box-shadow:
+    0 2px 0 var(--cinza-03) inset,
+    0 6px 18px var(--azul-escuro);
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  padding: .45rem .6rem;
+  font-family: var(--font-mexicana);
+  font-size: var(--font-size-mexicana);
+}
+
+.fancy-input:hover,
+.fancy-input:focus {
+  transform: translateY(-6px) rotateX(4deg) scale(1.02);
+  box-shadow:
+    0 6px 30px rgba(2,48,120,0.18),
+    0 2px 4px rgba(0,0,0,0.04) inset;
+  outline: none;
+  background: linear-gradient(180deg, var(--branco), rgba(223,240,255,1));
+}
+
+/* CTA button - agora usando as variáveis do tema */
+.btn-cta,
+.btn-primary {
+  background-color: var(--azul-mexicana);
+  border-color: var(--azul-mexicana);
+  color: var(--branco);
+  transition: transform .18s ease, box-shadow .18s ease;
+  box-shadow: 0 8px 20px rgba(11,99,255,0.12);
+}
+.btn-cta:hover,
+.btn-primary:hover {
+  background-color: rgba(9,88,230,1);
+  border-color: rgba(8,78,207,1);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(11,99,255,0.18);
+}
+
+/* small inputs */
+.form-control-sm { padding: .28rem .5rem; font-size: .88rem; }
+
+/* width helpers */
+.input-tail { width: 6ch; min-width: 6ch; }
+.input-etrack { width: 12ch; min-width: 12ch; }
+
+/* responsive */
+@media (max-width: 540px) {
+  .fancy-input { transform: none !important; width: 100% !important; min-width: 0 !important; }
+  .highlight-header { display: block; width: 100%; }
+  .input-tail, .input-etrack { width: 100% !important; min-width: 0 !important; }
+}
+
+/* pequenas correções de contraste para tabelas */
+.table thead th { background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(242,247,252,0.95)); color: var(--cinza-04); }
+.table tbody tr:hover { background: rgba(222,233,239,0.6); }
+

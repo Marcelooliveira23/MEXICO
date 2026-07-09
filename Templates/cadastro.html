@@ -1,0 +1,776 @@
+{% extends 'base.html' %} {% block title %}Fault Registration{% endblock %} {%
+block content %}
+
+<style>
+  .container-fluid {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  @media (min-width: 768px) {
+    .container-fluid {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container-fluid {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+  }
+  @media (min-width: 1400px) {
+    .container-fluid {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+  }
+  @media (min-width: 1920px) {
+    .container-fluid {
+      max-width: 1900px;
+      margin: 0 auto;
+    }
+  }
+
+  .cad-header {
+    background: linear-gradient(
+      135deg,
+      var(--brand-primary) 0%,
+      var(--brand-dark) 100%
+    );
+    color: var(--white);
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-md);
+  }
+  .cad-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .cad-insight {
+    background: linear-gradient(
+      135deg,
+      var(--gray-10) 0%,
+      rgba(0, 91, 175, 0.12) 100%
+    );
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    border-left: 5px solid var(--brand-primary);
+  }
+  .cad-insight-icon {
+    font-size: 2rem;
+    color: var(--brand-light);
+    margin-bottom: 10px;
+  }
+  .cad-insight-title {
+    font-weight: 700;
+    color: var(--gray-90);
+    margin-bottom: 8px;
+  }
+  .cad-insight p {
+    color: var(--gray-60);
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  .cad-form-section {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid var(--brand-primary);
+  }
+  .cad-form-section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--gray-90);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .cad-form-section-title i {
+    color: var(--brand-light);
+  }
+
+  .form-label {
+    font-weight: 600;
+    color: var(--gray-90);
+    margin-bottom: 8px;
+  }
+  .form-control,
+  .form-select {
+    border: 1px solid var(--gray-20);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .form-control:focus,
+  .form-select:focus {
+    border-color: var(--brand-primary);
+    box-shadow: 0 0 0 3px rgba(16, 6, 144, 0.12);
+  }
+
+  .required::after {
+    content: " *";
+    color: var(--status-danger);
+  }
+
+  .cad-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+  }
+  .btn-primary {
+    background: linear-gradient(
+      135deg,
+      var(--brand-primary) 0%,
+      var(--brand-dark) 100%
+    );
+    border: none;
+  }
+  .btn-primary:hover {
+    background: linear-gradient(
+      135deg,
+      var(--brand-dark) 0%,
+      var(--gray-90) 100%
+    );
+  }
+
+  .form-check-input {
+    border: 2px solid var(--gray-30);
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+  .form-check-input:checked {
+    background-color: var(--brand-light);
+    border-color: var(--brand-light);
+  }
+
+  .empty-form-helper {
+    color: var(--gray-60);
+    font-size: 0.9rem;
+    margin-top: 5px;
+  }
+
+  .priority-option-critical {
+    background: #ffebee;
+    color: #c62828;
+  }
+  .priority-option-high {
+    background: #fff3e0;
+    color: #e65100;
+  }
+  .priority-option-medium {
+    background: #fff9c4;
+    color: #f57f17;
+  }
+  .priority-option-low {
+    background: #c8e6c9;
+    color: #33691e;
+  }
+
+  .safety-flag-icon {
+    color: var(--status-danger);
+  }
+  .ai-inline-note {
+    font-size: 0.86rem;
+    color: var(--gray-60);
+    margin-top: 8px;
+  }
+</style>
+
+<div class="container-fluid mt-4">
+  <!-- Alerts -->
+  {% with messages = get_flashed_messages(with_categories=true) %} {% if
+  messages %} {% for category, message in messages %}
+  <div
+    class="alert alert-{{ 'success' if category == 'success' else 'danger' }} alert-dismissible fade show"
+    role="alert"
+  >
+    <i
+      class="fas fa-{{ 'check-circle' if category == 'success' else 'exclamation-circle' }}"
+    ></i>
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+  {% endfor %} {% endif %} {% endwith %}
+
+  <!-- Header -->
+  <div class="cad-header">
+    <div class="d-flex justify-content-between align-items-start">
+      <div>
+        <h1>
+          <i class="fas fa-tools"></i> Failure Reporting and Troubleshooting
+        </h1>
+        <p>
+          Register failures, MEL items, and PIREPs with intelligent analysis and
+          resolution tracking.
+        </p>
+      </div>
+      <div>
+        <a href="{{ url_for('menu') }}" class="btn btn-light">
+          <i class="fas fa-home"></i> Return to Menu
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Operational Insight Box -->
+  <div class="cad-insight">
+    <div class="cad-insight-icon">💡</div>
+    <div class="cad-insight-title">Failure Reporting Guidance</div>
+    <p>
+      <strong>Tip:</strong> Describe the issue with as much detail as possible
+      to support technical triage and operational history.
+    </p>
+  </div>
+
+  <div class="cad-insight" style="border-left-color: var(--brand-accent-teal)">
+    <div class="cad-insight-icon"><i class="fas fa-microchip"></i></div>
+    <div class="cad-insight-title">Offline AI Technical Assistant</div>
+    <p>
+      Use the technical assistant to analyze the current failure context and
+      generate troubleshooting recommendations without internet.
+    </p>
+    <div class="mt-2">
+      <label class="form-label mb-1">AI quick symptom (optional)</label>
+      <textarea
+        class="form-control"
+        id="ai-inline-description"
+        rows="2"
+        placeholder="Optional: type symptom here. If empty, AI runs autonomous analysis based on current form context (tail/model/ATA)."
+      ></textarea>
+      <small class="empty-form-helper"
+        >Tip: this field is optional. AI 6.0/7.0 runs even when empty using fleet context.</small
+      >
+    </div>
+    <div class="mt-3 d-flex flex-wrap gap-2">
+      <button type="button" class="btn btn-primary" id="btn-ai-analyze-inline">
+        <i class="fas fa-brain"></i> Analyze This Failure
+      </button>
+      <a
+        href="{{ url_for('analytics.ai_analysis_page') }}"
+        class="btn btn-secondary"
+      >
+        <i class="fas fa-chart-line"></i> Open Full AI Analytics Page
+      </a>
+    </div>
+    <div class="ai-inline-note">
+      <i class="fas fa-info-circle"></i> AI runs in autonomous mode if the symptom field is blank.
+    </div>
+    <div id="ai-inline-output" class="mt-3"></div>
+  </div>
+
+  <!-- FORM -->
+  <form method="POST" enctype="multipart/form-data" id="cadastro-form">
+    <!-- Section 1: Aircraft Identification -->
+    <div class="cad-form-section">
+      <div class="cad-form-section-title">
+        <i class="fas fa-plane"></i> Aircraft Identification
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label class="form-label required">Aircraft Tail</label>
+          <input
+            type="text"
+            class="form-control"
+            name="tail"
+            required
+            placeholder="e.g. PT-XYZ or PR-ABC"
+          />
+        </div>
+        <div class="col-md-6">
+          <label class="form-label required">Model</label>
+          <select class="form-select" name="modelo" required>
+            <option value="">Select a model...</option>
+            {% for m in model_options %}
+            <option value="{{ m.code }}">{{ m.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: Classification and Priority -->
+    <div class="cad-form-section">
+      <div class="cad-form-section-title">
+        <i class="fas fa-tags"></i> Classification and Priority
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <label class="form-label required">ATA (System)</label>
+          <input
+            type="text"
+            class="form-control"
+            name="ata"
+            placeholder="e.g. 21, 32, 35"
+            required
+          />
+          <small class="empty-form-helper">Affected system code</small>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label required">Category</label>
+          <select class="form-select" name="categoria" required>
+            <option value="">Select...</option>
+            <option>MEL</option>
+            <option>PIREP</option>
+            <option>Corrective Maintenance</option>
+            <option>Preventive Maintenance</option>
+            <option>Inspection</option>
+            <option>Modification</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label required">Priority</label>
+          <select class="form-select" name="prioridade" required>
+            <option value="">Select...</option>
+            <option value="Critical" class="priority-option-critical">
+              ⚠️ Critical
+            </option>
+            <option value="High" class="priority-option-high">🔴 High</option>
+            <option value="Medium" class="priority-option-medium" selected>
+              🟡 Medium
+            </option>
+            <option value="Low" class="priority-option-low">🟢 Low</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label required">Status</label>
+          <select class="form-select" name="status_atual" required>
+            <option value="Open">Open</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Pending Review">Pending Review</option>
+            <option value="Closed">Closed</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Technical Details -->
+    <div class="cad-form-section">
+      <div class="cad-form-section-title">
+        <i class="fas fa-wrench"></i> Technical Details
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label class="form-label">Component Location</label>
+          <input
+            type="text"
+            class="form-control"
+            name="localizacao"
+            placeholder="e.g. Wing, Fuselage, Landing Gear"
+          />
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Estimated Time (hours)</label>
+          <input
+            type="number"
+            class="form-control"
+            name="tempo_estimado_horas"
+            min="0"
+            step="0.5"
+            placeholder="e.g. 2.5"
+            value="0"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 4: Problem Description -->
+    <div class="cad-form-section">
+      <div class="cad-form-section-title">
+        <i class="fas fa-exclamation-triangle"></i> Failure Description
+      </div>
+      <div class="mb-3">
+        <label class="form-label required">Problem / Symptom</label>
+        <textarea
+          class="form-control"
+          name="problema"
+          rows="4"
+          required
+          placeholder="Describe the observed problem, symptoms, and occurrence conditions in detail..."
+        ></textarea>
+        <small class="empty-form-helper"
+          >The more detail provided, the better the analysis and
+          recommendations.</small
+        >
+      </div>
+    </div>
+
+    <!-- Section 5: Troubleshooting -->
+    <div class="cad-form-section">
+      <div class="cad-form-section-title">
+        <i class="fas fa-graduation-cap"></i> Troubleshooting and Diagnostics
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Performed Troubleshooting</label>
+        <textarea
+          class="form-control"
+          name="troubleshooting"
+          rows="3"
+          placeholder="Describe the tests, inspections, and troubleshooting steps performed..."
+        ></textarea>
+        <small class="empty-form-helper"
+          >Build a history of actions taken to diagnose the failure.</small
+        >
+      </div>
+    </div>
+
+    <!-- Section 6: Solution -->
+    <div class="cad-form-section">
+      <div class="cad-form-section-title">
+        <i class="fas fa-check-double"></i> Solution and Resolution
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Solution (Actions Performed)</label>
+        <textarea
+          class="form-control"
+          name="solucao"
+          rows="3"
+          placeholder="Describe the applied solution, replaced parts, and adjustments performed..."
+        ></textarea>
+        <small class="empty-form-helper"
+          >Detail how the problem was resolved.</small
+        >
+      </div>
+    </div>
+
+    <!-- Section 7: Safety and Attachments -->
+    <div class="cad-form-section">
+      <div class="cad-form-section-title">
+        <i class="fas fa-shield-alt"></i> Safety and Documentation
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              name="safety"
+              id="safety"
+            />
+            <label class="form-check-label" for="safety">
+              <strong
+                ><i class="fas fa-exclamation-circle safety-flag-icon"></i>
+                Safety Issue</strong
+              >
+            </label>
+          </div>
+          <small class="empty-form-helper"
+            >Check if the failure has safety implications.</small
+          >
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Attachments (Documentation)</label>
+        <input
+          type="file"
+          class="form-control"
+          name="arquivo_files"
+          accept=".pdf,.jpg,.png,.doc,.docx,.xls,.xlsx"
+          multiple
+        />
+        <small class="empty-form-helper"
+          >Maximum 10 MB (PDF, JPG, PNG, DOC, DOCX, XLS, XLSX)</small
+        >
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="cad-buttons">
+      <button
+        class="btn btn-primary btn-lg"
+        type="submit"
+        id="cadastro-submit-btn"
+      >
+        <i class="fas fa-save"></i> Save Failure Record
+      </button>
+      <a href="{{ url_for('consulta') }}" class="btn btn-secondary btn-lg">
+        <i class="fas fa-times-circle"></i> Cancel
+      </a>
+    </div>
+  </form>
+
+  <!-- Recent Records -->
+  <div class="cad-form-section mt-4">
+    <div class="cad-form-section-title">
+      <i class="fas fa-list"></i> Recent Failure Records (MySQL)
+    </div>
+    {% if falhas %}
+    <div class="table-responsive">
+      <table class="table table-striped table-hover align-middle">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Tail</th>
+            <th>Model</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in falhas %}
+          <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.data_cadastro|format_date }}</td>
+            <td
+              class="js-edit-tail"
+              data-id="{{ item.id }}"
+              data-field="tail"
+              data-original="{{ item.tail|default('—') }}"
+              title="Double-click to edit"
+            >
+              {{ item.tail|default('—') }}
+            </td>
+            <td>{{ item.modelo|default('—') }}</td>
+            <td>{{ item.status_atual|default('—') }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="alert alert-warning mb-0">
+      No records were found in the database for this query.
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- Return Button -->
+  <div class="mt-5 text-center">
+    <a href="{{ url_for('menu') }}" class="btn btn-secondary btn-lg">
+      <i class="fas fa-home"></i> Return to Main Menu
+    </a>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("cadastro-form");
+    const submitBtn = document.getElementById("cadastro-submit-btn");
+    const aiBtn = document.getElementById("btn-ai-analyze-inline");
+    const aiOutput = document.getElementById("ai-inline-output");
+
+    if (!form || !submitBtn) {
+      return;
+    }
+
+    form.addEventListener("submit", function () {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+    });
+
+    if (aiBtn && aiOutput) {
+      aiBtn.addEventListener("click", async function () {
+        const inlineDescription =
+          document.getElementById("ai-inline-description")?.value || "";
+        const formDescription =
+          document.querySelector('[name="problema"]')?.value || "";
+        const tailValue = document.querySelector('[name="tail"]')?.value || "";
+        const modelValue = document.querySelector('[name="modelo"]')?.value || "";
+        const payload = {
+          ata: document.querySelector('[name="ata"]')?.value || "",
+          model: modelValue,
+          model_filter: modelValue,
+          tail: tailValue,
+          category: document.querySelector('[name="categoria"]')?.value || "",
+          description: String(inlineDescription || formDescription || "").trim(),
+        };
+
+        aiOutput.innerHTML =
+          '<div class="text-muted">Running offline AI analysis...</div>';
+
+        try {
+          const response = await fetch("/api/ai/analyze_failure", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          const json = await response.json();
+
+          if (!json.success) {
+            aiOutput.innerHTML = `<div class="alert alert-danger mb-0">${json.error || "Failed to analyze failure."}</div>`;
+            return;
+          }
+
+          const data = json.data || {};
+          const system = data.ata_info
+            ? `ATA ${data.matched_ata} - ${data.ata_info.system}`
+            : "Not identified";
+          const intelligence = data.intelligence || {};
+          const projection = data.projection_signals || {};
+          const autonomy = projection.autonomy || intelligence.autonomy || {};
+          const impact =
+            projection.operational_impact ||
+            intelligence.operational_impact ||
+            {};
+          const autoContext = data.auto_context || {};
+          const plan = (intelligence.recommended_plan || [])
+            .map(
+              (x) =>
+                `<li><strong>${x.priority}</strong> - ${x.phase}: ${x.action}</li>`,
+            )
+            .join("");
+          const comparative = intelligence.comparative_troubleshooting || {};
+          const comparativePatterns = (comparative.historical_patterns || [])
+            .slice(0, 3)
+            .map(
+              (p) =>
+                `<tr>
+                  <td>#${p.case_id || "N/A"}</td>
+                  <td>${p.tail || "N/A"}</td>
+                  <td>${p.ata || "N/A"}</td>
+                  <td>${p.similarity || 0}%</td>
+                  <td>${p.historical_troubleshooting || "N/A"}</td>
+                  <td>${p.historical_solution || "N/A"}</td>
+                </tr>`,
+            )
+            .join("");
+          const comparativeFocus = (comparative.recommended_focus || [])
+            .map((x) => `<li>${x}</li>`)
+            .join("");
+          const quick = (data.quick_actions || [])
+            .map((x) => `<li>${x}</li>`)
+            .join("");
+          const steps = (data.troubleshooting_steps || [])
+            .slice(0, 5)
+            .map((x) => `<li>${x}</li>`)
+            .join("");
+
+          aiOutput.innerHTML = `
+          <div class="alert alert-info mb-0">
+            <strong>System:</strong> ${system}<br>
+            <strong>Confidence:</strong> ${data.confidence || 0}%<br>
+            <strong>Severity Estimate:</strong> ${data.severity_estimate || "N/A"}<br>
+            <strong>Estimated Resolution Time:</strong> ${data.estimated_hours || "N/A"}h<br>
+            <strong>Risk:</strong>
+            <span class="ai-risk-badge ${(intelligence.risk_level || "medium").toLowerCase()}">${intelligence.risk_score ?? 0} — ${(intelligence.risk_level || "medium").toUpperCase()}</span><br>
+            <strong>Inspection Depth:</strong> ${intelligence.inspection_depth || "standard"}<br>
+            <strong>Autonomy:</strong> ${autonomy.score || 0} (${autonomy.level || "guided"})<br>
+            <strong>Forecast:</strong> ${String(projection.trend_direction || "stable").toUpperCase()} | next 30d ${projection.next_30d_expected || 0} | next 90d ${projection.next_90d_expected || 0}<br>
+            <strong>Operational Impact:</strong> dispatch ${impact.dispatch_risk || "LOW"} | delay ${impact.estimated_delay_hours ?? 0}h | pressure ${impact.maintenance_pressure || 0}
+            ${autoContext.description_generated ? '<div class="mt-2 small text-info"><i class="fas fa-magic"></i> Autonomous mode: no symptom text provided, AI used form context (tail/model/ATA) to run full analysis.</div>' : ""}
+            <hr>
+            <strong>Quick Actions</strong>
+            <ul>${quick || "<li>No quick actions found.</li>"}</ul>
+            <strong>Top Troubleshooting Steps</strong>
+            <ol>${steps || "<li>No troubleshooting steps found.</li>"}</ol>
+            <strong>Recommended Plan</strong>
+            <ol>${plan || "<li>No recommended plan generated.</li>"}</ol>
+            <strong>Comparative Troubleshooting</strong>
+            <div class="small mb-2">${comparative.summary || "No comparative summary available."}</div>
+            <ul>${comparativeFocus || "<li>No recurring focus from historical cases.</li>"}</ul>
+            <div class="table-responsive mt-2">
+              <table class="table table-sm table-striped align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th>Case</th>
+                    <th>Tail</th>
+                    <th>ATA</th>
+                    <th>Similarity</th>
+                    <th>Historical Troubleshooting</th>
+                    <th>Historical Solution</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${comparativePatterns || '<tr><td colspan="6" class="text-muted">No historical comparative cases available.</td></tr>'}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        `;
+        } catch (error) {
+          aiOutput.innerHTML =
+            '<div class="alert alert-danger mb-0">Unable to run AI analysis.</div>';
+        }
+      });
+    }
+
+    // Inline Tail editing in recent records table (double-click)
+    const tailCells = document.querySelectorAll(
+      '.js-edit-tail, td[data-field="tail"][data-id]'
+    );
+    tailCells.forEach(function (cell) {
+      cell.style.cursor = "pointer";
+      cell.addEventListener("dblclick", function () {
+        const currentValue = cell.textContent.trim();
+        const recordId = cell.getAttribute("data-id");
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = currentValue;
+        input.className = "form-control form-control-sm";
+
+        cell.textContent = "";
+        cell.appendChild(input);
+        input.focus();
+        input.select();
+
+        function restore(value) {
+          cell.textContent = value;
+        }
+
+        function save() {
+          const newValue = input.value.trim();
+          if (!newValue || newValue === currentValue) {
+            restore(currentValue);
+            return;
+          }
+
+          cell.innerHTML =
+            '<span class="spinner-border spinner-border-sm" role="status"></span>';
+          fetch("/api/update_falha", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              id: recordId,
+              field: "tail",
+              value: newValue,
+            }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                restore(newValue);
+                cell.setAttribute("data-original", newValue);
+                cell.style.backgroundColor = "#d4edda";
+                setTimeout(() => {
+                  cell.style.backgroundColor = "";
+                }, 1500);
+              } else {
+                alert("Falha ao atualizar Tail");
+                restore(currentValue);
+              }
+            })
+            .catch(() => {
+              alert("Erro de conexão ao atualizar Tail");
+              restore(currentValue);
+            });
+        }
+
+        input.addEventListener("blur", save);
+        input.addEventListener("keydown", function (e) {
+          if (e.key === "Enter") {
+            save();
+          }
+          if (e.key === "Escape") {
+            restore(currentValue);
+          }
+        });
+      });
+    });
+  });
+</script>
+
+{% endblock %}

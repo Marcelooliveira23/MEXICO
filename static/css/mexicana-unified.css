@@ -1,0 +1,11 @@
+/*
+ * Mexicana unified theme alias.
+ * Keeps legacy layout tokens while rebranding assets.
+ */
+@import url("mexicana-base.css");
+
+.brand-logo img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}

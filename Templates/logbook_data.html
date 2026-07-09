@@ -1,0 +1,467 @@
+{% extends 'base.html' %}
+{% block title %}Logbook Data{% endblock %}
+{% block content %}
+<div class="container-fluid mt-4 ops-dashboard logbook-page">
+  <div class="page-hero fade-rise mb-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+      <div>
+        <div class="data-pill mb-2"><i class="bi bi-journal-text me-1"></i>Logbook</div>
+        <h1 class="page-title">Flight and Event Logbook</h1>
+        <p class="page-subtitle mb-0">Unified record of aircraft events, flight hours, and flight cycles.</p>
+      </div>
+      <div class="d-flex gap-2 flex-wrap">
+        <button type="button" class="btn btn-outline-danger" onclick="exportLogbook('pdf')"><i class="bi bi-file-earmark-pdf"></i> Export PDF</button>
+        <button type="button" class="btn btn-outline-success" onclick="exportLogbook('excel')"><i class="bi bi-file-earmark-excel"></i> Export Excel</button>
+        <button type="button" class="btn btn-outline-info" onclick="exportLogbook('csv')"><i class="bi bi-filetype-csv"></i> Export CSV</button>
+        <button type="button" class="btn btn-outline-secondary" onclick="printLogbook()"><i class="bi bi-printer"></i> Print</button>
+      </div>
+    </div>
+  </div>
+
+  {% if msg %}
+  <div class="alert alert-info alert-dismissible fade show" role="alert">
+    {{ msg }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endif %}
+
+  <!-- Filters -->
+  <div class="card neo-card mb-4">
+    <div class="card-header">
+      <h5 class="mb-0"><i class="bi bi-funnel"></i> Search Filters</h5>
+    </div>
+    <div class="card-body">
+      <form method="GET" class="row g-3" id="filterForm">
+        <div class="col-md-3">
+          <label class="form-label">Tail:</label>
+          <input type="text" class="form-control" name="tail" value="{{ request.args.get('tail', '') }}" placeholder="PR-XXX">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">ATA:</label>
+          <input type="text" class="form-control" name="ata" value="{{ request.args.get('ata', '') }}" placeholder="Example: 70, 71">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Status:</label>
+          <select class="form-select" name="status_atual">
+            <option value="">All</option>
+            <option value="open" {% if request.args.get('status_atual') == 'open' %}selected{% endif %}>Open</option>
+            <option value="resolved" {% if request.args.get('status_atual') == 'resolved' %}selected{% endif %}>Resolved</option>
+            <option value="review" {% if request.args.get('status_atual') == 'review' %}selected{% endif %}>Review</option>
+            <option value="in progress" {% if request.args.get('status_atual') == 'in progress' %}selected{% endif %}>In Progress</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Priority:</label>
+          <select class="form-select" name="prioridade">
+            <option value="">All</option>
+            <option value="Critical" {% if request.args.get('prioridade') == 'Critical' %}selected{% endif %}>Critical</option>
+            <option value="High" {% if request.args.get('prioridade') == 'High' %}selected{% endif %}>High</option>
+            <option value="Medium" {% if request.args.get('prioridade') == 'Medium' %}selected{% endif %}>Medium</option>
+            <option value="Low" {% if request.args.get('prioridade') == 'Low' %}selected{% endif %}>Low</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">Start Date:</label>
+          <input type="date" class="form-control" name="data_inicio" value="{{ request.args.get('data_inicio', '') }}">
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">End Date:</label>
+          <input type="date" class="form-control" name="data_fim" value="{{ request.args.get('data_fim', '') }}">
+        </div>
+        
+        <!-- Model Filters -->
+        <div class="col-md-12">
+          <fieldset class="model-filter-fieldset">
+            <legend class="model-filter-legend">
+              <i class="bi bi-airplane-fill"></i> Model Filters
+            </legend>
+            <div class="model-filter-grid logbook-model-filter-grid">
+            {% if models %}
+              {% for model_item in models %}
+              <div class="form-check model-filter-item">
+                <input class="form-check-input" type="checkbox" name="model" value="{{ model_item.code }}" id="model_{{ model_item.code }}"
+                  {% if model_item.code in selected_models %}checked{% endif %}>
+                <label class="form-check-label fw-semibold" for="model_{{ model_item.code }}">
+                  {{ model_item.name }}
+                </label>
+              </div>
+              {% endfor %}
+            {% else %}
+              <small class="text-muted">No models available</small>
+            {% endif %}
+            </div>
+          </fieldset>
+        </div>
+        
+        <!-- Multi-select Categories -->
+        <div class="col-md-12">
+          <label class="form-label">Categories:</label>
+          <select name="categorias" multiple class="form-select logbook-category-select">
+            <option value="General" {% if 'General' in request.args.getlist('categorias') %}selected{% endif %}>General</option>
+            <option value="Mechanical" {% if 'Mechanical' in request.args.getlist('categorias') %}selected{% endif %}>Mechanical</option>
+            <option value="Electrical" {% if 'Electrical' in request.args.getlist('categorias') %}selected{% endif %}>Electrical</option>
+            <option value="Hydraulic" {% if 'Hydraulic' in request.args.getlist('categorias') %}selected{% endif %}>Hydraulic</option>
+            <option value="Avionics" {% if 'Avionics' in request.args.getlist('categorias') %}selected{% endif %}>Avionics</option>
+            <option value="ACFT Structures" {% if 'ACFT Structures' in request.args.getlist('categorias') %}selected{% endif %}>Aircraft Structures</option>
+          </select>
+          <small class="d-block mt-1 logbook-help-text">Hold Ctrl/Cmd to select multiple options</small>
+        </div>
+        
+        <div class="col-md-12">
+          <div class="d-flex gap-2 flex-wrap">
+            <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i> Apply Filters</button>
+            <button class="btn btn-outline-secondary" type="button" onclick="clearFilters()"><i class="bi bi-x-circle"></i> Clear Filters</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Data Table -->
+  {% if logbook_rows %}
+  <div class="card neo-card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5 class="mb-0"><i class="bi bi-table"></i> Failure Records</h5>
+      <span class="badge bg-primary">{{ logbook_rows|length }} records</span>
+    </div>
+    <div class="card-body table-wrap-fluid logbook-table-card-body">
+      <div class="table-responsive table-wrap-fluid logbook-table-wrap">
+        <table class="table table-striped table-hover table-modern table-sm logbook-table logbook-table-full">
+          <thead class="table-light">
+            <tr>
+              <th class="col-w-50">ID</th>
+              <th class="col-min-w-80">Tail</th>
+              <th class="col-min-w-100">Priority</th>
+              <th class="col-min-w-120">Category</th>
+              <th class="col-min-w-150">Problem</th>
+              <th class="col-w-90">ATA</th>
+              <th class="col-min-w-100">Location</th>
+              <th class="col-w-100">Est. Time (h)</th>
+              <th class="col-min-w-120">Status</th>
+              <th class="col-min-w-200">Troubleshooting</th>
+              <th class="col-min-w-150">Solution</th>
+              <th class="col-w-85 logbook-cell-nowrap">Record Date</th>
+              <th class="col-w-85 logbook-cell-nowrap">Created Date</th>
+              <th class="col-min-w-100">Created By</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in logbook_rows %}
+            <tr>
+              <td data-label="ID"><strong>#{{ row.id|default('-', true) }}</strong></td>
+              
+              <!-- TAIL -->
+              <td data-label="Tail" data-editable data-type="falha" data-id="{{ row.id }}" data-field="tail" data-original="{{ row.tail|default('-', true) }}"><small><strong>{{ row.tail|default('-', true) }}</strong></small></td>
+              
+              <!-- PRIORIDADE -->
+              <td data-label="Priority">
+                {% set prio = row.prioridade|default('')|lower %}
+                {% if prio == 'critical' %}
+                  <span class="badge bg-danger"><i class="bi bi-exclamation-triangle-fill"></i> Critical</span>
+                {% elif prio == 'high' %}
+                  <span class="badge bg-warning text-dark"><i class="bi bi-exclamation-circle"></i> High</span>
+                {% elif prio == 'medium' %}
+                  <span class="badge bg-info">Medium</span>
+                {% elif prio == 'low' %}
+                  <span class="badge bg-secondary">Low</span>
+                {% else %}
+                  <span class="badge bg-light text-dark">{{ row.prioridade|default('-', true) }}</span>
+                {% endif %}
+              </td>
+              
+              <!-- CATEGORIA -->
+              <td data-label="Category" data-editable data-type="falha" data-id="{{ row.id }}" data-field="categoria" data-original="{{ row.categoria|default('-', true) }}"><small>{{ row.categoria|default('-', true) }}</small></td>
+              
+              <!-- PROBLEMA -->
+              <td data-label="Problem" data-editable data-type="falha" data-id="{{ row.id }}" data-field="problema" data-original="{{ row.problema|default('-', true) }}"><small class="logbook-wrap-cell" title="{{ row.problema|default('-', true) }}">{{ row.problema|default('-', true) }}</small></td>
+              
+              <!-- ATA -->
+              <td data-label="ATA" data-editable data-type="falha" data-id="{{ row.id }}" data-field="ata" data-original="{{ row.ata|default('-', true) }}"><small><strong>{{ row.ata|default('-', true) }}</strong></small></td>
+              
+              <!-- LOCATION -->
+              <td data-label="Location" data-editable data-type="falha" data-id="{{ row.id }}" data-field="localizacao" data-original="{{ row.localizacao|default('-', true) }}"><small>{{ row.localizacao|default('-', true) }}</small></td>
+              
+              <!-- ESTIMATED TIME -->
+              <td data-label="Est. Time" data-editable data-type="falha" data-id="{{ row.id }}" data-field="tempo_estimado_horas" data-original="{{ row.tempo_estimado_horas|default('0', true) }}"><small>{{ row.tempo_estimado_horas|default('0', true) }}h</small></td>
+              
+              <!-- STATUS -->
+              <td data-label="Status" class="cursor-pointer" data-id="{{ row.id }}" data-status="{{ row.status_atual|default('open', true) }}" ondblclick="editStatus(this)" title="Double-click to edit">
+                {% set status = row.status_atual|default('open')|lower %}
+                {% if status == 'open' %}
+                  <span class="badge bg-danger status-badge">Open</span>
+                {% elif status in ['resolved', 'closed'] %}
+                  <span class="badge bg-success status-badge">Resolved</span>
+                {% elif status == 'review' %}
+                  <span class="badge bg-warning status-badge">Review</span>
+                {% elif 'progress' in status %}
+                  <span class="badge bg-info status-badge">In Progress</span>
+                {% else %}
+                  <span class="badge bg-secondary status-badge">{{ row.status_atual|default('-', true)|upper }}</span>
+                {% endif %}
+              </td>
+              
+              <!-- TROUBLESHOOTING -->
+              <td data-label="Troubleshooting" data-editable data-type="falha" data-id="{{ row.id }}" data-field="troubleshooting" data-original="{{ row.troubleshooting|default('-', true) }}"><small class="logbook-wrap-cell" title="{{ row.troubleshooting|default('-', true) }}">{{ row.troubleshooting|default('-', true) }}</small></td>
+
+              <!-- SOLUTION -->
+              <td data-label="Solution" data-editable data-type="falha" data-id="{{ row.id }}" data-field="solucao" data-original="{{ row.solucao|default('-', true) }}"><small class="logbook-wrap-cell" title="{{ row.solucao|default('-', true) }}">{{ row.solucao|default('-', true) }}</small></td>
+              
+              <!-- REGISTRATION DATE -->
+              <td data-label="Record Date" class="logbook-cell-nowrap"><small>{{ row.data_cadastro|default('N/A', true) }}</small></td>
+              
+              <!-- CREATION DATE -->
+              <td data-label="Created Date" class="logbook-cell-nowrap"><small>{{ row.data_criacao|default('N/A', true) }}</small></td>
+              
+              <!-- CREATED BY -->
+              <td data-label="Created By"><small><i class="bi bi-person"></i> {{ row.criado_por|default('-', true) }}</small></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <div class="card neo-card">
+    <div class="card-body text-center py-5">
+      <i class="bi bi-inbox empty-state-icon-muted"></i>
+      <p class="mt-3 text-muted">No records found. Use the filters above or add a new record.</p>
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+<script>
+function clearFilters() {
+  // Clear text fields
+  document.querySelector('input[name="tail"]').value = '';
+  document.querySelector('input[name="ata"]').value = '';
+  document.querySelector('input[name="data_inicio"]').value = '';
+  document.querySelector('input[name="data_fim"]').value = '';
+
+  // Reset single-select fields
+  document.querySelector('select[name="status_atual"]').value = '';
+  document.querySelector('select[name="prioridade"]').value = '';
+
+  // Clear category multi-select
+  document.querySelectorAll('select[name="categorias"] option').forEach(option => {
+    option.selected = false;
+  });
+  
+  // Uncheck all model checkboxes
+  document.querySelectorAll('input[name="model"]').forEach(checkbox => {
+    checkbox.checked = false;
+  });
+  
+  // Submit form to refresh the page
+  document.getElementById('filterForm').submit();
+}
+
+function exportLogbook(format) {
+  let baseUrl;
+  if (format === 'pdf') {
+    baseUrl = "{{ url_for('logbook_export_pdf') }}";
+  } else if (format === 'csv') {
+    baseUrl = "{{ url_for('logbook_export_csv') }}";
+  } else {
+    baseUrl = "{{ url_for('logbook_export_excel') }}";
+  }
+  const query = window.location.search || '';
+  window.location.href = `${baseUrl}${query}`;
+}
+
+function printLogbook() {
+  const query = window.location.search || '';
+  const url = "{{ url_for('logbook_print_view') }}" + query;
+  window.open(url, '_blank');
+}
+
+// Edit status on double-click
+function editStatus(cell) {
+  const id = cell.dataset.id;
+  const currentStatus = cell.dataset.status || 'open';
+  
+  // Preserve original HTML
+  cell.dataset.originalHtml = cell.innerHTML;
+  
+  // Create inline dropdown
+  const select = document.createElement('select');
+  select.className = 'form-select form-select-sm';
+  select.innerHTML = `
+    <option value="open" ${currentStatus.toLowerCase() === 'open' ? 'selected' : ''}>Open</option>
+    <option value="in-progress" ${currentStatus.toLowerCase().includes('progress') ? 'selected' : ''}>In Progress</option>
+    <option value="review" ${currentStatus.toLowerCase().includes('review') ? 'selected' : ''}>Review</option>
+    <option value="closed" ${currentStatus.toLowerCase().includes('close') ? 'selected' : ''}>Closed</option>
+  `;
+  
+  // Change event: save automatically
+  select.onchange = function() {
+    saveStatus(id, this.value, cell);
+  };
+  
+  // Blur event: restore if user clicks outside without changing
+  select.onblur = function() {
+    setTimeout(() => {
+      if (cell.querySelector('select')) {
+        cell.innerHTML = cell.dataset.originalHtml;
+      }
+    }, 200);
+  };
+  
+  // Replace badge with dropdown
+  cell.innerHTML = '';
+  cell.appendChild(select);
+  select.focus();
+}
+
+// Save updated status
+function saveStatus(id, newStatus, cell) {
+  // Show loading indicator
+  cell.innerHTML = '<span class="spinner-border spinner-border-sm" role="status"></span>';
+  
+  // Send AJAX request
+  fetch('/logbook_data/update_status', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({id: id, status: newStatus})
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      // Update badge with new status
+      let badgeClass = 'bg-secondary';
+      let badgeText = newStatus;
+      
+      if (newStatus === 'open') {
+        badgeClass = 'bg-warning text-dark';
+        badgeText = 'Open';
+      } else if (newStatus === 'closed') {
+        badgeClass = 'bg-success';
+        badgeText = 'Closed';
+      } else if (newStatus === 'review') {
+        badgeClass = 'bg-info text-dark';
+        badgeText = 'Review';
+      } else if (newStatus === 'in-progress') {
+        badgeClass = 'bg-primary';
+        badgeText = 'In Progress';
+      }
+      
+      cell.innerHTML = `<span class="badge ${badgeClass} status-badge">${badgeText}</span>`;
+      cell.dataset.status = newStatus;
+      
+      // Show visual feedback
+      cell.style.backgroundColor = '#d4edda';
+      setTimeout(() => {
+        cell.style.backgroundColor = '';
+      }, 1000);
+    } else {
+      alert('Error updating status: ' + (data.error || 'Unknown'));
+      cell.innerHTML = cell.dataset.originalHtml;
+    }
+  })
+  .catch(err => {
+    console.error('Error updating status:', err);
+    alert('Connection error while updating status');
+    cell.innerHTML = cell.dataset.originalHtml;
+  });
+}
+
+// ========== GENERAL INLINE EDITING (ALL FIELDS) ==========
+document.addEventListener('DOMContentLoaded', function() {
+    // Enable inline editing on table cells (double-click)
+    const editableCells = document.querySelectorAll('.table tbody td[data-editable]');
+    
+    editableCells.forEach(cell => {
+        cell.style.cursor = 'pointer';
+        cell.title = 'Double-click to edit';
+        
+        cell.addEventListener('dblclick', function() {
+            const currentValue = this.textContent.trim();
+            const fieldName = this.getAttribute('data-field');
+            const recordId = this.getAttribute('data-id');
+            const recordType = this.getAttribute('data-type'); // 'fault' or 'logbook'
+            
+            // Create editing input
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = currentValue;
+            input.className = 'form-control form-control-sm';
+            
+            // Replace content
+            this.textContent = '';
+            this.appendChild(input);
+            input.focus();
+            input.select();
+            
+            // Save on blur
+            input.addEventListener('blur', function() {
+                const newValue = this.value.trim();
+                
+                // If changed, send update via AJAX
+                if (newValue !== currentValue) {
+                    saveFieldUpdate(recordType, recordId, fieldName, newValue, cell);
+                } else {
+                    // Restore original value
+                    cell.textContent = currentValue;
+                }
+            });
+            
+            // Save when pressing Enter
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    this.blur();
+                }
+            });
+            
+            // Cancel when pressing Escape
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    cell.textContent = currentValue;
+                }
+            });
+        });
+    });
+    
+    // Function to save update via AJAX
+    function saveFieldUpdate(recordType, recordId, fieldName, newValue, cell) {
+        const endpoint = recordType === 'falha' ? '/api/update_falha' : '/api/update_logbook';
+        
+        // Show loading
+        cell.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
+        
+        fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: recordId,
+                field: fieldName,
+                value: newValue
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                cell.textContent = newValue;
+                cell.setAttribute('data-original', newValue);
+                cell.style.backgroundColor = '#d4edda';
+                setTimeout(() => {
+                    cell.style.backgroundColor = '';
+                }, 2000);
+            } else {
+                alert('Error saving: ' + (data.error || 'Unknown'));
+                cell.textContent = cell.getAttribute('data-original') || newValue;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Connection error while saving');
+            cell.textContent = cell.getAttribute('data-original') || newValue;
+        });
+    }
+});
+</script>
+{% endblock %}

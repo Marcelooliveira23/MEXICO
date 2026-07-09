@@ -1,0 +1,213 @@
+{% extends 'base.html' %} {% block title %}Main Menu{% endblock %} {% block
+content %}
+<div class="container-fluid px-4 py-5 menu-page ops-menu-page">
+  <div class="page-hero fade-rise mb-5 menu-hero">
+    <div
+      class="d-flex flex-wrap justify-content-between align-items-center gap-3"
+    >
+      <div>
+        <h1 class="display-5 fw-bold page-title">
+          Mexicana Troubleshooting System
+        </h1>
+        <p class="lead page-subtitle mb-0">
+          Operational control center for technical records, fleet analytics,
+          MEL, ETD, and recovery actions
+        </p>
+      </div>
+      <div class="d-flex flex-wrap gap-2 hero-actions">
+        <a
+          href="{{ url_for('analytics.ai_analysis_page') }}"
+          class="btn btn-light btn-lg"
+        >
+          <i class="bi bi-cpu-fill"></i> AI Analysis
+        </a>
+        <a
+          href="{{ url_for('analytics.exceedance_analysis_page') }}"
+          class="btn btn-outline-light btn-lg"
+        >
+          <i class="bi bi-graph-up-arrow"></i> Exceedance Analysis
+        </a>
+        <a
+          href="{{ url_for('cadastro') }}"
+          class="btn btn-outline-light btn-lg"
+        >
+          <i class="bi bi-plus-circle-fill"></i> New Record
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN MENU: 10 PAGES -->
+  <div class="menu-grid">
+    <!-- Fault Registration -->
+    <a href="{{ url_for('cadastro') }}" class="card menu-card">
+      <div class="card-body text-center py-4">
+        <div class="icon-circle menu-icon-circle">
+          <i class="bi bi-plus-circle-fill fs-4 menu-icon"></i>
+        </div>
+        <h6 class="card-title fw-bold menu-card-title">Fault Registration</h6>
+        <p class="card-text small menu-card-text">Register a new occurrence</p>
+      </div>
+    </a>
+
+    <!-- Hours/Cycles -->
+    <a href="{{ url_for('horas_ciclos') }}" class="card menu-card">
+      <div class="card-body text-center py-4">
+        <div class="icon-circle menu-icon-circle">
+          <i class="bi bi-clock-history fs-4 menu-icon"></i>
+        </div>
+        <h6 class="card-title fw-bold menu-card-title">
+          Flight Hours and Cycles
+        </h6>
+        <p class="card-text small menu-card-text">
+          Utilization trend and aircraft FH/FC control
+        </p>
+      </div>
+    </a>
+
+    <!-- Fleet Status Report -->
+    <a href="{{ url_for('fleet_status_report') }}" class="card menu-card">
+      <div class="card-body text-center py-4">
+        <div class="icon-circle menu-icon-circle">
+          <i class="bi bi-airplane-fill fs-4 menu-icon"></i>
+        </div>
+        <h6 class="card-title fw-bold menu-card-title">Fleet Status</h6>
+        <p class="card-text small menu-card-text">Fleet operational status</p>
+      </div>
+    </a>
+
+    <!-- Logbook Data -->
+    <a href="{{ url_for('logbook_data') }}" class="card menu-card">
+      <div class="card-body text-center py-4">
+        <div class="icon-circle menu-icon-circle">
+          <i class="bi bi-journal-text fs-4 menu-icon"></i>
+        </div>
+        <h6 class="card-title fw-bold menu-card-title">Technical Logbook</h6>
+        <p class="card-text small menu-card-text">
+          Flight defects, actions, and status control
+        </p>
+      </div>
+    </a>
+
+    <!-- Out of Service -->
+    <a href="{{ url_for('out_of_service') }}" class="card menu-card">
+      <div class="card-body text-center py-4">
+        <div class="icon-circle menu-icon-circle">
+          <i class="bi bi-exclamation-triangle-fill fs-4 menu-icon"></i>
+        </div>
+        <h6 class="card-title fw-bold menu-card-title">
+          AOG and Out of Service
+        </h6>
+        <p class="card-text small menu-card-text">
+          Ground events, exposure, and release control
+        </p>
+      </div>
+    </a>
+
+    <!-- Tail Registry -->
+    <a href="{{ url_for('tail_cadastro') }}" class="card menu-card">
+      <div class="card-body text-center py-4">
+        <div class="icon-circle menu-icon-circle">
+          <i class="bi bi-airplane-engines-fill fs-4 menu-icon"></i>
+        </div>
+        <h6 class="card-title fw-bold menu-card-title">Aircraft Registry</h6>
+        <p class="card-text small menu-card-text">
+          Tail data, status, hours, and fleet identity
+        </p>
+      </div>
+    </a>
+
+    <!-- MEL Items -->
+    <a href="{{ url_for('mel_itens') }}" class="card menu-card">
+      <div class="card-body text-center py-4">
+        <div class="icon-circle menu-icon-circle">
+          <i class="bi bi-list-check fs-4 menu-icon"></i>
+        </div>
+        <h6 class="card-title fw-bold menu-card-title">MEL</h6>
+        <p class="card-text small menu-card-text">Minimum equipment list</p>
+      </div>
+    </a>
+
+    <!-- ETD Overview -->
+    <a href="{{ url_for('etd') }}" class="card menu-card">
+      <div class="card-body text-center py-4">
+        <div class="icon-circle menu-icon-circle">
+          <i class="bi bi-calendar2-check-fill fs-4 menu-icon"></i>
+        </div>
+        <h6 class="card-title fw-bold menu-card-title">ETD</h6>
+        <p class="card-text small menu-card-text">Technical dispositions</p>
+      </div>
+    </a>
+
+    <!-- LRU Removal Installation -->
+    <a href="{{ url_for('lru_removal_installation') }}" class="card menu-card">
+      <div class="card-body text-center py-4">
+        <div class="icon-circle menu-icon-circle">
+          <i class="bi bi-wrench-adjustable-circle-fill fs-4 menu-icon"></i>
+        </div>
+        <h6 class="card-title fw-bold menu-card-title">LRU</h6>
+        <p class="card-text small menu-card-text">
+          Component removal and installation
+        </p>
+      </div>
+    </a>
+
+    <!-- User Management -->
+    <a href="{{ url_for('user_management') }}" class="card menu-card">
+      <div class="card-body text-center py-4">
+        <div class="icon-circle menu-icon-circle">
+          <i class="bi bi-people-fill fs-4 menu-icon"></i>
+        </div>
+        <h6 class="card-title fw-bold menu-card-title">User Management</h6>
+        <p class="card-text small menu-card-text">
+          Access control and role administration
+        </p>
+      </div>
+    </a>
+
+    <!-- Offline AI Technical Analysis -->
+    <a
+      href="{{ url_for('analytics.ai_analysis_page') }}"
+      class="card menu-card"
+    >
+      <div class="card-body text-center py-4">
+        <div class="icon-circle menu-icon-circle">
+          <i class="bi bi-cpu-fill fs-4 menu-icon"></i>
+        </div>
+        <h6 class="card-title fw-bold menu-card-title">Offline AI Analysis</h6>
+        <p class="card-text small menu-card-text">
+          Technical diagnostics, recurrence patterns, and recommendations
+        </p>
+      </div>
+    </a>
+
+    <!-- Exceedance Event Analysis -->
+    <a
+      href="{{ url_for('analytics.exceedance_analysis_page') }}"
+      class="card menu-card"
+    >
+      <div class="card-body text-center py-4">
+        <div class="icon-circle menu-icon-circle">
+          <i class="bi bi-graph-up-arrow fs-4 menu-icon"></i>
+        </div>
+        <h6 class="card-title fw-bold menu-card-title">Exceedance Analysis</h6>
+        <p class="card-text small menu-card-text">
+          Hard landing, flap/LDG overspeed with CSV/PDF-assisted troubleshooting
+        </p>
+      </div>
+    </a>
+  </div>
+
+  <div class="neo-card p-4 mt-5 menu-footer-card">
+    <div class="text-center">
+      <h6 class="fw-bold menu-footer-title">
+        Mexicana Troubleshooting System v2.0
+      </h6>
+      <p class="text-muted mb-0">
+        Unified operational workspace for technical decision-making and fleet
+        reliability control
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

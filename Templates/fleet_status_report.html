@@ -1,0 +1,450 @@
+{% extends 'base.html' %} {% block title %}Tail Operational Status - Health
+Index{% endblock %} {% block content %}
+
+<div class="container-fluid mt-4 ops-dashboard">
+  <!-- Header -->
+  <div class="fleet-header">
+    <div class="d-flex justify-content-between align-items-start">
+      <div>
+        <h1><i class="fas fa-plane"></i> Tail Operational Status Report</h1>
+        <p>Operational tail analysis with AI-supported health scoring</p>
+        <small class="ops-faded-date"
+          >Report date: {{ reference_date|default(current_date) }}</small
+        >
+      </div>
+      <div class="d-flex gap-2 flex-wrap">
+        <button class="btn btn-light btn-sm" onclick="history.back()">
+          <i class="fas fa-arrow-left"></i> Back
+        </button>
+        <button class="btn btn-light btn-sm" onclick="generatePDF()">
+          <i class="fas fa-file-pdf"></i> PDF
+        </button>
+        <button class="btn btn-light btn-sm" onclick="exportCSV()">
+          <i class="fas fa-file-csv"></i> CSV
+        </button>
+        <button class="btn btn-light btn-sm" onclick="location.reload()">
+          <i class="fas fa-sync"></i> Refresh
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fleet Summary Cards -->
+  <div class="fleet-summary-grid">
+    <div class="fleet-summary-card excellent">
+      <div class="health-circle excellent">✓</div>
+      <div class="fleet-summary-label">Operational</div>
+      <div class="fleet-summary-value">{{ excellent_count|default(0) }}</div>
+    </div>
+
+    <div class="fleet-summary-card good">
+      <div class="health-circle good">!</div>
+      <div class="fleet-summary-label">Troubleshooting Open</div>
+      <div class="fleet-summary-value">{{ good_count|default(0) }}</div>
+    </div>
+
+    <div class="fleet-summary-card poor">
+      <div class="health-circle poor">⚠</div>
+      <div class="fleet-summary-label">AOG / Out of Service</div>
+      <div class="fleet-summary-value">{{ fair_count|default(0) }}</div>
+    </div>
+
+    <div class="fleet-summary-card fair">
+      <div class="health-circle fair">M</div>
+      <div class="fleet-summary-label">MEL Open</div>
+      <div class="fleet-summary-value">{{ mel_open_count|default(0) }}</div>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="filter-section">
+    <h5 class="filter-title">
+      <i class="fas fa-filter"></i> Filter by Tail Model
+    </h5>
+    <form
+      method="GET"
+      action="{{ url_for('fleet_status_report') }}"
+      id="filterForm"
+    >
+      <div class="row">
+        <div class="col-lg-8">
+          <fieldset class="model-filter-fieldset">
+            <legend class="model-filter-legend">
+              <i class="fas fa-plane"></i> Models
+            </legend>
+            <div class="model-filter-grid">
+              {% for model_item in models|default([]) %}
+              <div class="form-check model-filter-item">
+                <input
+                  class="form-check-input model-filter"
+                  type="checkbox"
+                  name="model"
+                  value="{{ model_item.code }}"
+                  id="model_{{ model_item.code }}"
+                  {%
+                  if
+                  model_item.code
+                  in
+                  selected_models|default([])
+                  %}checked{%
+                  endif
+                  %}
+                />
+                <label
+                  class="form-check-label"
+                  for="model_{{ model_item.code }}"
+                >
+                  {{ model_item.name }}
+                </label>
+              </div>
+              {% endfor %}
+            </div>
+          </fieldset>
+        </div>
+        <div class="col-lg-4">
+          <div class="ops-actions-end">
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-filter"></i> Apply
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              onclick="clearFilters()"
+            >
+              <i class="fas fa-times-circle"></i> Clear
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- View Toggle -->
+  {% if fleet_rows %}
+  <div class="d-flex justify-content-between align-items-center ops-mb-24">
+    <div class="btn-group btn-group-sm" role="group">
+      <button type="button" class="btn btn-outline-primary active" id="btnCards" onclick="setFleetView('cards')">
+        <i class="fas fa-th-large"></i> Cards
+      </button>
+      <button type="button" class="btn btn-outline-primary" id="btnTable" onclick="setFleetView('table')">
+        <i class="fas fa-table"></i> Table
+      </button>
+    </div>
+    <small class="ops-faded-date">{{ fleet_rows|length }} aircraft</small>
+  </div>
+
+  <!-- Compact Sortable Table View -->
+  <div id="fleetTableView" style="display:none;">
+    <div class="table-responsive">
+      <table class="table table-hover table-bordered table-sm align-middle" id="fleetTable">
+        <thead class="table-dark">
+          <tr>
+            <th class="fleet-th" onclick="sortFleetTable(0)" title="Sort by Tail">Tail ⇅</th>
+            <th class="fleet-th" onclick="sortFleetTable(1)" title="Sort by Model">Model ⇅</th>
+            <th class="fleet-th" onclick="sortFleetTable(2)" title="Sort by Status">Status ⇅</th>
+            <th class="fleet-th" onclick="sortFleetTable(3)" title="Sort by Health (desc)">Health ▼</th>
+            <th class="fleet-th" onclick="sortFleetTable(4)" title="Sort by Failures">Fail ⇅</th>
+            <th class="fleet-th" onclick="sortFleetTable(5)" title="Sort by Open Troubleshooting">Open ⇅</th>
+            <th class="fleet-th" onclick="sortFleetTable(6)" title="Sort by Open MEL">MEL ⇅</th>
+            <th class="fleet-th" onclick="sortFleetTable(7)" title="Failures last 30 days">30d ⇅</th>
+            <th class="fleet-th" onclick="sortFleetTable(8)" title="Sort by Flight Hours">FH ⇅</th>
+            <th title="Top ATA chapters by frequency">Top ATAs</th>
+            <th>Links</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in fleet_rows %}
+          <tr class="{% if row.status_indicator == 'aog' %}table-danger{% elif row.health_status == 'POOR' %}table-warning{% endif %}">
+            <td><strong>{{ row.tail }}</strong></td>
+            <td>{{ row.modelo }}</td>
+            <td>
+              {% if row.status_indicator == 'aog' %}
+              <span class="badge bg-danger"><i class="fas fa-exclamation-triangle"></i> AOG</span>
+              {% else %}
+              <span class="badge bg-success"><i class="fas fa-check"></i> OK</span>
+              {% endif %}
+              {% if row.open_troubleshooting > 0 %}
+              <span class="badge bg-warning text-dark ms-1"><i class="fas fa-wrench"></i> {{ row.open_troubleshooting }}</span>
+              {% endif %}
+            </td>
+            <td>
+              <span class="fw-bold {% if row.health_status == 'EXCELLENT' %}text-success{% elif row.health_status == 'GOOD' %}text-primary{% elif row.health_status == 'FAIR' %}text-warning{% else %}text-danger{% endif %}">
+                {{ row.health_score|int }}
+              </span>
+            </td>
+            <td>{{ row.failures }}</td>
+            <td>{{ row.open_troubleshooting }}</td>
+            <td>{% if row.open_mel > 0 %}<span class="badge bg-info text-dark">{{ row.open_mel }}</span>{% else %}0{% endif %}</td>
+            <td>{% if row.recent_failures > 0 %}<span class="badge bg-warning text-dark">{{ row.recent_failures }}</span>{% else %}<span class="text-muted">0</span>{% endif %}</td>
+            <td>{{ row.fh|default(0)|int }}</td>
+            <td>
+              {% for ata in row.top_atas %}
+              <span class="badge bg-secondary">{{ ata }}</span>
+              {% endfor %}
+              {% if not row.top_atas %}<span class="text-muted">—</span>{% endif %}
+            </td>
+            <td class="text-nowrap">
+              <a href="{{ url_for('logbook_data') }}?model={{ row.modelo }}" class="btn btn-xs-fleet btn-outline-primary" title="View Logbook">
+                <i class="fas fa-book"></i>
+              </a>
+              <a href="{{ url_for('mel_itens') }}" class="btn btn-xs-fleet btn-outline-warning ms-1" title="View MEL">
+                <i class="fas fa-clipboard-list"></i>
+              </a>
+              <a href="{{ url_for('out_of_service') }}" class="btn btn-xs-fleet btn-outline-danger ms-1" title="View AOG/OOS">
+                <i class="fas fa-plane-slash"></i>
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Aircraft Cards View -->
+  <div id="fleetCardsView">
+  <div class="aircraft-list">
+    {% for row in fleet_rows %}
+    <div class="aircraft-card">
+      <div class="aircraft-card-header">
+        <div>
+          <div class="aircraft-tail">
+            <span class="status-indicator {{ row.status_indicator }}"></span>
+            {{ row.tail }}
+          </div>
+          <div class="aircraft-meta">
+            {{ row.modelo }} | S/N: {{ row.serial_number|default('—') }}
+          </div>
+        </div>
+        <div class="ops-flex-center-gap">
+          <div class="ops-text-right">
+            {% if row.health_status == 'EXCELLENT' %}
+            <div class="health-circle health-circle-sm excellent">
+              {{ row.health_score|int }}
+            </div>
+            {% elif row.health_status == 'GOOD' %}
+            <div class="health-circle health-circle-sm good">
+              {{ row.health_score|int }}
+            </div>
+            {% elif row.health_status == 'FAIR' %}
+            <div class="health-circle health-circle-sm fair">
+              {{ row.health_score|int }}
+            </div>
+            {% else %}
+            <div class="health-circle health-circle-sm poor">
+              {{ row.health_score|int }}
+            </div>
+            {% endif %}
+            <small class="health-index-caption">Health Index</small>
+          </div>
+          <div>
+            {% if row.status_indicator == 'operational' %}
+            <span class="status-badge status-operational">
+              <i class="fas fa-check-circle"></i>
+              Operational
+            </span>
+            {% else %}
+            <span class="status-badge status-aog">
+              <i class="fas fa-exclamation-triangle"></i>
+              AOG
+            </span>
+            {% endif %} {% if row.has_open_troubleshooting %}
+            <span class="status-badge status-mel ms-1">
+              <i class="fas fa-wrench"></i>
+              Troubleshooting Open: {{ row.open_troubleshooting|default(0) }}
+            </span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Health Metrics -->
+      <div class="health-metrics-grid">
+        <div class="health-metric">
+          <div class="health-metric-value">{{ row.failures|default(0) }}</div>
+          <div class="health-metric-label">Failures</div>
+        </div>
+        <div class="health-metric">
+          <div class="health-metric-value">
+            {{ row.open_troubleshooting|default(0) }}
+          </div>
+          <div class="health-metric-label">Troubleshooting Open</div>
+        </div>
+        <div class="health-metric">
+          <div class="health-metric-value metric-value-fh">
+            {{ row.fh|default(0)|int }}
+          </div>
+          <div class="health-metric-label">Flight Hours</div>
+        </div>
+        <div class="health-metric">
+          <div class="health-metric-value metric-value-fc">
+            {{ row.fc|default(0)|int }}
+          </div>
+          <div class="health-metric-label">Flight Cycles</div>
+        </div>
+      </div>
+
+      <!-- Additional Info + Quick Links -->
+      <div class="ops-detail-row ops-detail-row-fleet">
+        <div class="ops-detail-col">
+          <div><strong>Days since last failure:</strong> <span class="ops-success-strong">{{ row.days_since_last_failure|default(0) }}</span></div>
+          <div><strong>MEL Open:</strong> <span class="ops-success-strong">{{ row.open_mel|default(0) }}</span></div>
+          {% if row.recent_failures > 0 %}
+          <div class="mt-1"><strong>Last 30 days:</strong> <span class="badge bg-warning text-dark">{{ row.recent_failures }} failure{{ 's' if row.recent_failures != 1 else '' }}</span></div>
+          {% endif %}
+          {% if row.top_atas %}
+          <div class="mt-1"><strong>Top ATAs:</strong>
+            {% for ata in row.top_atas %}<span class="badge bg-secondary ms-1">ATA {{ ata }}</span>{% endfor %}
+          </div>
+          {% endif %}
+        </div>
+        <div class="ops-detail-links">
+          <a href="{{ url_for('logbook_data') }}?model={{ row.modelo }}" class="btn btn-sm btn-outline-primary" title="Logbook">
+            <i class="fas fa-book"></i> Logbook
+          </a>
+          <a href="{{ url_for('mel_itens') }}" class="btn btn-sm btn-outline-warning ms-1" title="MEL">
+            <i class="fas fa-clipboard-list"></i> MEL
+          </a>
+          <a href="{{ url_for('out_of_service') }}" class="btn btn-sm btn-outline-danger ms-1" title="AOG/OOS">
+            <i class="fas fa-plane-slash"></i> AOG
+          </a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  </div><!-- end #fleetCardsView -->
+  {% else %}
+  <div class="empty-state">
+    <div class="empty-state-icon">🛩️</div>
+    <p><strong>No aircraft found</strong></p>
+    <p class="ops-empty-text">Adjust the filters to display fleet records.</p>
+  </div>
+  {% endif %}
+
+  <!-- Return Button -->
+  <div class="mt-5 text-center">
+    <a href="{{ url_for('menu') }}" class="btn btn-secondary btn-lg">
+      <i class="fas fa-home"></i> Return to Main Menu
+    </a>
+  </div>
+</div>
+
+<style>
+  .fleet-th { cursor: pointer; user-select: none; white-space: nowrap; }
+  .fleet-th:hover { background: #495057; }
+  .btn-xs-fleet { padding: 2px 6px; font-size: 0.72rem; }
+  .ops-detail-row-fleet { display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 1rem; flex-wrap: wrap; padding: 0.75rem 0 0.25rem; border-top: 1px solid #e9ecef; margin-top: 0.5rem; }
+  .ops-detail-col { flex: 1; min-width: 180px; }
+  .ops-detail-links { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: flex-start; }
+</style>
+<script>
+  // --- View toggle ---
+  function setFleetView(mode) {
+    const table = document.getElementById('fleetTableView');
+    const cards = document.getElementById('fleetCardsView');
+    const btnT = document.getElementById('btnTable');
+    const btnC = document.getElementById('btnCards');
+    if (mode === 'table') {
+      table.style.display = '';
+      cards.style.display = 'none';
+      btnT.classList.add('active');
+      btnC.classList.remove('active');
+      localStorage.setItem('fleetView', 'table');
+    } else {
+      table.style.display = 'none';
+      cards.style.display = '';
+      btnC.classList.add('active');
+      btnT.classList.remove('active');
+      localStorage.setItem('fleetView', 'cards');
+    }
+  }
+  // Restore saved view preference
+  (function() {
+    const saved = localStorage.getItem('fleetView');
+    if (saved === 'table') setFleetView('table');
+  })();
+
+  // --- Sortable table ---
+  let _sortCol = 3, _sortAsc = false;  // default: health desc
+  function sortFleetTable(col) {
+    const table = document.getElementById('fleetTable');
+    if (!table) return;
+    const tbody = table.tBodies[0];
+    const rows = Array.from(tbody.rows);
+    if (_sortCol === col) {
+      _sortAsc = !_sortAsc;
+    } else {
+      _sortCol = col;
+      _sortAsc = (col !== 3 && col !== 4 && col !== 5 && col !== 6 && col !== 7 && col !== 8);
+    }
+    rows.sort((a, b) => {
+      const va = a.cells[col] ? a.cells[col].textContent.trim() : '';
+      const vb = b.cells[col] ? b.cells[col].textContent.trim() : '';
+      const na = parseFloat(va), nb = parseFloat(vb);
+      const cmp = (!isNaN(na) && !isNaN(nb)) ? na - nb : va.localeCompare(vb, undefined, {numeric: true});
+      return _sortAsc ? cmp : -cmp;
+    });
+    rows.forEach(r => tbody.appendChild(r));
+    // Update header icons
+    table.querySelectorAll('.fleet-th').forEach((th, i) => {
+      const txt = th.textContent.replace(/[⇅▲▼]/g, '').trim();
+      th.textContent = txt + (i === _sortCol ? (_sortAsc ? ' ▲' : ' ▼') : ' ⇅');
+    });
+  }
+  // Initial sort by health desc
+  document.addEventListener('DOMContentLoaded', function() {
+    if (document.getElementById('fleetTable')) sortFleetTable(3);
+  });
+
+  function clearFilters() {
+    document.querySelectorAll(".model-filter").forEach((checkbox) => {
+      checkbox.checked = false;
+    });
+    document.getElementById("filterForm").submit();
+  }
+
+  function generatePDF() {
+    window.print();
+  }
+
+  function exportCSV() {
+    const table = document.getElementById('fleetTable');
+    if (table) {
+      // Export from table when in table view
+      let csv = ['TAIL,MODEL,STATUS,HEALTH,FAILURES,OPEN,MEL,30D,FH'];
+      Array.from(table.tBodies[0].rows).forEach(r => {
+        const cells = Array.from(r.cells).slice(0, 9).map(c => '"' + c.textContent.trim().replace(/"/g, '""') + '"');
+        csv.push(cells.join(','));
+      });
+      _downloadCSV(csv.join('\n'));
+      return;
+    }
+    // Fallback: export from cards
+    const aircraftCards = document.querySelectorAll(".aircraft-card");
+    let csv = ["TAIL,STATUS,MODEL,HEALTH_INDEX,FAILURES,OPEN,FLIGHT_HOURS,FLIGHT_CYCLES"];
+    aircraftCards.forEach((card) => {
+      const tailEl = card.querySelector(".aircraft-tail");
+      const modeloEl = card.querySelector(".aircraft-meta");
+      const tail = tailEl ? tailEl.textContent.trim().split("\n")[0] : "—";
+      const statusBadge = card.querySelector(".status-badge");
+      const status = statusBadge ? statusBadge.textContent.trim() : "—";
+      const metrics = Array.from(card.querySelectorAll(".health-metric-value")).map((el) => el.textContent.trim());
+      csv.push([tail, status, modeloEl ? modeloEl.textContent.trim().split("|")[0].trim() : "—",
+        metrics[0]||"—", metrics[1]||"—", metrics[2]||"—", metrics[3]||"—"].join(","));
+    });
+    _downloadCSV(csv.join('\n'));
+  }
+  function _downloadCSV(content) {
+    const blob = new Blob([content], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    link.setAttribute("href", URL.createObjectURL(blob));
+    link.setAttribute("download", "fleet_status_" + new Date().toISOString().slice(0, 10) + ".csv");
+    link.style.visibility = "hidden";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+</script>
+{% endblock %}

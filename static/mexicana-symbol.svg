@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Mexicana symbol">
+    <defs>
+        <linearGradient id="mxGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#0A4B9E"/>
+            <stop offset="100%" stop-color="#1A8AD8"/>
+        </linearGradient>
+    </defs>
+    <rect x="6" y="6" width="116" height="116" rx="24" fill="url(#mxGrad)"/>
+    <path d="M28 90V38h14l22 28 22-28h14v52H86V60L64 88 42 60v30z" fill="#FFFFFF"/>
+    <path d="M74 30l24 8-24 8 7-8z" fill="#FFFFFF" opacity="0.9"/>
+</svg>

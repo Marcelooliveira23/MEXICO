@@ -1,0 +1,905 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MEXICANA AI v10.0 - Troubleshooting Assistant</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #0d6efd;
+        --primary-dark: #0a58ca;
+        --secondary: #6c757d;
+        --success: #198754;
+        --danger: #dc3545;
+        --warning: #ffc107;
+        --bg-dark: #1e1e1e;
+        --bg-light: #ffffff;
+        --text-dark: #1f2937;
+        --text-light: #f3f4f6;
+        --border: #e5e7eb;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+          Cantarell, sans-serif;
+        background: var(--bg-light);
+        color: var(--text-dark);
+        line-height: 1.6;
+        transition: background 0.3s;
+      }
+
+      body.dark-mode {
+        background: var(--bg-dark);
+        color: var(--text-light);
+      }
+
+      /* LAYOUT PRINCIPAL */
+      .container-main {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        min-height: 100vh;
+      }
+
+      body.sidebar-collapsed .container-main {
+        grid-template-columns: 60px 1fr;
+      }
+
+      /* SIDEBAR */
+      .sidebar {
+        background: var(--bg-light);
+        border-right: 1px solid var(--border);
+        padding: 1rem;
+        overflow-y: auto;
+        max-height: 100vh;
+        transition: all 0.3s;
+      }
+
+      body.dark-mode .sidebar {
+        background: #2d2d2d;
+        border-right-color: #404040;
+      }
+
+      .sidebar-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .sidebar-logo {
+        width: 32px;
+        height: 32px;
+        background: var(--primary);
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+      }
+
+      .sidebar-logo img {
+        width: 22px;
+        height: 22px;
+        object-fit: contain;
+      }
+
+      .sidebar-title {
+        font-weight: 600;
+        font-size: 14px;
+        display: none;
+      }
+
+      .sidebar-toggler {
+        margin-left: auto;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--secondary);
+        font-size: 18px;
+      }
+
+      /* SIDEBAR SECTIONS */
+      .sidebar-section {
+        margin-bottom: 1.5rem;
+      }
+
+      .sidebar-section-title {
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: var(--secondary);
+        margin-bottom: 0.5rem;
+        padding: 0 0.5rem;
+        display: none;
+      }
+
+      .sidebar-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        margin-bottom: 0.5rem;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.2s;
+        text-decoration: none;
+        color: var(--text-dark);
+      }
+
+      body.dark-mode .sidebar-item {
+        color: var(--text-light);
+      }
+
+      .sidebar-item:hover {
+        background: #f3f4f6;
+      }
+
+      body.dark-mode .sidebar-item:hover {
+        background: #3d3d3d;
+      }
+
+      .sidebar-item.active {
+        background: var(--primary);
+        color: white;
+      }
+
+      .sidebar-item-icon {
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+      }
+
+      .sidebar-item-text {
+        font-size: 13px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: none;
+      }
+
+      /* MAIN CONTENT */
+      .main-content {
+        display: flex;
+        flex-direction: column;
+        background: var(--bg-light);
+      }
+
+      .dark-mode .main-content {
+        background: var(--bg-dark);
+      }
+
+      /* HEADER */
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid var(--border);
+        background: var(--bg-light);
+      }
+
+      .dark-mode .header {
+        background: #2d2d2d;
+        border-bottom-color: #404040;
+      }
+
+      .header-title {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .header-title h1 {
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .header-status {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: #f0f9ff;
+        color: var(--primary);
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      .dark-mode .header-status {
+        background: #1e3a8a;
+        color: #93c5fd;
+      }
+
+      .header-controls {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      .header-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 20px;
+        color: var(--secondary);
+        transition: color 0.2s;
+      }
+
+      .header-btn:hover {
+        color: var(--text-dark);
+      }
+
+      /* CHAT AREA */
+      .chat-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .message {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        animation: slideIn 0.3s ease-out;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .message.ai {
+        justify-content: flex-start;
+      }
+
+      .message.user {
+        justify-content: flex-end;
+      }
+
+      .message-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        font-weight: bold;
+        flex-shrink: 0;
+      }
+
+      .message.ai .message-avatar {
+        background: var(--primary);
+        color: white;
+      }
+
+      .message.user .message-avatar {
+        background: var(--secondary);
+        color: white;
+      }
+
+      .message-content {
+        max-width: 65%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .message-bubble {
+        padding: 1rem;
+        border-radius: 12px;
+        line-height: 1.5;
+        word-wrap: break-word;
+      }
+
+      .message.ai .message-bubble {
+        background: #f3f4f6;
+        color: var(--text-dark);
+        border: 1px solid var(--border);
+      }
+
+      .dark-mode .message.ai .message-bubble {
+        background: #3d3d3d;
+        color: var(--text-light);
+        border-color: #404040;
+      }
+
+      .message.user .message-bubble {
+        background: var(--primary);
+        color: white;
+        border-radius: 12px 0 12px 12px;
+      }
+
+      .message-meta {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 11px;
+        color: var(--secondary);
+      }
+
+      .message.user .message-meta {
+        justify-content: flex-end;
+      }
+
+      .confidence-badge {
+        display: inline-block;
+        padding: 0.25rem 0.5rem;
+        background: #e0f2fe;
+        color: var(--primary);
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 500;
+      }
+
+      .dark-mode .confidence-badge {
+        background: #1e3a8a;
+        color: #93c5fd;
+      }
+
+      /* MESSAGE ACTIONS */
+      .message-actions {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+      }
+
+      .action-btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 11px;
+        border: 1px solid var(--border);
+        background: var(--bg-light);
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .dark-mode .action-btn {
+        background: #2d2d2d;
+        border-color: #404040;
+        color: var(--text-light);
+      }
+
+      .action-btn:hover {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+      }
+
+      /* INPUT AREA */
+      .input-area {
+        padding: 1.5rem 2rem;
+        border-top: 1px solid var(--border);
+        background: var(--bg-light);
+      }
+
+      .dark-mode .input-area {
+        background: #2d2d2d;
+        border-top-color: #404040;
+      }
+
+      .input-wrapper {
+        display: flex;
+        gap: 1rem;
+        align-items: flex-end;
+      }
+
+      .input-field {
+        flex: 1;
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 14px;
+        resize: none;
+        max-height: 120px;
+        background: var(--bg-light);
+        color: var(--text-dark);
+        transition: border 0.2s;
+      }
+
+      .dark-mode .input-field {
+        background: #3d3d3d;
+        border-color: #404040;
+        color: var(--text-light);
+      }
+
+      .input-field:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+      }
+
+      .input-field::placeholder {
+        color: var(--secondary);
+      }
+
+      .send-btn {
+        padding: 0.75rem 1.5rem;
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .send-btn:hover {
+        background: var(--primary-dark);
+      }
+
+      .send-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      /* SUGGESTIONS */
+      .suggestions {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 0.75rem;
+        margin-top: 1rem;
+      }
+
+      .suggestion-btn {
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--border);
+        background: var(--bg-light);
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 13px;
+        transition: all 0.2s;
+      }
+
+      .dark-mode .suggestion-btn {
+        background: #2d2d2d;
+        border-color: #404040;
+        color: var(--text-light);
+      }
+
+      .suggestion-btn:hover {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 768px) {
+        .container-main {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          position: fixed;
+          left: 0;
+          top: 0;
+          width: 280px;
+          height: 100vh;
+          z-index: 100;
+          transform: translateX(-100%);
+          transition: transform 0.3s;
+        }
+
+        .sidebar.open {
+          transform: translateX(0);
+        }
+
+        .message-content {
+          max-width: 85%;
+        }
+
+        .header {
+          padding: 1rem;
+        }
+
+        .messages {
+          padding: 1rem;
+        }
+
+        .input-area {
+          padding: 1rem;
+        }
+      }
+
+      /* SCROLLBAR */
+      .messages::-webkit-scrollbar,
+      .sidebar::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .messages::-webkit-scrollbar-track,
+      .sidebar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      .messages::-webkit-scrollbar-thumb,
+      .sidebar::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 4px;
+      }
+
+      .messages::-webkit-scrollbar-thumb:hover,
+      .sidebar::-webkit-scrollbar-thumb:hover {
+        background: #64748b;
+      }
+
+      body.dark-mode .messages::-webkit-scrollbar-thumb {
+        background: #475569;
+      }
+
+      body.dark-mode .messages::-webkit-scrollbar-thumb:hover {
+        background: #64748b;
+      }
+
+      /* LOADING STATE */
+      .typing-indicator {
+        display: flex;
+        gap: 4px;
+        padding: 1rem;
+      }
+
+      .typing-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--secondary);
+        animation: typing 1.4s infinite;
+      }
+
+      .typing-dot:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      .typing-dot:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes typing {
+        0%,
+        60%,
+        100% {
+          opacity: 0.5;
+          transform: translateY(0);
+        }
+        30% {
+          opacity: 1;
+          transform: translateY(-10px);
+        }
+      }
+
+      /* EMPTY STATE */
+      .empty-state {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        padding: 4rem 2rem;
+        text-align: center;
+      }
+
+      .empty-state-icon {
+        font-size: 64px;
+        opacity: 0.5;
+      }
+
+      .empty-state-icon img {
+        width: 64px;
+        height: 64px;
+        object-fit: contain;
+      }
+
+      .empty-state-title {
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .empty-state-text {
+        color: var(--secondary);
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-main">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="sidebar-logo">
+            <img
+              src="{{ url_for('static', filename='mexicana-symbol.svg') }}"
+              alt="Mexicana"
+            />
+          </div>
+          <div class="sidebar-title">MEXICANA AI</div>
+          <button class="sidebar-toggler" onclick="toggleSidebar()">☰</button>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">EXPLORE</div>
+          <button class="sidebar-item" onclick="newChat()">
+            <div class="sidebar-item-icon">➕</div>
+            <span class="sidebar-item-text">New Chat</span>
+          </button>
+          <button class="sidebar-item" onclick="toggleSearch()">
+            <div class="sidebar-item-icon">🔍</div>
+            <span class="sidebar-item-text">Search</span>
+          </button>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">BROWSE</div>
+          <a class="sidebar-item" href="#tails">
+            <div class="sidebar-item-icon">✈️</div>
+            <span class="sidebar-item-text">Tails (Fleet)</span>
+          </a>
+          <a class="sidebar-item" href="#atas">
+            <div class="sidebar-item-icon">📋</div>
+            <span class="sidebar-item-text">ATAs (21-80)</span>
+          </a>
+          <a class="sidebar-item" href="#tools">
+            <div class="sidebar-item-icon">🛠️</div>
+            <span class="sidebar-item-text">Tools</span>
+          </a>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">HISTORY</div>
+          <button class="sidebar-item">
+            <div class="sidebar-item-icon">⏱️</div>
+            <span class="sidebar-item-text">Last 7 days</span>
+          </button>
+          <button class="sidebar-item">
+            <div class="sidebar-item-icon">⭐</div>
+            <span class="sidebar-item-text">Favorites</span>
+          </button>
+        </div>
+
+        <div class="sidebar-section" style="margin-top: auto">
+          <button class="sidebar-item" onclick="toggleSettings()">
+            <div class="sidebar-item-icon">⚙️</div>
+            <span class="sidebar-item-text">Settings</span>
+          </button>
+          <button class="sidebar-item">
+            <div class="sidebar-item-icon">👤</div>
+            <span class="sidebar-item-text">Account</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <div class="main-content">
+        <!-- HEADER -->
+        <header class="header">
+          <div class="header-title">
+            <h1>MEXICANA Troubleshooting AI</h1>
+          </div>
+          <div class="header-status">
+            <span>●</span>
+            <span>Online</span>
+          </div>
+          <div class="header-controls">
+            <button
+              class="header-btn"
+              onclick="toggleTheme()"
+              title="Toggle theme"
+            >
+              🌙
+            </button>
+            <button
+              class="header-btn"
+              onclick="toggleSettings()"
+              title="Settings"
+            >
+              ⚙️
+            </button>
+          </div>
+        </header>
+
+        <!-- CHAT CONTAINER -->
+        <div class="chat-container">
+          <div class="messages" id="messages">
+            <div class="empty-state">
+              <div class="empty-state-icon">
+                <img
+                  src="{{ url_for('static', filename='mexicana-symbol.svg') }}"
+                  alt="Mexicana"
+                />
+              </div>
+              <div class="empty-state-title">
+                Olá! Sou seu assistente de troubleshooting
+              </div>
+              <div class="empty-state-text">
+                Faça-me perguntas sobre manutenção, tails, ATAs ou qualquer
+                outro tópico técnico
+              </div>
+            </div>
+          </div>
+
+          <!-- INPUT AREA -->
+          <div class="input-area">
+            <div class="suggestions" id="suggestions">
+              <button
+                class="suggestion-btn"
+                onclick="sendMessage('Qual é o ATA 29?')"
+              >
+                📋 ATA 29 - Hydraulic Power
+              </button>
+              <button
+                class="suggestion-btn"
+                onclick="sendMessage('Analyzer da frota MXD')"
+              >
+                ✈️ Frota MXD
+              </button>
+              <button
+                class="suggestion-btn"
+                onclick="sendMessage('LRU removal procedure')"
+              >
+                🔧 LRU Removal
+              </button>
+              <button
+                class="suggestion-btn"
+                onclick="sendMessage('Show statistics')"
+              >
+                📊 Statistics
+              </button>
+            </div>
+            <div class="input-wrapper">
+              <input
+                type="text"
+                id="messageInput"
+                class="input-field"
+                placeholder="Pergunte-me qualquer coisa... (Português or English)"
+                onkeypress="
+                  if (event.key === 'Enter' && !event.shiftKey) {
+                    sendMessage();
+                    event.preventDefault();
+                  }
+                "
+              />
+              <button class="send-btn" onclick="sendMessage()" id="sendBtn">
+                ➤
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Simple state management
+      const state = {
+        darkMode: false,
+        sidebarOpen: true,
+      };
+
+      function toggleTheme() {
+        state.darkMode = !state.darkMode;
+        document.body.classList.toggle("dark-mode");
+        localStorage.setItem("darkMode", state.darkMode);
+      }
+
+      function toggleSidebar() {
+        state.sidebarOpen = !state.sidebarOpen;
+        document.body.classList.toggle("sidebar-collapsed");
+      }
+
+      function toggleSettings() {
+        alert("Settings panel - será implementado em v10.0");
+      }
+
+      function toggleSearch() {
+        alert("Search - será implementado em v10.0");
+      }
+
+      function newChat() {
+        const messagesDiv = document.getElementById("messages");
+        messagesDiv.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-state-icon">🤖</div>
+                    <div class="empty-state-title">Nova conversa iniciada</div>
+                    <div class="empty-state-text">Faça sua primeira pergunta...</div>
+                </div>
+            `;
+      }
+
+      function sendMessage(text = null) {
+        const input = document.getElementById("messageInput");
+        const message = text || input.value.trim();
+
+        if (!message) return;
+
+        const messagesDiv = document.getElementById("messages");
+
+        // Remove empty state
+        if (messagesDiv.querySelector(".empty-state")) {
+          messagesDiv.innerHTML = "";
+        }
+
+        // Add user message
+        const userMsg = document.createElement("div");
+        userMsg.className = "message user";
+        userMsg.innerHTML = `
+                <div class="message-content">
+                    <div class="message-bubble">${message}</div>
+                    <div class="message-meta">Agora</div>
+                </div>
+                <div class="message-avatar">👤</div>
+            `;
+        messagesDiv.appendChild(userMsg);
+
+        // Clear input
+        input.value = "";
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+        // Simulate AI response
+        setTimeout(() => {
+          const aiMsg = document.createElement("div");
+          aiMsg.className = "message ai";
+          aiMsg.innerHTML = `
+                    <div class="message-avatar">🤖</div>
+                    <div class="message-content">
+                        <div class="message-bubble">
+                            <strong>Processando sua pergunta...</strong><br>
+                            <small>Este é um protótipo da UI v10.0. A resposta será gerada pelo AI Engine v10.0</small>
+                        </div>
+                        <div class="message-meta">
+                            📊 Confidence: <span class="confidence-badge">92%</span>
+                        </div>
+                        <div class="message-actions">
+                            <button class="action-btn">📋 Copy</button>
+                            <button class="action-btn">📖 Expand</button>
+                            <button class="action-btn">🖨️ Print</button>
+                            <button class="action-btn">👍 Helpful</button>
+                        </div>
+                    </div>
+                `;
+          messagesDiv.appendChild(aiMsg);
+          messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }, 500);
+      }
+
+      // Load theme preference
+      if (localStorage.getItem("darkMode") === "true") {
+        state.darkMode = true;
+        document.body.classList.add("dark-mode");
+      }
+
+      // Show suggestions on first load
+      document.getElementById("messageInput").focus();
+    </script>
+  </body>
+</html>

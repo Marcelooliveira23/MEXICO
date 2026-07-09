@@ -1,0 +1,1103 @@
+{% extends 'base.html' %} {% block title %}Exceedance & Document Analysis{%
+endblock %} {% block content %}
+<div class="container-fluid px-4 py-4">
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <h2 class="h4 mb-1">Exceedance & Troubleshooting Assistant</h2>
+      <p class="text-muted mb-0">
+        Analyze hard landing, flap overspeed, landing overspeed and correlate
+        open troubleshooting with CSV/PDF evidence.
+      </p>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-lg-5">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h3 class="h6 mb-3">Input Data</h3>
+          <form id="exceedance-form" enctype="multipart/form-data">
+            <div class="mb-3">
+              <label for="failure_text" class="form-label"
+                >Failure Description</label
+              >
+              <textarea
+                id="failure_text"
+                name="failure_text"
+                class="form-control"
+                rows="4"
+                placeholder="Describe the failure and operational context..."
+              ></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="scenario" class="form-label"
+                >Message Cascade / Scenario</label
+              >
+              <textarea
+                id="scenario"
+                name="scenario"
+                class="form-control"
+                rows="4"
+                placeholder="Paste ACMS/FDR sequence, alerts, and timeline..."
+              ></textarea>
+            </div>
+
+            <div class="row g-2 mb-3">
+              <div class="col-6">
+                <label for="tail_input" class="form-label">Tail Number</label>
+                <input
+                  id="tail_input"
+                  name="tail"
+                  type="text"
+                  class="form-control form-control-sm"
+                  placeholder="ex: PR-PXA"
+                  maxlength="16"
+                />
+              </div>
+              <div class="col-6">
+                <label for="modelo_input" class="form-label"
+                  >Aircraft Model</label
+                >
+                <input
+                  id="modelo_input"
+                  name="modelo"
+                  type="text"
+                  class="form-control form-control-sm"
+                  placeholder="ex: E195-E2"
+                  maxlength="32"
+                />
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="analysis_mode" class="form-label"
+                >Analysis Mode</label
+              >
+              <select
+                id="analysis_mode"
+                name="analysis_mode"
+                class="form-select form-select-sm"
+              >
+                <option value="standard" selected>Standard</option>
+                <option value="expert">Expert</option>
+                <option value="executive">Executive</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="csv_files" class="form-label"
+                >CSV Evidence (one or more files)</label
+              >
+              <input
+                id="csv_files"
+                name="csv_files"
+                type="file"
+                class="form-control"
+                accept=".csv,text/csv"
+                multiple
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="pdf_files" class="form-label"
+                >PDF Evidence (one or more files)</label
+              >
+              <input
+                id="pdf_files"
+                name="pdf_files"
+                type="file"
+                class="form-control"
+                accept=".pdf,application/pdf"
+                multiple
+              />
+            </div>
+
+            <button
+              id="btn-analyze"
+              type="submit"
+              class="btn btn-primary w-100"
+            >
+              <i class="bi bi-cpu-fill me-1"></i>Analyze Exceedance
+            </button>
+          </form>
+
+          <hr />
+
+          <h3 class="h6 mb-3">Open Troubleshooting</h3>
+          <div class="row g-2 mb-2">
+            <div class="col-6">
+              <input
+                id="open-tail"
+                class="form-control form-control-sm"
+                placeholder="Tail (ex: PR-E2A)"
+              />
+            </div>
+            <div class="col-6">
+              <input
+                id="open-ata"
+                class="form-control form-control-sm"
+                placeholder="ATA (ex: 29)"
+              />
+            </div>
+          </div>
+          <div class="d-grid gap-2">
+            <button
+              id="btn-load-open-cases"
+              type="button"
+              class="btn btn-outline-secondary btn-sm"
+            >
+              Load Open Cases
+            </button>
+            <select id="open-cases-select" class="form-select form-select-sm">
+              <option value="">Select an open case...</option>
+            </select>
+            <button
+              id="btn-analyze-open-case"
+              type="button"
+              class="btn btn-outline-primary btn-sm"
+            >
+              Analyze Selected Open Case
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-7">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h3 class="h6 mb-3">Technical Recommendation</h3>
+          <div id="analysis-status" class="small text-muted mb-2">
+            Waiting for analysis...
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Priority</label>
+            <div id="out-priority" class="fw-semibold">-</div>
+          </div>
+
+          <!-- Exceedance Verdict Panel ─ deterministic AMM/AFM threshold result -->
+          <div class="mb-3" id="out-exceedance-verdict-section" style="display: none">
+            <label class="form-label fw-bold">Veredicto de Excedência (AMM/AFM)</label>
+            <div id="out-exceedance-verdict" class="p-2 border rounded bg-light"></div>
+          </div>
+
+          <div class="mb-3" id="out-version-section" style="display: none">
+            <label class="form-label">Analysis Version</label>
+            <div id="out-version" class="small"></div>
+          </div>
+
+          <div
+            class="mb-3"
+            id="out-diagnosis-alert-section"
+            style="display: none"
+          >
+            <label class="form-label">Diagnosis Change Alert</label>
+            <div
+              id="out-diagnosis-alert"
+              class="alert alert-danger py-2 px-3 mb-0 small"
+            ></div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Confidence Score</label>
+            <div id="out-confidence" class="fw-semibold">-</div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Detected Signals</label>
+            <div id="out-signals" class="small">-</div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Cascade Summary</label>
+            <ul id="out-cascade" class="small mb-0"></ul>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Best Option</label>
+            <div id="out-best" class="alert alert-warning py-2 px-3 mb-0">
+              -
+            </div>
+          </div>
+
+          <div class="mb-3" id="out-severity-section" style="display: none">
+            <label class="form-label">Severity Estimate</label>
+            <div id="out-severity" class="small"></div>
+          </div>
+
+          <div
+            class="mb-3"
+            id="out-probable-cause-section"
+            style="display: none"
+          >
+            <label class="form-label">Probable Cause</label>
+            <div id="out-probable-cause" class="small"></div>
+          </div>
+
+          <div class="mb-3" id="out-mode-output-section" style="display: none">
+            <label class="form-label">Mode Output</label>
+            <div id="out-mode-output" class="small"></div>
+          </div>
+
+          <div class="mb-3" id="out-containment-section" style="display: none">
+            <label class="form-label">Immediate Containment</label>
+            <ul id="out-containment" class="small mb-0"></ul>
+          </div>
+
+          <div
+            class="mb-3"
+            id="out-additional-inspections-section"
+            style="display: none"
+          >
+            <label class="form-label">Additional Inspections</label>
+            <ul id="out-additional-inspections" class="small mb-0"></ul>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">PDF Sections (extracted)</label>
+            <div id="out-pdf-sections" class="small text-muted">-</div>
+          </div>
+
+          <div
+            class="mb-3"
+            id="out-pdf-relevance-section"
+            style="display: none"
+          >
+            <label class="form-label">PDF Paragraph Relevance</label>
+            <div id="out-pdf-relevance" class="small"></div>
+          </div>
+
+          <div>
+            <label class="form-label">Recommended Actions</label>
+            <ol id="out-actions" class="small mb-0"></ol>
+          </div>
+
+          <div class="mt-3" id="out-playbooks-section" style="display: none">
+            <label class="form-label fw-semibold"
+              >&#128196; Inspection Playbooks</label
+            >
+            <div id="out-playbooks" class="small"></div>
+          </div>
+
+          <div
+            class="mt-3"
+            id="out-reconciliation-section"
+            style="display: none"
+          >
+            <label class="form-label fw-semibold"
+              >&#9878; Evidence Reconciliation</label
+            >
+            <div id="out-reconciliation" class="small"></div>
+          </div>
+
+          <div class="mt-3" id="out-causal-chain-section" style="display: none">
+            <label class="form-label fw-semibold">&#128270; Causal Chain</label>
+            <ol id="out-causal-chain" class="small mb-0"></ol>
+          </div>
+
+          <div
+            class="mt-3"
+            id="out-closure-checklist-section"
+            style="display: none"
+          >
+            <label class="form-label fw-semibold"
+              >&#9989; Closure Checklist</label
+            >
+            <ul
+              id="out-closure-checklist"
+              class="small mb-0 list-unstyled"
+            ></ul>
+          </div>
+
+          <div
+            class="mt-3"
+            id="out-evidence-completeness-section"
+            style="display: none"
+          >
+            <label class="form-label fw-semibold"
+              >&#128202; Evidence Completeness</label
+            >
+            <div id="out-evidence-completeness" class="small"></div>
+          </div>
+
+          <div
+            class="mt-3"
+            id="out-closure-readiness-section"
+            style="display: none"
+          >
+            <label class="form-label fw-semibold"
+              >&#128204; Closure Readiness</label
+            >
+            <div id="out-closure-readiness" class="small"></div>
+          </div>
+
+          <div
+            class="mt-3"
+            id="out-recurring-pattern-section"
+            style="display: none"
+          >
+            <label class="form-label fw-semibold"
+              >&#128336; Recurring Event Pattern</label
+            >
+            <div id="out-recurring-pattern" class="small"></div>
+          </div>
+
+          <div
+            class="mt-3"
+            id="out-family-context-section"
+            style="display: none"
+          >
+            <label class="form-label fw-semibold"
+              >&#128218; Aircraft Family AMM Context</label
+            >
+            <div id="out-family-context" class="small"></div>
+          </div>
+
+          <div class="mt-3">
+            <button
+              id="btn-export-json"
+              type="button"
+              class="btn btn-outline-dark btn-sm"
+            >
+              Export Analysis JSON
+            </button>
+            <button
+              id="btn-reprocess-analysis"
+              type="button"
+              class="btn btn-outline-secondary btn-sm ms-2"
+            >
+              Reprocess Last Analysis
+            </button>
+          </div>
+
+          <div
+            class="mt-3"
+            id="out-stored-evidence-section"
+            style="display: none"
+          >
+            <label class="form-label fw-semibold">Stored Evidence</label>
+            <div id="out-stored-evidence" class="small"></div>
+          </div>
+
+          <div
+            class="mt-3"
+            id="out-audit-summary-section"
+            style="display: none"
+          >
+            <label class="form-label fw-semibold">Audit Summary</label>
+            <div id="out-audit-summary" class="small"></div>
+          </div>
+
+          <div class="mt-3" id="out-retention-section" style="display: none">
+            <label class="form-label fw-semibold">Retention Policy</label>
+            <div id="out-retention" class="small"></div>
+          </div>
+
+          <hr />
+
+          <div class="mb-3">
+            <label class="form-label">Timeline Excerpt</label>
+            <ul id="out-timeline" class="small mb-0"></ul>
+          </div>
+
+          <div>
+            <label class="form-label">Open Troubleshooting Matches</label>
+            <div id="out-open-cases" class="small text-muted">-</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block extra_js %}
+<script>
+  (function () {
+    const form = document.getElementById("exceedance-form");
+    const statusEl = document.getElementById("analysis-status");
+    const openCasesSelect = document.getElementById("open-cases-select");
+    let lastAnalysisPayload = null;
+
+    function setText(id, text) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = text;
+    }
+
+    function setList(id, items, ordered) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.innerHTML = "";
+      if (!Array.isArray(items) || !items.length) {
+        const li = document.createElement("li");
+        li.textContent = "-";
+        el.appendChild(li);
+        return;
+      }
+      items.forEach((x) => {
+        const li = document.createElement("li");
+        li.textContent = x;
+        el.appendChild(li);
+      });
+    }
+
+    function renderAnalysis(data) {
+      setText("out-priority", data.priority || "-");
+      setText(
+        "out-confidence",
+        (data.confidence_score || "-") + (data.confidence_score ? "%" : ""),
+      );
+      setText("out-signals", (data.signals || []).join(", ") || "-");
+      setText("out-best", data.best_option || "-");
+
+      // ── Exceedance Verdict Panel (AMM/AFM threshold evaluation) ──────────
+      const verdictSection = document.getElementById("out-exceedance-verdict-section");
+      const verdictEl = document.getElementById("out-exceedance-verdict");
+      if (verdictEl && data.exceedance_verdict) {
+        verdictSection.style.display = "";
+        const ev = data.exceedance_verdict;
+        const vmap = { YES: ["danger", "✗ EXCEEDÊNCIA CONFIRMADA"],
+                       NO:  ["success", "✓ SEM EXCEDÊNCIA"],
+                       UNDETERMINED: ["warning", "? INDETERMINADO"] };
+        const [vColor, vLabel] = vmap[ev.verdict] || ["secondary", ev.verdict || "-"];
+        const triggeredHtml = (ev.triggered_rules || []).length
+          ? `<table class="table table-sm table-bordered mt-2 mb-0 small">
+               <thead class="table-dark">
+                 <tr><th>Evento</th><th>Parâmetro</th><th>Pico</th><th>Limite</th><th>Unidade</th><th>Severidade</th><th>Ref AMM</th></tr>
+               </thead><tbody>` +
+            (ev.triggered_rules).map(r =>
+              `<tr class="${r.severity === 'CRITICAL' ? 'table-danger' : r.severity === 'HIGH' ? 'table-warning' : ''}">
+                <td>${r.event || "-"}</td>
+                <td><code>${r.parameter || "-"}</code></td>
+                <td><strong>${r.peak_value ?? "-"}</strong></td>
+                <td>${r.limit ?? "-"}</td>
+                <td>${r.unit || "-"}</td>
+                <td><span class="badge bg-${r.severity === 'CRITICAL' ? 'danger' : r.severity === 'HIGH' ? 'warning' : r.severity === 'MEDIUM' ? 'primary' : 'secondary'}">${r.severity || "-"}</span></td>
+                <td class="text-muted">${r.ref || "-"}</td>
+              </tr>`
+            ).join("") +
+            `</tbody></table>`
+          : "";
+        const peaksHtml = Object.keys(ev.parameter_peaks || {}).length
+          ? `<div class="mt-2 small text-muted"><strong>Picos detectados:</strong> ` +
+            Object.entries(ev.parameter_peaks).map(([p, v]) => `${p}=${v}`).join(" | ") +
+            `</div>`
+          : "";
+        const refsHtml = (ev.amm_references || []).length
+          ? `<div class="mt-1 small text-muted"><strong>Referências AMM/AFM:</strong> ${ev.amm_references.join("; ")}</div>`
+          : "";
+        verdictEl.innerHTML =
+          `<div class="d-flex align-items-center gap-3 flex-wrap">
+             <span class="badge fs-6 bg-${vColor} px-3 py-2">${vLabel}</span>
+             <span class="text-muted small">${ev.summary || ""}</span>
+           </div>` +
+          `<div class="mt-1 small"><strong>Família:</strong> ${ev.family || "?"} &nbsp;|&nbsp;
+           <strong>Linhas avaliadas:</strong> ${ev.rows_evaluated ?? 0} &nbsp;|&nbsp;
+           <strong>Eventos verificados:</strong> ${(ev.evaluated_events || []).length}</div>` +
+          triggeredHtml + peaksHtml + refsHtml;
+      } else if (verdictSection) {
+        verdictSection.style.display = "none";
+      }
+
+      const versionSection = document.getElementById("out-version-section");
+      const versionEl = document.getElementById("out-version");
+      if (versionEl && data.analysis_version) {
+        versionSection.style.display = "";
+        const vc = data.version_comparison || {};
+        const changed = (vc.changed_fields || []).join(", ") || "none";
+        versionEl.innerHTML =
+          `<div><strong>Version:</strong> v${data.analysis_version}</div>` +
+          `<div><strong>Changed fields:</strong> ${changed}</div>`;
+      } else if (versionSection) {
+        versionSection.style.display = "none";
+      }
+
+      const storedSection = document.getElementById(
+        "out-stored-evidence-section",
+      );
+      const storedEl = document.getElementById("out-stored-evidence");
+      if (storedEl) {
+        const stored = data.stored_evidence || [];
+        if (stored.length) {
+          storedSection.style.display = "";
+          storedEl.innerHTML = stored
+            .map(
+              (item) =>
+                `<div>${item.kind || "-"} | ${item.anonymized_name || "-"} | ${item.size_bytes || 0} bytes</div>`,
+            )
+            .join("");
+        } else {
+          storedSection.style.display = "none";
+        }
+      }
+
+      const auditSection = document.getElementById("out-audit-summary-section");
+      const auditEl = document.getElementById("out-audit-summary");
+      if (auditEl && data.audit_summary) {
+        auditSection.style.display = "";
+        auditEl.innerHTML =
+          `<div><strong>Files logged:</strong> ${data.audit_summary.files_logged || 0}</div>` +
+          `<div><strong>Actor:</strong> ${data.audit_summary.latest_actor || "-"}</div>`;
+      } else if (auditSection) {
+        auditSection.style.display = "none";
+      }
+
+      const retentionSection = document.getElementById("out-retention-section");
+      const retentionEl = document.getElementById("out-retention");
+      if (retentionEl && data.retention_policy) {
+        retentionSection.style.display = "";
+        retentionEl.innerHTML =
+          `<div><strong>Retention:</strong> ${data.retention_policy.retention_days || 0} day(s)</div>` +
+          `<div><strong>Expired files removed:</strong> ${data.retention_policy.removed_files || 0}</div>`;
+      } else if (retentionSection) {
+        retentionSection.style.display = "none";
+      }
+
+      const diagnosisAlertSection = document.getElementById(
+        "out-diagnosis-alert-section",
+      );
+      const diagnosisAlertEl = document.getElementById("out-diagnosis-alert");
+      if (diagnosisAlertEl && data.diagnosis_change_alert) {
+        diagnosisAlertSection.style.display = "";
+        diagnosisAlertEl.textContent = data.diagnosis_change_alert;
+      } else if (diagnosisAlertSection) {
+        diagnosisAlertSection.style.display = "none";
+      }
+
+      const severitySection = document.getElementById("out-severity-section");
+      const severityEl = document.getElementById("out-severity");
+      if (severityEl && data.severity_assessment) {
+        severitySection.style.display = "";
+        const sev = data.severity_assessment || {};
+        const sevColor =
+          sev.level === "CRITICAL"
+            ? "danger"
+            : sev.level === "HIGH"
+              ? "warning"
+              : sev.level === "MEDIUM"
+                ? "primary"
+                : "secondary";
+        const reasons = (sev.reasons || [])
+          .map((r) => `<li class="text-muted">${r}</li>`)
+          .join("");
+        severityEl.innerHTML =
+          `<span class="badge bg-${sevColor} me-2">${sev.level || data.severity_estimate || "-"}</span>` +
+          `<span class="fw-semibold">${sev.score || 0}/100</span>` +
+          (reasons
+            ? `<ul class="list-unstyled mt-1 mb-0">${reasons}</ul>`
+            : "");
+      } else if (severitySection) {
+        severitySection.style.display = "none";
+      }
+
+      const probableSection = document.getElementById(
+        "out-probable-cause-section",
+      );
+      const probableEl = document.getElementById("out-probable-cause");
+      if (probableEl && data.probable_cause) {
+        probableSection.style.display = "";
+        const pc = data.probable_cause || {};
+        const factors = (pc.contributing_factors || [])
+          .map((f) => `<li>${f}</li>`)
+          .join("");
+        probableEl.innerHTML =
+          `<div><strong>Primary cause:</strong> ${pc.primary_cause || "-"}</div>` +
+          `<div><strong>Confidence:</strong> ${pc.confidence || 0}%</div>` +
+          (pc.rationale
+            ? `<div class="text-muted mt-1">${pc.rationale}</div>`
+            : "") +
+          (factors ? `<ul class="mt-1 mb-0">${factors}</ul>` : "");
+      } else if (probableSection) {
+        probableSection.style.display = "none";
+      }
+
+      const modeOutputSection = document.getElementById(
+        "out-mode-output-section",
+      );
+      const modeOutputEl = document.getElementById("out-mode-output");
+      if (
+        modeOutputEl &&
+        data.analysis_mode &&
+        data.analysis_mode !== "standard"
+      ) {
+        modeOutputSection.style.display = "";
+        if (data.analysis_mode === "executive") {
+          const ex = data.executive_view || {};
+          const blocks = (ex.blocking_reasons || [])
+            .map((b) => `<li>${b}</li>`)
+            .join("");
+          const containment = (ex.containment || [])
+            .map((c) => `<li>${c}</li>`)
+            .join("");
+          modeOutputEl.innerHTML =
+            `<div><strong>Summary:</strong> ${ex.summary || "-"}</div>` +
+            `<div class="mt-1"><strong>Decision:</strong> ${ex.decision || "-"}</div>` +
+            (containment
+              ? `<div class="mt-1"><strong>Containment:</strong><ul class="mb-0">${containment}</ul></div>`
+              : "") +
+            (blocks
+              ? `<div class="mt-1"><strong>Blocking reasons:</strong><ul class="mb-0">${blocks}</ul></div>`
+              : "");
+        } else {
+          const expert = data.expert_view || {};
+          const sigs = (expert.signals || []).join(", ") || "-";
+          const evidenceCount = (expert.action_support_evidence || []).length;
+          modeOutputEl.innerHTML =
+            `<div><strong>${expert.headline || "Expert package"}</strong></div>` +
+            `<div class="mt-1"><strong>Signals:</strong> ${sigs}</div>` +
+            `<div class="mt-1"><strong>Support evidence rows:</strong> ${evidenceCount}</div>` +
+            `<div class="mt-1"><strong>Severity:</strong> ${(expert.severity || {}).level || "-"}</div>`;
+        }
+      } else if (modeOutputSection) {
+        modeOutputSection.style.display = "none";
+      }
+
+      const containment = data.immediate_containment_actions || [];
+      const containmentSection = document.getElementById(
+        "out-containment-section",
+      );
+      const containmentEl = document.getElementById("out-containment");
+      if (containmentEl) {
+        if (containment.length) {
+          containmentSection.style.display = "";
+          containmentEl.innerHTML = containment
+            .map((a) => `<li>${a}</li>`)
+            .join("");
+        } else {
+          containmentSection.style.display = "none";
+        }
+      }
+
+      const extraInspections = data.additional_inspections || [];
+      const extraInspectionSection = document.getElementById(
+        "out-additional-inspections-section",
+      );
+      const extraInspectionEl = document.getElementById(
+        "out-additional-inspections",
+      );
+      if (extraInspectionEl) {
+        if (extraInspections.length) {
+          extraInspectionSection.style.display = "";
+          extraInspectionEl.innerHTML = extraInspections
+            .map((a) => `<li>${a}</li>`)
+            .join("");
+        } else {
+          extraInspectionSection.style.display = "none";
+        }
+      }
+
+      // PDF Sections — now includes procedure, reference, notes, ata_refs (items 308-309)
+      const pdfSections = data.pdf_sections || {};
+      const pdfEl = document.getElementById("out-pdf-sections");
+      if (pdfEl) {
+        const fields = [
+          ["Finding", pdfSections.finding],
+          ["Action", pdfSections.action],
+          ["Limitation", pdfSections.limitation],
+          ["Procedure", pdfSections.procedure],
+          ["Reference", pdfSections.reference],
+          ["Notes", pdfSections.notes],
+        ];
+        const ataRefs = (pdfSections.ata_refs || []).join(", ");
+        const rows = fields
+          .filter(([, v]) => v)
+          .map(([k, v]) => `<div><strong>${k}:</strong> ${v}</div>`)
+          .join("");
+        pdfEl.innerHTML =
+          (rows || '<span class="text-muted">No sections extracted.</span>') +
+          (ataRefs
+            ? `<div class="mt-1"><strong>ATA Refs:</strong> ${ataRefs}</div>`
+            : "");
+      }
+
+      const relevanceSection = document.getElementById(
+        "out-pdf-relevance-section",
+      );
+      const relevanceEl = document.getElementById("out-pdf-relevance");
+      if (relevanceEl && data.pdf_relevance) {
+        const rel = data.pdf_relevance || {};
+        const top = rel.top_paragraphs || [];
+        if (top.length) {
+          relevanceSection.style.display = "";
+          const rows = top
+            .map((p) => {
+              return `<div class="border rounded p-2 mb-2"><div><strong>Score:</strong> ${p.score || 0}</div><div class="text-muted">${p.excerpt || ""}</div></div>`;
+            })
+            .join("");
+          relevanceEl.innerHTML = `<div class="mb-1"><strong>Average top score:</strong> ${rel.avg_score || 0}</div>${rows}`;
+        } else {
+          relevanceSection.style.display = "none";
+        }
+      } else if (relevanceSection) {
+        relevanceSection.style.display = "none";
+      }
+
+      setList("out-cascade", data.cascade_summary || [], false);
+      setList("out-actions", data.recommended_actions || [], true);
+
+      const timelineItems = (data.timeline || []).map((x) => {
+        const t = x.time ? `[${x.time}] ` : "";
+        return `${t}${x.event || "event"}`;
+      });
+      setList("out-timeline", timelineItems, false);
+
+      const openCases = data.open_troubleshooting_matches || [];
+      const openEl = document.getElementById("out-open-cases");
+      if (openEl) {
+        if (!openCases.length) {
+          openEl.textContent = "No open troubleshooting correlation found.";
+        } else {
+          openEl.innerHTML = openCases
+            .map((c) => {
+              return `<div class="border rounded p-2 mb-2">
+              <strong>#${c.id || "-"} | ${c.tail || "-"} | ATA ${c.ata || "-"}</strong>
+              <div>Status: ${c.status || "-"} | Match: ${c.match_score || 0}</div>
+              <div>Problem: ${c.problema || "-"}</div>
+            </div>`;
+            })
+            .join("");
+        }
+      }
+
+      // --- Playbooks (items 373-374) ---
+      const playbooks = data.playbooks || {};
+      const playbookSection = document.getElementById("out-playbooks-section");
+      const playbookEl = document.getElementById("out-playbooks");
+      if (playbookEl) {
+        const entries = Object.entries(playbooks);
+        if (entries.length) {
+          playbookSection.style.display = "";
+          playbookEl.innerHTML = entries
+            .map(([sig, steps]) => {
+              const stepHtml = steps
+                .map((s, i) => `<li>${i + 1}. ${s}</li>`)
+                .join("");
+              return `<div class="mb-3"><div class="fw-semibold text-uppercase small text-primary mb-1">${sig}</div><ul class="list-unstyled mb-0">${stepHtml}</ul></div>`;
+            })
+            .join('<hr class="my-2">');
+        } else {
+          playbookSection.style.display = "none";
+        }
+      }
+
+      // --- Reconciliation (item 322) ---
+      const rec = data.reconciliation || {};
+      const recSection = document.getElementById("out-reconciliation-section");
+      const recEl = document.getElementById("out-reconciliation");
+      if (recEl && rec.conflict_notes !== undefined) {
+        recSection.style.display = "";
+        if (!rec.has_conflict) {
+          recEl.innerHTML =
+            '<span class="text-success">&#10003; CSV and PDF signals are consistent — no conflicts detected.</span>';
+        } else {
+          const notes = (rec.conflict_notes || [])
+            .map((n) => `<li class="text-warning">${n}</li>`)
+            .join("");
+          const agr = (rec.agreements || []).join(", ") || "none";
+          recEl.innerHTML = `<div class="text-success small mb-1">Agreements: ${agr}</div><ul class="list-unstyled mb-0">${notes}</ul>`;
+        }
+      } else if (recSection) {
+        recSection.style.display = "none";
+      }
+
+      // --- Causal Chain (item 323) ---
+      const causalChain = data.causal_chain || [];
+      const causalSection = document.getElementById("out-causal-chain-section");
+      const causalEl = document.getElementById("out-causal-chain");
+      if (causalEl) {
+        if (causalChain.length) {
+          causalSection.style.display = "";
+          causalEl.innerHTML = causalChain.map((s) => `<li>${s}</li>`).join("");
+        } else {
+          causalSection.style.display = "none";
+        }
+      }
+
+      // --- Closure Checklist (item 332) ---
+      const checklist = data.closure_checklist || [];
+      const checkSection = document.getElementById(
+        "out-closure-checklist-section",
+      );
+      const checkEl = document.getElementById("out-closure-checklist");
+      if (checkEl) {
+        if (checklist.length) {
+          checkSection.style.display = "";
+          checkEl.innerHTML = checklist
+            .map(
+              (item) =>
+                `<li class="d-flex align-items-start gap-1 mb-1"><span class="text-muted">&#9744;</span> <span>${item}</span></li>`,
+            )
+            .join("");
+        } else {
+          checkSection.style.display = "none";
+        }
+      }
+
+      // --- Evidence Completeness (item 380) ---
+      const evComp = data.evidence_completeness || {};
+      const evSection = document.getElementById(
+        "out-evidence-completeness-section",
+      );
+      const evEl = document.getElementById("out-evidence-completeness");
+      if (evEl && evComp.rating !== undefined) {
+        evSection.style.display = "";
+        const ratingColor =
+          evComp.rating === "COMPLETE"
+            ? "success"
+            : evComp.rating === "ADEQUATE"
+              ? "primary"
+              : evComp.rating === "PARTIAL"
+                ? "warning"
+                : "danger";
+        const notesList = (evComp.notes || [])
+          .map((n) => `<li class="text-muted">${n}</li>`)
+          .join("");
+        evEl.innerHTML =
+          `<span class="badge bg-${ratingColor} me-2">${evComp.rating}</span>` +
+          `<span class="fw-semibold">${evComp.score || 0}/100</span>` +
+          (notesList
+            ? `<ul class="list-unstyled mt-1 mb-0">${notesList}</ul>`
+            : "");
+      } else if (evSection) {
+        evSection.style.display = "none";
+      }
+
+      // --- Closure Readiness (item 394) ---
+      const clReady = data.closure_readiness || {};
+      const clSection = document.getElementById(
+        "out-closure-readiness-section",
+      );
+      const clEl = document.getElementById("out-closure-readiness");
+      if (clEl && clReady.status !== undefined) {
+        clSection.style.display = "";
+        const clColor =
+          clReady.status === "READY"
+            ? "success"
+            : clReady.status === "NEAR_READY"
+              ? "primary"
+              : clReady.status === "REQUIRES_ACTION"
+                ? "warning"
+                : "danger";
+        const blockList = (clReady.blocking_reasons || [])
+          .map((r) => `<li class="text-warning">&#9744; ${r}</li>`)
+          .join("");
+        clEl.innerHTML =
+          `<span class="badge bg-${clColor} me-2">${clReady.status}</span>` +
+          `<span class="fw-semibold">${clReady.score || 0}/100</span>` +
+          (blockList
+            ? `<ul class="list-unstyled mt-1 mb-0">${blockList}</ul>`
+            : "");
+      } else if (clSection) {
+        clSection.style.display = "none";
+      }
+
+      // --- Recurring Pattern (item 354) ---
+      const recPat = data.recurring_pattern || {};
+      const recPatSection = document.getElementById(
+        "out-recurring-pattern-section",
+      );
+      const recPatEl = document.getElementById("out-recurring-pattern");
+      if (recPatEl) {
+        if (recPat.has_recurrence) {
+          recPatSection.style.display = "";
+          const evList = (recPat.events || [])
+            .slice(0, 5)
+            .map(
+              (e) =>
+                `<li>${e.date || ""} ${e.ata || ""} ${e.description || ""}</li>`,
+            )
+            .join("");
+          recPatEl.innerHTML =
+            `<span class="text-danger fw-semibold">Recurrence detected: ${recPat.count || 0} event(s)</span>` +
+            (evList
+              ? `<ul class="list-unstyled mt-1 mb-0">${evList}</ul>`
+              : "") +
+            (recPat.recommendation
+              ? `<div class="mt-1 text-muted">${recPat.recommendation}</div>`
+              : "");
+        } else {
+          recPatSection.style.display = "none";
+        }
+      }
+
+      // --- Aircraft Family AMM Context (item 351) ---
+      const famCtx = data.family_context || {};
+      const famSection = document.getElementById("out-family-context-section");
+      const famEl = document.getElementById("out-family-context");
+      if (famEl) {
+        if (famCtx.family && (famCtx.source_files || []).length) {
+          famSection.style.display = "";
+          const sections = (famCtx.matched_sections || []).join(", ") || "-";
+          const files = (famCtx.source_files || [])
+            .map((f) => `<code class="small">${f}</code>`)
+            .join(", ");
+          const excerpt = famCtx.text_excerpt
+            ? `<details class="mt-1"><summary class="small text-muted">AMM text excerpt (${famCtx.text_excerpt.length} chars)</summary><pre class="small mt-1 text-muted" style="white-space:pre-wrap;max-height:200px;overflow:auto">${famCtx.text_excerpt.slice(0, 1500)}</pre></details>`
+            : "";
+          famEl.innerHTML =
+            `<div><strong>Family:</strong> ${famCtx.family} &mdash; <strong>Sections:</strong> ${sections}</div>` +
+            `<div><strong>Source files:</strong> ${files}</div>` +
+            excerpt;
+        } else {
+          famSection.style.display = "none";
+        }
+      }
+    }
+
+    form.addEventListener("submit", async (ev) => {
+      ev.preventDefault();
+      const fd = new FormData(form);
+      statusEl.textContent = "Analyzing documents and scenario...";
+      try {
+        const res = await fetch("/api/ai/exceedance/analyze", {
+          method: "POST",
+          body: fd,
+        });
+        const json = await res.json();
+        if (!json.success) {
+          statusEl.textContent = json.error || "Failed to analyze.";
+          return;
+        }
+        statusEl.textContent = "Analysis completed.";
+        lastAnalysisPayload = json;
+        renderAnalysis(json.data || {});
+      } catch (err) {
+        statusEl.textContent =
+          "Network/processing error: " + (err.message || err);
+      }
+    });
+
+    document
+      .getElementById("btn-load-open-cases")
+      ?.addEventListener("click", async () => {
+        const tail = (document.getElementById("open-tail")?.value || "").trim();
+        const ata = (document.getElementById("open-ata")?.value || "").trim();
+        const params = new URLSearchParams();
+        if (tail) params.set("tail", tail);
+        if (ata) params.set("ata", ata);
+        statusEl.textContent = "Loading open troubleshooting cases...";
+        try {
+          const res = await fetch(
+            `/api/ai/exceedance/open_cases?${params.toString()}`,
+          );
+          const json = await res.json();
+          if (!json.success) {
+            statusEl.textContent = json.error || "Failed to load open cases.";
+            return;
+          }
+          openCasesSelect.innerHTML =
+            '<option value="">Select an open case...</option>';
+          (json.cases || []).forEach((c) => {
+            const opt = document.createElement("option");
+            opt.value = c.id;
+            opt.textContent = `#${c.id} | ${c.tail || "-"} | ATA ${c.ata || "-"} | ${c.status || "-"}`;
+            openCasesSelect.appendChild(opt);
+          });
+          statusEl.textContent = `Loaded ${json.count || 0} open case(s).`;
+        } catch (err) {
+          statusEl.textContent =
+            "Error loading open cases: " + (err.message || err);
+        }
+      });
+
+    document
+      .getElementById("btn-analyze-open-case")
+      ?.addEventListener("click", async () => {
+        const caseId = openCasesSelect?.value;
+        if (!caseId) {
+          statusEl.textContent = "Select an open case first.";
+          return;
+        }
+        statusEl.textContent = "Analyzing selected open case...";
+        try {
+          const fd = new FormData();
+          fd.append("case_id", caseId);
+          fd.append(
+            "analysis_mode",
+            document.getElementById("analysis_mode")?.value || "standard",
+          );
+          const csvFiles = document.getElementById("csv_files")?.files || [];
+          const pdfFiles = document.getElementById("pdf_files")?.files || [];
+          for (const f of csvFiles) fd.append("csv_files", f);
+          for (const f of pdfFiles) fd.append("pdf_files", f);
+
+          const res = await fetch("/api/ai/exceedance/analyze_open_case", {
+            method: "POST",
+            body: fd,
+          });
+          const json = await res.json();
+          if (!json.success) {
+            statusEl.textContent =
+              json.error || "Failed to analyze selected case.";
+            return;
+          }
+          statusEl.textContent = `Analysis completed for case #${json.case?.id || caseId}.`;
+          lastAnalysisPayload = json;
+          renderAnalysis(json.data || {});
+        } catch (err) {
+          statusEl.textContent =
+            "Error analyzing selected case: " + (err.message || err);
+        }
+      });
+
+    document
+      .getElementById("btn-export-json")
+      ?.addEventListener("click", () => {
+        if (!lastAnalysisPayload) {
+          statusEl.textContent = "No analysis available to export.";
+          return;
+        }
+        const blob = new Blob([JSON.stringify(lastAnalysisPayload, null, 2)], {
+          type: "application/json",
+        });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "exceedance_analysis_report.json";
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+
+    document
+      .getElementById("btn-reprocess-analysis")
+      ?.addEventListener("click", async () => {
+        const analysisKey = lastAnalysisPayload?.data?.analysis_key;
+        if (!analysisKey) {
+          statusEl.textContent =
+            "No previous analysis key available for reprocessing.";
+          return;
+        }
+        statusEl.textContent = "Reprocessing stored evidence...";
+        try {
+          const fd = new FormData();
+          fd.append("analysis_key", analysisKey);
+          fd.append(
+            "analysis_mode",
+            document.getElementById("analysis_mode")?.value || "standard",
+          );
+          const csvFiles = document.getElementById("csv_files")?.files || [];
+          const pdfFiles = document.getElementById("pdf_files")?.files || [];
+          for (const f of csvFiles) fd.append("csv_files", f);
+          for (const f of pdfFiles) fd.append("pdf_files", f);
+
+          const res = await fetch("/api/ai/exceedance/reprocess", {
+            method: "POST",
+            body: fd,
+          });
+          const json = await res.json();
+          if (!json.success) {
+            statusEl.textContent =
+              json.error || "Failed to reprocess analysis.";
+            return;
+          }
+          statusEl.textContent = `Reprocessed analysis ${json.reprocessed_from}.`;
+          lastAnalysisPayload = json;
+          renderAnalysis(json.data || {});
+        } catch (err) {
+          statusEl.textContent =
+            "Error reprocessing analysis: " + (err.message || err);
+        }
+      });
+  })();
+</script>
+{% endblock %}

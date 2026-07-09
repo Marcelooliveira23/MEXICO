@@ -1,0 +1,341 @@
+<!-- 
+  FLEET REPORT ATA FILTER & CHART PARAMETERS ENHANCEMENT
+  Features:
+  1. Dynamic ATA/System Selection for Charts
+  2. Tooltip Explanations for Chart Parameters
+  3. Chart Data Refresh Based on Filters
+-->
+
+<div class="ata-filter-section ops-mb-24" id="ata_filter_section">
+  <div class="card shadow-sm border-0">
+    <div class="card-header bg-light d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">
+        <i class="fas fa-sliders-h"></i> Chart Configuration
+      </h5>
+      <button class="btn btn-sm btn-outline-secondary" onclick="toggleATAFilter()" title="Collapse/Expand">
+        <i class="fas fa-chevron-up" id="ata_filter_icon"></i>
+      </button>
+    </div>
+    <div class="card-body" id="ata_filter_content">
+      <!-- Section 1: ATA Selection -->
+      <div class="mb-4">
+        <h6 class="mb-3">
+          <i class="fas fa-cube"></i> Select Systems (ATAs) to Display
+          <span class="info-icon" data-toggle="tooltip" title="Choose which ATA chapters to include in the analysis charts">
+            <i class="fas fa-question-circle text-muted"></i>
+          </span>
+        </h6>
+        
+        <div id="ata_selection_controls" class="mb-2">
+          <button type="button" class="btn btn-sm btn-outline-primary me-2" onclick="selectAllATAs()">
+            <i class="fas fa-check-square"></i> Select All
+          </button>
+          <button type="button" class="btn btn-sm btn-outline-secondary me-2" onclick="deselectAllATAs()">
+            <i class="fas fa-square"></i> Deselect All
+          </button>
+          <button type="button" class="btn btn-sm btn-outline-info" onclick="resetATAFilters()">
+            <i class="fas fa-redo"></i> Reset to Defaults
+          </button>
+        </div>
+        
+        <div id="ata_selection_grid" class="ata-selection-grid row g-2">
+          <!-- Dynamically populated by JavaScript -->
+          <div class="col-12 text-center text-muted">
+            <small>Loading available ATAs...</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Chart Parameter Explanations -->
+      <div class="mb-4">
+        <h6 class="mb-3">
+          <i class="fas fa-chart-bar"></i> Chart Parameters Explained
+          <span class="info-icon" data-toggle="tooltip" title="Understanding what each chart shows">
+            <i class="fas fa-question-circle text-muted"></i>
+          </span>
+        </h6>
+        
+        <div class="accordion" id="chartExplanations">
+          <!-- Fleet Health Distribution -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#explain_health">
+                Fleet Health Distribution Chart
+              </button>
+            </h2>
+            <div id="explain_health" class="accordion-collapse collapse" data-bs-parent="#chartExplanations">
+              <div class="accordion-body small">
+                <p><strong>What it shows:</strong> Breakdown of your fleet into operational status categories.</p>
+                <ul class="mb-2 mt-2">
+                  <li><span class="badge bg-success">Operational</span> — Aircraft with no open issues, fully available for operations</li>
+                  <li><span class="badge bg-warning">Troubleshooting Open</span> — Aircraft with open troubleshooting items under diagnosis</li>
+                  <li><span class="badge bg-danger">AOG/Out of Service</span> — Aircraft grounded due to critical failures</li>
+                  <li><span class="badge bg-info">MEL Open</span> — Aircraft with deferred maintenance items approved for operation</li>
+                </ul>
+                <p class="mb-0"><strong>Why it matters:</strong> Helps identify fleet availability and dispatch capability at a glance.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tail Risk Profile -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#explain_risk">
+                Tail Risk & Utilization Profile Chart
+              </button>
+            </h2>
+            <div id="explain_risk" class="accordion-collapse collapse" data-bs-parent="#chartExplanations">
+              <div class="accordion-body small">
+                <p><strong>What it shows:</strong> For each aircraft, displays three key metrics:</p>
+                <ul class="mb-2 mt-2">
+                  <li><strong>Bar height</strong> = Open issue weight (failures, MEL, troubleshooting items severity combined)</li>
+                  <li><strong>Health Index (number inside)</strong> = Operational health score (0-100) calculated from issues, age, utilization</li>
+                  <li><strong>Flight Hours (FH)</strong> = Cumulative hours flown, indicates utilization and wear level</li>
+                </ul>
+                <p><strong>Color coding:</strong></p>
+                <ul class="mb-2">
+                  <li><span style="color: #28a745;">Green</span> — Excellent health, low risk</li>
+                  <li><span style="color: #ffc107;">Yellow</span> — Fair health, moderate maintenance load</li>
+                  <li><span style="color: #dc3545;">Red</span> — Poor health, high priority maintenance needed</li>
+                </ul>
+                <p class="mb-0"><strong>Why it matters:</strong> Prioritizes which aircraft need immediate maintenance before next operation.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top ATAs Trend -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#explain_ata_trend">
+                Top ATA Chapters Trend Chart
+              </button>
+            </h2>
+            <div id="explain_ata_trend" class="accordion-collapse collapse" data-bs-parent="#chartExplanations">
+              <div class="accordion-body small">
+                <p><strong>What it shows:</strong> Frequency of failures by ATA (aircraft system) chapter over time.</p>
+                <p><strong>ATA Codes Reference:</strong></p>
+                <ul class="small mb-2">
+                  <li><strong>ATA 21</strong> — Air Conditioning & Pressurization</li>
+                  <li><strong>ATA 22</strong> — AutoFlight (autopilot)</li>
+                  <li><strong>ATA 23</strong> — Communications</li>
+                  <li><strong>ATA 24</strong> — Electrical Power</li>
+                  <li><strong>ATA 26</strong> — Fire Protection</li>
+                  <li><strong>ATA 27</strong> — Flight Controls</li>
+                  <li><strong>ATA 29</strong> — Hydraulic Power</li>
+                  <li><strong>ATA 32</strong> — Landing Gear</li>
+                  <li><strong>ATA 34</strong> — Navigation</li>
+                  <li><strong>ATA 49</strong> — Auxiliary Power Unit (APU)</li>
+                  <li><strong>ATA 71</strong> — Power Plant (Engines)</li>
+                  <li><strong>ATA 73</strong> — Engine Fuel & Control</li>
+                  <li><strong>ATA 79</strong> — Starting Systems</li>
+                </ul>
+                <p class="mb-0"><strong>Why it matters:</strong> Identifies systemic issues across the fleet; helps with preventive maintenance planning.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Health Score Formula -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#explain_formula">
+                Health Index Calculation Formula
+              </button>
+            </h2>
+            <div id="explain_formula" class="accordion-collapse collapse" data-bs-parent="#chartExplanations">
+              <div class="accordion-body small">
+                <p><strong>How Health Index is Calculated:</strong></p>
+                <div class="bg-light p-2 rounded mb-2" style="font-family: monospace;">
+                  Health Index = 100 - (failures × 2) - (open items × 5) - (MEL items × 4) - (AOG items × 25)
+                </div>
+                <p><strong>Component Weights:</strong></p>
+                <ul class="mb-2">
+                  <li>Each historic failure = -2 points</li>
+                  <li>Each open troubleshooting item = -5 points</li>
+                  <li>Each open MEL item = -4 points</li>
+                  <li>Each AOG/grounded instance = -25 points (highest penalty)</li>
+                </ul>
+                <p><strong>Range:</strong> Minimum 10, Maximum 100</p>
+                <ul class="mb-2">
+                  <li><span class="badge bg-success">90-100</span> — EXCELLENT</li>
+                  <li><span class="badge bg-info">70-89</span> — GOOD</li>
+                  <li><span class="badge bg-warning">50-69</span> — FAIR</li>
+                  <li><span class="badge bg-danger">&lt;50</span> — POOR</li>
+                </ul>
+                <p class="mb-0"><strong>Purpose:</strong> Single number to quickly assess each aircraft's operational readiness.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3: Apply Button -->
+      <div class="d-flex gap-2">
+        <button type="button" class="btn btn-primary" onclick="applyATAFilters()">
+          <i class="fas fa-check"></i> Apply Filters
+        </button>
+        <button type="button" class="btn btn-secondary" onclick="closeATAFilter()">
+          <i class="fas fa-times"></i> Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Button to Show ATA Filter (shown when collapsed) -->
+<div class="d-flex justify-content-center ops-mb-24">
+  <button type="button" class="btn btn-outline-info btn-sm" id="show_ata_filter_btn" style="display:none;" onclick="toggleATAFilter()">
+    <i class="fas fa-sliders-h"></i> Configure Chart Filters & Parameters
+  </button>
+</div>
+
+<style>
+.ata-selection-grid {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 5px;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.ata-selection-item {
+  display: flex;
+  align-items: center;
+}
+
+.info-icon {
+  cursor: help;
+  margin-left: 5px;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #e7f3ff;
+  color: #0056b3;
+}
+
+.accordion-body {
+  background-color: #f9f9f9;
+}
+</style>
+
+<script>
+// Global ATA list (populated from server data or hardcoded)
+const AVAILABLE_ATAS = [
+  {code: '21', system: 'Air Conditioning'},
+  {code: '22', system: 'AutoFlight'},
+  {code: '23', system: 'Communications'},
+  {code: '24', system: 'Electrical Power'},
+  {code: '26', system: 'Fire Protection'},
+  {code: '27', system: 'Flight Controls'},
+  {code: '28', system: 'Fuel'},
+  {code: '29', system: 'Hydraulic Power'},
+  {code: '30', system: 'Ice Protection'},
+  {code: '31', system: 'Instruments'},
+  {code: '32', system: 'Landing Gear'},
+  {code: '33', system: 'Lighting'},
+  {code: '34', system: 'Navigation'},
+  {code: '35', system: 'Safety Equipment'},
+  {code: '36', system: 'Windows'},
+  {code: '45', system: 'Central Maintenance'},
+  {code: '49', system: 'APU'},
+  {code: '71', system: 'Power Plant'},
+  {code: '72', system: 'Engine'},
+  {code: '73', system: 'Engine Fuel'},
+  {code: '79', system: 'Starting'},
+  {code: '80', system: 'Starting'},
+];
+
+window.selectedATAs = new Set();
+const selectedATAs = window.selectedATAs;
+
+// Initialize ATA filter UI
+function initializeATAFilter() {
+  const grid = document.getElementById('ata_selection_grid');
+  grid.innerHTML = '';
+  
+  AVAILABLE_ATAS.forEach(ata => {
+    const div = document.createElement('div');
+    div.className = 'col-md-6 col-lg-4 ata-selection-item';
+    div.innerHTML = `
+      <div class="form-check w-100">
+        <input class="form-check-input ata-checkbox" type="checkbox" name="ata" value="${ata.code}" id="ata_${ata.code}" checked>
+        <label class="form-check-label flex-grow-1" for="ata_${ata.code}">
+          <strong>ATA ${ata.code}</strong> — ${ata.system}
+        </label>
+      </div>
+    `;
+    grid.appendChild(div);
+    
+    // Add to selected set if checked
+    const checkbox = div.querySelector('input');
+    checkbox.addEventListener('change', (e) => {
+      if (e.target.checked) {
+        selectedATAs.add(ata.code);
+      } else {
+        selectedATAs.delete(ata.code);
+      }
+      if (typeof window.onFleetAtaFilterChange === 'function') {
+        window.onFleetAtaFilterChange(Array.from(selectedATAs));
+      }
+    });
+    
+    selectedATAs.add(ata.code);
+  });
+}
+
+function toggleATAFilter() {
+  const section = document.getElementById('ata_filter_section');
+  const content = document.getElementById('ata_filter_content');
+  const icon = document.getElementById('ata_filter_icon');
+  const btn = document.getElementById('show_ata_filter_btn');
+  
+  if (section.style.display === 'none') {
+    section.style.display = 'block';
+    content.style.display = 'block';
+    btn.style.display = 'none';
+    icon.classList.remove('fa-chevron-down');
+    icon.classList.add('fa-chevron-up');
+  } else {
+    section.style.display = 'none';
+    content.style.display = 'none';
+    btn.style.display = 'inline-block';
+    icon.classList.remove('fa-chevron-up');
+    icon.classList.add('fa-chevron-down');
+  }
+}
+
+function selectAllATAs() {
+  document.querySelectorAll('.ata-checkbox').forEach(cb => cb.checked = true);
+  selectedATAs.clear();
+  AVAILABLE_ATAS.forEach((ata) => selectedATAs.add(ata.code));
+}
+
+function deselectAllATAs() {
+  document.querySelectorAll('.ata-checkbox').forEach(cb => cb.checked = false);
+  selectedATAs.clear();
+}
+
+function resetATAFilters() {
+  selectAllATAs();
+}
+
+function applyATAFilters() {
+  const selected = Array.from(selectedATAs);
+  if (typeof window.onFleetAtaFilterChange === 'function') {
+    window.onFleetAtaFilterChange(selected);
+  }
+  closeATAFilter();
+}
+
+function closeATAFilter() {
+  document.getElementById('ata_filter_section').style.display = 'none';
+  document.getElementById('show_ata_filter_btn').style.display = 'inline-block';
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', () => {
+  initializeATAFilter();
+  if (typeof window.onFleetAtaFilterChange === 'function') {
+    window.onFleetAtaFilterChange(Array.from(selectedATAs));
+  }
+});
+</script>

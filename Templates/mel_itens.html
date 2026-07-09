@@ -1,0 +1,842 @@
+{% extends 'base.html' %}
+{% block title %}MEL - Minimum Equipment List{% endblock %}
+{% block content %}
+
+<style>
+/* Responsive layout */
+.container-fluid {
+  width: 100%;
+  max-width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media (min-width: 768px) {
+  .container-fluid {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-fluid {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container-fluid {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .container-fluid {
+    max-width: 1900px;
+    margin: 0 auto;
+  }
+}
+
+/* MEL Header */
+.mel-header {
+  background: var(--colors-brand-gradient);
+  color: white;
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+}
+
+.mel-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.mel-header p {
+  opacity: 0.95;
+  font-size: 1.1rem;
+}
+
+/* MEL Summary Cards */
+.mel-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: 128px;
+  align-items: stretch;
+  gap: 16px;
+  margin-bottom: 25px;
+}
+
+/* Force equal card dimensions regardless of external Bootstrap classes */
+.mel-summary-grid > .mel-summary-card,
+.mel-summary-card.mel-summary-fixed {
+  width: 100%;
+  min-height: 0 !important;
+  height: 100% !important;
+}
+@media (max-width: 768px) {
+  .mel-summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .mel-summary-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mel-summary-card {
+  box-sizing: border-box;
+  background: white;
+  border-radius: 10px;
+  padding: 18px;
+  min-height: 128px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border-top: 4px solid var(--colors-brand-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.mel-summary-card.summary-open {
+  border-top-color: #dc3545;
+}
+
+.mel-summary-card.summary-on-time {
+  border-top-color: #ffc107;
+}
+
+.mel-summary-card.summary-delayed {
+  border-top-color: #ff9800;
+}
+
+.mel-summary-card.summary-closed {
+  border-top-color: #28a745;
+}
+
+.mel-summary-value {
+  display: block;
+  line-height: 1;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--colors-black100);
+  margin: 10px 0;
+}
+
+.mel-summary-label {
+  min-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: var(--colors-gray200);
+}
+
+@media (min-width: 1400px) {
+  .mel-summary-grid {
+    grid-template-columns: repeat(4, minmax(280px, 1fr));
+  }
+}
+
+/* MEL Item Card */
+.mel-item-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border-left: 4px solid var(--colors-brand-primary);
+  transition: all 0.3s ease;
+}
+
+.mel-item-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+  transform: translateY(-2px);
+}
+
+.mel-item-card.urgent {
+  border-left-color: #dc3545;
+}
+
+.mel-item-card.warning {
+  border-left-color: #ff9800;
+}
+
+.mel-item-card.completed {
+  border-left-color: #28a745;
+}
+
+.mel-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.mel-item-id {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--colors-black100);
+}
+
+.mel-item-meta {
+  font-size: 0.85rem;
+  color: var(--colors-gray300);
+  margin-top: 2px;
+}
+
+.mel-priorities-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.priority-metric {
+  background: #f8f9fa;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.priority-metric-value {
+  font-weight: 700;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.priority-metric-label {
+  font-size: 0.75rem;
+  color: #999;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* Duration Badge */
+.duration-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.duration-critical {
+  background: #ffebee;
+  color: #c41e3a;
+  border: 1px solid #ef9a9a;
+  animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+  0%, 100% { background: #ffebee; }
+  50% { background: #ffcdd2; }
+}
+
+.duration-warning {
+  background: #fff3e0;
+  color: #e65100;
+  border: 1px solid #ffb74d;
+}
+
+.duration-normal {
+  background: #e3f2fd;
+  color: #1565c0;
+  border: 1px solid #90caf9;
+}
+
+/* Status Badge */
+.mel-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.status-open {
+  background: #ffebee;
+  color: #c41e3a;
+  border: 1px solid #ef9a9a;
+}
+
+.status-progress {
+  background: #fff3e0;
+  color: #e65100;
+  border: 1px solid #ffb74d;
+}
+
+.status-review {
+  background: #f3e5f5;
+  color: #6a1b9a;
+  border: 1px solid #ce93d8;
+}
+
+.status-closed {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #81c784;
+}
+
+/* Filter Section */
+.filter-section {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.filter-title {
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.form-control, .form-select {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px 12px;
+  transition: border-color 0.2s;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #17a2b8;
+  box-shadow: 0 0 0 3px rgba(23, 162, 184, 0.1);
+}
+
+/* Operational Insight Box */
+.ops-insight-box {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e0e7ff 100%);
+  border-left: 4px solid #17a2b8;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.ops-insight-title {
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ops-insight-text {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+/* History Timeline on Released Cards */
+.history-item {
+  padding: 12px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.history-item:last-child {
+  border-bottom: none;
+}
+
+.history-date {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.history-description {
+  color: #666;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-state-icon {
+  font-size: 3rem;
+  color: #ddd;
+  margin-bottom: 15px;
+}
+
+.empty-state p {
+  color: #999;
+  font-size: 1.1rem;
+}
+</style>
+
+<div class="container-fluid mt-4">
+  <!-- Header -->
+  <div class="mel-header">
+    <div class="d-flex justify-content-between align-items-start">
+      <div>
+        <h1><i class="fas fa-list-check"></i> MEL - Minimum Equipment List</h1>
+        <p>Tracking critical in-service items with aging analysis and prioritization.</p>
+      </div>
+      <div class="d-flex gap-2 flex-wrap">
+        <button class="btn btn-light btn-sm" onclick="history.back()">
+          <i class="fas fa-arrow-left"></i> Back
+        </button>
+        <button class="btn btn-light btn-sm" onclick="location.reload()">
+          <i class="fas fa-sync"></i> Refresh
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEL Summary Cards -->
+  <div class="mel-summary-grid">
+    <div class="mel-summary-card mel-summary-fixed summary-open">
+      <div class="mel-summary-label">Open</div>
+      <div class="mel-summary-value">{{ open_count|default(0) }}</div>
+    </div>
+
+    <div class="mel-summary-card mel-summary-fixed summary-on-time">
+      <div class="mel-summary-label">On Time (&le; 7 Days)</div>
+      <div class="mel-summary-value">{{ progress_count|default(0) }}</div>
+    </div>
+
+    <div class="mel-summary-card mel-summary-fixed summary-delayed">
+      <div class="mel-summary-label">Overdue (> 7 Days)</div>
+      <div class="mel-summary-value">{{ review_count|default(0) }}</div>
+    </div>
+
+    <div class="mel-summary-card mel-summary-fixed summary-closed">
+      <div class="mel-summary-label">Closed</div>
+      <div class="mel-summary-value">{{ closed_count|default(0) }}</div>
+    </div>
+  </div>
+
+  <!-- Operational Insights -->
+  <div class="ops-insight-box">
+    <div class="ops-insight-title">
+      <i class="fas fa-lightbulb"></i> Operational Insight
+    </div>
+    <div class="ops-insight-text">
+      {% if urgent_mels|default([])|length > 0 %}
+        <strong>{{ urgent_mels|default([])|length }} item(s) are in a critical condition</strong> (open for more than 7 days).
+        Accelerated resolution is recommended due to operational impact.
+      {% elif high_recurrence_ata|default('—') != '—' %}
+        <strong>ATA {{ high_recurrence_ata }}</strong> shows high recurrence.
+        Technical investigation is recommended for a permanent correction.
+      {% else %}
+        The fleet is currently compliant with MEL requirements.
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Button to register a new MEL -->
+  <div class="mb-3 d-flex justify-content-end">
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#novoMelModal">
+      <i class="fas fa-plus-circle"></i> Register New MEL
+    </button>
+  </div>
+
+  <!-- Filters -->
+  <div class="filter-section">
+    <h5 class="filter-title">
+      <i class="fas fa-filter"></i> Filter MEL Items
+    </h5>
+    <form method="GET" action="{{ url_for('mel_itens') }}" id="filterForm">
+      <div class="row">
+        <div class="col-md-3">
+          <label class="form-label">ATA:</label>
+          <input type="text" class="form-control" name="ata" value="{{ filtros.ata|default('') }}" placeholder="21.41.00">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Tail:</label>
+          <input type="text" class="form-control" name="tail" value="{{ filtros.tail|default('') }}" placeholder="PR-XXX">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Status:</label>
+          <select class="form-select" name="status">
+            <option value="">All</option>
+            <option value="open" {% if filtros.status == 'open' %}selected{% endif %}>Open</option>
+            <option value="in progress" {% if filtros.status == 'in progress' %}selected{% endif %}>In Progress</option>
+            <option value="review" {% if filtros.status == 'review' %}selected{% endif %}>Review</option>
+            <option value="closed" {% if filtros.status == 'closed' %}selected{% endif %}>Closed</option>
+          </select>
+        </div>
+        <div class="col-md-3" style="display: flex; gap: 10px; align-items: flex-end;">
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-filter"></i> Apply
+          </button>
+          <button type="button" class="btn btn-secondary" onclick="clearFilters()">
+            <i class="fas fa-times-circle"></i> Clear
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- MEL Items Section -->
+  {% if mel_list %}
+  <div class="mel-items-section" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:16px;align-items:start;">
+    {% for mel in mel_list %}
+    <div class="mel-item-card {% if mel.days_open > 7 %}urgent{% elif mel.days_open > 3 %}warning{% endif %}" data-mel-id="{{ mel.id }}" data-mel-status="{{ mel.status }}" {% if mel.status == 'open' %}ondblclick="toggleMelStatus({{ mel.id }}, 'open')" title="Double-click to close and record the solution"{% endif %}>
+      <div class="mel-item-header">
+        <div>
+          <div class="mel-item-id">MEL #{{ mel.id }}</div>
+          <div class="mel-item-meta">
+            <strong>{{ mel.tail|default('—') }}</strong> | {{ mel.modelo|default('—') }} | ATA {{ mel.ata|default('—') }}
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: flex-start;">
+          {% if mel.days_open > 7 %}
+            <span class="duration-badge duration-critical">
+              <i class="fas fa-warning"></i> {{ mel.days_open }} days
+            </span>
+          {% elif mel.days_open > 3 %}
+            <span class="duration-badge duration-warning">
+              <i class="fas fa-clock"></i> {{ mel.days_open }} days
+            </span>
+          {% else %}
+            <span class="duration-badge duration-normal">
+              <i class="fas fa-hourglass-start"></i> {{ mel.days_open }} days
+            </span>
+          {% endif %}
+
+          {% if mel.status == 'open' %}
+            <span class="mel-status-badge status-open" data-mel-toggle="true" data-mel-id="{{ mel.id }}" data-mel-status="open" ondblclick="toggleMelStatus({{ mel.id }}, 'open')" title="Double-click to close" style="cursor: pointer; user-select: none;">
+              <i class="fas fa-exclamation-circle"></i> Open
+            </span>
+          {% elif mel.status == 'in progress' %}
+            <span class="mel-status-badge status-progress" data-mel-toggle="true" data-mel-id="{{ mel.id }}" data-mel-status="open" ondblclick="toggleMelStatus({{ mel.id }}, 'open')" title="Double-click to close" style="cursor: pointer; user-select: none;">
+              <i class="fas fa-spinner"></i> In Progress
+            </span>
+          {% elif mel.status == 'review' %}
+            <span class="mel-status-badge status-review" data-mel-toggle="true" data-mel-id="{{ mel.id }}" data-mel-status="open" ondblclick="toggleMelStatus({{ mel.id }}, 'open')" title="Double-click to close" style="cursor: pointer; user-select: none;">
+              <i class="fas fa-eye"></i> Review
+            </span>
+          {% else %}
+            <span class="mel-status-badge status-closed" data-mel-toggle="true" data-mel-id="{{ mel.id }}" data-mel-status="closed" ondblclick="toggleMelStatus({{ mel.id }}, 'closed')" title="Double-click to reopen" style="cursor: pointer; user-select: none;">
+              <i class="fas fa-check-circle"></i> Closed
+            </span>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Problem Description -->
+      <div style="margin: 12px 0; padding: 12px; background: #ffffff; border-radius: 8px; border-left: 3px solid var(--colors-brand-primary); border: 1px solid var(--colors-gray400);">
+        <strong style="color: var(--colors-black100);">Problem:</strong>
+        <div style="color: var(--colors-gray200); margin-top: 6px; font-size: 0.95rem;">
+          {{ mel.system_inop|default('—') }}
+        </div>
+      </div>
+
+      <div style="font-size: 0.9rem; color: var(--colors-gray200); margin-bottom: 10px;">
+        <div><strong>Category:</strong> {{ mel.category|default('—') }}</div>
+        <div><strong>Chapter:</strong> {{ mel.chapter|default('—') }}</div>
+        <div><strong>Created At:</strong> {{ mel.created_at|default('—') }}</div>
+        <div><strong>Logbook Reference:</strong> {{ mel.logbook|default('—') }}</div>
+        <div><strong>Notes:</strong> {{ mel.notes|default('—') }}</div>
+        {% if mel.status == 'open' %}
+        <div style="margin-top: 8px; color: var(--colors-brand-primary); font-size: 0.85rem; font-weight: 600;">
+          <i class="fas fa-mouse-pointer"></i> Double-click the card to close the MEL and record the solution
+        </div>
+        <div style="margin-top: 10px;">
+          <button type="button" class="btn btn-sm btn-outline-success" onclick="toggleMelStatus({{ mel.id }}, 'open')">
+            <i class="fas fa-check-circle"></i> Close MEL
+          </button>
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- Metrics -->
+      <div class="mel-priorities-grid">
+        <div class="priority-metric">
+          <div class="priority-metric-value">{{ mel.recurrence_count|default(1) }}</div>
+          <div class="priority-metric-label">Recurrences</div>
+        </div>
+        <div class="priority-metric">
+          <div class="priority-metric-value">{{ mel.aircraft_affected|default(1) }}</div>
+          <div class="priority-metric-label">Aircraft</div>
+        </div>
+      </div>
+
+      <!-- Dates -->
+      <div style="font-size: 0.9rem; color: var(--colors-gray200); padding: 12px 0; border-top: 1px solid var(--colors-gray400); margin-top: 12px;">
+        <div>
+          <strong>Open Date:</strong>
+          <span>{{ mel.date_opened|default('—') }}</span>
+        </div>
+        {% if mel.status == 'closed' or mel.status == 'resolved' %}
+        <div style="margin-top: 4px;">
+          <strong>Close Date:</strong>
+          <span style="color: var(--colors-success); font-weight: 600;">{{ mel.date_closed|default('—') }}</span>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <div class="empty-state-icon">📋</div>
+    <p><strong>No MEL items found</strong></p>
+    <p style="font-size: 0.95rem; color: var(--colors-gray300); margin-top: 10px;">Adjust the filters or verify that MEL items have been recorded.</p>
+  </div>
+  {% endif %}
+
+  <!-- Closed/Resolved MEL Section -->
+  {% if mel_closed_list %}
+  <div style="margin-top: 40px;">
+    <h5 style="margin-bottom: 20px; color: var(--colors-black100); font-weight: 700;">
+      <i class="fas fa-check-square" style="color: var(--colors-success);"></i> Resolved / Closed MEL Items ({{ mel_closed_list|length }})
+    </h5>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:16px;align-items:start;">
+    {% for mel in mel_closed_list %}
+    <div class="mel-item-card completed" data-mel-id="{{ mel.id }}" data-mel-status="closed">
+      <div class="mel-item-header">
+        <div>
+          <div class="mel-item-id">MEL #{{ mel.id }}</div>
+          <div class="mel-item-meta">
+            <strong>{{ mel.tail|default('—') }}</strong> | {{ mel.modelo|default('—') }} | ATA {{ mel.ata|default('—') }}
+          </div>
+        </div>
+        <div>
+          <span class="mel-status-badge status-closed" data-mel-toggle="true" data-mel-id="{{ mel.id }}" data-mel-status="closed" ondblclick="toggleMelStatus({{ mel.id }}, 'closed')" title="Double-click to reopen" style="cursor: pointer; user-select: none;">
+            <i class="fas fa-check-circle"></i> Resolved
+          </span>
+        </div>
+      </div>
+
+      <!-- Resolved Info -->
+      <div style="margin: 12px 0; padding: 12px; background: rgba(0, 132, 61, 0.08); border-radius: 8px; border-left: 3px solid var(--colors-success); border: 1px solid rgba(0, 132, 61, 0.18);">
+        <div style="font-size: 0.9rem;">
+          <div>
+            <strong style="color: var(--colors-success);">Total Duration:</strong>
+            <span style="color: var(--colors-success);">{{ mel.total_duration_days|default(0) }} days</span>
+          </div>
+          <div style="margin-top: 4px;">
+            <strong style="color: var(--colors-success);">Resolution:</strong>
+            <span style="color: var(--colors-gray200);">{{ mel.resolution_summary|default('Resolved successfully') }}</span>
+          </div>
+          <div style="margin-top: 4px;">
+            <strong style="color: var(--colors-success);">Replaced Item:</strong>
+            <span style="color: var(--colors-gray200);">{{ mel.replaced_item|default('Not provided') }}</span>
+          </div>
+          <div style="margin-top: 4px;">
+            <strong style="color: var(--colors-success);">Solution Response:</strong>
+            <span style="color: var(--colors-gray200);">{{ mel.solution_response|default(mel.resolution_summary, true) }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+  <div class="mt-5 text-center">
+    <a href="{{ url_for('menu') }}" class="btn btn-secondary btn-lg">
+      <i class="fas fa-home"></i> Return to Main Menu
+    </a>
+  </div>
+</div>
+
+<!-- Modal to register a new MEL -->
+<div class="modal fade" id="novoMelModal" tabindex="-1" aria-labelledby="novoMelModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title" id="novoMelModalLabel">
+          <i class="fas fa-plus-circle"></i> Register New MEL
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form method="POST" action="{{ url_for('mel_itens') }}">
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="tail" class="form-label">Aircraft Tail *</label>
+              <input type="text" class="form-control" id="tail" name="tail" required placeholder="PR-XXX">
+            </div>
+            <div class="col-md-6">
+              <label for="ata" class="form-label">ATA *</label>
+              <input type="text" class="form-control" id="ata" name="ata" required placeholder="21.41.00">
+            </div>
+            <div class="col-md-6">
+              <label for="logbook" class="form-label">Logbook Reference</label>
+              <input type="text" class="form-control" id="logbook" name="logbook" placeholder="Logbook reference">
+            </div>
+            <div class="col-md-3">
+              <label for="category" class="form-label">Category</label>
+              <input type="text" class="form-control" id="category" name="category" placeholder="A/B/C">
+            </div>
+            <div class="col-md-3">
+              <label for="chapter" class="form-label">Chapter</label>
+              <input type="text" class="form-control" id="chapter" name="chapter" placeholder="21-41">
+            </div>
+            <div class="col-md-12">
+              <label for="system_inop" class="form-label">Inoperative System *</label>
+              <textarea class="form-control" id="system_inop" name="system_inop" rows="3" required placeholder="Describe the inoperative system"></textarea>
+            </div>
+            <div class="col-md-6">
+              <label for="date_opened" class="form-label">Open Date *</label>
+              <input type="date" class="form-control" id="date_opened" name="date_opened" required>
+            </div>
+            <div class="col-md-6">
+              <label for="due_date" class="form-label">Due Date</label>
+              <input type="date" class="form-control" id="due_date" name="due_date">
+            </div>
+            <div class="col-md-12">
+              <label for="notes" class="form-label">Notes</label>
+              <textarea class="form-control" id="notes" name="notes" rows="2" placeholder="Initial observations"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <i class="fas fa-times"></i> Cancel
+          </button>
+          <button type="submit" class="btn btn-success">
+            <i class="fas fa-save"></i> Register MEL
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal to close MEL by double-click -->
+<div class="modal fade" id="closeMelModal" tabindex="-1" aria-labelledby="closeMelModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-warning">
+        <h5 class="modal-title" id="closeMelModalLabel">
+          <i class="fas fa-check-circle"></i> Close MEL Item
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="closeMelId">
+        <div class="mb-3">
+          <label for="closeMelReplacedItem" class="form-label">Replaced Item (optional)</label>
+          <input type="text" class="form-control" id="closeMelReplacedItem" placeholder="Enter the replaced item">
+        </div>
+        <div class="mb-2">
+          <label for="closeMelSolution" class="form-label">Solution Response (required)</label>
+          <textarea class="form-control" id="closeMelSolution" rows="3" placeholder="Describe the corrective action"></textarea>
+          <small class="text-muted">This field is required to close the MEL item.</small>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success" onclick="confirmCloseMel()">
+          <i class="fas fa-save"></i> Confirm Closeout
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function clearFilters() {
+  document.querySelector('input[name="ata"]').value = '';
+  document.querySelector('input[name="tail"]').value = '';
+  document.querySelector('select[name="status"]').value = '';
+  document.getElementById('filterForm').submit();
+}
+
+function toggleMelStatus(id, currentStatus) {
+  const isCurrentlyClosed = currentStatus === 'closed';
+  const newStatus = isCurrentlyClosed ? 'open' : 'closed';
+
+  if (newStatus === 'closed') {
+    document.getElementById('closeMelId').value = id;
+    document.getElementById('closeMelReplacedItem').value = '';
+    document.getElementById('closeMelSolution').value = '';
+    const closeModalEl = document.getElementById('closeMelModal');
+    const closeModal = new bootstrap.Modal(closeModalEl);
+    closeModal.show();
+    return;
+  }
+
+  if (!confirm('Deseja reabrir este item MEL?')) {
+    return;
+  }
+
+  submitMelStatusUpdate(id, newStatus, '', '');
+}
+
+function confirmCloseMel() {
+  const id = document.getElementById('closeMelId').value;
+  const replacedItem = document.getElementById('closeMelReplacedItem').value || '';
+  const solutionResponse = document.getElementById('closeMelSolution').value || '';
+
+  if (!solutionResponse.trim()) {
+    alert('A solution response is required to close the MEL item.');
+    return;
+  }
+
+  submitMelStatusUpdate(id, 'closed', replacedItem, solutionResponse);
+
+  const closeModalEl = document.getElementById('closeMelModal');
+  const closeModal = bootstrap.Modal.getInstance(closeModalEl);
+  if (closeModal) {
+    closeModal.hide();
+  }
+}
+
+function submitMelStatusUpdate(id, newStatus, replacedItem, solutionResponse) {
+  fetch('/mel_itens/update_status', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      id: id,
+      status: newStatus,
+      replaced_item: replacedItem,
+      solution_response: solutionResponse
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      location.reload();
+    } else {
+      alert('Failed to update MEL status: ' + (data.error || 'Unknown error'));
+    }
+  })
+  .catch(() => {
+    alert('Connection error while updating MEL status.');
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('[data-mel-toggle="true"]').forEach((element) => {
+    element.addEventListener('dblclick', function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      toggleMelStatus(this.dataset.melId, this.dataset.melStatus);
+    });
+  });
+});
+</script>
+
+{% endblock %}

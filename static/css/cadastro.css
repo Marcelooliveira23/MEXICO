@@ -1,0 +1,255 @@
+:root{
+  /* Use the shared theme variables when available; fall back to Mexicana RGB values */
+  --emb-azul: var(--azul-mexicana, rgb(16,6,144));
+  --emb-azul-claro: var(--azul-claro, rgb(0,91,175));
+  --emb-azul-escuro: var(--azul-escuro, rgb(10,26,92));
+  --emb-accent: var(--aviacao-comercial, rgb(252,195,23));
+  --emb-branco: var(--branco, #ffffff);
+}
+
+/* Button: high specificity to override Bootstrap defaults on this page */
+button.btn-3d.btn-save,
+.btn-3d.btn-save {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  padding: 0 1.1rem;
+  border-radius: 10px;
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--emb-branco) !important;
+
+  /* Mexicana brand colors (uses theme variables from mexicana-theme.css/colors.less) */
+  background: linear-gradient(180deg, var(--emb-azul-claro) 0%, var(--emb-azul) 100%) !important;
+  background-color: var(--emb-azul) !important; /* fallback */
+  border: none !important;
+
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transform-style: preserve-3d;
+  position: relative;
+  z-index: 2;
+
+  /* 3D shadows */
+  box-shadow:
+    0 20px 40px rgba(10,26,92,0.20),
+    0 6px 18px rgba(10,26,92,0.12),
+    inset 0 2px 0 rgba(255,255,255,0.06);
+
+  transition: transform 180ms cubic-bezier(.2,.9,.25,1), box-shadow 180ms ease, filter 160ms;
+}
+
+/* Extruded base / depth */
+button.btn-3d.btn-save::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  bottom: -10px;
+  height: 12px;
+  border-radius: 8px;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0.06) 60%);
+  filter: blur(6px);
+  z-index: -1;
+  transition: transform 180ms, opacity 180ms;
+}
+
+/* Hover / focus / active */
+button.btn-3d.btn-save:hover,
+.btn-3d.btn-save:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 30px 60px rgba(10,26,92,0.26),
+    0 12px 28px rgba(10,26,92,0.14),
+    inset 0 2px 0 rgba(255,255,255,0.08);
+  filter: saturate(1.02);
+}
+button.btn-3d.btn-save:active,
+.btn-3d.btn-save:active {
+  transform: translateY(-3px) scale(0.998);
+  box-shadow:
+    0 12px 24px rgba(10,26,92,0.14),
+    0 4px 10px rgba(10,26,92,0.08);
+}
+button.btn-3d.btn-save:focus {
+  outline: none;
+  box-shadow:
+    0 26px 44px rgba(10,26,92,0.22),
+    0 0 0 6px rgba(0,91,175,0.12);
+}
+
+/* Ensure clickability above overlays */
+button.btn-3d.btn-save { pointer-events: auto; z-index: 9999; }
+
+/* Small screen adjustments */
+@media (max-width: 540px) {
+  button.btn-3d.btn-save { height: 48px; border-radius: 8px; font-size: 0.95rem; }
+  button.btn-3d.btn-save::after { bottom: -6px; height: 10px; left: 4px; right: 4px; }
+}
+
+/* Botões Mexicana: Azul, Branco, Preto */
+.btn-mexicana {
+  font-family: var(--mexicana-font, Arial, sans-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 0.7em 2em;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+/* Botão Mexicana Azul 3D */
+.btn-mexicana-azul {
+  background: linear-gradient(180deg, #1677ff 0%, #0958d9 100%);
+  color: #fff;
+  border: 1px solid #0958d9;
+  box-shadow: 0 12px 36px rgba(22,119,255,0.22), 0 2px 8px rgba(9,88,217,0.12);
+  position: relative;
+}
+.btn-mexicana-azul:hover, .btn-mexicana-azul:focus {
+  background: linear-gradient(180deg, #0958d9 0%, #1677ff 100%);
+  color: #fff;
+  box-shadow: 0 16px 48px rgba(22,119,255,0.28), 0 4px 16px rgba(9,88,217,0.18);
+  transform: translateY(-2px) scale(1.03);
+}
+.btn-mexicana-azul:active {
+  background: linear-gradient(180deg, #0958d9 0%, #1677ff 100%);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(22,119,255,0.18);
+  transform: translateY(1px) scale(0.98);
+}
+.btn-mexicana-branco {
+  background: var(--emb-branco);
+  color: var(--emb-azul);
+  box-shadow: 0 2px 8px rgba(16,6,144,0.08);
+  border: 1px solid var(--emb-azul);
+}
+.btn-mexicana-branco:hover, .btn-mexicana-branco:focus {
+  background: var(--emb-azul-claro);
+  color: var(--emb-branco);
+}
+.btn-mexicana-branco:active {
+  background: var(--emb-azul);
+  color: var(--emb-branco);
+}
+.btn-mexicana-preto {
+  background: #222;
+  color: var(--emb-branco);
+  box-shadow: 0 2px 8px rgba(10,26,92,0.10);
+}
+.btn-mexicana-preto:hover, .btn-mexicana-preto:focus {
+  background: #000;
+  color: var(--emb-accent, #FCC317);
+}
+.btn-mexicana-preto:active {
+  background: #333;
+  color: var(--emb-branco);
+}
+
+/* Para usar nos templates HTML:
+<button class="btn-mexicana btn-mexicana-azul">Salvar</button>
+<button class="btn-mexicana btn-mexicana-branco">Cancelar</button>
+<button class="btn-mexicana btn-mexicana-preto">Excluir</button>
+*/
+
+/* small helper for tail input */
+.input-tail { width: 6ch; min-width: 6ch; }
+
+/* Botões Mexicana 3D - Azul, Verde, Preto */
+.btn-mexicana {
+  font-family: var(--mexicana-font, Arial, sans-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 0.7em 2em;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(0,91,175,0.18), 0 4px 16px rgba(16,6,144,0.10);
+  transition: color 0.18s, background 0.18s, box-shadow 0.18s, transform 0.18s;
+  position: relative;
+  outline: none;
+}
+.btn-mexicana-azul {
+  background: linear-gradient(180deg, #1677ff 0%, #0958d9 100%);
+  color: #fff;
+  border: 1px solid #0958d9;
+}
+.btn-mexicana-azul:hover, .btn-mexicana-azul:focus {
+  background: linear-gradient(180deg, #0958d9 0%, #1677ff 100%);
+  color: #fff;
+  box-shadow: 0 12px 36px rgba(22,119,255,0.22), 0 2px 8px rgba(9,88,217,0.12);
+  transform: translateY(-2px) scale(1.03);
+}
+.btn-mexicana-azul:active {
+  background: linear-gradient(180deg, #0958d9 0%, #1677ff 100%);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(22,119,255,0.18);
+  transform: translateY(1px) scale(0.98);
+}
+.btn-mexicana-verde {
+  background: linear-gradient(180deg, #1ec773 0%, #159c4a 100%);
+  color: #fff;
+  border: 1px solid #159c4a;
+}
+.btn-mexicana-verde:hover, .btn-mexicana-verde:focus {
+  background: linear-gradient(180deg, #159c4a 0%, #1ec773 100%);
+  color: #fff;
+  box-shadow: 0 12px 36px rgba(30,199,115,0.22), 0 2px 8px rgba(21,156,74,0.12);
+  transform: translateY(-2px) scale(1.03);
+}
+.btn-mexicana-verde:active {
+  background: linear-gradient(180deg, #159c4a 0%, #1ec773 100%);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(30,199,115,0.18);
+  transform: translateY(1px) scale(0.98);
+}
+.btn-mexicana-preto {
+  background: linear-gradient(180deg, #222 0%, #000 100%);
+  color: #fff;
+  border: 1px solid #222;
+}
+.btn-mexicana-preto:hover, .btn-mexicana-preto:focus {
+  background: linear-gradient(180deg, #000 0%, #222 100%);
+  color: #fff;
+  box-shadow: 0 12px 36px rgba(34,34,34,0.22), 0 2px 8px rgba(0,0,0,0.12);
+  transform: translateY(-2px) scale(1.03);
+}
+.btn-mexicana-preto:active {
+  background: linear-gradient(180deg, #222 0%, #000 100%);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(34,34,34,0.18);
+  transform: translateY(1px) scale(0.98);
+}
+/* Efeito 3D: sombra extrudada */
+/* Efeito 3D extrudado para todos os botões Mexicana */
+.btn-mexicana::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: -10px;
+  height: 14px;
+  border-radius: 8px;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.04) 60%);
+  filter: blur(6px);
+  z-index: -1;
+  transition: transform 180ms, opacity 180ms;
+}
+
+/* Botão verde Mexicana para Back to Menu */
+.btn-mexicana-verde {
+  background: linear-gradient(180deg, #1ec773 0%, #159c4a 100%);
+  color: var(--emb-branco);
+  box-shadow: 0 8px 32px rgba(30,199,115,0.10), 0 4px 16px rgba(21,156,74,0.08);
+  border: none;
+}
+.btn-mexicana-verde:hover, .btn-mexicana-verde:focus {
+  background: linear-gradient(180deg, #159c4a 0%, #1ec773 100%);
+  color: var(--emb-branco);
+}
+.btn-mexicana-verde:active {
+  background: linear-gradient(180deg, #159c4a 0%, #159c4a 100%);
+  color: var(--emb-branco);
+}
