@@ -1,0 +1,337 @@
+{
+  "families": {
+    "e145": {
+      "total_pdfs": 5,
+      "pdfs": {
+        "MPP1401_05-50-25-06-1_1765402412089.PDF": {
+          "filename": "MPP1401_05-50-25-06-1_1765402412089.PDF",
+          "task": "05-50-25",
+          "category": "temp_envelope",
+          "image_count": 0,
+          "images": []
+        },
+        "MPP1401_05-50-07-06-1_1765402445891.PDF": {
+          "filename": "MPP1401_05-50-07-06-1_1765402445891.PDF",
+          "task": "05-50-07",
+          "category": "max_speed",
+          "image_count": 0,
+          "images": []
+        },
+        "MPP1401_05-50-06-06-1_1765402450372.PDF": {
+          "filename": "MPP1401_05-50-06-06-1_1765402450372.PDF",
+          "task": "05-50-06",
+          "category": "gear_overspeed",
+          "image_count": 0,
+          "images": []
+        },
+        "MPP1401_05-50-04-06-1_1765402455790.PDF": {
+          "filename": "MPP1401_05-50-04-06-1_1765402455790.PDF",
+          "task": "05-50-04",
+          "category": "hard_landing",
+          "image_count": 0,
+          "images": []
+        },
+        "MPP1401_05-50-02-06-1_1765402478057.PDF": {
+          "filename": "MPP1401_05-50-02-06-1_1765402478057.PDF",
+          "task": "05-50-02",
+          "category": "hard_landing",
+          "image_count": 0,
+          "images": []
+        }
+      }
+    },
+    "e1": {
+      "total_pdfs": 7,
+      "pdfs": {
+        "MPP3213_05-50-06-06-1-200-801-A_1765401800646.PDF": {
+          "filename": "MPP3213_05-50-06-06-1-200-801-A_1765401800646.PDF",
+          "task": "05-50-06",
+          "category": "gear_overspeed",
+          "image_count": 0,
+          "images": []
+        },
+        "MPP3213_05-50-07-06-1-200-801-A_1765401818627.PDF": {
+          "filename": "MPP3213_05-50-07-06-1-200-801-A_1765401818627.PDF",
+          "task": "05-50-07",
+          "category": "max_speed",
+          "image_count": 0,
+          "images": []
+        },
+        "MPP3213_05-50-13-06-1-200-801-A_1765401857254.PDF": {
+          "filename": "MPP3213_05-50-13-06-1-200-801-A_1765401857254.PDF",
+          "task": "05-50-13",
+          "category": "flap_overspeed",
+          "image_count": 0,
+          "images": []
+        },
+        "MPP3213_05-50-27-06-1-210-801-A_1765401890990.PDF": {
+          "filename": "MPP3213_05-50-27-06-1-210-801-A_1765401890990.PDF",
+          "task": "05-50-27",
+          "category": "overweight_landing",
+          "image_count": 0,
+          "images": []
+        },
+        "MPP3213_05-50-28-06-1-210-801-A_1765401906957.PDF": {
+          "filename": "MPP3213_05-50-28-06-1-210-801-A_1765401906957.PDF",
+          "task": "05-50-28",
+          "category": "overweight_landing",
+          "image_count": 0,
+          "images": []
+        },
+        "MPP3213_05-50-03-06-1-200-801-A_1765401741528.PDF": {
+          "filename": "MPP3213_05-50-03-06-1-200-801-A_1765401741528.PDF",
+          "task": "05-50-03",
+          "category": "hard_landing",
+          "image_count": 0,
+          "images": []
+        },
+        "MPP3213_05-50-03-06-1-200-804-A_1765401766038.PDF": {
+          "filename": "MPP3213_05-50-03-06-1-200-804-A_1765401766038.PDF",
+          "task": "05-50-03",
+          "category": "hard_landing",
+          "image_count": 0,
+          "images": []
+        }
+      }
+    },
+    "e2": {
+      "total_pdfs": 5,
+      "pdfs": {
+        "MPP8725_05-50-07-06-1-200-801-A_1765401278771.PDF": {
+          "filename": "MPP8725_05-50-07-06-1-200-801-A_1765401278771.PDF",
+          "task": "05-50-07",
+          "category": "max_speed",
+          "image_count": 0,
+          "images": []
+        },
+        "MPP8725_05-50-27-06-1-200-801-A_1765401549266.PDF": {
+          "filename": "MPP8725_05-50-27-06-1-200-801-A_1765401549266.PDF",
+          "task": "05-50-27",
+          "category": "overweight_landing",
+          "image_count": 0,
+          "images": []
+        },
+        "MPP8725_05-50-03-06-1-200-802-A_1765401623712.PDF": {
+          "filename": "MPP8725_05-50-03-06-1-200-802-A_1765401623712.PDF",
+          "task": "05-50-03",
+          "category": "hard_landing",
+          "image_count": 0,
+          "images": []
+        },
+        "MPP8725_05-50-03-06-1-200-801-A_1765401638290.PDF": {
+          "filename": "MPP8725_05-50-03-06-1-200-801-A_1765401638290.PDF",
+          "task": "05-50-03",
+          "category": "hard_landing",
+          "image_count": 0,
+          "images": []
+        },
+        "MPP8725_05-50-10-06-1-200-801-A_1765401465293.PDF": {
+          "filename": "MPP8725_05-50-10-06-1-200-801-A_1765401465293.PDF",
+          "task": "05-50-10",
+          "category": "flap_overspeed",
+          "image_count": 0,
+          "images": []
+        }
+      }
+    },
+    "e170": {
+      "total_pdfs": 6,
+      "pdfs": {
+        "MPP8492_05-50-06-06-1-200-801-A_1765402036911.PDF": {
+          "filename": "MPP8492_05-50-06-06-1-200-801-A_1765402036911.PDF",
+          "task": "05-50-06",
+          "category": "gear_overspeed",
+          "image_count": 0,
+          "images": []
+        },
+        "MPP8492_05-50-07-06-1-200-801-A_1765402056993.PDF": {
+          "filename": "MPP8492_05-50-07-06-1-200-801-A_1765402056993.PDF",
+          "task": "05-50-07",
+          "category": "max_speed",
+          "image_count": 0,
+          "images": []
+        },
+        "MPP8492_05-50-13-06-1-200-801-A_1765402098706.PDF": {
+          "filename": "MPP8492_05-50-13-06-1-200-801-A_1765402098706.PDF",
+          "task": "05-50-13",
+          "category": "flap_overspeed",
+          "image_count": 0,
+          "images": []
+        },
+        "MPP8492_05-50-27-06-1-210-802-A_1765402138407.PDF": {
+          "filename": "MPP8492_05-50-27-06-1-210-802-A_1765402138407.PDF",
+          "task": "05-50-27",
+          "category": "overweight_landing",
+          "image_count": 0,
+          "images": []
+        },
+        "MPP8492_05-50-03-06-1-200-802-A_1765401993281.PDF": {
+          "filename": "MPP8492_05-50-03-06-1-200-802-A_1765401993281.PDF",
+          "task": "05-50-03",
+          "category": "hard_landing",
+          "image_count": 0,
+          "images": []
+        },
+        "MPP8492_05-50-03-06-1-200-804-A_1765402017470.PDF": {
+          "filename": "MPP8492_05-50-03-06-1-200-804-A_1765402017470.PDF",
+          "task": "05-50-03",
+          "category": "hard_landing",
+          "image_count": 0,
+          "images": []
+        }
+      }
+    }
+  },
+  "categories": {
+    "temp_envelope": [
+      {
+        "family": "e145",
+        "filename": "MPP1401_05-50-25-06-1_1765402412089.PDF",
+        "image_count": 0,
+        "path": "e145\\MPP1401_05-50-25-06-1_1765402412089.PDF"
+      }
+    ],
+    "max_speed": [
+      {
+        "family": "e145",
+        "filename": "MPP1401_05-50-07-06-1_1765402445891.PDF",
+        "image_count": 0,
+        "path": "e145\\MPP1401_05-50-07-06-1_1765402445891.PDF"
+      },
+      {
+        "family": "e1",
+        "filename": "MPP3213_05-50-07-06-1-200-801-A_1765401818627.PDF",
+        "image_count": 0,
+        "path": "e1\\MPP3213_05-50-07-06-1-200-801-A_1765401818627.PDF"
+      },
+      {
+        "family": "e2",
+        "filename": "MPP8725_05-50-07-06-1-200-801-A_1765401278771.PDF",
+        "image_count": 0,
+        "path": "e2\\MPP8725_05-50-07-06-1-200-801-A_1765401278771.PDF"
+      },
+      {
+        "family": "e170",
+        "filename": "MPP8492_05-50-07-06-1-200-801-A_1765402056993.PDF",
+        "image_count": 0,
+        "path": "e170\\MPP8492_05-50-07-06-1-200-801-A_1765402056993.PDF"
+      }
+    ],
+    "gear_overspeed": [
+      {
+        "family": "e145",
+        "filename": "MPP1401_05-50-06-06-1_1765402450372.PDF",
+        "image_count": 0,
+        "path": "e145\\MPP1401_05-50-06-06-1_1765402450372.PDF"
+      },
+      {
+        "family": "e1",
+        "filename": "MPP3213_05-50-06-06-1-200-801-A_1765401800646.PDF",
+        "image_count": 0,
+        "path": "e1\\MPP3213_05-50-06-06-1-200-801-A_1765401800646.PDF"
+      },
+      {
+        "family": "e170",
+        "filename": "MPP8492_05-50-06-06-1-200-801-A_1765402036911.PDF",
+        "image_count": 0,
+        "path": "e170\\MPP8492_05-50-06-06-1-200-801-A_1765402036911.PDF"
+      }
+    ],
+    "hard_landing": [
+      {
+        "family": "e145",
+        "filename": "MPP1401_05-50-04-06-1_1765402455790.PDF",
+        "image_count": 0,
+        "path": "e145\\MPP1401_05-50-04-06-1_1765402455790.PDF"
+      },
+      {
+        "family": "e145",
+        "filename": "MPP1401_05-50-02-06-1_1765402478057.PDF",
+        "image_count": 0,
+        "path": "e145\\MPP1401_05-50-02-06-1_1765402478057.PDF"
+      },
+      {
+        "family": "e1",
+        "filename": "MPP3213_05-50-03-06-1-200-801-A_1765401741528.PDF",
+        "image_count": 0,
+        "path": "e1\\MPP3213_05-50-03-06-1-200-801-A_1765401741528.PDF"
+      },
+      {
+        "family": "e1",
+        "filename": "MPP3213_05-50-03-06-1-200-804-A_1765401766038.PDF",
+        "image_count": 0,
+        "path": "e1\\MPP3213_05-50-03-06-1-200-804-A_1765401766038.PDF"
+      },
+      {
+        "family": "e2",
+        "filename": "MPP8725_05-50-03-06-1-200-802-A_1765401623712.PDF",
+        "image_count": 0,
+        "path": "e2\\MPP8725_05-50-03-06-1-200-802-A_1765401623712.PDF"
+      },
+      {
+        "family": "e2",
+        "filename": "MPP8725_05-50-03-06-1-200-801-A_1765401638290.PDF",
+        "image_count": 0,
+        "path": "e2\\MPP8725_05-50-03-06-1-200-801-A_1765401638290.PDF"
+      },
+      {
+        "family": "e170",
+        "filename": "MPP8492_05-50-03-06-1-200-802-A_1765401993281.PDF",
+        "image_count": 0,
+        "path": "e170\\MPP8492_05-50-03-06-1-200-802-A_1765401993281.PDF"
+      },
+      {
+        "family": "e170",
+        "filename": "MPP8492_05-50-03-06-1-200-804-A_1765402017470.PDF",
+        "image_count": 0,
+        "path": "e170\\MPP8492_05-50-03-06-1-200-804-A_1765402017470.PDF"
+      }
+    ],
+    "flap_overspeed": [
+      {
+        "family": "e1",
+        "filename": "MPP3213_05-50-13-06-1-200-801-A_1765401857254.PDF",
+        "image_count": 0,
+        "path": "e1\\MPP3213_05-50-13-06-1-200-801-A_1765401857254.PDF"
+      },
+      {
+        "family": "e2",
+        "filename": "MPP8725_05-50-10-06-1-200-801-A_1765401465293.PDF",
+        "image_count": 0,
+        "path": "e2\\MPP8725_05-50-10-06-1-200-801-A_1765401465293.PDF"
+      },
+      {
+        "family": "e170",
+        "filename": "MPP8492_05-50-13-06-1-200-801-A_1765402098706.PDF",
+        "image_count": 0,
+        "path": "e170\\MPP8492_05-50-13-06-1-200-801-A_1765402098706.PDF"
+      }
+    ],
+    "overweight_landing": [
+      {
+        "family": "e1",
+        "filename": "MPP3213_05-50-27-06-1-210-801-A_1765401890990.PDF",
+        "image_count": 0,
+        "path": "e1\\MPP3213_05-50-27-06-1-210-801-A_1765401890990.PDF"
+      },
+      {
+        "family": "e1",
+        "filename": "MPP3213_05-50-28-06-1-210-801-A_1765401906957.PDF",
+        "image_count": 0,
+        "path": "e1\\MPP3213_05-50-28-06-1-210-801-A_1765401906957.PDF"
+      },
+      {
+        "family": "e2",
+        "filename": "MPP8725_05-50-27-06-1-200-801-A_1765401549266.PDF",
+        "image_count": 0,
+        "path": "e2\\MPP8725_05-50-27-06-1-200-801-A_1765401549266.PDF"
+      },
+      {
+        "family": "e170",
+        "filename": "MPP8492_05-50-27-06-1-210-802-A_1765402138407.PDF",
+        "image_count": 0,
+        "path": "e170\\MPP8492_05-50-27-06-1-210-802-A_1765402138407.PDF"
+      }
+    ]
+  }
+}
