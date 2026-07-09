@@ -1,0 +1,14 @@
+{
+    "description": "Family-specific exceedance support files used by the Flask backend.",
+    "families": [
+        "E145",
+        "E170",
+        "E1",
+        "E2"
+    ],
+    "purpose": [
+        "Manual references per family",
+        "Touchdown / gear impact interpretation hints",
+        "Inspection zone labels exposed to UI"
+    ]
+}

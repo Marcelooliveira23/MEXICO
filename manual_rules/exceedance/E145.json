@@ -1,0 +1,24 @@
+{
+    "family": "E145",
+    "manual_refs": {
+        "hard_landing": "AMM 05-50-02 Table 4-1",
+        "gear_location": "AMM 32 / hard landing close-out cues",
+        "touchdown_follow_up": "Landing gear, fuselage and nose gear follow-up inspection"
+    },
+    "touchdown_mapping": {
+        "wow_priority": [
+            "mlg_rh_wow",
+            "mlg_lh_wow",
+            "nlg_wow"
+        ],
+        "roll_positive": "MLG RH",
+        "roll_negative": "MLG LH",
+        "simultaneous_main": "BOTH MLG"
+    },
+    "inspection_zones": [
+        "MLG RH",
+        "MLG LH",
+        "NLG",
+        "BOTH MLG"
+    ]
+}

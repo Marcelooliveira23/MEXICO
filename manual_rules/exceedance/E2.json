@@ -1,0 +1,24 @@
+{
+    "family": "E2",
+    "manual_refs": {
+        "hard_landing": "AMM 05-50-03-200-804-A (E2 variant)",
+        "gear_location": "E2 hard landing assessment / landing gear touch order",
+        "touchdown_follow_up": "MLG/NLG focused inspection package"
+    },
+    "touchdown_mapping": {
+        "wow_priority": [
+            "mlg_rh_wow",
+            "mlg_lh_wow",
+            "nlg_wow"
+        ],
+        "roll_positive": "MLG RH",
+        "roll_negative": "MLG LH",
+        "simultaneous_main": "BOTH MLG"
+    },
+    "inspection_zones": [
+        "MLG RH",
+        "MLG LH",
+        "NLG",
+        "BOTH MLG"
+    ]
+}
