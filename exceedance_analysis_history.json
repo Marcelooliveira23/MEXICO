@@ -1,0 +1,1752 @@
+{
+  "exd_f3cb935ea4fa6291": [
+    {
+      "analysis_key": "exd_f3cb935ea4fa6291",
+      "analysis_version": 1,
+      "created_at": "2026-03-26T16:54:04.267523+00:00",
+      "priority": "LOW",
+      "severity_estimate": "LOW",
+      "best_option": "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+      "signals": [],
+      "recommended_actions": [
+        "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+        "Cross-check ATA chapter exposure and open MEL/ETD constraints before release.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Issue return-to-service recommendation only after closure evidence is documented."
+      ],
+      "probable_cause": {
+        "primary_cause": "undetermined",
+        "confidence": 30,
+        "contributing_factors": [
+          "Sequence inferred from 400 CSV/FDR row(s)."
+        ],
+        "rationale": "No dominant signal sequence identified; maintain generic troubleshooting flow until additional evidence is provided."
+      }
+    }
+  ],
+  "exd_1cc17778315136ed": [
+    {
+      "analysis_key": "exd_1cc17778315136ed",
+      "analysis_version": 1,
+      "created_at": "2026-03-26T16:55:44.893840+00:00",
+      "priority": "LOW",
+      "severity_estimate": "LOW",
+      "best_option": "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+      "signals": [],
+      "recommended_actions": [
+        "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+        "Cross-check ATA chapter exposure and open MEL/ETD constraints before release.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Issue return-to-service recommendation only after closure evidence is documented."
+      ],
+      "probable_cause": {
+        "primary_cause": "undetermined",
+        "confidence": 30,
+        "contributing_factors": [
+          "Sequence inferred from 400 CSV/FDR row(s)."
+        ],
+        "rationale": "No dominant signal sequence identified; maintain generic troubleshooting flow until additional evidence is provided."
+      }
+    }
+  ],
+  "exd_500fdcc0491c0a59": [
+    {
+      "analysis_key": "exd_500fdcc0491c0a59",
+      "analysis_version": 17,
+      "created_at": "2026-04-02T13:19:49.514233+00:00",
+      "priority": "HIGH",
+      "severity_estimate": "HIGH",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [
+        "landing overspeed"
+      ],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Hold aircraft release pending Engineering initial disposition.",
+        "Apply temporary dispatch restriction until mandatory inspections are closed.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Limit operation envelope and complete flight-control/landing-gear stress inspection before release.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Require senior certifying engineer review before return-to-service authorization.",
+        "Review approach profile and braking/gear stress indicators for potential exceedance impact."
+      ],
+      "probable_cause": {
+        "primary_cause": "landing overspeed",
+        "confidence": 83,
+        "contributing_factors": [
+          "Sequence inferred from 400 CSV/FDR row(s)."
+        ],
+        "rationale": "Probable cause inferred from temporal sequence, detected signals, and maintenance narrative correlation."
+      },
+      "exceedance_verdict": "YES",
+      "failure_text": "",
+      "scenario": "",
+      "tail": "",
+      "ata": "",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": true,
+      "stored_files": [
+        {
+          "kind": "csv",
+          "original_name": "XA-ALU _HL_13AGO25_FLT651.CSV",
+          "stored_name": "exd_500fdcc0491c0a59_csv_508122f26c07.csv",
+          "stored_path": "C:\\Troubleshooting\\uploads\\exceedance\\exd_500fdcc0491c0a59_csv_508122f26c07.csv",
+          "sha1": "508122f26c0732935fd3b1290c9159508eae6da0",
+          "size_bytes": 2616923,
+          "uploaded_at": "2026-04-02T13:19:49.471750+00:00",
+          "actor": "conv_20260402111509751696:127_0_0_1",
+          "anonymized_name": "XA-ALU _HL_13AGO25_FLT651.CSV",
+          "anonymized_preview": "Sample,GMT,Day,FltNumber,GrossWeight,Air/Gnd,Roll,Pitch,NormAccel,Error\r\n,,Day,Text,lbs,,degrees,degrees,G's,\r\n89195,18:31:34,,,87900,GROUND,0.17578110,-1.58202"
+        }
+      ]
+    },
+    {
+      "analysis_key": "exd_500fdcc0491c0a59",
+      "analysis_version": 18,
+      "created_at": "2026-04-02T13:21:47.686051+00:00",
+      "priority": "HIGH",
+      "severity_estimate": "HIGH",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [
+        "landing overspeed"
+      ],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Hold aircraft release pending Engineering initial disposition.",
+        "Apply temporary dispatch restriction until mandatory inspections are closed.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Limit operation envelope and complete flight-control/landing-gear stress inspection before release.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Require senior certifying engineer review before return-to-service authorization.",
+        "Review approach profile and braking/gear stress indicators for potential exceedance impact."
+      ],
+      "probable_cause": {
+        "primary_cause": "landing overspeed",
+        "confidence": 83,
+        "contributing_factors": [
+          "Sequence inferred from 400 CSV/FDR row(s)."
+        ],
+        "rationale": "Probable cause inferred from temporal sequence, detected signals, and maintenance narrative correlation."
+      },
+      "exceedance_verdict": "YES",
+      "failure_text": "",
+      "scenario": "",
+      "tail": "",
+      "ata": "",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": true,
+      "stored_files": [
+        {
+          "kind": "csv",
+          "original_name": "ALL.csv",
+          "stored_name": "exd_500fdcc0491c0a59_csv_4a3a8a07e6af.csv",
+          "stored_path": "C:\\Troubleshooting\\uploads\\exceedance\\exd_500fdcc0491c0a59_csv_4a3a8a07e6af.csv",
+          "sha1": "4a3a8a07e6af6fe2d7641f9881a08477d1c04b64",
+          "size_bytes": 3457150,
+          "uploaded_at": "2026-04-02T13:21:47.656226+00:00",
+          "actor": "conv_20260402132145990341:127_0_0_1",
+          "anonymized_name": "ALL.csv",
+          "anonymized_preview": "Offset,GMT (hrs),\"Radio Altitude (1, left, Capt or Only) (ft)\",Pressure Altitude (ft),Airspeed (calibrated; 1 or Only) (knots),Acceleration (normal load-factor)"
+        }
+      ]
+    },
+    {
+      "analysis_key": "exd_500fdcc0491c0a59",
+      "analysis_version": 19,
+      "created_at": "2026-04-02T13:22:26.154440+00:00",
+      "priority": "HIGH",
+      "severity_estimate": "HIGH",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [
+        "landing overspeed"
+      ],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Hold aircraft release pending Engineering initial disposition.",
+        "Apply temporary dispatch restriction until mandatory inspections are closed.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Limit operation envelope and complete flight-control/landing-gear stress inspection before release.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Require senior certifying engineer review before return-to-service authorization.",
+        "Review approach profile and braking/gear stress indicators for potential exceedance impact."
+      ],
+      "probable_cause": {
+        "primary_cause": "landing overspeed",
+        "confidence": 83,
+        "contributing_factors": [
+          "Sequence inferred from 400 CSV/FDR row(s)."
+        ],
+        "rationale": "Probable cause inferred from temporal sequence, detected signals, and maintenance narrative correlation."
+      },
+      "exceedance_verdict": "YES",
+      "failure_text": "",
+      "scenario": "",
+      "tail": "",
+      "ata": "",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": true,
+      "stored_files": [
+        {
+          "kind": "csv",
+          "original_name": "XA-JAC DVDR HARD LANDING 1.CSV",
+          "stored_name": "exd_500fdcc0491c0a59_csv_239f54e8879f.csv",
+          "stored_path": "C:\\Troubleshooting\\uploads\\exceedance\\exd_500fdcc0491c0a59_csv_239f54e8879f.csv",
+          "sha1": "239f54e8879fefea125e0e6008dfc9c66bcefff7",
+          "size_bytes": 2111652,
+          "uploaded_at": "2026-04-02T13:22:26.090663+00:00",
+          "actor": "conv_20260402132145990341:127_0_0_1",
+          "anonymized_name": "XA-JAC DVDR HARD LANDING 1.CSV",
+          "anonymized_preview": "Sample,GMT,Day,FltNumber,GrossWeight,Air/Gnd,Roll,Pitch,NormAccel,Error,ROLL RATE,PITCH RATE,,,,,\r\n,,Day,Text,lbs,,degrees,degrees,G's,,,,,,,,\r\n91904,03:27:11,1"
+        }
+      ]
+    },
+    {
+      "analysis_key": "exd_500fdcc0491c0a59",
+      "analysis_version": 20,
+      "created_at": "2026-04-02T18:26:54.435795+00:00",
+      "priority": "HIGH",
+      "severity_estimate": "HIGH",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [
+        "hard landing"
+      ],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Ground aircraft for hard-landing structural inspection matrix before next flight leg.",
+        "Hold aircraft release pending Engineering initial disposition.",
+        "Apply temporary dispatch restriction until mandatory inspections are closed.",
+        "Execute hard-landing inspection matrix (structure, landing gear, fuselage interfaces).",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Require senior certifying engineer review before return-to-service authorization."
+      ],
+      "probable_cause": {
+        "primary_cause": "hard landing",
+        "confidence": 83,
+        "contributing_factors": [
+          "Sequence inferred from 400 CSV/FDR row(s)."
+        ],
+        "rationale": "Probable cause inferred from temporal sequence, detected signals, and maintenance narrative correlation."
+      },
+      "exceedance_verdict": "YES",
+      "failure_text": "",
+      "scenario": "",
+      "tail": "",
+      "ata": "",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": true,
+      "stored_files": [
+        {
+          "kind": "csv",
+          "original_name": "JY-RED RJA511 30 JUL 2025.xlsx",
+          "stored_name": "exd_500fdcc0491c0a59_csv_bf775293ea37.xlsx",
+          "stored_path": "C:\\Troubleshooting\\uploads\\exceedance\\exd_500fdcc0491c0a59_csv_bf775293ea37.xlsx",
+          "sha1": "bf775293ea37c8c8277fafbf07662ce7cc687201",
+          "size_bytes": 48630,
+          "uploaded_at": "2026-04-02T18:26:54.274173+00:00",
+          "actor": "conv_20260402182640494636:127_0_0_1",
+          "anonymized_name": "JY-RED RJA511 30 JUL 2025.xlsx",
+          "anonymized_preview": "PK\u0003\u0004\u0014\u0000\u0006\u0000\b\u0000\u0000\u0000!\u0000b�h^\u0001\u0000\u0000�\u0004\u0000\u0000\u0013\u0000\b\u0002[Content_Types].xml �\u0004\u0002(�\u0000\u0002\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+        }
+      ]
+    },
+    {
+      "analysis_key": "exd_500fdcc0491c0a59",
+      "analysis_version": 21,
+      "created_at": "2026-04-02T18:40:20.259620+00:00",
+      "priority": "HIGH",
+      "severity_estimate": "HIGH",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [
+        "hard landing"
+      ],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Ground aircraft for hard-landing structural inspection matrix before next flight leg.",
+        "Hold aircraft release pending Engineering initial disposition.",
+        "Apply temporary dispatch restriction until mandatory inspections are closed.",
+        "Execute hard-landing inspection matrix (structure, landing gear, fuselage interfaces).",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Require senior certifying engineer review before return-to-service authorization."
+      ],
+      "probable_cause": {
+        "primary_cause": "hard landing",
+        "confidence": 83,
+        "contributing_factors": [
+          "Sequence inferred from 400 CSV/FDR row(s)."
+        ],
+        "rationale": "Probable cause inferred from temporal sequence, detected signals, and maintenance narrative correlation."
+      },
+      "exceedance_verdict": "YES",
+      "failure_text": "",
+      "scenario": "",
+      "tail": "",
+      "ata": "",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": true,
+      "stored_files": [
+        {
+          "kind": "csv",
+          "original_name": "JY-RED RJA511 30 JUL 2025.xlsx",
+          "stored_name": "exd_500fdcc0491c0a59_csv_bf775293ea37.xlsx",
+          "stored_path": "C:\\Troubleshooting\\uploads\\exceedance\\exd_500fdcc0491c0a59_csv_bf775293ea37.xlsx",
+          "sha1": "bf775293ea37c8c8277fafbf07662ce7cc687201",
+          "size_bytes": 48630,
+          "uploaded_at": "2026-04-02T18:40:20.199516+00:00",
+          "actor": "conv_20260402183610454839:127_0_0_1",
+          "anonymized_name": "JY-RED RJA511 30 JUL 2025.xlsx",
+          "anonymized_preview": "PK\u0003\u0004\u0014\u0000\u0006\u0000\b\u0000\u0000\u0000!\u0000b�h^\u0001\u0000\u0000�\u0004\u0000\u0000\u0013\u0000\b\u0002[Content_Types].xml �\u0004\u0002(�\u0000\u0002\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+        }
+      ]
+    },
+    {
+      "analysis_key": "exd_500fdcc0491c0a59",
+      "analysis_version": 21,
+      "created_at": "2026-04-03T02:07:07.282766+00:00",
+      "priority": "HIGH",
+      "severity_estimate": "HIGH",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [
+        "hard landing"
+      ],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Ground aircraft for hard-landing structural inspection matrix before next flight leg.",
+        "Hold aircraft release pending Engineering initial disposition.",
+        "Apply temporary dispatch restriction until mandatory inspections are closed.",
+        "Execute hard-landing inspection matrix (structure, landing gear, fuselage interfaces).",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Require senior certifying engineer review before return-to-service authorization."
+      ],
+      "probable_cause": {
+        "primary_cause": "hard landing",
+        "confidence": 83,
+        "contributing_factors": [
+          "Sequence inferred from 400 CSV/FDR row(s)."
+        ],
+        "rationale": "Probable cause inferred from temporal sequence, detected signals, and maintenance narrative correlation."
+      },
+      "exceedance_verdict": "YES",
+      "failure_text": "",
+      "scenario": "",
+      "tail": "",
+      "ata": "",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": true,
+      "stored_files": [
+        {
+          "kind": "csv",
+          "original_name": "JY-RED RJA511 30 JUL 2025.xlsx",
+          "stored_name": "exd_500fdcc0491c0a59_csv_bf775293ea37.xlsx",
+          "stored_path": "C:\\Troubleshooting\\uploads\\exceedance\\exd_500fdcc0491c0a59_csv_bf775293ea37.xlsx",
+          "sha1": "bf775293ea37c8c8277fafbf07662ce7cc687201",
+          "size_bytes": 48630,
+          "uploaded_at": "2026-04-03T02:07:07.248638+00:00",
+          "actor": "conv_20260403020555166656:127_0_0_1",
+          "anonymized_name": "JY-RED RJA511 30 JUL 2025.xlsx",
+          "anonymized_preview": "PK\u0003\u0004\u0014\u0000\u0006\u0000\b\u0000\u0000\u0000!\u0000b�h^\u0001\u0000\u0000�\u0004\u0000\u0000\u0013\u0000\b\u0002[Content_Types].xml �\u0004\u0002(�\u0000\u0002\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+        }
+      ]
+    },
+    {
+      "analysis_key": "exd_500fdcc0491c0a59",
+      "analysis_version": 21,
+      "created_at": "2026-04-03T02:08:10.443056+00:00",
+      "priority": "HIGH",
+      "severity_estimate": "HIGH",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [
+        "hard landing"
+      ],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Ground aircraft for hard-landing structural inspection matrix before next flight leg.",
+        "Hold aircraft release pending Engineering initial disposition.",
+        "Apply temporary dispatch restriction until mandatory inspections are closed.",
+        "Execute hard-landing inspection matrix (structure, landing gear, fuselage interfaces).",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Require senior certifying engineer review before return-to-service authorization."
+      ],
+      "probable_cause": {
+        "primary_cause": "hard landing",
+        "confidence": 83,
+        "contributing_factors": [
+          "Sequence inferred from 400 CSV/FDR row(s)."
+        ],
+        "rationale": "Probable cause inferred from temporal sequence, detected signals, and maintenance narrative correlation."
+      },
+      "exceedance_verdict": "YES",
+      "failure_text": "",
+      "scenario": "",
+      "tail": "",
+      "ata": "",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": true,
+      "stored_files": [
+        {
+          "kind": "csv",
+          "original_name": "JY-RED RJA511 30 JUL 2025.xlsx",
+          "stored_name": "exd_500fdcc0491c0a59_csv_bf775293ea37.xlsx",
+          "stored_path": "C:\\Troubleshooting\\uploads\\exceedance\\exd_500fdcc0491c0a59_csv_bf775293ea37.xlsx",
+          "sha1": "bf775293ea37c8c8277fafbf07662ce7cc687201",
+          "size_bytes": 48630,
+          "uploaded_at": "2026-04-03T02:08:10.422422+00:00",
+          "actor": "conv_20260403020555166656:127_0_0_1",
+          "anonymized_name": "JY-RED RJA511 30 JUL 2025.xlsx",
+          "anonymized_preview": "PK\u0003\u0004\u0014\u0000\u0006\u0000\b\u0000\u0000\u0000!\u0000b�h^\u0001\u0000\u0000�\u0004\u0000\u0000\u0013\u0000\b\u0002[Content_Types].xml �\u0004\u0002(�\u0000\u0002\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+        }
+      ]
+    },
+    {
+      "analysis_key": "exd_500fdcc0491c0a59",
+      "analysis_version": 21,
+      "created_at": "2026-04-05T14:39:30.303058+00:00",
+      "priority": "HIGH",
+      "severity_estimate": "HIGH",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [
+        "hard landing"
+      ],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Ground aircraft for hard-landing structural inspection matrix before next flight leg.",
+        "Hold aircraft release pending Engineering initial disposition.",
+        "Apply temporary dispatch restriction until mandatory inspections are closed.",
+        "Execute hard-landing inspection matrix (structure, landing gear, fuselage interfaces).",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Require senior certifying engineer review before return-to-service authorization."
+      ],
+      "probable_cause": {
+        "primary_cause": "hard landing",
+        "confidence": 83,
+        "contributing_factors": [
+          "Sequence inferred from 400 CSV/FDR row(s)."
+        ],
+        "rationale": "Probable cause inferred from temporal sequence, detected signals, and maintenance narrative correlation."
+      },
+      "exceedance_verdict": "YES",
+      "failure_text": "",
+      "scenario": "",
+      "tail": "",
+      "ata": "",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": true,
+      "stored_files": [
+        {
+          "kind": "csv",
+          "original_name": "JY-RED RJA511 30 JUL 2025.xlsx",
+          "stored_name": "exd_500fdcc0491c0a59_csv_bf775293ea37.xlsx",
+          "stored_path": "C:\\Troubleshooting\\uploads\\exceedance\\exd_500fdcc0491c0a59_csv_bf775293ea37.xlsx",
+          "sha1": "bf775293ea37c8c8277fafbf07662ce7cc687201",
+          "size_bytes": 48630,
+          "uploaded_at": "2026-04-05T14:39:30.271239+00:00",
+          "actor": "conv_20260405143928358219:127_0_0_1",
+          "anonymized_name": "JY-RED RJA511 30 JUL 2025.xlsx",
+          "anonymized_preview": "PK\u0003\u0004\u0014\u0000\u0006\u0000\b\u0000\u0000\u0000!\u0000b�h^\u0001\u0000\u0000�\u0004\u0000\u0000\u0013\u0000\b\u0002[Content_Types].xml �\u0004\u0002(�\u0000\u0002\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+        }
+      ]
+    },
+    {
+      "analysis_key": "exd_500fdcc0491c0a59",
+      "analysis_version": 21,
+      "created_at": "2026-04-05T14:40:21.683929+00:00",
+      "priority": "HIGH",
+      "severity_estimate": "HIGH",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [
+        "hard landing"
+      ],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Ground aircraft for hard-landing structural inspection matrix before next flight leg.",
+        "Hold aircraft release pending Engineering initial disposition.",
+        "Apply temporary dispatch restriction until mandatory inspections are closed.",
+        "Execute hard-landing inspection matrix (structure, landing gear, fuselage interfaces).",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Require senior certifying engineer review before return-to-service authorization."
+      ],
+      "probable_cause": {
+        "primary_cause": "hard landing",
+        "confidence": 83,
+        "contributing_factors": [
+          "Sequence inferred from 800 CSV/FDR row(s)."
+        ],
+        "rationale": "Probable cause inferred from temporal sequence, detected signals, and maintenance narrative correlation."
+      },
+      "exceedance_verdict": "YES",
+      "failure_text": "",
+      "scenario": "",
+      "tail": "",
+      "ata": "",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": true,
+      "stored_files": [
+        {
+          "kind": "csv",
+          "original_name": "JY-RED RJA511 30 JUL 2025.xlsx",
+          "stored_name": "exd_500fdcc0491c0a59_csv_bf775293ea37.xlsx",
+          "stored_path": "C:\\Troubleshooting\\uploads\\exceedance\\exd_500fdcc0491c0a59_csv_bf775293ea37.xlsx",
+          "sha1": "bf775293ea37c8c8277fafbf07662ce7cc687201",
+          "size_bytes": 48630,
+          "uploaded_at": "2026-04-05T14:39:30.271239+00:00",
+          "actor": "conv_20260405143928358219:127_0_0_1",
+          "anonymized_name": "JY-RED RJA511 30 JUL 2025.xlsx",
+          "anonymized_preview": "PK\u0003\u0004\u0014\u0000\u0006\u0000\b\u0000\u0000\u0000!\u0000b�h^\u0001\u0000\u0000�\u0004\u0000\u0000\u0013\u0000\b\u0002[Content_Types].xml �\u0004\u0002(�\u0000\u0002\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+        },
+        {
+          "kind": "csv",
+          "original_name": "JY-RED RJA511 30 JUL 2025.xlsx",
+          "stored_name": "exd_500fdcc0491c0a59_csv_bf775293ea37.xlsx",
+          "stored_path": "C:\\Troubleshooting\\uploads\\exceedance\\exd_500fdcc0491c0a59_csv_bf775293ea37.xlsx",
+          "sha1": "bf775293ea37c8c8277fafbf07662ce7cc687201",
+          "size_bytes": 48630,
+          "uploaded_at": "2026-04-05T14:40:21.664411+00:00",
+          "actor": "conv_20260405143928358219:127_0_0_1",
+          "anonymized_name": "JY-RED RJA511 30 JUL 2025.xlsx",
+          "anonymized_preview": "PK\u0003\u0004\u0014\u0000\u0006\u0000\b\u0000\u0000\u0000!\u0000b�h^\u0001\u0000\u0000�\u0004\u0000\u0000\u0013\u0000\b\u0002[Content_Types].xml �\u0004\u0002(�\u0000\u0002\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+        }
+      ]
+    },
+    {
+      "analysis_key": "exd_500fdcc0491c0a59",
+      "analysis_version": 21,
+      "created_at": "2026-04-05T14:40:55.398624+00:00",
+      "priority": "LOW",
+      "severity_estimate": "LOW",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Issue return-to-service recommendation only after closure evidence is documented.",
+        "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+        "Cross-check ATA chapter exposure and open MEL/ETD constraints before release.",
+        "Run baseline troubleshooting checklist with targeted ATA verification before release."
+      ],
+      "probable_cause": {
+        "primary_cause": "undetermined",
+        "confidence": 48,
+        "contributing_factors": [
+          "Initial event in sequence: 0.",
+          "Sequence inferred from 124 CSV/FDR row(s)."
+        ],
+        "rationale": "No dominant signal sequence identified; maintain generic troubleshooting flow until additional evidence is provided."
+      },
+      "exceedance_verdict": "NO",
+      "failure_text": "",
+      "scenario": "",
+      "tail": "",
+      "ata": "",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": true,
+      "stored_files": [
+        {
+          "kind": "csv",
+          "original_name": "F-HDRK FDR READOUT HARD LANDING 17-01-2026 - raw.csv",
+          "stored_name": "exd_500fdcc0491c0a59_csv_e8c19d2f4ff7.csv",
+          "stored_path": "C:\\Troubleshooting\\uploads\\exceedance\\exd_500fdcc0491c0a59_csv_e8c19d2f4ff7.csv",
+          "sha1": "e8c19d2f4ff71494afbefab63d718d4d279adb2d",
+          "size_bytes": 14294,
+          "uploaded_at": "2026-04-05T14:40:55.378162+00:00",
+          "actor": "conv_20260405143928358219:127_0_0_1",
+          "anonymized_name": "F-HDRK FDR READOUT HARD LANDING 17-01-2026 - raw.csv",
+          "anonymized_preview": "COUNTER;GMTday;GMTmonth;GMThrs;GMTmins;GMTsecs;ACCnorm;ACClat;ACClong;AIR_gnd;CAScapt;CASfo;ALTprescapt;ALTpresfo;HDGmag;ATTroll;ATTpitch;ALTrad1;ALTrad2;WEIGHT"
+        }
+      ]
+    },
+    {
+      "analysis_key": "exd_500fdcc0491c0a59",
+      "analysis_version": 21,
+      "created_at": "2026-04-05T14:41:05.438659+00:00",
+      "priority": "MEDIUM",
+      "severity_estimate": "MEDIUM",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [
+        "weight exceedance"
+      ],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Issue return-to-service recommendation only after closure evidence is documented.",
+        "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+        "Increase targeted monitoring and correlate next events against tail/ATA trend window.",
+        "Cross-check ATA chapter exposure and open MEL/ETD constraints before release.",
+        "Run baseline troubleshooting checklist with targeted ATA verification before release."
+      ],
+      "probable_cause": {
+        "primary_cause": "weight exceedance",
+        "confidence": 83,
+        "contributing_factors": [
+          "Initial event in sequence: 0.",
+          "Sequence inferred from 124 CSV/FDR row(s)."
+        ],
+        "rationale": "Probable cause inferred from temporal sequence, detected signals, and maintenance narrative correlation."
+      },
+      "exceedance_verdict": "YES",
+      "failure_text": "",
+      "scenario": "",
+      "tail": "",
+      "ata": "",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": true,
+      "stored_files": [
+        {
+          "kind": "csv",
+          "original_name": "F-HDRK FDR READOUT HARD LANDING 17-01-2026 - raw.csv",
+          "stored_name": "exd_500fdcc0491c0a59_csv_e8c19d2f4ff7.csv",
+          "stored_path": "C:\\Troubleshooting\\uploads\\exceedance\\exd_500fdcc0491c0a59_csv_e8c19d2f4ff7.csv",
+          "sha1": "e8c19d2f4ff71494afbefab63d718d4d279adb2d",
+          "size_bytes": 14294,
+          "uploaded_at": "2026-04-05T14:41:05.415660+00:00",
+          "actor": "conv_20260405143928358219:127_0_0_1",
+          "anonymized_name": "F-HDRK FDR READOUT HARD LANDING 17-01-2026 - raw.csv",
+          "anonymized_preview": "COUNTER;GMTday;GMTmonth;GMThrs;GMTmins;GMTsecs;ACCnorm;ACClat;ACClong;AIR_gnd;CAScapt;CASfo;ALTprescapt;ALTpresfo;HDGmag;ATTroll;ATTpitch;ALTrad1;ALTrad2;WEIGHT"
+        }
+      ]
+    },
+    {
+      "analysis_key": "exd_500fdcc0491c0a59",
+      "analysis_version": 21,
+      "created_at": "2026-04-05T14:42:20.914704+00:00",
+      "priority": "MEDIUM",
+      "severity_estimate": "MEDIUM",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [
+        "weight exceedance"
+      ],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Issue return-to-service recommendation only after closure evidence is documented.",
+        "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+        "Increase targeted monitoring and correlate next events against tail/ATA trend window.",
+        "Cross-check ATA chapter exposure and open MEL/ETD constraints before release.",
+        "Run baseline troubleshooting checklist with targeted ATA verification before release."
+      ],
+      "probable_cause": {
+        "primary_cause": "weight exceedance",
+        "confidence": 83,
+        "contributing_factors": [
+          "Initial event in sequence: 0.",
+          "Sequence inferred from 124 CSV/FDR row(s)."
+        ],
+        "rationale": "Probable cause inferred from temporal sequence, detected signals, and maintenance narrative correlation."
+      },
+      "exceedance_verdict": "YES",
+      "failure_text": "",
+      "scenario": "",
+      "tail": "",
+      "ata": "",
+      "modelo": "",
+      "analysis_mode": "expert",
+      "mandatory_review_required": true,
+      "stored_files": [
+        {
+          "kind": "csv",
+          "original_name": "F-HDRK FDR READOUT HARD LANDING 17-01-2026 - raw.csv",
+          "stored_name": "exd_500fdcc0491c0a59_csv_e8c19d2f4ff7.csv",
+          "stored_path": "C:\\Troubleshooting\\uploads\\exceedance\\exd_500fdcc0491c0a59_csv_e8c19d2f4ff7.csv",
+          "sha1": "e8c19d2f4ff71494afbefab63d718d4d279adb2d",
+          "size_bytes": 14294,
+          "uploaded_at": "2026-04-05T14:42:20.892198+00:00",
+          "actor": "conv_20260405143928358219:127_0_0_1",
+          "anonymized_name": "F-HDRK FDR READOUT HARD LANDING 17-01-2026 - raw.csv",
+          "anonymized_preview": "COUNTER;GMTday;GMTmonth;GMThrs;GMTmins;GMTsecs;ACCnorm;ACClat;ACClong;AIR_gnd;CAScapt;CASfo;ALTprescapt;ALTpresfo;HDGmag;ATTroll;ATTpitch;ALTrad1;ALTrad2;WEIGHT"
+        }
+      ]
+    },
+    {
+      "analysis_key": "exd_500fdcc0491c0a59",
+      "analysis_version": 21,
+      "created_at": "2026-04-06T17:10:47.574605+00:00",
+      "priority": "LOW",
+      "severity_estimate": "LOW",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Issue return-to-service recommendation only after closure evidence is documented.",
+        "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+        "Cross-check ATA chapter exposure and open MEL/ETD constraints before release.",
+        "Run baseline troubleshooting checklist with targeted ATA verification before release."
+      ],
+      "probable_cause": {
+        "primary_cause": "undetermined",
+        "confidence": 48,
+        "contributing_factors": [
+          "Initial event in sequence: 0.",
+          "Sequence inferred from 124 CSV/FDR row(s)."
+        ],
+        "rationale": "No dominant signal sequence identified; maintain generic troubleshooting flow until additional evidence is provided."
+      },
+      "exceedance_verdict": "NO",
+      "failure_text": "",
+      "scenario": "",
+      "tail": "",
+      "ata": "",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": true,
+      "stored_files": [
+        {
+          "kind": "csv",
+          "original_name": "F-HDRK FDR READOUT HARD LANDING 17-01-2026 - raw.csv",
+          "stored_name": "exd_500fdcc0491c0a59_csv_e8c19d2f4ff7.csv",
+          "stored_path": "C:\\Troubleshooting\\uploads\\exceedance\\exd_500fdcc0491c0a59_csv_e8c19d2f4ff7.csv",
+          "sha1": "e8c19d2f4ff71494afbefab63d718d4d279adb2d",
+          "size_bytes": 14294,
+          "uploaded_at": "2026-04-06T17:10:47.539951+00:00",
+          "actor": "conv_20260406171046720118:127_0_0_1",
+          "anonymized_name": "F-HDRK FDR READOUT HARD LANDING 17-01-2026 - raw.csv",
+          "anonymized_preview": "COUNTER;GMTday;GMTmonth;GMThrs;GMTmins;GMTsecs;ACCnorm;ACClat;ACClong;AIR_gnd;CAScapt;CASfo;ALTprescapt;ALTpresfo;HDGmag;ATTroll;ATTpitch;ALTrad1;ALTrad2;WEIGHT"
+        }
+      ]
+    },
+    {
+      "analysis_key": "exd_500fdcc0491c0a59",
+      "analysis_version": 21,
+      "created_at": "2026-04-06T17:11:20.161842+00:00",
+      "priority": "LOW",
+      "severity_estimate": "LOW",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Issue return-to-service recommendation only after closure evidence is documented.",
+        "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+        "Cross-check ATA chapter exposure and open MEL/ETD constraints before release.",
+        "Run baseline troubleshooting checklist with targeted ATA verification before release."
+      ],
+      "probable_cause": {
+        "primary_cause": "undetermined",
+        "confidence": 30,
+        "contributing_factors": [],
+        "rationale": "No dominant signal sequence identified; maintain generic troubleshooting flow until additional evidence is provided."
+      },
+      "exceedance_verdict": "UNDETERMINED",
+      "failure_text": "",
+      "scenario": "",
+      "tail": "",
+      "ata": "",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": true,
+      "stored_files": []
+    },
+    {
+      "analysis_key": "exd_500fdcc0491c0a59",
+      "analysis_version": 21,
+      "created_at": "2026-04-06T17:13:02.397954+00:00",
+      "priority": "MEDIUM",
+      "severity_estimate": "MEDIUM",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [
+        "weight exceedance"
+      ],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Issue return-to-service recommendation only after closure evidence is documented.",
+        "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+        "Increase targeted monitoring and correlate next events against tail/ATA trend window.",
+        "Cross-check ATA chapter exposure and open MEL/ETD constraints before release.",
+        "Run baseline troubleshooting checklist with targeted ATA verification before release."
+      ],
+      "probable_cause": {
+        "primary_cause": "weight exceedance",
+        "confidence": 83,
+        "contributing_factors": [
+          "Initial event in sequence: 0.",
+          "Sequence inferred from 124 CSV/FDR row(s)."
+        ],
+        "rationale": "Probable cause inferred from temporal sequence, detected signals, and maintenance narrative correlation."
+      },
+      "exceedance_verdict": "YES",
+      "failure_text": "",
+      "scenario": "",
+      "tail": "",
+      "ata": "",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": true,
+      "stored_files": [
+        {
+          "kind": "csv",
+          "original_name": "F-HDRK FDR READOUT HARD LANDING 17-01-2026 - raw.csv",
+          "stored_name": "exd_500fdcc0491c0a59_csv_e8c19d2f4ff7.csv",
+          "stored_path": "C:\\Troubleshooting\\uploads\\exceedance\\exd_500fdcc0491c0a59_csv_e8c19d2f4ff7.csv",
+          "sha1": "e8c19d2f4ff71494afbefab63d718d4d279adb2d",
+          "size_bytes": 14294,
+          "uploaded_at": "2026-04-06T17:13:02.379118+00:00",
+          "actor": "conv_20260406171046720118:127_0_0_1",
+          "anonymized_name": "F-HDRK FDR READOUT HARD LANDING 17-01-2026 - raw.csv",
+          "anonymized_preview": "COUNTER;GMTday;GMTmonth;GMThrs;GMTmins;GMTsecs;ACCnorm;ACClat;ACClong;AIR_gnd;CAScapt;CASfo;ALTprescapt;ALTpresfo;HDGmag;ATTroll;ATTpitch;ALTrad1;ALTrad2;WEIGHT"
+        }
+      ]
+    },
+    {
+      "analysis_key": "exd_500fdcc0491c0a59",
+      "analysis_version": 21,
+      "created_at": "2026-04-06T22:30:34.857753+00:00",
+      "priority": "HIGH",
+      "severity_estimate": "HIGH",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [
+        "hard landing"
+      ],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Ground aircraft for hard-landing structural inspection matrix before next flight leg.",
+        "Hold aircraft release pending Engineering initial disposition.",
+        "Apply temporary dispatch restriction until mandatory inspections are closed.",
+        "Execute hard-landing inspection matrix (structure, landing gear, fuselage interfaces).",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Require senior certifying engineer review before return-to-service authorization."
+      ],
+      "probable_cause": {
+        "primary_cause": "hard landing",
+        "confidence": 83,
+        "contributing_factors": [
+          "Sequence inferred from 400 CSV/FDR row(s)."
+        ],
+        "rationale": "Probable cause inferred from temporal sequence, detected signals, and maintenance narrative correlation."
+      },
+      "exceedance_verdict": "YES",
+      "failure_text": "",
+      "scenario": "",
+      "tail": "",
+      "ata": "",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": true,
+      "stored_files": [
+        {
+          "kind": "csv",
+          "original_name": "JY-RED RJA511 30 JUL 2025.xlsx",
+          "stored_name": "exd_500fdcc0491c0a59_csv_bf775293ea37.xlsx",
+          "stored_path": "C:\\Troubleshooting\\uploads\\exceedance\\exd_500fdcc0491c0a59_csv_bf775293ea37.xlsx",
+          "sha1": "bf775293ea37c8c8277fafbf07662ce7cc687201",
+          "size_bytes": 48630,
+          "uploaded_at": "2026-04-06T22:30:34.828594+00:00",
+          "actor": "conv_20260406171046720118:127_0_0_1",
+          "anonymized_name": "JY-RED RJA511 30 JUL 2025.xlsx",
+          "anonymized_preview": "PK\u0003\u0004\u0014\u0000\u0006\u0000\b\u0000\u0000\u0000!\u0000b�h^\u0001\u0000\u0000�\u0004\u0000\u0000\u0013\u0000\b\u0002[Content_Types].xml �\u0004\u0002(�\u0000\u0002\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+        }
+      ]
+    },
+    {
+      "analysis_key": "exd_500fdcc0491c0a59",
+      "analysis_version": 21,
+      "created_at": "2026-04-30T00:00:24.371746+00:00",
+      "priority": "CRITICAL",
+      "severity_estimate": "CRITICAL",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [
+        "hard landing"
+      ],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Ground aircraft for hard-landing structural inspection matrix before next flight leg.",
+        "Hold aircraft release pending Engineering initial disposition.",
+        "Apply temporary dispatch restriction until mandatory inspections are closed.",
+        "Execute hard-landing inspection matrix (structure, landing gear, fuselage interfaces).",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Escalate to Engineering Review Board and suspend return-to-service decision until full disposition."
+      ],
+      "probable_cause": {
+        "primary_cause": "hard landing",
+        "confidence": 83,
+        "contributing_factors": [
+          "Sequence inferred from 40 CSV/FDR row(s)."
+        ],
+        "rationale": "Probable cause inferred from temporal sequence, detected signals, and maintenance narrative correlation."
+      },
+      "exceedance_verdict": "YES",
+      "failure_text": "",
+      "scenario": "",
+      "tail": "",
+      "ata": "",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": true,
+      "stored_files": [
+        {
+          "kind": "csv",
+          "original_name": "e2_hard_landing_validation_4flights.csv",
+          "stored_name": "exd_500fdcc0491c0a59_csv_54cc58ff2711.csv",
+          "stored_path": "C:\\Troubleshooting\\uploads\\exceedance\\exd_500fdcc0491c0a59_csv_54cc58ff2711.csv",
+          "sha1": "54cc58ff27119015a1ed6dd0b516d78abb2a8d08",
+          "size_bytes": 1561,
+          "uploaded_at": "2026-04-30T00:00:24.340138+00:00",
+          "actor": "conv_20260430000023765300:127_0_0_1",
+          "anonymized_name": "e2_hard_landing_validation_4flights.csv",
+          "anonymized_preview": "time,wow_any,wow_lh,wow_rh,wow_nlg,vertical_g,ias,gear_down,flight_id\r\n0,1,1,1,1,1.00,146,1,DEMO-HL-LH-EXC\r\n1,1,1,1,1,1.01,147,1,DEMO-HL-LH-EXC\r\n2,0,0,0,0,1.03,"
+        }
+      ]
+    },
+    {
+      "analysis_key": "exd_500fdcc0491c0a59",
+      "analysis_version": 21,
+      "created_at": "2026-05-05T16:27:39.307801+00:00",
+      "priority": "MEDIUM",
+      "severity_estimate": "MEDIUM",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Issue return-to-service recommendation only after closure evidence is documented.",
+        "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+        "Cross-check ATA chapter exposure and open MEL/ETD constraints before release.",
+        "Run baseline troubleshooting checklist with targeted ATA verification before release."
+      ],
+      "probable_cause": {
+        "primary_cause": "undetermined",
+        "confidence": 48,
+        "contributing_factors": [
+          "Sequence inferred from 7 CSV/FDR row(s)."
+        ],
+        "rationale": "No dominant signal sequence identified; maintain generic troubleshooting flow until additional evidence is provided."
+      },
+      "exceedance_verdict": "NO",
+      "failure_text": "",
+      "scenario": "",
+      "tail": "",
+      "ata": "",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": true,
+      "stored_files": [
+        {
+          "kind": "csv",
+          "original_name": "hard_landing_e195_roll_le_2_5_exceedance.csv",
+          "stored_name": "exd_500fdcc0491c0a59_csv_c14bcbd15fcf.csv",
+          "stored_path": "C:\\Troubleshooting\\uploads\\exceedance\\exd_500fdcc0491c0a59_csv_c14bcbd15fcf.csv",
+          "sha1": "c14bcbd15fcfbb0306714aacd60a0f52ddeead9b",
+          "size_bytes": 538,
+          "uploaded_at": "2026-05-05T16:27:39.281993+00:00",
+          "actor": "conv_20260505162738615119:127_0_0_1",
+          "anonymized_name": "hard_landing_e195_roll_le_2_5_exceedance.csv",
+          "anonymized_preview": "Time (GMT),all Gear WOW2,Nose Landing Gear WOFW Sensor 1,Normal CG acceleration,Gross weight,AHRS Inertial Roll Rate (DVDR),Flight number (FltNumber),Date (Day)"
+        }
+      ]
+    },
+    {
+      "analysis_key": "exd_500fdcc0491c0a59",
+      "analysis_version": 21,
+      "created_at": "2026-05-05T16:28:20.146013+00:00",
+      "priority": "MEDIUM",
+      "severity_estimate": "MEDIUM",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Issue return-to-service recommendation only after closure evidence is documented.",
+        "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+        "Cross-check ATA chapter exposure and open MEL/ETD constraints before release.",
+        "Run baseline troubleshooting checklist with targeted ATA verification before release."
+      ],
+      "probable_cause": {
+        "primary_cause": "undetermined",
+        "confidence": 48,
+        "contributing_factors": [
+          "Sequence inferred from 7 CSV/FDR row(s)."
+        ],
+        "rationale": "No dominant signal sequence identified; maintain generic troubleshooting flow until additional evidence is provided."
+      },
+      "exceedance_verdict": "NO",
+      "failure_text": "",
+      "scenario": "",
+      "tail": "",
+      "ata": "",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": true,
+      "stored_files": [
+        {
+          "kind": "csv",
+          "original_name": "hard_landing_e190_roll_gt_8_exceedance.csv",
+          "stored_name": "exd_500fdcc0491c0a59_csv_974c1946be54.csv",
+          "stored_path": "C:\\Troubleshooting\\uploads\\exceedance\\exd_500fdcc0491c0a59_csv_974c1946be54.csv",
+          "sha1": "974c1946be543e8d8583c1161456c101459f5810",
+          "size_bytes": 538,
+          "uploaded_at": "2026-05-05T16:28:20.129859+00:00",
+          "actor": "conv_20260505162738615119:127_0_0_1",
+          "anonymized_name": "hard_landing_e190_roll_gt_8_exceedance.csv",
+          "anonymized_preview": "Time (GMT),all Gear WOW2,Nose Landing Gear WOFW Sensor 1,Normal CG acceleration,Gross weight,AHRS Inertial Roll Rate (DVDR),Flight number (FltNumber),Date (Day)"
+        }
+      ]
+    },
+    {
+      "analysis_key": "exd_500fdcc0491c0a59",
+      "analysis_version": 21,
+      "created_at": "2026-06-19T16:50:55.870859+00:00",
+      "priority": "LOW",
+      "severity_estimate": "LOW",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Issue return-to-service recommendation only after closure evidence is documented.",
+        "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+        "Cross-check ATA chapter exposure and open MEL/ETD constraints before release.",
+        "Run baseline troubleshooting checklist with targeted ATA verification before release."
+      ],
+      "probable_cause": {
+        "primary_cause": "undetermined",
+        "confidence": 30,
+        "contributing_factors": [],
+        "rationale": "No dominant signal sequence identified; maintain generic troubleshooting flow until additional evidence is provided."
+      },
+      "exceedance_verdict": "UNDETERMINED",
+      "failure_text": "",
+      "scenario": "",
+      "tail": "",
+      "ata": "",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": true,
+      "stored_files": []
+    }
+  ],
+  "exd_b7ebc6525eba26b2": [
+    {
+      "analysis_key": "exd_b7ebc6525eba26b2",
+      "analysis_version": 1,
+      "created_at": "2026-03-29T01:03:04.165964+00:00",
+      "priority": "LOW",
+      "severity_estimate": "LOW",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Issue return-to-service recommendation only after closure evidence is documented.",
+        "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+        "Cross-check ATA chapter exposure and open MEL/ETD constraints before release.",
+        "Run baseline troubleshooting checklist with targeted ATA verification before release."
+      ],
+      "probable_cause": {
+        "primary_cause": "undetermined",
+        "confidence": 30,
+        "contributing_factors": [],
+        "rationale": "No dominant signal sequence identified; maintain generic troubleshooting flow until additional evidence is provided."
+      },
+      "exceedance_verdict": "UNDETERMINED",
+      "failure_text": "Engine parameter spike after takeoff",
+      "scenario": "Crew observed exceedance alert and maintenance needs guidance",
+      "tail": "PR-TEST",
+      "ata": "72",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": false,
+      "stored_files": []
+    },
+    {
+      "analysis_key": "exd_b7ebc6525eba26b2",
+      "analysis_version": 2,
+      "created_at": "2026-03-29T01:03:05.396014+00:00",
+      "priority": "LOW",
+      "severity_estimate": "LOW",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Issue return-to-service recommendation only after closure evidence is documented.",
+        "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+        "Cross-check ATA chapter exposure and open MEL/ETD constraints before release.",
+        "Run baseline troubleshooting checklist with targeted ATA verification before release."
+      ],
+      "probable_cause": {
+        "primary_cause": "undetermined",
+        "confidence": 30,
+        "contributing_factors": [],
+        "rationale": "No dominant signal sequence identified; maintain generic troubleshooting flow until additional evidence is provided."
+      },
+      "exceedance_verdict": "UNDETERMINED",
+      "failure_text": "Engine parameter spike after takeoff",
+      "scenario": "Crew observed exceedance alert and maintenance needs guidance",
+      "tail": "PR-TEST",
+      "ata": "72",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": false,
+      "stored_files": []
+    },
+    {
+      "analysis_key": "exd_b7ebc6525eba26b2",
+      "analysis_version": 3,
+      "created_at": "2026-03-29T01:05:07.213511+00:00",
+      "priority": "LOW",
+      "severity_estimate": "LOW",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Issue return-to-service recommendation only after closure evidence is documented.",
+        "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+        "Cross-check ATA chapter exposure and open MEL/ETD constraints before release.",
+        "Run baseline troubleshooting checklist with targeted ATA verification before release."
+      ],
+      "probable_cause": {
+        "primary_cause": "undetermined",
+        "confidence": 30,
+        "contributing_factors": [],
+        "rationale": "No dominant signal sequence identified; maintain generic troubleshooting flow until additional evidence is provided."
+      },
+      "exceedance_verdict": "UNDETERMINED",
+      "failure_text": "Engine parameter spike after takeoff",
+      "scenario": "Crew observed exceedance alert and maintenance needs guidance",
+      "tail": "PR-TEST",
+      "ata": "72",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": false,
+      "stored_files": []
+    },
+    {
+      "analysis_key": "exd_b7ebc6525eba26b2",
+      "analysis_version": 4,
+      "created_at": "2026-03-29T01:05:08.409635+00:00",
+      "priority": "LOW",
+      "severity_estimate": "LOW",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Issue return-to-service recommendation only after closure evidence is documented.",
+        "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+        "Cross-check ATA chapter exposure and open MEL/ETD constraints before release.",
+        "Run baseline troubleshooting checklist with targeted ATA verification before release."
+      ],
+      "probable_cause": {
+        "primary_cause": "undetermined",
+        "confidence": 30,
+        "contributing_factors": [],
+        "rationale": "No dominant signal sequence identified; maintain generic troubleshooting flow until additional evidence is provided."
+      },
+      "exceedance_verdict": "UNDETERMINED",
+      "failure_text": "Engine parameter spike after takeoff",
+      "scenario": "Crew observed exceedance alert and maintenance needs guidance",
+      "tail": "PR-TEST",
+      "ata": "72",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": false,
+      "stored_files": []
+    },
+    {
+      "analysis_key": "exd_b7ebc6525eba26b2",
+      "analysis_version": 5,
+      "created_at": "2026-03-29T01:06:29.241774+00:00",
+      "priority": "LOW",
+      "severity_estimate": "LOW",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Issue return-to-service recommendation only after closure evidence is documented.",
+        "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+        "Cross-check ATA chapter exposure and open MEL/ETD constraints before release.",
+        "Run baseline troubleshooting checklist with targeted ATA verification before release."
+      ],
+      "probable_cause": {
+        "primary_cause": "undetermined",
+        "confidence": 30,
+        "contributing_factors": [],
+        "rationale": "No dominant signal sequence identified; maintain generic troubleshooting flow until additional evidence is provided."
+      },
+      "exceedance_verdict": "UNDETERMINED",
+      "failure_text": "Engine parameter spike after takeoff",
+      "scenario": "Crew observed exceedance alert and maintenance needs guidance",
+      "tail": "PR-TEST",
+      "ata": "72",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": false,
+      "stored_files": []
+    },
+    {
+      "analysis_key": "exd_b7ebc6525eba26b2",
+      "analysis_version": 6,
+      "created_at": "2026-03-29T01:06:30.404888+00:00",
+      "priority": "LOW",
+      "severity_estimate": "LOW",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Issue return-to-service recommendation only after closure evidence is documented.",
+        "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+        "Cross-check ATA chapter exposure and open MEL/ETD constraints before release.",
+        "Run baseline troubleshooting checklist with targeted ATA verification before release."
+      ],
+      "probable_cause": {
+        "primary_cause": "undetermined",
+        "confidence": 30,
+        "contributing_factors": [],
+        "rationale": "No dominant signal sequence identified; maintain generic troubleshooting flow until additional evidence is provided."
+      },
+      "exceedance_verdict": "UNDETERMINED",
+      "failure_text": "Engine parameter spike after takeoff",
+      "scenario": "Crew observed exceedance alert and maintenance needs guidance",
+      "tail": "PR-TEST",
+      "ata": "72",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": false,
+      "stored_files": []
+    },
+    {
+      "analysis_key": "exd_b7ebc6525eba26b2",
+      "analysis_version": 7,
+      "created_at": "2026-03-29T01:07:45.390497+00:00",
+      "priority": "LOW",
+      "severity_estimate": "LOW",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Issue return-to-service recommendation only after closure evidence is documented.",
+        "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+        "Cross-check ATA chapter exposure and open MEL/ETD constraints before release.",
+        "Run baseline troubleshooting checklist with targeted ATA verification before release."
+      ],
+      "probable_cause": {
+        "primary_cause": "undetermined",
+        "confidence": 30,
+        "contributing_factors": [],
+        "rationale": "No dominant signal sequence identified; maintain generic troubleshooting flow until additional evidence is provided."
+      },
+      "exceedance_verdict": "UNDETERMINED",
+      "failure_text": "Engine parameter spike after takeoff",
+      "scenario": "Crew observed exceedance alert and maintenance needs guidance",
+      "tail": "PR-TEST",
+      "ata": "72",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": false,
+      "stored_files": []
+    },
+    {
+      "analysis_key": "exd_b7ebc6525eba26b2",
+      "analysis_version": 8,
+      "created_at": "2026-03-29T01:07:46.896287+00:00",
+      "priority": "LOW",
+      "severity_estimate": "LOW",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Issue return-to-service recommendation only after closure evidence is documented.",
+        "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+        "Cross-check ATA chapter exposure and open MEL/ETD constraints before release.",
+        "Run baseline troubleshooting checklist with targeted ATA verification before release."
+      ],
+      "probable_cause": {
+        "primary_cause": "undetermined",
+        "confidence": 30,
+        "contributing_factors": [],
+        "rationale": "No dominant signal sequence identified; maintain generic troubleshooting flow until additional evidence is provided."
+      },
+      "exceedance_verdict": "UNDETERMINED",
+      "failure_text": "Engine parameter spike after takeoff",
+      "scenario": "Crew observed exceedance alert and maintenance needs guidance",
+      "tail": "PR-TEST",
+      "ata": "72",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": false,
+      "stored_files": []
+    },
+    {
+      "analysis_key": "exd_b7ebc6525eba26b2",
+      "analysis_version": 9,
+      "created_at": "2026-03-29T01:08:36.969845+00:00",
+      "priority": "LOW",
+      "severity_estimate": "LOW",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Issue return-to-service recommendation only after closure evidence is documented.",
+        "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+        "Cross-check ATA chapter exposure and open MEL/ETD constraints before release.",
+        "Run baseline troubleshooting checklist with targeted ATA verification before release."
+      ],
+      "probable_cause": {
+        "primary_cause": "undetermined",
+        "confidence": 30,
+        "contributing_factors": [],
+        "rationale": "No dominant signal sequence identified; maintain generic troubleshooting flow until additional evidence is provided."
+      },
+      "exceedance_verdict": "UNDETERMINED",
+      "failure_text": "Engine parameter spike after takeoff",
+      "scenario": "Crew observed exceedance alert and maintenance needs guidance",
+      "tail": "PR-TEST",
+      "ata": "72",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": false,
+      "stored_files": []
+    },
+    {
+      "analysis_key": "exd_b7ebc6525eba26b2",
+      "analysis_version": 10,
+      "created_at": "2026-03-29T01:08:38.500621+00:00",
+      "priority": "LOW",
+      "severity_estimate": "LOW",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Issue return-to-service recommendation only after closure evidence is documented.",
+        "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+        "Cross-check ATA chapter exposure and open MEL/ETD constraints before release.",
+        "Run baseline troubleshooting checklist with targeted ATA verification before release."
+      ],
+      "probable_cause": {
+        "primary_cause": "undetermined",
+        "confidence": 30,
+        "contributing_factors": [],
+        "rationale": "No dominant signal sequence identified; maintain generic troubleshooting flow until additional evidence is provided."
+      },
+      "exceedance_verdict": "UNDETERMINED",
+      "failure_text": "Engine parameter spike after takeoff",
+      "scenario": "Crew observed exceedance alert and maintenance needs guidance",
+      "tail": "PR-TEST",
+      "ata": "72",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": false,
+      "stored_files": []
+    },
+    {
+      "analysis_key": "exd_b7ebc6525eba26b2",
+      "analysis_version": 11,
+      "created_at": "2026-03-29T13:58:26.605085+00:00",
+      "priority": "LOW",
+      "severity_estimate": "LOW",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Issue return-to-service recommendation only after closure evidence is documented.",
+        "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+        "Cross-check ATA chapter exposure and open MEL/ETD constraints before release.",
+        "Run baseline troubleshooting checklist with targeted ATA verification before release."
+      ],
+      "probable_cause": {
+        "primary_cause": "undetermined",
+        "confidence": 30,
+        "contributing_factors": [],
+        "rationale": "No dominant signal sequence identified; maintain generic troubleshooting flow until additional evidence is provided."
+      },
+      "exceedance_verdict": "UNDETERMINED",
+      "failure_text": "Engine parameter spike after takeoff",
+      "scenario": "Crew observed exceedance alert and maintenance needs guidance",
+      "tail": "PR-TEST",
+      "ata": "72",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": false,
+      "stored_files": []
+    },
+    {
+      "analysis_key": "exd_b7ebc6525eba26b2",
+      "analysis_version": 12,
+      "created_at": "2026-03-29T13:58:28.144241+00:00",
+      "priority": "LOW",
+      "severity_estimate": "LOW",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Issue return-to-service recommendation only after closure evidence is documented.",
+        "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+        "Cross-check ATA chapter exposure and open MEL/ETD constraints before release.",
+        "Run baseline troubleshooting checklist with targeted ATA verification before release."
+      ],
+      "probable_cause": {
+        "primary_cause": "undetermined",
+        "confidence": 30,
+        "contributing_factors": [],
+        "rationale": "No dominant signal sequence identified; maintain generic troubleshooting flow until additional evidence is provided."
+      },
+      "exceedance_verdict": "UNDETERMINED",
+      "failure_text": "Engine parameter spike after takeoff",
+      "scenario": "Crew observed exceedance alert and maintenance needs guidance",
+      "tail": "PR-TEST",
+      "ata": "72",
+      "modelo": "",
+      "analysis_mode": "standard",
+      "mandatory_review_required": false,
+      "stored_files": []
+    }
+  ],
+  "exd_0615200df149adc3": [
+    {
+      "analysis_key": "exd_0615200df149adc3",
+      "analysis_version": 1,
+      "created_at": "2026-04-03T02:22:57.728907+00:00",
+      "priority": "MEDIUM",
+      "severity_estimate": "MEDIUM",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [
+        "weight exceedance"
+      ],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Issue return-to-service recommendation only after closure evidence is documented.",
+        "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+        "Increase targeted monitoring and correlate next events against tail/ATA trend window.",
+        "Cross-check ATA chapter exposure and open MEL/ETD constraints before release.",
+        "Run baseline troubleshooting checklist with targeted ATA verification before release."
+      ],
+      "probable_cause": {
+        "primary_cause": "weight exceedance",
+        "confidence": 83,
+        "contributing_factors": [
+          "Initial event in sequence: 0.",
+          "Sequence inferred from 124 CSV/FDR row(s)."
+        ],
+        "rationale": "Probable cause inferred from temporal sequence, detected signals, and maintenance narrative correlation."
+      },
+      "exceedance_verdict": "YES",
+      "failure_text": "",
+      "scenario": "",
+      "tail": "",
+      "ata": "",
+      "modelo": "E170",
+      "analysis_mode": "expert",
+      "mandatory_review_required": true,
+      "stored_files": [
+        {
+          "kind": "csv",
+          "original_name": "F-HDRK FDR READOUT HARD LANDING 17-01-2026 - raw.csv",
+          "stored_name": "exd_0615200df149adc3_csv_e8c19d2f4ff7.csv",
+          "stored_path": "C:\\Troubleshooting\\uploads\\exceedance\\exd_0615200df149adc3_csv_e8c19d2f4ff7.csv",
+          "sha1": "e8c19d2f4ff71494afbefab63d718d4d279adb2d",
+          "size_bytes": 14294,
+          "uploaded_at": "2026-04-03T02:22:57.708857+00:00",
+          "actor": "conv_20260403020555166656:127_0_0_1",
+          "anonymized_name": "F-HDRK FDR READOUT HARD LANDING 17-01-2026 - raw.csv",
+          "anonymized_preview": "COUNTER;GMTday;GMTmonth;GMThrs;GMTmins;GMTsecs;ACCnorm;ACClat;ACClong;AIR_gnd;CAScapt;CASfo;ALTprescapt;ALTpresfo;HDGmag;ATTroll;ATTpitch;ALTrad1;ALTrad2;WEIGHT"
+        }
+      ]
+    }
+  ],
+  "exd_12bf8a8a10c93d0b": [
+    {
+      "analysis_key": "exd_12bf8a8a10c93d0b",
+      "analysis_version": 1,
+      "created_at": "2026-04-03T02:41:45.606024+00:00",
+      "priority": "HIGH",
+      "severity_estimate": "HIGH",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [
+        "hard landing"
+      ],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Ground aircraft for hard-landing structural inspection matrix before next flight leg.",
+        "Hold aircraft release pending Engineering initial disposition.",
+        "Apply temporary dispatch restriction until mandatory inspections are closed.",
+        "Execute hard-landing inspection matrix (structure, landing gear, fuselage interfaces).",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Require senior certifying engineer review before return-to-service authorization."
+      ],
+      "probable_cause": {
+        "primary_cause": "hard landing",
+        "confidence": 83,
+        "contributing_factors": [
+          "Sequence inferred from 400 CSV/FDR row(s)."
+        ],
+        "rationale": "Probable cause inferred from temporal sequence, detected signals, and maintenance narrative correlation."
+      },
+      "exceedance_verdict": "YES",
+      "failure_text": "",
+      "scenario": "",
+      "tail": "",
+      "ata": "",
+      "modelo": "E190",
+      "analysis_mode": "expert",
+      "mandatory_review_required": true,
+      "stored_files": [
+        {
+          "kind": "csv",
+          "original_name": "JY-RED RJA511 30 JUL 2025.xlsx",
+          "stored_name": "exd_12bf8a8a10c93d0b_csv_bf775293ea37.xlsx",
+          "stored_path": "C:\\Troubleshooting\\uploads\\exceedance\\exd_12bf8a8a10c93d0b_csv_bf775293ea37.xlsx",
+          "sha1": "bf775293ea37c8c8277fafbf07662ce7cc687201",
+          "size_bytes": 48630,
+          "uploaded_at": "2026-04-03T02:41:45.594110+00:00",
+          "actor": "conv_20260403020555166656:127_0_0_1",
+          "anonymized_name": "JY-RED RJA511 30 JUL 2025.xlsx",
+          "anonymized_preview": "PK\u0003\u0004\u0014\u0000\u0006\u0000\b\u0000\u0000\u0000!\u0000b�h^\u0001\u0000\u0000�\u0004\u0000\u0000\u0013\u0000\b\u0002[Content_Types].xml �\u0004\u0002(�\u0000\u0002\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+        }
+      ]
+    },
+    {
+      "analysis_key": "exd_12bf8a8a10c93d0b",
+      "analysis_version": 2,
+      "created_at": "2026-04-03T15:27:08.610647+00:00",
+      "priority": "HIGH",
+      "severity_estimate": "HIGH",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [
+        "hard landing"
+      ],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Ground aircraft for hard-landing structural inspection matrix before next flight leg.",
+        "Hold aircraft release pending Engineering initial disposition.",
+        "Apply temporary dispatch restriction until mandatory inspections are closed.",
+        "Execute hard-landing inspection matrix (structure, landing gear, fuselage interfaces).",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Require senior certifying engineer review before return-to-service authorization."
+      ],
+      "probable_cause": {
+        "primary_cause": "hard landing",
+        "confidence": 83,
+        "contributing_factors": [
+          "Sequence inferred from 400 CSV/FDR row(s)."
+        ],
+        "rationale": "Probable cause inferred from temporal sequence, detected signals, and maintenance narrative correlation."
+      },
+      "exceedance_verdict": "YES",
+      "failure_text": "",
+      "scenario": "",
+      "tail": "",
+      "ata": "",
+      "modelo": "E190",
+      "analysis_mode": "expert",
+      "mandatory_review_required": true,
+      "stored_files": [
+        {
+          "kind": "csv",
+          "original_name": "JY-RED RJA511 30 JUL 2025.xlsx",
+          "stored_name": "exd_12bf8a8a10c93d0b_csv_bf775293ea37.xlsx",
+          "stored_path": "C:\\Troubleshooting\\uploads\\exceedance\\exd_12bf8a8a10c93d0b_csv_bf775293ea37.xlsx",
+          "sha1": "bf775293ea37c8c8277fafbf07662ce7cc687201",
+          "size_bytes": 48630,
+          "uploaded_at": "2026-04-03T15:27:08.582836+00:00",
+          "actor": "conv_20260403020555166656:127_0_0_1",
+          "anonymized_name": "JY-RED RJA511 30 JUL 2025.xlsx",
+          "anonymized_preview": "PK\u0003\u0004\u0014\u0000\u0006\u0000\b\u0000\u0000\u0000!\u0000b�h^\u0001\u0000\u0000�\u0004\u0000\u0000\u0013\u0000\b\u0002[Content_Types].xml �\u0004\u0002(�\u0000\u0002\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+        }
+      ]
+    }
+  ],
+  "exd_eccb603beb187f6c": [
+    {
+      "analysis_key": "exd_eccb603beb187f6c",
+      "analysis_version": 1,
+      "created_at": "2026-04-28T18:17:30.317063+00:00",
+      "priority": "CRITICAL",
+      "severity_estimate": "CRITICAL",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [
+        "hard landing"
+      ],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Ground aircraft for hard-landing structural inspection matrix before next flight leg.",
+        "Hold aircraft release pending Engineering initial disposition.",
+        "Apply temporary dispatch restriction until mandatory inspections are closed.",
+        "Execute hard-landing inspection matrix (structure, landing gear, fuselage interfaces).",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Escalate to Engineering Review Board and suspend return-to-service decision until full disposition."
+      ],
+      "probable_cause": {
+        "primary_cause": "hard landing",
+        "confidence": 83,
+        "contributing_factors": [
+          "Sequence inferred from 40 CSV/FDR row(s)."
+        ],
+        "rationale": "Probable cause inferred from temporal sequence, detected signals, and maintenance narrative correlation."
+      },
+      "exceedance_verdict": "YES",
+      "failure_text": "",
+      "scenario": "",
+      "tail": "",
+      "ata": "",
+      "modelo": "E195E2",
+      "analysis_mode": "standard",
+      "mandatory_review_required": true,
+      "stored_files": [
+        {
+          "kind": "csv",
+          "original_name": "e2_hard_landing_validation_4flights.csv",
+          "stored_name": "exd_eccb603beb187f6c_csv_54cc58ff2711.csv",
+          "stored_path": "C:\\Troubleshooting\\uploads\\exceedance\\exd_eccb603beb187f6c_csv_54cc58ff2711.csv",
+          "sha1": "54cc58ff27119015a1ed6dd0b516d78abb2a8d08",
+          "size_bytes": 1561,
+          "uploaded_at": "2026-04-28T18:17:30.256112+00:00",
+          "actor": "conv_20260428181729054531:127_0_0_1",
+          "anonymized_name": "e2_hard_landing_validation_4flights.csv",
+          "anonymized_preview": "time,wow_any,wow_lh,wow_rh,wow_nlg,vertical_g,ias,gear_down,flight_id\r\n0,1,1,1,1,1.00,146,1,DEMO-HL-LH-EXC\r\n1,1,1,1,1,1.01,147,1,DEMO-HL-LH-EXC\r\n2,0,0,0,0,1.03,"
+        }
+      ]
+    },
+    {
+      "analysis_key": "exd_eccb603beb187f6c",
+      "analysis_version": 2,
+      "created_at": "2026-05-05T16:27:59.339950+00:00",
+      "priority": "MEDIUM",
+      "severity_estimate": "MEDIUM",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Issue return-to-service recommendation only after closure evidence is documented.",
+        "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+        "Cross-check ATA chapter exposure and open MEL/ETD constraints before release.",
+        "Run baseline troubleshooting checklist with targeted ATA verification before release."
+      ],
+      "probable_cause": {
+        "primary_cause": "undetermined",
+        "confidence": 48,
+        "contributing_factors": [
+          "Sequence inferred from 7 CSV/FDR row(s)."
+        ],
+        "rationale": "No dominant signal sequence identified; maintain generic troubleshooting flow until additional evidence is provided."
+      },
+      "exceedance_verdict": "NO",
+      "failure_text": "",
+      "scenario": "",
+      "tail": "",
+      "ata": "",
+      "modelo": "E195E2",
+      "analysis_mode": "standard",
+      "mandatory_review_required": true,
+      "stored_files": [
+        {
+          "kind": "csv",
+          "original_name": "hard_landing_e195_roll_le_2_5_exceedance.csv",
+          "stored_name": "exd_eccb603beb187f6c_csv_c14bcbd15fcf.csv",
+          "stored_path": "C:\\Troubleshooting\\uploads\\exceedance\\exd_eccb603beb187f6c_csv_c14bcbd15fcf.csv",
+          "sha1": "c14bcbd15fcfbb0306714aacd60a0f52ddeead9b",
+          "size_bytes": 538,
+          "uploaded_at": "2026-05-05T16:27:59.323889+00:00",
+          "actor": "conv_20260505162738615119:127_0_0_1",
+          "anonymized_name": "hard_landing_e195_roll_le_2_5_exceedance.csv",
+          "anonymized_preview": "Time (GMT),all Gear WOW2,Nose Landing Gear WOFW Sensor 1,Normal CG acceleration,Gross weight,AHRS Inertial Roll Rate (DVDR),Flight number (FltNumber),Date (Day)"
+        }
+      ]
+    }
+  ],
+  "exd_ba1096a8c3e21b37": [
+    {
+      "analysis_key": "exd_ba1096a8c3e21b37",
+      "analysis_version": 1,
+      "created_at": "2026-05-05T16:28:28.189031+00:00",
+      "priority": "MEDIUM",
+      "severity_estimate": "MEDIUM",
+      "best_option": "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+      "signals": [],
+      "recommended_actions": [
+        "Reconcile recommended actions with official AMM/manual procedure and secure engineering sign-off before return-to-service.",
+        "Inspect structural or systems limits potentially impacted by exceedance profile.",
+        "Prioritize open troubleshooting task with targeted borescope/NDT when applicable.",
+        "Issue return-to-service recommendation only after closure evidence is documented.",
+        "Validate FDR/ACMS event markers and correlate timestamp with pilot report.",
+        "Cross-check ATA chapter exposure and open MEL/ETD constraints before release.",
+        "Run baseline troubleshooting checklist with targeted ATA verification before release."
+      ],
+      "probable_cause": {
+        "primary_cause": "undetermined",
+        "confidence": 48,
+        "contributing_factors": [
+          "Sequence inferred from 7 CSV/FDR row(s)."
+        ],
+        "rationale": "No dominant signal sequence identified; maintain generic troubleshooting flow until additional evidence is provided."
+      },
+      "exceedance_verdict": "NO",
+      "failure_text": "",
+      "scenario": "",
+      "tail": "",
+      "ata": "",
+      "modelo": "E190E2",
+      "analysis_mode": "standard",
+      "mandatory_review_required": true,
+      "stored_files": [
+        {
+          "kind": "csv",
+          "original_name": "hard_landing_e190_roll_gt_8_exceedance.csv",
+          "stored_name": "exd_ba1096a8c3e21b37_csv_974c1946be54.csv",
+          "stored_path": "C:\\Troubleshooting\\uploads\\exceedance\\exd_ba1096a8c3e21b37_csv_974c1946be54.csv",
+          "sha1": "974c1946be543e8d8583c1161456c101459f5810",
+          "size_bytes": 538,
+          "uploaded_at": "2026-05-05T16:28:28.172848+00:00",
+          "actor": "conv_20260505162738615119:127_0_0_1",
+          "anonymized_name": "hard_landing_e190_roll_gt_8_exceedance.csv",
+          "anonymized_preview": "Time (GMT),all Gear WOW2,Nose Landing Gear WOFW Sensor 1,Normal CG acceleration,Gross weight,AHRS Inertial Roll Rate (DVDR),Flight number (FltNumber),Date (Day)"
+        }
+      ]
+    }
+  ]
+}

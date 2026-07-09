@@ -1,0 +1,64 @@
+CACHE REFRESH INSTRUCTIONS - LEIA AGORA!
+==========================================
+
+Se as mudanças NÃO estão aparecendo no navegador, faça HARD REFRESH:
+
+WINDOWS/LINUX:
+-----------
+Chrome/Edge: Ctrl + Shift + R (ou Ctrl + F5)
+Firefox: Ctrl + Shift + R
+Safari: Cmd + Option + R
+
+MAC:
+-----------
+Chrome/Edge: Cmd + Shift + R
+Firefox: Cmd + Shift + R
+Safari: Cmd + Option + R
+
+ALTERNATIVA - DevTools:
+-----------------------
+1. Abra DevTools (F12 ou Cmd+Option+I)
+2. Clique direito na botão "Refresh" no navegador
+3. Selecione "Empty cache and hard refresh"
+
+ALTERNATIVA - Settings do Navegador:
+------------------------------------
+Chrome/Edge:
+- Settings > Privacy and security > Clear browsing data
+- Selecione "Cached images and files"
+- Clique "Clear data"
+- Recarregue a página
+
+Firefox:
+- Settings > Privacy & Security
+- Clique "Clear Data" em Cached Web Content
+- Recarregue a página
+
+CACHE HEADERS CONFIRMADOS:
+--------------------------
+✅ Flask está enviando: Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+✅ CSS version token atualizado: 20260323-04
+✅ Todos os estilos aplicados com !important
+
+ISSO PODE ESTAR ESCONDIDO NO CACHE:
+-----------------------------------
+1. Menu page com botões AI e New Record
+2. FAB (floating button AI) no canto inferior direito
+3. Cores brancas nos campos (ao invés de preto)
+4. Gradiente azul Mexicana correto
+
+PRÓXIMAS AÇÕES APÓS REFRESH:
+----------------------------
+1. Se AINDA não funcionar, avise qual página exatamente
+2. Abra DevTools (F12) e verifique:
+   - Aba "Elements" - procure por <a class="fly-ai-fab">
+   - Aba "Network" - verifique se mexicana-unified.css tem v=20260323-04
+   - Console - procure por erros em vermelho
+
+VERSÃO CSS ESPERADA:
+-------------------
+Na aba Network, em mexicana-unified.css, o URL deve conter:
+?v=20260323-04
+
+Se tiver v=20260323-03 ou anterior, o cache AINDA NÃO foi limpo!
+

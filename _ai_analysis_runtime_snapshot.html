@@ -1,0 +1,4661 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Offline AI Technical Analysis</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/static/mexicana-symbol.svg"
+    />
+
+    <!-- Bootstrap 5 CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Rubik:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- App CSS -->
+    <link
+      rel="stylesheet"
+      href="/static/css/style.css?v=20260324-02"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/css/responsive-mobile.css?v=20260324-02"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/css/menu-grid.css?v=20260324-02"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/css/operations-theme.css?v=20260324-02"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/css/ui-performance-v12.css?v=20260324-02"
+    />
+
+    <!-- MEXICANA UNIFIED DESIGN SYSTEM (loaded last to win conflicts) -->
+    <link
+      rel="stylesheet"
+      href="/static/css/mexicana-unified.css?v=20260324-02"
+    />
+
+    
+  </head>
+  <body
+    class="app-shell page-analytics-ai_analysis_page"
+  >
+    <div class="brand-strip">
+      <div class="container-fluid px-3 px-lg-4">
+        <div
+          class="brand-strip-inner d-flex flex-wrap align-items-center justify-content-between gap-3"
+        >
+          <a
+            href="/login"
+            class="brand-lockup"
+          >
+            <span class="brand-logo">
+              <img
+                src="/static/mexicana-symbol.svg"
+                alt="Mexicana"
+              />
+            </span>
+            <span class="brand-text">
+              <span class="brand-title">Troubleshooting</span>
+              <span class="brand-subtitle">Mexicana Fleet Operations</span>
+            </span>
+          </a>
+
+          <div class="brand-meta">
+            <span class="brand-chip"
+              ><i class="bi bi-airplane"></i> FlyMexicana Visual</span
+            >
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="py-4">
+      <div class="container-fluid px-3 px-lg-4">
+         
+        <!-- FLASH MESSAGES -->
+          
+
+        <!-- GLOBAL ERROR -->
+        
+        <!-- PAGE CONTENT -->
+        
+<style>
+  .ai-hero {
+    background: var(--colors-brand-gradient);
+    color: #fff;
+    border-radius: 14px;
+    padding: 1.6rem;
+    box-shadow: 0 10px 28px rgba(7, 31, 38, 0.28);
+  }
+  .ai-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  .ai-card {
+    border: 1px solid rgba(0, 90, 175, 0.15);
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 6px 18px rgba(0, 50, 127, 0.1);
+  }
+  .ai-card .card-body {
+    padding: 1rem;
+  }
+  .ai-depth-layer {
+    background: linear-gradient(145deg, #ffffff 0%, #f7f9fc 100%);
+    border: 1px solid rgba(0, 90, 175, 0.18);
+    border-radius: 10px;
+    box-shadow: 0 10px 24px rgba(0, 50, 127, 0.12);
+    padding: 0.8rem;
+  }
+  .ai-kpi {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--colors-brand-primary);
+  }
+  .ai-chat-box {
+    min-height: 220px;
+    max-height: 420px;
+    overflow: auto;
+    border: 1px solid #d8e4ea;
+    border-radius: 10px;
+    padding: 0.85rem;
+    background: #ffffff;
+  }
+  .ai-msg {
+    border-radius: 10px;
+    padding: 0.6rem 0.75rem;
+    margin-bottom: 0.5rem;
+    white-space: pre-wrap;
+  }
+  .ai-msg.user {
+    background: var(--colors-brand-primary);
+    color: #fff;
+  }
+  .ai-msg.bot {
+    background: rgba(0, 90, 175, 0.08);
+    color: var(--colors-black100);
+  }
+  .ai-pill {
+    border-radius: 999px;
+    font-size: 0.78rem;
+    padding: 0.2rem 0.6rem;
+    display: inline-block;
+    background: rgba(0, 90, 175, 0.08);
+    color: var(--colors-brand-primary);
+  }
+  .ai-btn-brand {
+    border: none;
+    color: #fff;
+    background: var(--colors-brand-gradient);
+    box-shadow: 0 6px 14px rgba(0, 50, 127, 0.25);
+  }
+  .ai-btn-brand:hover {
+    color: #fff;
+    transform: translateY(-1px);
+  }
+  .ai-scope-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.85rem;
+  }
+  .ai-scope-btn {
+    border: 1px solid rgba(0, 90, 175, 0.16);
+    background: #ffffff;
+    color: var(--colors-brand-primary);
+    border-radius: 999px;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  .ai-scope-btn.active {
+    background: var(--colors-brand-gradient);
+    color: #ffffff;
+    border-color: transparent;
+  }
+  .ai-prompt-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 0.75rem;
+  }
+  .ai-prompt-btn {
+    border: 1px solid rgba(0, 90, 175, 0.12);
+    background: rgba(0, 90, 175, 0.05);
+    color: var(--colors-brand-primary);
+    border-radius: 999px;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.78rem;
+  }
+  .ai-assistant-meta {
+    font-size: 0.78rem;
+    color: var(--colors-gray200);
+    margin-top: 0.5rem;
+  }
+  .ai-side-panel {
+    background: #f8fbff;
+    border: 1px solid rgba(0, 90, 175, 0.15);
+    border-radius: 10px;
+    padding: 0.6rem;
+    min-height: 170px;
+  }
+  .ai-side-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.45rem;
+  }
+  .ai-history-item,
+  .ai-context-item {
+    border: 1px solid rgba(0, 90, 175, 0.12);
+    border-radius: 8px;
+    background: #ffffff;
+    padding: 0.45rem 0.55rem;
+    margin-bottom: 0.4rem;
+  }
+  .ai-history-q {
+    color: var(--colors-black100);
+    font-weight: 600;
+    margin-bottom: 0.15rem;
+  }
+  .ai-history-meta,
+  .ai-context-meta {
+    color: var(--colors-gray200);
+    font-size: 0.74rem;
+  }
+  .ai-context-ref {
+    font-size: 0.78rem;
+    color: var(--colors-brand-primary);
+    font-weight: 600;
+  }
+  .ai-context-summary {
+    font-size: 0.78rem;
+    color: var(--colors-black100);
+  }
+  .ai-panel-empty {
+    color: var(--colors-gray200);
+    font-size: 0.78rem;
+  }
+  .ai-trend-wrap {
+    display: none;
+    position: relative;
+    height: 220px;
+  }
+  .ai-proj-wrap {
+    display: none;
+    position: relative;
+    height: 240px;
+  }
+  .ai-forecast-kpi {
+    border: 1px solid rgba(0, 90, 175, 0.16);
+    border-radius: 10px;
+    background: #f7fbff;
+    padding: 0.55rem 0.7rem;
+    min-height: 72px;
+  }
+  .ai-forecast-kpi .label {
+    font-size: 0.74rem;
+    color: var(--colors-gray200);
+  }
+  .ai-forecast-kpi .value {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--colors-brand-primary);
+  }
+  .ai-risk-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.18rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+  .ai-risk-badge.critical {
+    background: rgba(235, 7, 68, 0.12);
+    color: #b30031;
+  }
+  .ai-risk-badge.high {
+    background: rgba(202, 135, 0, 0.16);
+    color: #8a5a00;
+  }
+  .ai-risk-badge.medium {
+    background: rgba(0, 90, 175, 0.12);
+    color: #00327f;
+  }
+  .ai-risk-badge.low {
+    background: rgba(0, 132, 61, 0.12);
+    color: #006b35;
+  }
+  .ai-followup-item {
+    border: 1px dashed rgba(0, 90, 175, 0.22);
+    border-radius: 8px;
+    padding: 0.42rem 0.55rem;
+    font-size: 0.78rem;
+    color: var(--colors-brand-primary);
+    background: rgba(0, 90, 175, 0.04);
+    margin-bottom: 0.32rem;
+    cursor: pointer;
+  }
+  .ai-ops-chip {
+    display: inline-block;
+    font-size: 0.74rem;
+    color: var(--colors-black100);
+    background: #eef5fc;
+    border: 1px solid rgba(0, 90, 175, 0.16);
+    border-radius: 999px;
+    padding: 0.2rem 0.55rem;
+    margin-right: 0.25rem;
+    margin-bottom: 0.3rem;
+  }
+  .ai-ata-ref-detail {
+    display: none;
+  }
+  .ai-learning-chip {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    font-size: 0.74rem;
+    padding: 0.2rem 0.55rem;
+    margin-right: 0.25rem;
+    margin-bottom: 0.28rem;
+    background: rgba(0, 90, 175, 0.08);
+    color: var(--colors-brand-primary);
+    border: 1px solid rgba(0, 90, 175, 0.16);
+  }
+  .ai-hypothesis-item {
+    background: #ffffff;
+    border: 1px solid rgba(0, 90, 175, 0.14);
+    border-radius: 8px;
+    padding: 0.46rem 0.55rem;
+    margin-bottom: 0.38rem;
+  }
+  .ai-hypothesis-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--colors-black100);
+  }
+  .ai-hypothesis-evidence {
+    font-size: 0.77rem;
+    color: var(--colors-gray200);
+  }
+  .ai-deep-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 0.52rem;
+    color: var(--colors-gray200);
+    font-size: 0.8rem;
+  }
+  .fleet-chart-wrap {
+    position: relative;
+    min-height: 280px;
+  }
+  .fleet-chart-wrap-wide {
+    min-height: 320px;
+  }
+  @media (max-width: 768px) {
+    .ai-hero {
+      padding: 1rem;
+    }
+    .ai-kpi {
+      font-size: 1.25rem;
+    }
+  }
+  /* ─── V10 Phase 2 — Interface Pro (50 melhorias) ─── */
+  /* 1-2. Chat bubble alignment — user right / bot left */
+  .ai-msg.user {
+    margin-left: auto !important;
+    max-width: 80%;
+    border-radius: 18px 18px 4px 18px !important;
+    position: relative;
+  }
+  .ai-msg.bot {
+    margin-right: auto !important;
+    max-width: 90%;
+    border-radius: 18px 18px 18px 4px !important;
+    position: relative;
+  }
+  /* 3. Typing indicator com animação de 3 pontos */
+  .ai-typing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 9px 16px;
+    background: rgba(0, 90, 175, 0.08);
+    border-radius: 18px 18px 18px 4px;
+    width: fit-content;
+    margin-bottom: 4px;
+  }
+  .ai-typing-indicator span {
+    width: 7px;
+    height: 7px;
+    background: var(--colors-brand-primary, #005aaf);
+    border-radius: 50%;
+    display: block;
+    animation: aiTypingBounce 1.2s infinite ease-in-out;
+  }
+  .ai-typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .ai-typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+  @keyframes aiTypingBounce {
+    0%,
+    60%,
+    100% {
+      transform: translateY(0);
+      opacity: 0.55;
+    }
+    30% {
+      transform: translateY(-7px);
+      opacity: 1;
+    }
+  }
+  /* 4. Horário da mensagem */
+  .ai-msg-meta {
+    font-size: 0.63rem;
+    color: rgba(0, 0, 0, 0.35);
+    margin-top: 2px;
+    display: block;
+    text-align: right;
+  }
+  .ai-msg.bot ~ .ai-msg-meta,
+  .ai-msg-wrapper.bot .ai-msg-meta {
+    text-align: left;
+  }
+  /* 5. Botão copiar mensagem */
+  .ai-msg-copy-btn {
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(0, 90, 175, 0.18);
+    border-radius: 5px;
+    padding: 1px 7px;
+    font-size: 0.67rem;
+    cursor: pointer;
+    color: #00327f;
+    margin-top: 4px;
+    display: none;
+    transition: background 0.15s;
+  }
+  .ai-msg.bot:hover .ai-msg-copy-btn {
+    display: inline-block;
+  }
+  .ai-msg-copy-btn.copied {
+    background: rgba(0, 132, 61, 0.12);
+    color: #006b35;
+    border-color: #006b35;
+  }
+  /* 6. Confidence badge no chat */
+  .ai-chat-confidence {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    font-size: 0.67rem;
+    font-weight: 700;
+    padding: 0.1rem 0.48rem;
+    margin-right: 5px;
+  }
+  .ai-chat-confidence.grade-a {
+    background: rgba(0, 132, 61, 0.12);
+    color: #006b35;
+  }
+  .ai-chat-confidence.grade-b {
+    background: rgba(0, 90, 175, 0.12);
+    color: #00327f;
+  }
+  .ai-chat-confidence.grade-c {
+    background: rgba(202, 135, 0, 0.16);
+    color: #8a5a00;
+  }
+  .ai-chat-confidence.grade-d {
+    background: rgba(235, 7, 68, 0.12);
+    color: #b30031;
+  }
+  /* 7. Suggestion chips inline */
+  .ai-suggestion-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 7px;
+  }
+  .ai-suggestion-chip {
+    background: #eef5fc;
+    border: 1px solid rgba(0, 90, 175, 0.18);
+    border-radius: 999px;
+    padding: 0.15rem 0.55rem;
+    font-size: 0.72rem;
+    color: var(--colors-brand-primary, #005aaf);
+    cursor: pointer;
+    transition: background 0.15s;
+    line-height: 1.5;
+  }
+  .ai-suggestion-chip:hover {
+    background: rgba(0, 90, 175, 0.14);
+  }
+  /* 8. Dark mode — variáveis de tema */
+  [data-theme="dark"] body.app-shell {
+    background: linear-gradient(180deg, #0b1426 0%, #111827 100%) !important;
+    color: #c8d8f0;
+  }
+  [data-theme="dark"] .card.ai-card,
+  [data-theme="dark"] .card {
+    background-color: #1a2035 !important;
+    border-color: #2a3a55 !important;
+  }
+  [data-theme="dark"] .card-body {
+    background-color: #1a2035;
+    color: #c8d8f0;
+  }
+  [data-theme="dark"] .ai-chat-box {
+    background: #0e1626 !important;
+  }
+  [data-theme="dark"] .ai-msg.bot {
+    background: rgba(80, 140, 255, 0.1) !important;
+    color: #c8d8f0;
+  }
+  [data-theme="dark"] .ai-msg.user {
+    background: #1a4fa8 !important;
+    color: #fff;
+  }
+  [data-theme="dark"] .ai-side-panel {
+    background: #111827;
+    border-color: #2a3a55;
+    color: #c8d8f0;
+  }
+  [data-theme="dark"] .form-control,
+  [data-theme="dark"] .form-select {
+    background-color: #1e2d45 !important;
+    color: #c8d8f0 !important;
+    border-color: #2a3a55 !important;
+  }
+  [data-theme="dark"] .text-muted {
+    color: #8a9abf !important;
+  }
+  [data-theme="dark"] .ai-hero {
+    background: linear-gradient(135deg, #0a1628 0%, #1a3a6e 100%) !important;
+  }
+  [data-theme="dark"] .ai-suggestion-chip {
+    background: #1e2d45;
+    color: #8ab4f8;
+    border-color: #2a4a7a;
+  }
+  [data-theme="dark"] .table {
+    color: #c8d8f0;
+  }
+  [data-theme="dark"] .table-light {
+    background-color: #1e2d45 !important;
+    color: #c8d8f0;
+  }
+  [data-theme="dark"] .border-bottom {
+    border-color: #2a3a55 !important;
+  }
+  [data-theme="dark"] .ai-typing-indicator {
+    background: rgba(80, 140, 255, 0.1);
+  }
+  [data-theme="dark"] .ai-typing-indicator span {
+    background: #8ab4f8;
+  }
+  [data-theme="dark"] .ai-forecast-kpi {
+    background: #1a2035;
+    border-color: #2a3a55;
+  }
+  [data-theme="dark"] .ai-forecast-kpi .label {
+    color: #8a9abf;
+  }
+  [data-theme="dark"] .ai-forecast-kpi .value {
+    color: #8ab4f8;
+  }
+  [data-theme="dark"] .bg-white {
+    background-color: #1e2d45 !important;
+  }
+  [data-theme="dark"] .alert-secondary {
+    background: #1e2d45;
+    border-color: #2a3a55;
+    color: #c8d8f0;
+  }
+  [data-theme="dark"] .ai-history-item,
+  [data-theme="dark"] .ai-context-item,
+  [data-theme="dark"] .ai-hypothesis-item {
+    background: #1e2d45;
+    border-color: #2a3a55;
+    color: #c8d8f0;
+  }
+  [data-theme="dark"] .ai-msg-meta {
+    color: rgba(200, 216, 240, 0.45);
+  }
+  /* 9. Botão theme toggle */
+  .ai-theme-toggle {
+    background: none;
+    border: 1px solid rgba(0, 90, 175, 0.22);
+    border-radius: 999px;
+    padding: 0.2rem 0.65rem;
+    font-size: 0.78rem;
+    cursor: pointer;
+    color: var(--colors-brand-primary, #005aaf);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: background 0.15s;
+  }
+  .ai-theme-toggle:hover {
+    background: rgba(0, 90, 175, 0.08);
+  }
+  /* 10. Badge V10 */
+  .ai-v10-status {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #006b35;
+    padding: 0.08rem 0.42rem;
+    background: rgba(0, 132, 61, 0.1);
+    border-radius: 999px;
+    border: 1px solid rgba(0, 132, 61, 0.2);
+    vertical-align: middle;
+  }
+  /* 11-12. Chat box smooth scroll + wrapper de bolha */
+  .ai-chat-box {
+    scroll-behavior: smooth;
+  }
+  .ai-msg-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2px;
+  }
+  .ai-msg-wrapper.user {
+    align-items: flex-end;
+  }
+  .ai-msg-wrapper.bot {
+    align-items: flex-start;
+  }
+
+  /* ─── Fase 2 — 13: Expand / Collapse de respostas longas ─────────────────── */
+  .ai-msg-collapse-btn {
+    background: none;
+    border: 1px solid rgba(0, 90, 175, 0.22);
+    border-radius: 6px;
+    padding: 1px 8px;
+    font-size: 0.68rem;
+    cursor: pointer;
+    color: #00327f;
+    margin-top: 4px;
+    transition: background 0.15s;
+  }
+  .ai-msg-collapse-btn:hover {
+    background: rgba(0, 90, 175, 0.08);
+  }
+  .ai-msg.bot .ai-msg-body {
+    max-height: 340px;
+    overflow: hidden;
+    transition: max-height 0.3s;
+  }
+  .ai-msg.bot .ai-msg-body.expanded {
+    max-height: none;
+  }
+
+  /* ─── Fase 2 — 14: Syntax highlighting para blocos de código ─────────────── */
+  .ai-msg.bot pre code {
+    border-radius: 6px;
+    font-size: 0.81rem;
+  }
+  .ai-msg.bot pre {
+    margin: 0.4rem 0;
+    border-radius: 6px;
+  }
+
+  /* ─── Fase 2 — 15: Connection status badge ───────────────────────────────── */
+  .ai-conn-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.66rem;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 0.1rem 0.5rem;
+    border: 1px solid;
+  }
+  .ai-conn-badge.online {
+    background: rgba(0, 132, 61, 0.1);
+    color: #006b35;
+    border-color: rgba(0, 132, 61, 0.22);
+  }
+  .ai-conn-badge.offline {
+    background: rgba(235, 7, 68, 0.1);
+    color: #b30031;
+    border-color: rgba(235, 7, 68, 0.22);
+  }
+  .ai-conn-badge::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  /* ─── Fase 2 — 16: Processing time ───────────────────────────────────────── */
+  .ai-proc-time {
+    font-size: 0.63rem;
+    color: rgba(0, 0, 0, 0.3);
+    margin-left: 6px;
+  }
+  [data-theme="dark"] .ai-proc-time {
+    color: rgba(200, 216, 240, 0.35);
+  }
+
+  /* ─── Fase 2 — 17: Message search input ──────────────────────────────────── */
+  .ai-history-search {
+    width: 100%;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    border: 1px solid rgba(0, 90, 175, 0.18);
+    border-radius: 6px;
+    margin-bottom: 0.4rem;
+    background: transparent;
+    color: inherit;
+  }
+  .ai-history-search:focus {
+    outline: none;
+    border-color: rgba(0, 90, 175, 0.45);
+  }
+  [data-theme="dark"] .ai-history-search {
+    background: #1e2d45;
+    color: #c8d8f0;
+    border-color: #2a4a7a;
+  }
+
+  /* ─── Fase 2 — 18: Font size controls A+ / A- ────────────────────────────── */
+  :root {
+    --ai-chat-font-size: 0.88rem;
+  }
+  .ai-msg.bot,
+  .ai-msg.user {
+    font-size: var(--ai-chat-font-size);
+  }
+  .ai-font-ctrl {
+    background: none;
+    border: 1px solid rgba(0, 90, 175, 0.22);
+    border-radius: 6px;
+    padding: 0.1rem 0.4rem;
+    font-size: 0.72rem;
+    cursor: pointer;
+    color: var(--colors-brand-primary, #005aaf);
+    line-height: 1.6;
+  }
+  .ai-font-ctrl:hover {
+    background: rgba(0, 90, 175, 0.08);
+  }
+
+  /* ─── Fase 2 — 19: High contrast mode ────────────────────────────────────── */
+  [data-theme="high-contrast"] {
+    background: #000 !important;
+    color: #fff !important;
+    --colors-brand-primary: #ffff00;
+    --colors-black100: #ffffff;
+    --colors-gray200: #cccccc;
+  }
+  [data-theme="high-contrast"] .card,
+  [data-theme="high-contrast"] .card-body {
+    background: #111 !important;
+    border-color: #ffff00 !important;
+    color: #fff !important;
+  }
+  [data-theme="high-contrast"] .ai-chat-box {
+    background: #000 !important;
+  }
+  [data-theme="high-contrast"] .ai-msg.bot {
+    background: #222 !important;
+    color: #fff !important;
+    border: 1px solid #ffff00;
+  }
+  [data-theme="high-contrast"] .ai-msg.user {
+    background: #003080 !important;
+    color: #fff !important;
+  }
+  [data-theme="high-contrast"] .form-control,
+  [data-theme="high-contrast"] .form-select {
+    background: #111 !important;
+    color: #fff !important;
+    border-color: #ffff00 !important;
+  }
+  [data-theme="high-contrast"] .btn {
+    border-color: #ffff00 !important;
+    color: #ffff00 !important;
+  }
+  [data-theme="high-contrast"] .btn.ai-btn-brand {
+    background: #003080 !important;
+    color: #ffff00 !important;
+  }
+  [data-theme="high-contrast"] .text-muted {
+    color: #aaa !important;
+  }
+
+  /* ─── Fase 2 — 20: Settings panel modal ──────────────────────────────────── */
+  .ai-settings-panel {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  .ai-settings-panel.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .ai-settings-box {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.22);
+    padding: 1.4rem 1.6rem;
+    min-width: 320px;
+    max-width: 420px;
+    width: 90vw;
+    position: relative;
+  }
+  [data-theme="dark"] .ai-settings-box {
+    background: #1a2035;
+    color: #c8d8f0;
+    border: 1px solid #2a3a55;
+  }
+  [data-theme="high-contrast"] .ai-settings-box {
+    background: #111;
+    color: #fff;
+    border: 2px solid #ffff00;
+  }
+  .ai-settings-close {
+    position: absolute;
+    top: 0.7rem;
+    right: 0.8rem;
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: inherit;
+    opacity: 0.65;
+  }
+  .ai-settings-close:hover {
+    opacity: 1;
+  }
+  .ai-settings-title {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .ai-settings-row {
+    margin-bottom: 0.75rem;
+  }
+  .ai-settings-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    display: block;
+  }
+  .ai-settings-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .ai-settings-opt {
+    padding: 0.18rem 0.7rem;
+    border-radius: 999px;
+    border: 1.5px solid rgba(0, 90, 175, 0.3);
+    font-size: 0.77rem;
+    cursor: pointer;
+    background: transparent;
+    color: inherit;
+    transition:
+      background 0.15s,
+      border-color 0.15s;
+  }
+  .ai-settings-opt.active {
+    background: rgba(0, 90, 175, 0.14);
+    border-color: var(--colors-brand-primary, #005aaf);
+    font-weight: 700;
+  }
+  [data-theme="dark"] .ai-settings-opt {
+    border-color: #2a4a7a;
+  }
+  [data-theme="dark"] .ai-settings-opt.active {
+    background: rgba(80, 140, 255, 0.18);
+    border-color: #8ab4f8;
+  }
+  .ai-settings-save {
+    margin-top: 1rem;
+    width: 100%;
+  }
+
+  /* ─── Fase 2 — 21: Voice input button ────────────────────────────────────── */
+  .ai-voice-btn {
+    background: none;
+    border: 1px solid rgba(0, 90, 175, 0.22);
+    border-radius: 6px;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    color: var(--colors-brand-primary, #005aaf);
+    transition: background 0.15s;
+  }
+  .ai-voice-btn.recording {
+    background: rgba(235, 7, 68, 0.1);
+    color: #b30031;
+    border-color: #b30031;
+    animation: voicePulse 1s infinite;
+  }
+  @keyframes voicePulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+  [data-theme="dark"] .ai-voice-btn {
+    color: #8ab4f8;
+    border-color: #2a4a7a;
+  }
+</style>
+
+<div class="container-fluid py-4">
+  <div class="ai-hero mb-4">
+    <div
+      class="d-flex flex-wrap align-items-center justify-content-between gap-2"
+    >
+      <div>
+        <h1 class="h3 mb-1 text-white">
+          <i class="bi bi-cpu-fill me-2"></i>Offline AI Technical Analysis
+        </h1>
+        <p class="mb-0 text-white-50">
+          Local engine for troubleshooting, recurrence detection, ATA
+          interpretation, and recommendations.
+        </p>
+      </div>
+      <div class="d-flex flex-wrap gap-2">
+        <button id="btn-recalibrate" class="btn btn-warning btn-sm">
+          <i class="bi bi-arrow-repeat me-1"></i>Recalibrate AI
+        </button>
+        <a href="/menu" class="btn btn-light btn-sm"
+          ><i class="bi bi-house-door-fill me-1"></i>Return to Menu</a
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="ai-grid mb-4">
+    <div class="ai-card card">
+      <div class="card-body">
+        <div class="text-muted small">Records analyzed</div>
+        <div class="ai-kpi">2000</div>
+      </div>
+    </div>
+    <div class="ai-card card">
+      <div class="card-body">
+        <div class="text-muted small">Most common failure keyword</div>
+        <div class="ai-kpi text-capitalize">fail</div>
+      </div>
+    </div>
+    <div class="ai-card card">
+      <div class="card-body">
+        <div class="text-muted small">Open failures</div>
+        <div class="ai-kpi">
+          0
+        </div>
+      </div>
+    </div>
+    <div class="ai-card card">
+      <div class="card-body">
+        <div class="text-muted small">Recurring tails (>=3)</div>
+        <div class="ai-kpi">
+          10
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-lg-6">
+      <div class="card ai-card h-100">
+        <div class="card-body">
+          <h2 class="h5">Analyze Failure</h2>
+          <p class="text-muted small">
+            Generate troubleshooting suggestions from ATA + description.
+          </p>
+          <div class="row g-2">
+            <div class="col-md-4">
+              <label class="form-label">Operating family</label>
+              <select id="ai-family-filter" class="form-select">
+                <option value="ALL_FLEET" selected>
+                  All models: E1 + E2 + E170/E175 + ERJ
+                </option>
+                <option value="E2_FAMILY">E2 family: E190-E2 + E195-E2</option>
+                <option value="E190-E2">E190-E2 only</option>
+                <option value="E195-E2">E195-E2 only</option>
+                <option value="CLASSIC_FAMILY">
+                  Classic E-Jets: E170/E175/E190/E195
+                </option>
+                <option value="ERJ_FAMILY">ERJ family</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">ATA</label>
+              <input id="ai-ata" class="form-control" placeholder="29" />
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Tail</label>
+              <input
+                id="ai-tail"
+                class="form-control"
+                list="ai-tail-list"
+                placeholder="PR-E2A"
+              />
+              <datalist id="ai-tail-list">
+                
+                <option value="FLEET"></option>
+                
+                <option value="VQ-BLW"></option>
+                
+                <option value="XA -ELI"></option>
+                
+                <option value="XA-AAC"></option>
+                
+                <option value="XA-ACA"></option>
+                
+                <option value="XA-ACB"></option>
+                
+                <option value="XA-ACI"></option>
+                
+                <option value="XA-ACN"></option>
+                
+                <option value="XA-ACT"></option>
+                
+                <option value="XA-AEO"></option>
+                
+                <option value="XA-ALI"></option>
+                
+                <option value="XA-BLI"></option>
+                
+                <option value="XA-CLI"></option>
+                
+                <option value="XA-ELI"></option>
+                
+                <option value="XA-FLI"></option>
+                
+                <option value="XA-GAH"></option>
+                
+                <option value="XA-HAC"></option>
+                
+                <option value="XA-HLI"></option>
+                
+                <option value="XA-IAC"></option>
+                
+                <option value="XA-ILI"></option>
+                
+                <option value="XA-JLI"></option>
+                
+                <option value="XA-KAC"></option>
+                
+                <option value="XA-KLI"></option>
+                
+                <option value="XA-MAC"></option>
+                
+                <option value="XA-MLI"></option>
+                
+                <option value="XA-MXA"></option>
+                
+                <option value="XA-MXB"></option>
+                
+                <option value="XA-MXC"></option>
+                
+                <option value="XA-MXD"></option>
+                
+                <option value="XA-MXE"></option>
+                
+                <option value="XA-PAC"></option>
+                
+                <option value="XA-QAC"></option>
+                
+                <option value="XA-QLI"></option>
+                
+                <option value="XA-RAC"></option>
+                
+                <option value="XA-RLI"></option>
+                
+                <option value="XA-SLI"></option>
+                
+                <option value="XA-TAC"></option>
+                
+                <option value="XA-TLI"></option>
+                
+                <option value="XA-ULI"></option>
+                
+                <option value="XA-VAC"></option>
+                
+                <option value="XA-VLI"></option>
+                
+                <option value="XA-WAC"></option>
+                
+                <option value="XA-WLI"></option>
+                
+                <option value="XA-XAC"></option>
+                
+                <option value="XA-XLI"></option>
+                
+                <option value="XA-YAC"></option>
+                
+                <option value="XA-YLI"></option>
+                
+                <option value="XA-ZAC"></option>
+                
+                <option value="XA-ZLI"></option>
+                
+              </datalist>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Model</label>
+              <input
+                id="ai-model"
+                class="form-control"
+                list="ai-model-list"
+                placeholder="All models or specify one"
+                value=""
+              />
+              <datalist id="ai-model-list">
+                
+                <option value="E175"></option>
+                
+                <option value="E190"></option>
+                
+                <option value="E195-E2"></option>
+                
+                <option value="ERJ145"></option>
+                
+              </datalist>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Category</label>
+              <input
+                id="ai-category"
+                class="form-control"
+                placeholder="Corrective Maintenance"
+              />
+            </div>
+            <div class="col-12">
+              <label class="form-label">Description</label>
+              <textarea
+                id="ai-description"
+                class="form-control"
+                rows="4"
+                placeholder="Describe observed symptoms, messages, and conditions."
+              ></textarea>
+            </div>
+          </div>
+          <div class="small text-muted mt-2">
+            This page loads the full fleet database by default. Use family,
+            model, ATA, or tail only when you want to narrow the evidence.
+          </div>
+          <div class="d-flex flex-wrap gap-2 mt-3">
+            <button id="btn-analyze" class="btn ai-btn-brand">
+              <i class="bi bi-cpu-fill me-1"></i>Run Analysis
+            </button>
+            <button id="btn-summary" class="btn btn-outline-secondary">
+              <i class="bi bi-graph-up-arrow me-1"></i>Load Technical Summary
+            </button>
+            <button id="btn-ai-clear-all" class="btn btn-outline-danger">
+              <i class="bi bi-x-circle me-1"></i>CLEAR
+            </button>
+          </div>
+          <div id="analysis-output" class="mt-3 small"></div>
+          <div id="summary-output" class="mt-2 small text-muted"></div>
+          <div id="analysis-feedback" class="d-none mt-2">
+            <div class="small text-muted mb-1">
+              Did this recommendation help?
+            </div>
+            <div class="d-flex gap-2">
+              <button
+                id="feedback-positive"
+                class="btn btn-sm btn-outline-success"
+              >
+                <i class="bi bi-hand-thumbs-up me-1"></i>Helpful
+              </button>
+              <button
+                id="feedback-negative"
+                class="btn btn-sm btn-outline-danger"
+              >
+                <i class="bi bi-hand-thumbs-down me-1"></i>Needs Improvement
+              </button>
+            </div>
+            <div id="feedback-status" class="small mt-2 text-muted"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="card ai-card h-100">
+        <div class="card-body d-flex flex-column">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center gap-2">
+              <h2 class="h5 mb-0">
+                AI Copilot Assist <span class="ai-v10-status">V10</span>
+              </h2>
+              <span
+                id="ai-conn-badge"
+                class="ai-conn-badge online"
+                title="Status de conexão"
+                >Online</span
+              >
+            </div>
+            <div class="d-flex align-items-center gap-1">
+              <button
+                id="ai-font-down"
+                class="ai-font-ctrl"
+                title="Diminuir fonte (A-)"
+              >
+                A-
+              </button>
+              <button
+                id="ai-font-up"
+                class="ai-font-ctrl"
+                title="Aumentar fonte (A+)"
+              >
+                A+
+              </button>
+              <button
+                id="ai-settings-btn"
+                class="ai-theme-toggle"
+                title="Configurações do copiloto"
+              >
+                <i class="bi bi-gear-fill"></i>
+              </button>
+              <button
+                id="ai-theme-toggle"
+                class="ai-theme-toggle"
+                title="Alternar modo escuro/claro"
+              >
+                <i class="bi bi-moon-stars-fill" id="ai-theme-icon"></i>
+              </button>
+            </div>
+          </div>
+          <p class="text-muted small">
+            Ask in natural language and the AI will consult logbook, MEL, AOG,
+            and fleet context to return grounded recommendations.
+          </p>
+          <div class="ai-scope-bar" id="ai-scope-bar">
+            <button
+              type="button"
+              class="ai-scope-btn active"
+              data-scope="global"
+            >
+              Global
+            </button>
+            <button type="button" class="ai-scope-btn" data-scope="logbook">
+              Logbook
+            </button>
+            <button type="button" class="ai-scope-btn" data-scope="mel">
+              MEL
+            </button>
+            <button type="button" class="ai-scope-btn" data-scope="aog">
+              AOG
+            </button>
+            <button type="button" class="ai-scope-btn" data-scope="fleet">
+              Fleet
+            </button>
+            <button type="button" class="ai-scope-btn" data-scope="tail">
+              Tail
+            </button>
+          </div>
+          <div class="row g-2 mb-2">
+            <div class="col-md-3">
+              <select
+                id="chat-family-filter"
+                class="form-select form-select-sm"
+              >
+                <option value="ALL_FLEET" selected>All models</option>
+                <option value="E2_FAMILY">E2 family</option>
+                <option value="E190-E2">E190-E2 only</option>
+                <option value="E195-E2">E195-E2 only</option>
+                <option value="CLASSIC_FAMILY">Classic E-Jets</option>
+                <option value="ERJ_FAMILY">ERJ family</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <input
+                id="chat-tail-filter"
+                type="text"
+                class="form-control form-control-sm"
+                list="chat-tail-filter-list"
+                placeholder="Tail filter (example: PR-E2A)"
+              />
+              <datalist id="chat-tail-filter-list">
+                
+                <option value="FLEET"></option>
+                
+                <option value="VQ-BLW"></option>
+                
+                <option value="XA -ELI"></option>
+                
+                <option value="XA-AAC"></option>
+                
+                <option value="XA-ACA"></option>
+                
+                <option value="XA-ACB"></option>
+                
+                <option value="XA-ACI"></option>
+                
+                <option value="XA-ACN"></option>
+                
+                <option value="XA-ACT"></option>
+                
+                <option value="XA-AEO"></option>
+                
+                <option value="XA-ALI"></option>
+                
+                <option value="XA-BLI"></option>
+                
+                <option value="XA-CLI"></option>
+                
+                <option value="XA-ELI"></option>
+                
+                <option value="XA-FLI"></option>
+                
+                <option value="XA-GAH"></option>
+                
+                <option value="XA-HAC"></option>
+                
+                <option value="XA-HLI"></option>
+                
+                <option value="XA-IAC"></option>
+                
+                <option value="XA-ILI"></option>
+                
+                <option value="XA-JLI"></option>
+                
+                <option value="XA-KAC"></option>
+                
+                <option value="XA-KLI"></option>
+                
+                <option value="XA-MAC"></option>
+                
+                <option value="XA-MLI"></option>
+                
+                <option value="XA-MXA"></option>
+                
+                <option value="XA-MXB"></option>
+                
+                <option value="XA-MXC"></option>
+                
+                <option value="XA-MXD"></option>
+                
+                <option value="XA-MXE"></option>
+                
+                <option value="XA-PAC"></option>
+                
+                <option value="XA-QAC"></option>
+                
+                <option value="XA-QLI"></option>
+                
+                <option value="XA-RAC"></option>
+                
+                <option value="XA-RLI"></option>
+                
+                <option value="XA-SLI"></option>
+                
+                <option value="XA-TAC"></option>
+                
+                <option value="XA-TLI"></option>
+                
+                <option value="XA-ULI"></option>
+                
+                <option value="XA-VAC"></option>
+                
+                <option value="XA-VLI"></option>
+                
+                <option value="XA-WAC"></option>
+                
+                <option value="XA-WLI"></option>
+                
+                <option value="XA-XAC"></option>
+                
+                <option value="XA-XLI"></option>
+                
+                <option value="XA-YAC"></option>
+                
+                <option value="XA-YLI"></option>
+                
+                <option value="XA-ZAC"></option>
+                
+                <option value="XA-ZLI"></option>
+                
+              </datalist>
+            </div>
+            <div class="col-md-3">
+              <input
+                id="chat-model-filter"
+                class="form-control form-control-sm"
+                list="chat-model-filter-list"
+                placeholder="Model filter (example: E195-E2)"
+              />
+              <datalist id="chat-model-filter-list">
+                
+                <option value="E175"></option>
+                
+                <option value="E190"></option>
+                
+                <option value="E195-E2"></option>
+                
+                <option value="ERJ145"></option>
+                
+              </datalist>
+            </div>
+            <div class="col-md-3">
+              <input
+                id="chat-ata-filter"
+                class="form-control form-control-sm"
+                placeholder="ATA focus (24, 29...)"
+              />
+            </div>
+          </div>
+          <div id="chat-box" class="ai-chat-box mb-2 flex-grow-1"></div>
+          <div class="input-group">
+            <button
+              id="chat-voice-btn"
+              class="ai-voice-btn"
+              title="Voz (Web Speech API)"
+            >
+              <i class="bi bi-mic-fill"></i>
+            </button>
+            <input
+              id="chat-input"
+              type="text"
+              class="form-control"
+              placeholder="Example: show recurring ATA for PR-E2A and recommend next actions"
+            />
+            <button id="chat-send" class="btn ai-btn-brand">
+              <i class="bi bi-send-fill me-1"></i>Send
+            </button>
+          </div>
+          <div class="ai-deep-toggle">
+            <div class="form-check form-switch mb-0">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="chat-deep-mode"
+              />
+            </div>
+            <span>Deep-thinking mode (hypotheses, gaps, strategy)</span>
+          </div>
+          <div id="chat-meta" class="ai-assistant-meta">
+            Current scope: Global.
+          </div>
+          <div class="ai-prompt-list">
+            <button
+              type="button"
+              class="ai-prompt-btn"
+              data-prompt="What are the most recurring failures by ATA and tail?"
+            >
+              Recurring failures
+            </button>
+            <button
+              type="button"
+              class="ai-prompt-btn"
+              data-prompt="Is there any open MEL related to the informed ATA?"
+            >
+              Cross-check MEL
+            </button>
+            <button
+              type="button"
+              class="ai-prompt-btn"
+              data-prompt="Is there any similar active AOG and what is the release recommendation?"
+            >
+              Cross-check AOG
+            </button>
+            <button
+              type="button"
+              class="ai-prompt-btn"
+              data-prompt="Summarize the most likely next technical steps for this case."
+            >
+              Next steps
+            </button>
+            <button
+              type="button"
+              class="ai-prompt-btn"
+              data-prompt="Provide executive opinion with 30/90-day projection, operational impact and what-if scenarios for current model/tail scope."
+            >
+              Executive outlook
+            </button>
+          </div>
+          <div class="row g-2 mt-2">
+            <div class="col-md-6">
+              <div class="ai-side-panel h-100">
+                <div class="ai-side-header">
+                  <strong class="small">Conversation history</strong>
+                  <button
+                    id="chat-history-clear"
+                    type="button"
+                    class="btn btn-sm btn-outline-secondary py-0 px-2"
+                  >
+                    Clear
+                  </button>
+                </div>
+                <input
+                  type="text"
+                  id="chat-history-search"
+                  class="ai-history-search"
+                  placeholder="Buscar no histórico..."
+                />
+                <div id="chat-history-list"></div>
+                <div id="chat-history-empty" class="ai-panel-empty">
+                  Recent questions are stored in this browser.
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="ai-side-panel h-100">
+                <div class="ai-side-header">
+                  <strong class="small">Referenced context</strong>
+                </div>
+                <div id="chat-context-list"></div>
+                <div id="chat-context-empty" class="ai-panel-empty">
+                  Send a question to view the records used by AI.
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="ai-side-panel">
+                <div class="ai-side-header">
+                  <strong class="small">Recommended follow-up questions</strong>
+                </div>
+                <div id="chat-followup-list"></div>
+                <div id="chat-followup-empty" class="ai-panel-empty">
+                  After each response, AI suggests follow-up diagnostics.
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="ai-side-panel">
+                <div class="ai-side-header">
+                  <strong class="small">Learning and reasoning radar</strong>
+                </div>
+                <div id="chat-learning-profile" class="mb-2"></div>
+                <div id="chat-deep-insight"></div>
+                <div id="chat-learning-empty" class="ai-panel-empty">
+                  AI shows learning profile, hypotheses and data gaps here.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3 mt-1">
+    <div class="col-lg-6">
+      <div class="card ai-card">
+        <div class="card-body">
+          <h3 class="h6">Top ATA Systems</h3>
+           
+          <div
+            class="d-flex justify-content-between align-items-center border-bottom py-2"
+          >
+            <div><strong>ATA 21</strong> - Air Conditioning and Pressurization</div>
+            <span class="ai-pill">421 records</span>
+          </div>
+          
+          <div
+            class="d-flex justify-content-between align-items-center border-bottom py-2"
+          >
+            <div><strong>ATA 27</strong> - Flight Controls</div>
+            <span class="ai-pill">392 records</span>
+          </div>
+          
+          <div
+            class="d-flex justify-content-between align-items-center border-bottom py-2"
+          >
+            <div><strong>ATA 32</strong> - Landing Gear</div>
+            <span class="ai-pill">252 records</span>
+          </div>
+          
+          <div
+            class="d-flex justify-content-between align-items-center border-bottom py-2"
+          >
+            <div><strong>ATA 49</strong> - Auxiliary Power Unit (APU)</div>
+            <span class="ai-pill">137 records</span>
+          </div>
+          
+          <div
+            class="d-flex justify-content-between align-items-center border-bottom py-2"
+          >
+            <div><strong>ATA 36</strong> - Pneumatic Systems</div>
+            <span class="ai-pill">115 records</span>
+          </div>
+          
+          <div
+            class="d-flex justify-content-between align-items-center border-bottom py-2"
+          >
+            <div><strong>ATA 24</strong> - Electrical Power</div>
+            <span class="ai-pill">103 records</span>
+          </div>
+           
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card ai-card">
+        <div class="card-body">
+          <h3 class="h6">Recurring Tails</h3>
+           
+          <div
+            class="d-flex justify-content-between align-items-center border-bottom py-2"
+          >
+            <div><strong>XA-TAC</strong></div>
+            <span class="ai-pill">94 recurrences</span>
+          </div>
+          
+          <div
+            class="d-flex justify-content-between align-items-center border-bottom py-2"
+          >
+            <div><strong>XA-ELI</strong></div>
+            <span class="ai-pill">85 recurrences</span>
+          </div>
+          
+          <div
+            class="d-flex justify-content-between align-items-center border-bottom py-2"
+          >
+            <div><strong>XA-ULI</strong></div>
+            <span class="ai-pill">85 recurrences</span>
+          </div>
+          
+          <div
+            class="d-flex justify-content-between align-items-center border-bottom py-2"
+          >
+            <div><strong>XA-BLI</strong></div>
+            <span class="ai-pill">83 recurrences</span>
+          </div>
+          
+          <div
+            class="d-flex justify-content-between align-items-center border-bottom py-2"
+          >
+            <div><strong>XA-RLI</strong></div>
+            <span class="ai-pill">77 recurrences</span>
+          </div>
+          
+          <div
+            class="d-flex justify-content-between align-items-center border-bottom py-2"
+          >
+            <div><strong>XA-XLI</strong></div>
+            <span class="ai-pill">72 recurrences</span>
+          </div>
+          
+          <div
+            class="d-flex justify-content-between align-items-center border-bottom py-2"
+          >
+            <div><strong>XA-RAC</strong></div>
+            <span class="ai-pill">72 recurrences</span>
+          </div>
+          
+          <div
+            class="d-flex justify-content-between align-items-center border-bottom py-2"
+          >
+            <div><strong>XA-YLI</strong></div>
+            <span class="ai-pill">72 recurrences</span>
+          </div>
+           
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card ai-card">
+        <div class="card-body">
+          <h3 class="h6">FH/FC Priority Index</h3>
+          <div id="fhfc-priority" class="small text-muted">
+            Load technical summary to view weighted priorities.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="card ai-card">
+        <div class="card-body">
+          <h3 class="h6">Monthly Failure Trend</h3>
+          <p class="text-muted small mb-2">
+            Load technical summary to render the trend chart.
+          </p>
+          <div id="trend-chart-wrap" class="ai-trend-wrap">
+            <canvas id="trend-chart"></canvas>
+          </div>
+          <div id="trend-placeholder" class="text-muted small">
+            Chart will appear after summary is loaded.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="card ai-card">
+        <div class="card-body">
+          <h3 class="h6">AI Forecast, Exposure & Hotspots</h3>
+          <p class="text-muted small mb-2">
+            Automatic projection based on model/tail filter, historical trend,
+            FH/FC exposure and ATA recurrence.
+          </p>
+          <div class="row g-2 mb-2" id="forecast-kpis">
+            <div class="col-md-3">
+              <div class="ai-forecast-kpi">
+                <div class="label">Trend direction</div>
+                <div class="value" id="forecast-trend">—</div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="ai-forecast-kpi">
+                <div class="label">Growth rate</div>
+                <div class="value" id="forecast-growth">0%</div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="ai-forecast-kpi">
+                <div class="label">Expected next 30d</div>
+                <div class="value" id="forecast-next30">0</div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="ai-forecast-kpi">
+                <div class="label">Expected next 90d</div>
+                <div class="value" id="forecast-next90">0</div>
+              </div>
+            </div>
+          </div>
+          <div class="row g-2 mb-2">
+            <div class="col-md-3">
+              <div class="ai-forecast-kpi">
+                <div class="label">AI autonomy</div>
+                <div class="value" id="forecast-autonomy">0</div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="ai-forecast-kpi">
+                <div class="label">Dispatch risk</div>
+                <div class="value" id="impact-dispatch">LOW</div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="ai-forecast-kpi">
+                <div class="label">Estimated delay (h)</div>
+                <div class="value" id="impact-delay">0.0</div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="ai-forecast-kpi">
+                <div class="label">Maint. pressure</div>
+                <div class="value" id="impact-pressure">0</div>
+              </div>
+            </div>
+          </div>
+          <div id="ai-chart-brief" class="ai-depth-layer mb-3">
+            <strong>AI Chart Brief</strong>
+            <div class="small text-muted mt-1">
+              Load summary or run analysis to let V10 choose the primary visual
+              focus, explain the forecast and recommend the next operational
+              move.
+            </div>
+          </div>
+          <div class="row g-3">
+            <div class="col-lg-7">
+              <div id="projection-chart-wrap" class="ai-proj-wrap">
+                <canvas id="projection-chart"></canvas>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div id="hotspot-chart-wrap" class="ai-proj-wrap">
+                <canvas id="hotspot-chart"></canvas>
+              </div>
+            </div>
+            <div class="col-12">
+              <div id="ata-projection-chart-wrap" class="ai-proj-wrap">
+                <canvas id="ata-projection-chart"></canvas>
+              </div>
+            </div>
+          </div>
+          <div id="projection-placeholder" class="text-muted small mt-2">
+            Load summary or run analysis to view forecast curves and hotspot
+            projection.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card ai-card">
+        <div class="card-body">
+          <h3 class="h6">ATA Quick Reference</h3>
+          <p class="text-muted small mb-2">
+            Click an ATA to view troubleshooting procedure.
+          </p>
+          <div id="ata-quick-ref" class="small">
+            
+            <div class="d-flex flex-wrap gap-1">
+              
+              <button
+                class="btn btn-outline-secondary btn-sm ata-ref-btn"
+                data-ata="21"
+              >
+                21
+                <span class="text-muted"
+                  >Air Conditioning a…</span
+                >
+              </button>
+              
+              <button
+                class="btn btn-outline-secondary btn-sm ata-ref-btn"
+                data-ata="22"
+              >
+                22
+                <span class="text-muted"
+                  >Auto Flight / Auto…</span
+                >
+              </button>
+              
+              <button
+                class="btn btn-outline-secondary btn-sm ata-ref-btn"
+                data-ata="23"
+              >
+                23
+                <span class="text-muted"
+                  >Communications</span
+                >
+              </button>
+              
+              <button
+                class="btn btn-outline-secondary btn-sm ata-ref-btn"
+                data-ata="24"
+              >
+                24
+                <span class="text-muted"
+                  >Electrical Power</span
+                >
+              </button>
+              
+              <button
+                class="btn btn-outline-secondary btn-sm ata-ref-btn"
+                data-ata="26"
+              >
+                26
+                <span class="text-muted"
+                  >Fire Protection</span
+                >
+              </button>
+              
+              <button
+                class="btn btn-outline-secondary btn-sm ata-ref-btn"
+                data-ata="27"
+              >
+                27
+                <span class="text-muted"
+                  >Flight Controls</span
+                >
+              </button>
+              
+              <button
+                class="btn btn-outline-secondary btn-sm ata-ref-btn"
+                data-ata="28"
+              >
+                28
+                <span class="text-muted"
+                  >Fuel System</span
+                >
+              </button>
+              
+              <button
+                class="btn btn-outline-secondary btn-sm ata-ref-btn"
+                data-ata="29"
+              >
+                29
+                <span class="text-muted"
+                  >Hydraulic Power</span
+                >
+              </button>
+              
+              <button
+                class="btn btn-outline-secondary btn-sm ata-ref-btn"
+                data-ata="30"
+              >
+                30
+                <span class="text-muted"
+                  >Ice and Rain Prote…</span
+                >
+              </button>
+              
+              <button
+                class="btn btn-outline-secondary btn-sm ata-ref-btn"
+                data-ata="31"
+              >
+                31
+                <span class="text-muted"
+                  >Indicating and Rec…</span
+                >
+              </button>
+              
+              <button
+                class="btn btn-outline-secondary btn-sm ata-ref-btn"
+                data-ata="32"
+              >
+                32
+                <span class="text-muted"
+                  >Landing Gear</span
+                >
+              </button>
+              
+              <button
+                class="btn btn-outline-secondary btn-sm ata-ref-btn"
+                data-ata="33"
+              >
+                33
+                <span class="text-muted"
+                  >Lighting</span
+                >
+              </button>
+              
+              <button
+                class="btn btn-outline-secondary btn-sm ata-ref-btn"
+                data-ata="34"
+              >
+                34
+                <span class="text-muted"
+                  >Navigation</span
+                >
+              </button>
+              
+              <button
+                class="btn btn-outline-secondary btn-sm ata-ref-btn"
+                data-ata="35"
+              >
+                35
+                <span class="text-muted"
+                  >Oxygen Systems</span
+                >
+              </button>
+              
+              <button
+                class="btn btn-outline-secondary btn-sm ata-ref-btn"
+                data-ata="36"
+              >
+                36
+                <span class="text-muted"
+                  >Pneumatic Systems</span
+                >
+              </button>
+              
+              <button
+                class="btn btn-outline-secondary btn-sm ata-ref-btn"
+                data-ata="38"
+              >
+                38
+                <span class="text-muted"
+                  >Water and Waste</span
+                >
+              </button>
+              
+              <button
+                class="btn btn-outline-secondary btn-sm ata-ref-btn"
+                data-ata="45"
+              >
+                45
+                <span class="text-muted"
+                  >Central Maintenanc…</span
+                >
+              </button>
+              
+              <button
+                class="btn btn-outline-secondary btn-sm ata-ref-btn"
+                data-ata="49"
+              >
+                49
+                <span class="text-muted"
+                  >Auxiliary Power Un…</span
+                >
+              </button>
+              
+              <button
+                class="btn btn-outline-secondary btn-sm ata-ref-btn"
+                data-ata="71"
+              >
+                71
+                <span class="text-muted"
+                  >Power Plant — Gene…</span
+                >
+              </button>
+              
+              <button
+                class="btn btn-outline-secondary btn-sm ata-ref-btn"
+                data-ata="72"
+              >
+                72
+                <span class="text-muted"
+                  >Engine — Turbine/C…</span
+                >
+              </button>
+              
+              <button
+                class="btn btn-outline-secondary btn-sm ata-ref-btn"
+                data-ata="73"
+              >
+                73
+                <span class="text-muted"
+                  >Engine Fuel and Co…</span
+                >
+              </button>
+              
+              <button
+                class="btn btn-outline-secondary btn-sm ata-ref-btn"
+                data-ata="79"
+              >
+                79
+                <span class="text-muted"
+                  >Engine Oil System</span
+                >
+              </button>
+              
+              <button
+                class="btn btn-outline-secondary btn-sm ata-ref-btn"
+                data-ata="80"
+              >
+                80
+                <span class="text-muted"
+                  >Engine Starting</span
+                >
+              </button>
+              
+            </div>
+            <div id="ata-ref-detail" class="mt-3 ai-ata-ref-detail"></div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card ai-card">
+        <div class="card-body">
+          <h3 class="h6">
+            <i class="bi bi-arrow-repeat me-1 text-warning"></i>AI Recalibration
+          </h3>
+          <p class="text-muted small mb-2">
+            Analyze accumulated feedback signals and recalibrate per ATA
+            chapter.
+          </p>
+          <div id="recalibrate-output" class="text-muted small">
+            Click <strong>Recalibrate AI</strong> in the header to run.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card ai-card">
+        <div class="card-body">
+          <h3 class="h6">
+            <i class="bi bi-trash3 me-1 text-danger"></i>Safe Project Cleanup
+          </h3>
+          <p class="text-muted small mb-2">
+            Preview old backups, caches and generated artifacts before any
+            removal.
+          </p>
+          <div class="row g-2 mb-2 small">
+            <div class="col-sm-6">
+              <label class="form-check d-flex gap-2 align-items-center">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="cleanup-cat-backups"
+                  checked
+                />
+                <span>Backup directories</span>
+              </label>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-check d-flex gap-2 align-items-center">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="cleanup-cat-cache"
+                  checked
+                />
+                <span>Cache directories</span>
+              </label>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-check d-flex gap-2 align-items-center">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="cleanup-cat-generated"
+                  checked
+                />
+                <span>Generated artifacts</span>
+              </label>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-check d-flex gap-2 align-items-center">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="cleanup-cat-expired"
+                />
+                <span>Expired exceedance uploads</span>
+              </label>
+            </div>
+          </div>
+          <div class="d-flex gap-2 flex-wrap mb-2">
+            <button
+              id="cleanup-preview-btn"
+              class="btn btn-sm btn-outline-secondary"
+            >
+              <i class="bi bi-search me-1"></i>Preview
+            </button>
+            <button id="cleanup-run-btn" class="btn btn-sm btn-outline-danger">
+              <i class="bi bi-trash me-1"></i>Run Selected Cleanup
+            </button>
+          </div>
+          <div id="cleanup-status" class="small text-muted mb-2">
+            No cleanup preview loaded yet.
+          </div>
+          <div id="cleanup-output" class="small text-muted"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="card ai-card">
+        <div class="card-body">
+          <div
+            class="d-flex align-items-center justify-content-between mb-2 gap-2 flex-wrap"
+          >
+            <h3 class="h6 mb-0">
+              V10 Mission Console &amp; Autonomous Intervention Queue
+            </h3>
+            <div class="d-flex gap-2">
+              <button
+                id="btn-mission-push"
+                class="btn btn-sm ai-btn-brand"
+                title="Enviar fila para o servidor"
+              >
+                <i class="bi bi-cloud-upload me-1"></i>Salvar Fila
+              </button>
+              <button
+                id="btn-mission-load"
+                class="btn btn-sm btn-outline-secondary"
+                title="Carregar fila do servidor"
+              >
+                <i class="bi bi-cloud-download me-1"></i>Carregar
+              </button>
+              <button
+                id="btn-mission-clear"
+                class="btn btn-sm btn-outline-danger"
+                title="Limpar fila do servidor"
+              >
+                <i class="bi bi-trash me-1"></i>Limpar
+              </button>
+            </div>
+          </div>
+          <div id="mission-brief" class="small text-muted mb-2">
+            Load summary or run analysis to generate mission brief.
+          </div>
+          <div
+            id="mission-queue-status"
+            class="small mb-2"
+            style="display: none"
+          ></div>
+          <div class="table-responsive">
+            <table
+              class="table table-sm table-bordered align-middle mb-0"
+              id="intervention-queue-table"
+            >
+              <thead class="table-light">
+                <tr>
+                  <th>Rank</th>
+                  <th>Tail</th>
+                  <th>ATA</th>
+                  <th>Urgency</th>
+                  <th>Priority</th>
+                  <th>SLA</th>
+                  <th>Ação</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="intervention-queue-body">
+                <tr>
+                  <td colspan="8" class="text-muted">
+                    No queue generated yet.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fleet Analysis Charts — migrated from fleet_status_report.html -->
+<div class="container-fluid mt-3 mb-3">
+  <!-- 
+  FLEET REPORT ATA FILTER & CHART PARAMETERS ENHANCEMENT
+  Features:
+  1. Dynamic ATA/System Selection for Charts
+  2. Tooltip Explanations for Chart Parameters
+  3. Chart Data Refresh Based on Filters
+-->
+
+<div class="ata-filter-section ops-mb-24" id="ata_filter_section">
+  <div class="card shadow-sm border-0">
+    <div class="card-header bg-light d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">
+        <i class="fas fa-sliders-h"></i> Chart Configuration
+      </h5>
+      <button class="btn btn-sm btn-outline-secondary" onclick="toggleATAFilter()" title="Collapse/Expand">
+        <i class="fas fa-chevron-up" id="ata_filter_icon"></i>
+      </button>
+    </div>
+    <div class="card-body" id="ata_filter_content">
+      <!-- Section 1: ATA Selection -->
+      <div class="mb-4">
+        <h6 class="mb-3">
+          <i class="fas fa-cube"></i> Select Systems (ATAs) to Display
+          <span class="info-icon" data-toggle="tooltip" title="Choose which ATA chapters to include in the analysis charts">
+            <i class="fas fa-question-circle text-muted"></i>
+          </span>
+        </h6>
+        
+        <div id="ata_selection_controls" class="mb-2">
+          <button type="button" class="btn btn-sm btn-outline-primary me-2" onclick="selectAllATAs()">
+            <i class="fas fa-check-square"></i> Select All
+          </button>
+          <button type="button" class="btn btn-sm btn-outline-secondary me-2" onclick="deselectAllATAs()">
+            <i class="fas fa-square"></i> Deselect All
+          </button>
+          <button type="button" class="btn btn-sm btn-outline-info" onclick="resetATAFilters()">
+            <i class="fas fa-redo"></i> Reset to Defaults
+          </button>
+        </div>
+        
+        <div id="ata_selection_grid" class="ata-selection-grid row g-2">
+          <!-- Dynamically populated by JavaScript -->
+          <div class="col-12 text-center text-muted">
+            <small>Loading available ATAs...</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Chart Parameter Explanations -->
+      <div class="mb-4">
+        <h6 class="mb-3">
+          <i class="fas fa-chart-bar"></i> Chart Parameters Explained
+          <span class="info-icon" data-toggle="tooltip" title="Understanding what each chart shows">
+            <i class="fas fa-question-circle text-muted"></i>
+          </span>
+        </h6>
+        
+        <div class="accordion" id="chartExplanations">
+          <!-- Fleet Health Distribution -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#explain_health">
+                Fleet Health Distribution Chart
+              </button>
+            </h2>
+            <div id="explain_health" class="accordion-collapse collapse" data-bs-parent="#chartExplanations">
+              <div class="accordion-body small">
+                <p><strong>What it shows:</strong> Breakdown of your fleet into operational status categories.</p>
+                <ul class="mb-2 mt-2">
+                  <li><span class="badge bg-success">Operational</span> — Aircraft with no open issues, fully available for operations</li>
+                  <li><span class="badge bg-warning">Troubleshooting Open</span> — Aircraft with open troubleshooting items under diagnosis</li>
+                  <li><span class="badge bg-danger">AOG/Out of Service</span> — Aircraft grounded due to critical failures</li>
+                  <li><span class="badge bg-info">MEL Open</span> — Aircraft with deferred maintenance items approved for operation</li>
+                </ul>
+                <p class="mb-0"><strong>Why it matters:</strong> Helps identify fleet availability and dispatch capability at a glance.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tail Risk Profile -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#explain_risk">
+                Tail Risk & Utilization Profile Chart
+              </button>
+            </h2>
+            <div id="explain_risk" class="accordion-collapse collapse" data-bs-parent="#chartExplanations">
+              <div class="accordion-body small">
+                <p><strong>What it shows:</strong> For each aircraft, displays three key metrics:</p>
+                <ul class="mb-2 mt-2">
+                  <li><strong>Bar height</strong> = Open issue weight (failures, MEL, troubleshooting items severity combined)</li>
+                  <li><strong>Health Index (number inside)</strong> = Operational health score (0-100) calculated from issues, age, utilization</li>
+                  <li><strong>Flight Hours (FH)</strong> = Cumulative hours flown, indicates utilization and wear level</li>
+                </ul>
+                <p><strong>Color coding:</strong></p>
+                <ul class="mb-2">
+                  <li><span style="color: #28a745;">Green</span> — Excellent health, low risk</li>
+                  <li><span style="color: #ffc107;">Yellow</span> — Fair health, moderate maintenance load</li>
+                  <li><span style="color: #dc3545;">Red</span> — Poor health, high priority maintenance needed</li>
+                </ul>
+                <p class="mb-0"><strong>Why it matters:</strong> Prioritizes which aircraft need immediate maintenance before next operation.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top ATAs Trend -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#explain_ata_trend">
+                Top ATA Chapters Trend Chart
+              </button>
+            </h2>
+            <div id="explain_ata_trend" class="accordion-collapse collapse" data-bs-parent="#chartExplanations">
+              <div class="accordion-body small">
+                <p><strong>What it shows:</strong> Frequency of failures by ATA (aircraft system) chapter over time.</p>
+                <p><strong>ATA Codes Reference:</strong></p>
+                <ul class="small mb-2">
+                  <li><strong>ATA 21</strong> — Air Conditioning & Pressurization</li>
+                  <li><strong>ATA 22</strong> — AutoFlight (autopilot)</li>
+                  <li><strong>ATA 23</strong> — Communications</li>
+                  <li><strong>ATA 24</strong> — Electrical Power</li>
+                  <li><strong>ATA 26</strong> — Fire Protection</li>
+                  <li><strong>ATA 27</strong> — Flight Controls</li>
+                  <li><strong>ATA 29</strong> — Hydraulic Power</li>
+                  <li><strong>ATA 32</strong> — Landing Gear</li>
+                  <li><strong>ATA 34</strong> — Navigation</li>
+                  <li><strong>ATA 49</strong> — Auxiliary Power Unit (APU)</li>
+                  <li><strong>ATA 71</strong> — Power Plant (Engines)</li>
+                  <li><strong>ATA 73</strong> — Engine Fuel & Control</li>
+                  <li><strong>ATA 79</strong> — Starting Systems</li>
+                </ul>
+                <p class="mb-0"><strong>Why it matters:</strong> Identifies systemic issues across the fleet; helps with preventive maintenance planning.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Health Score Formula -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#explain_formula">
+                Health Index Calculation Formula
+              </button>
+            </h2>
+            <div id="explain_formula" class="accordion-collapse collapse" data-bs-parent="#chartExplanations">
+              <div class="accordion-body small">
+                <p><strong>How Health Index is Calculated:</strong></p>
+                <div class="bg-light p-2 rounded mb-2" style="font-family: monospace;">
+                  Health Index = 100 - (failures × 2) - (open items × 5) - (MEL items × 4) - (AOG items × 25)
+                </div>
+                <p><strong>Component Weights:</strong></p>
+                <ul class="mb-2">
+                  <li>Each historic failure = -2 points</li>
+                  <li>Each open troubleshooting item = -5 points</li>
+                  <li>Each open MEL item = -4 points</li>
+                  <li>Each AOG/grounded instance = -25 points (highest penalty)</li>
+                </ul>
+                <p><strong>Range:</strong> Minimum 10, Maximum 100</p>
+                <ul class="mb-2">
+                  <li><span class="badge bg-success">90-100</span> — EXCELLENT</li>
+                  <li><span class="badge bg-info">70-89</span> — GOOD</li>
+                  <li><span class="badge bg-warning">50-69</span> — FAIR</li>
+                  <li><span class="badge bg-danger">&lt;50</span> — POOR</li>
+                </ul>
+                <p class="mb-0"><strong>Purpose:</strong> Single number to quickly assess each aircraft's operational readiness.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3: Apply Button -->
+      <div class="d-flex gap-2">
+        <button type="button" class="btn btn-primary" onclick="applyATAFilters()">
+          <i class="fas fa-check"></i> Apply Filters
+        </button>
+        <button type="button" class="btn btn-secondary" onclick="closeATAFilter()">
+          <i class="fas fa-times"></i> Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Button to Show ATA Filter (shown when collapsed) -->
+<div class="d-flex justify-content-center ops-mb-24">
+  <button type="button" class="btn btn-outline-info btn-sm" id="show_ata_filter_btn" style="display:none;" onclick="toggleATAFilter()">
+    <i class="fas fa-sliders-h"></i> Configure Chart Filters & Parameters
+  </button>
+</div>
+
+<style>
+.ata-selection-grid {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 5px;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.ata-selection-item {
+  display: flex;
+  align-items: center;
+}
+
+.info-icon {
+  cursor: help;
+  margin-left: 5px;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #e7f3ff;
+  color: #0056b3;
+}
+
+.accordion-body {
+  background-color: #f9f9f9;
+}
+</style>
+
+<script>
+// Global ATA list (populated from server data or hardcoded)
+const AVAILABLE_ATAS = [
+  {code: '21', system: 'Air Conditioning'},
+  {code: '22', system: 'AutoFlight'},
+  {code: '23', system: 'Communications'},
+  {code: '24', system: 'Electrical Power'},
+  {code: '26', system: 'Fire Protection'},
+  {code: '27', system: 'Flight Controls'},
+  {code: '28', system: 'Fuel'},
+  {code: '29', system: 'Hydraulic Power'},
+  {code: '30', system: 'Ice Protection'},
+  {code: '31', system: 'Instruments'},
+  {code: '32', system: 'Landing Gear'},
+  {code: '33', system: 'Lighting'},
+  {code: '34', system: 'Navigation'},
+  {code: '35', system: 'Safety Equipment'},
+  {code: '36', system: 'Windows'},
+  {code: '45', system: 'Central Maintenance'},
+  {code: '49', system: 'APU'},
+  {code: '71', system: 'Power Plant'},
+  {code: '72', system: 'Engine'},
+  {code: '73', system: 'Engine Fuel'},
+  {code: '79', system: 'Starting'},
+  {code: '80', system: 'Starting'},
+];
+
+window.selectedATAs = new Set();
+const selectedATAs = window.selectedATAs;
+
+// Initialize ATA filter UI
+function initializeATAFilter() {
+  const grid = document.getElementById('ata_selection_grid');
+  grid.innerHTML = '';
+  
+  AVAILABLE_ATAS.forEach(ata => {
+    const div = document.createElement('div');
+    div.className = 'col-md-6 col-lg-4 ata-selection-item';
+    div.innerHTML = `
+      <div class="form-check w-100">
+        <input class="form-check-input ata-checkbox" type="checkbox" name="ata" value="${ata.code}" id="ata_${ata.code}" checked>
+        <label class="form-check-label flex-grow-1" for="ata_${ata.code}">
+          <strong>ATA ${ata.code}</strong> — ${ata.system}
+        </label>
+      </div>
+    `;
+    grid.appendChild(div);
+    
+    // Add to selected set if checked
+    const checkbox = div.querySelector('input');
+    checkbox.addEventListener('change', (e) => {
+      if (e.target.checked) {
+        selectedATAs.add(ata.code);
+      } else {
+        selectedATAs.delete(ata.code);
+      }
+      if (typeof window.onFleetAtaFilterChange === 'function') {
+        window.onFleetAtaFilterChange(Array.from(selectedATAs));
+      }
+    });
+    
+    selectedATAs.add(ata.code);
+  });
+}
+
+function toggleATAFilter() {
+  const section = document.getElementById('ata_filter_section');
+  const content = document.getElementById('ata_filter_content');
+  const icon = document.getElementById('ata_filter_icon');
+  const btn = document.getElementById('show_ata_filter_btn');
+  
+  if (section.style.display === 'none') {
+    section.style.display = 'block';
+    content.style.display = 'block';
+    btn.style.display = 'none';
+    icon.classList.remove('fa-chevron-down');
+    icon.classList.add('fa-chevron-up');
+  } else {
+    section.style.display = 'none';
+    content.style.display = 'none';
+    btn.style.display = 'inline-block';
+    icon.classList.remove('fa-chevron-up');
+    icon.classList.add('fa-chevron-down');
+  }
+}
+
+function selectAllATAs() {
+  document.querySelectorAll('.ata-checkbox').forEach(cb => cb.checked = true);
+  selectedATAs.clear();
+  AVAILABLE_ATAS.forEach((ata) => selectedATAs.add(ata.code));
+}
+
+function deselectAllATAs() {
+  document.querySelectorAll('.ata-checkbox').forEach(cb => cb.checked = false);
+  selectedATAs.clear();
+}
+
+function resetATAFilters() {
+  selectAllATAs();
+}
+
+function applyATAFilters() {
+  const selected = Array.from(selectedATAs);
+  if (typeof window.onFleetAtaFilterChange === 'function') {
+    window.onFleetAtaFilterChange(selected);
+  }
+  closeATAFilter();
+}
+
+function closeATAFilter() {
+  document.getElementById('ata_filter_section').style.display = 'none';
+  document.getElementById('show_ata_filter_btn').style.display = 'inline-block';
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', () => {
+  initializeATAFilter();
+  if (typeof window.onFleetAtaFilterChange === 'function') {
+    window.onFleetAtaFilterChange(Array.from(selectedATAs));
+  }
+});
+</script>
+  <div class="row g-3 mt-2">
+    <div class="col-lg-6">
+      <div class="card ai-card">
+        <div class="card-body">
+          <h5 class="h6 mb-3">
+            <i class="fas fa-chart-pie me-1"></i>Fleet Health Distribution
+          </h5>
+          <div class="fleet-chart-wrap">
+            <canvas id="fleetHealthChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card ai-card">
+        <div class="card-body">
+          <h5 class="h6 mb-3">
+            <i class="fas fa-chart-bar me-1"></i>Tail Risk and Utilization
+            Profile
+          </h5>
+          <div class="fleet-chart-wrap">
+            <canvas id="fleetRiskChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="card ai-card">
+        <div class="card-body">
+          <h5 class="h6 mb-2">
+            <i class="fas fa-sort-amount-down me-1"></i>Fleet Prioritization
+            Insight
+          </h5>
+          <div id="fleet-prioritization-insight" class="small text-muted">
+            Load fleet summary to generate prioritization insight.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Fleet Analysis Charts -->
+<!-- Settings Panel Modal -->
+<div class="ai-settings-panel" id="ai-settings-panel">
+  <div class="ai-settings-box">
+    <button class="ai-settings-close" id="ai-settings-close">✕</button>
+    <div class="ai-settings-title">
+      <i class="bi bi-gear-fill me-2"></i>Configurações do Copiloto
+    </div>
+    <div class="ai-settings-opt">
+      <label>Idioma</label>
+      <select id="ai-setting-lang" class="form-select form-select-sm">
+        <option value="pt">Português</option>
+        <option value="en">English</option>
+      </select>
+    </div>
+    <div class="ai-settings-opt">
+      <label>Verbosidade</label>
+      <select id="ai-setting-verbose" class="form-select form-select-sm">
+        <option value="concise">Concisa</option>
+        <option value="normal" selected>Normal</option>
+        <option value="detailed">Detalhada</option>
+      </select>
+    </div>
+    <div class="ai-settings-opt">
+      <label>Tema</label>
+      <select id="ai-setting-theme" class="form-select form-select-sm">
+        <option value="dark">Dark</option>
+        <option value="light" selected>Light</option>
+        <option value="high-contrast">Alto Contraste</option>
+      </select>
+    </div>
+    <div class="ai-settings-opt">
+      <label>Unidades</label>
+      <select id="ai-setting-units" class="form-select form-select-sm">
+        <option value="metric" selected>Métrico (kg/km)</option>
+        <option value="imperial">Imperial (lbs/nm)</option>
+      </select>
+    </div>
+    <div class="ai-settings-opt">
+      <label>Tamanho da fonte</label>
+      <div class="d-flex gap-2 align-items-center">
+        <button class="ai-font-ctrl" id="ai-settings-font-down">A-</button>
+        <span
+          id="ai-settings-font-label"
+          style="font-size: 0.8rem; opacity: 0.7"
+          >Normal</span
+        >
+        <button class="ai-font-ctrl" id="ai-settings-font-up">A+</button>
+      </div>
+    </div>
+    <div class="ai-settings-opt">
+      <label>Auto-salvar histórico</label>
+      <div class="form-check form-switch mb-0">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="ai-setting-autosave"
+          checked
+        />
+      </div>
+    </div>
+    <button class="btn ai-btn-brand w-100 mt-2" id="ai-settings-save">
+      Salvar Preferências
+    </button>
+  </div>
+</div>
+
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="app-footer border-top py-4 mt-5">
+      <div class="container-fluid px-3 px-lg-4">
+        <div class="row">
+          <div class="col-md-6">
+            <p class="text-muted mb-0">
+              <strong>Troubleshooting System</strong> - Mexicana Aircraft
+              Maintenance
+            </p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <small class="text-muted">
+              Updated: <span id="copyright-year"></span>
+            </small>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Global Scripts -->
+    <script>
+      document.getElementById("copyright-year").textContent =
+        new Date().getFullYear();
+    </script>
+    <script
+      defer
+      src="/static/js/ui-performance-v12.js?v=20260324-02"
+    ></script>
+
+    
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<script>
+  (function () {
+    const REQUEST_TIMEOUT_MS = 25000;
+    const analysisOutput = document.getElementById("analysis-output");
+    const summaryOutput = document.getElementById("summary-output");
+    const chatBox = document.getElementById("chat-box");
+    const feedbackPanel = document.getElementById("analysis-feedback");
+    const feedbackStatus = document.getElementById("feedback-status");
+    const fhfcPriority = document.getElementById("fhfc-priority");
+    const recalibrateOutput = document.getElementById("recalibrate-output");
+    const cleanupStatus = document.getElementById("cleanup-status");
+    const cleanupOutput = document.getElementById("cleanup-output");
+    const ataRefDetail = document.getElementById("ata-ref-detail");
+    const chatMeta = document.getElementById("chat-meta");
+    const chatHistoryList = document.getElementById("chat-history-list");
+    const chatHistoryEmpty = document.getElementById("chat-history-empty");
+    const chatContextList = document.getElementById("chat-context-list");
+    const chatContextEmpty = document.getElementById("chat-context-empty");
+    const chatFollowupList = document.getElementById("chat-followup-list");
+    const chatFollowupEmpty = document.getElementById("chat-followup-empty");
+    const chatHistoryClear = document.getElementById("chat-history-clear");
+    const chatLearningProfile = document.getElementById(
+      "chat-learning-profile",
+    );
+    const chatDeepInsight = document.getElementById("chat-deep-insight");
+    const chatLearningEmpty = document.getElementById("chat-learning-empty");
+    const chatDeepMode = document.getElementById("chat-deep-mode");
+    const btnAiClearAll = document.getElementById("btn-ai-clear-all");
+    const CHAT_HISTORY_KEY = "fly_mexicana_ai_chat_history_v1";
+    const MAX_HISTORY_ITEMS = 20;
+    const FAMILY_PRESETS = {
+      E2_FAMILY: {
+        models: "E190-E2, E195-E2",
+        preferredModel: "E195-E2",
+      },
+      "E190-E2": {
+        models: "E190-E2",
+        preferredModel: "E190-E2",
+      },
+      "E195-E2": {
+        models: "E195-E2",
+        preferredModel: "E195-E2",
+      },
+      CLASSIC_FAMILY: {
+        models: "E170, E175, E190, E195",
+        preferredModel: "E190",
+      },
+      ERJ_FAMILY: {
+        models: "ERJ145",
+        preferredModel: "ERJ145",
+      },
+      ALL_FLEET: {
+        models: "",
+        preferredModel: "",
+      },
+    };
+    let activeScope = "global";
+    let conversationId = "";
+    let trendChartInstance = null;
+    let projectionChartInstance = null;
+    let hotspotChartInstance = null;
+    let ataProjectionChartInstance = null;
+    let lastAnalysis = null;
+    let chatHistory = [];
+
+    function normalizeTail(value) {
+      return String(value || "")
+        .trim()
+        .toUpperCase();
+    }
+
+    function applyFamilyPreset(value, options = {}) {
+      const preset = FAMILY_PRESETS[value] || FAMILY_PRESETS.ALL_FLEET;
+      const aiFamily = document.getElementById("ai-family-filter");
+      const chatFamily = document.getElementById("chat-family-filter");
+      const aiModel = document.getElementById("ai-model");
+      const chatModel = document.getElementById("chat-model-filter");
+      const force = !!options.force;
+
+      if (aiFamily && aiFamily.value !== value) {
+        aiFamily.value = value;
+      }
+      if (chatFamily && chatFamily.value !== value) {
+        chatFamily.value = value;
+      }
+      if (chatModel) {
+        chatModel.value = preset.models;
+      }
+      if (
+        aiModel &&
+        (force ||
+          aiModel.dataset.autoManaged === "true" ||
+          !String(aiModel.value || "").trim())
+      ) {
+        aiModel.value = preset.preferredModel;
+        aiModel.dataset.autoManaged = "true";
+      }
+    }
+
+    function syncFiltersFromAnalysisInputs() {
+      const aiTail = normalizeTail(document.getElementById("ai-tail")?.value);
+      const aiModel = String(
+        document.getElementById("ai-model")?.value || "",
+      ).trim();
+      const aiFamily =
+        document.getElementById("ai-family-filter")?.value || "ALL_FLEET";
+      const chatTail = document.getElementById("chat-tail-filter");
+      const chatModel = document.getElementById("chat-model-filter");
+
+      applyFamilyPreset(aiFamily);
+
+      if (chatTail && aiTail) {
+        chatTail.value = aiTail;
+      }
+      if (chatModel && aiModel && !chatModel.value) {
+        chatModel.value = aiModel;
+      }
+    }
+
+    function resolveActiveModelFilter() {
+      const family =
+        document.getElementById("ai-family-filter")?.value || "ALL_FLEET";
+      const aiModel = String(
+        document.getElementById("ai-model")?.value || "",
+      ).trim();
+      const chatModel = String(
+        document.getElementById("chat-model-filter")?.value || "",
+      ).trim();
+      if (family === "ALL_FLEET") return "ALL_FLEET";
+      if (chatModel) return chatModel;
+      if (aiModel) return aiModel;
+      return (FAMILY_PRESETS[family] && FAMILY_PRESETS[family].models) || "";
+    }
+
+    function buildAutoCopilotPrompt() {
+      const modelFilter = resolveActiveModelFilter();
+      const tail = normalizeTail(
+        document.getElementById("chat-tail-filter")?.value || "",
+      );
+      const ata = String(
+        document.getElementById("chat-ata-filter")?.value ||
+          document.getElementById("ai-ata")?.value ||
+          "",
+      ).trim();
+      const target = tail
+        ? `tail ${tail}`
+        : modelFilter && modelFilter !== "ALL_FLEET"
+          ? `model/family ${modelFilter}`
+          : "the entire fleet database";
+      const ataPart = ata ? ` with strict focus ATA ${ata}` : "";
+      return `Generate autonomous technical outlook for ${target}${ataPart}: top recurrence patterns, FH/FC exposure, next 30/90-day projection, operational risk and recommended actions.`;
+    }
+
+    async function clearAiWorkspace() {
+      chatHistory = [];
+      saveChatHistory();
+      conversationId = "";
+      lastAnalysis = null;
+
+      document.getElementById("ai-ata").value = "";
+      document.getElementById("ai-tail").value = "";
+      document.getElementById("ai-model").value = "";
+      document.getElementById("ai-category").value = "";
+      document.getElementById("ai-description").value = "";
+      document.getElementById("chat-tail-filter").value = "";
+      document.getElementById("chat-model-filter").value = "";
+      document.getElementById("chat-ata-filter").value = "";
+      document.getElementById("chat-input").value = "";
+      if (chatDeepMode) {
+        chatDeepMode.checked = false;
+      }
+
+      applyFamilyPreset("ALL_FLEET", { force: true });
+      setScope("global");
+
+      analysisOutput.innerHTML = "";
+      summaryOutput.innerHTML = "";
+      feedbackStatus.textContent = "";
+      document.getElementById("analysis-feedback")?.classList.add("d-none");
+
+      chatBox.innerHTML = "";
+      renderHistoryPanel();
+      renderContextPanel([]);
+      renderFollowupPanel([]);
+      renderLearningPanel(null, null);
+      hydrateChatBoxFromHistory();
+
+      try {
+        await fetch("/api/ai/chat/history", { method: "DELETE" });
+      } catch (_) {}
+    }
+
+    async function fetchJsonWithTimeout(
+      url,
+      options = {},
+      timeoutMs = REQUEST_TIMEOUT_MS,
+    ) {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+      try {
+        const response = await fetch(url, {
+          ...options,
+          signal: controller.signal,
+        });
+        const json = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          const message = json.error || `Request failed (${response.status})`;
+          throw new Error(message);
+        }
+        return json;
+      } finally {
+        clearTimeout(timeoutId);
+      }
+    }
+
+    function formatList(items, wrapperTag = "ul") {
+      if (!items || !items.length) {
+        return wrapperTag === "ol"
+          ? "<ol><li>No data available.</li></ol>"
+          : "<ul><li>No data available.</li></ul>";
+      }
+      const lines = items.map((item) => `<li>${item}</li>`).join("");
+      return `<${wrapperTag}>${lines}</${wrapperTag}>`;
+    }
+
+    function selectedCleanupCategories() {
+      const map = [
+        ["cleanup-cat-backups", "backup_directories"],
+        ["cleanup-cat-cache", "cache_directories"],
+        ["cleanup-cat-generated", "generated_artifacts"],
+        ["cleanup-cat-expired", "expired_exceedance_uploads"],
+      ];
+      return map
+        .filter(([id]) => document.getElementById(id)?.checked)
+        .map(([, category]) => category);
+    }
+
+    function renderCleanupPreview(data, actionLabel = "Preview") {
+      if (!cleanupOutput || !cleanupStatus) return;
+      const summary = data?.summary || {};
+      const summaryRows = Object.entries(summary)
+        .map(
+          ([category, info]) =>
+            `<tr><td>${category}</td><td>${info.count || 0}</td><td>${info.size_bytes || 0}</td></tr>`,
+        )
+        .join("");
+      const candidates = Array.isArray(data?.candidates) ? data.candidates : [];
+      const candidateRows = candidates
+        .slice(0, 12)
+        .map(
+          (item) =>
+            `<tr><td>${item.category || "-"}</td><td>${item.kind || "-"}</td><td>${item.size_bytes || 0}</td><td>${item.path || "-"}</td></tr>`,
+        )
+        .join("");
+
+      cleanupStatus.textContent = `${actionLabel}: ${candidates.length} candidate(s) detected in ${data?.root_path || "workspace"}.`;
+      cleanupOutput.innerHTML = `
+        <div class="mb-2"><strong>Categories:</strong> ${(data?.categories || []).join(", ") || "none"}</div>
+        <div class="table-responsive mb-2">
+          <table class="table table-sm table-bordered mb-0">
+            <thead class="table-light"><tr><th>Category</th><th>Count</th><th>Bytes</th></tr></thead>
+            <tbody>${summaryRows || '<tr><td colspan="3" class="text-muted">No cleanup candidates found.</td></tr>'}</tbody>
+          </table>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-sm table-bordered mb-0">
+            <thead class="table-light"><tr><th>Category</th><th>Kind</th><th>Bytes</th><th>Path</th></tr></thead>
+            <tbody>${candidateRows || '<tr><td colspan="4" class="text-muted">No items to show.</td></tr>'}</tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    async function loadCleanupPreview() {
+      const json = await fetchJsonWithTimeout("/api/system/cleanup/preview");
+      renderCleanupPreview(json.data || {}, "Preview loaded");
+    }
+
+    async function runCleanup() {
+      const categories = selectedCleanupCategories();
+      if (!categories.length) {
+        cleanupStatus.textContent =
+          "Select at least one cleanup category before running.";
+        return;
+      }
+
+      cleanupStatus.textContent = "Running safe cleanup...";
+      const json = await fetchJsonWithTimeout("/api/system/cleanup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ confirm: true, categories }),
+      });
+      const result = json.data || {};
+      const deleted = Array.isArray(result.deleted) ? result.deleted.length : 0;
+      const failed = Array.isArray(result.failed) ? result.failed.length : 0;
+      cleanupStatus.textContent = `Cleanup completed: ${deleted} deleted, ${failed} failed.`;
+      renderCleanupPreview(result.preview_after || {}, "Cleanup completed");
+    }
+
+    function showTypingIndicator() {
+      if (document.getElementById("ai-typing-el")) return;
+      const el = document.createElement("div");
+      el.id = "ai-typing-el";
+      el.className = "ai-typing-indicator";
+      el.innerHTML = "<span></span><span></span><span></span>";
+      chatBox.appendChild(el);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+    function hideTypingIndicator() {
+      const el = document.getElementById("ai-typing-el");
+      if (el) el.remove();
+    }
+
+    function addMessage(type, text, options = {}) {
+      const persist = options.persist !== false;
+      const scope = options.scope || activeScope;
+      const confidence = options.confidence || null;
+      const grade = options.grade || null;
+      const suggestions = options.suggestions || [];
+      const wrapper = document.createElement("div");
+      wrapper.className = `ai-msg-wrapper ${type}`;
+      const el = document.createElement("div");
+      el.className = `ai-msg ${type}`;
+      if (type === "bot") {
+        if (typeof marked !== "undefined" && marked.parse) {
+          el.innerHTML = marked.parse(String(text || ""), { breaks: true });
+        } else {
+          el.innerHTML = String(text || "").replace(/\n/g, "<br>");
+        }
+        const copyBtn = document.createElement("button");
+        copyBtn.className = "ai-msg-copy-btn";
+        copyBtn.textContent = "copiar";
+        copyBtn.title = "Copiar para área de transferência";
+        copyBtn.addEventListener("click", () => {
+          navigator.clipboard
+            .writeText(text || "")
+            .then(() => {
+              copyBtn.textContent = "copiado!";
+              copyBtn.classList.add("copied");
+              setTimeout(() => {
+                copyBtn.textContent = "copiar";
+                copyBtn.classList.remove("copied");
+              }, 1800);
+            })
+            .catch(() => {
+              copyBtn.textContent = "erro";
+            });
+        });
+        el.appendChild(copyBtn);
+      } else {
+        el.textContent = text;
+      }
+      wrapper.appendChild(el);
+      const metaRow = document.createElement("div");
+      metaRow.className = "ai-msg-meta";
+      const timeStr = new Date().toLocaleTimeString("pt-BR", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+      if (confidence !== null && grade) {
+        const badge = document.createElement("span");
+        badge.className = `ai-chat-confidence grade-${String(grade).toLowerCase()}`;
+        badge.textContent = `${grade} ${confidence}%`;
+        metaRow.appendChild(badge);
+      }
+      const timeSpan = document.createElement("span");
+      timeSpan.textContent = timeStr;
+      metaRow.appendChild(timeSpan);
+      wrapper.appendChild(metaRow);
+      if (type === "bot" && suggestions.length > 0) {
+        const chipsRow = document.createElement("div");
+        chipsRow.className = "ai-suggestion-chips";
+        suggestions.slice(0, 4).forEach((s) => {
+          const chip = document.createElement("button");
+          chip.className = "ai-suggestion-chip";
+          chip.textContent = s;
+          chip.addEventListener("click", () => {
+            document.getElementById("chat-input").value = s;
+            document.getElementById("chat-send").click();
+          });
+          chipsRow.appendChild(chip);
+        });
+        wrapper.appendChild(chipsRow);
+      }
+      chatBox.appendChild(wrapper);
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      if (persist) {
+        chatHistory.push({
+          type,
+          text: String(text || ""),
+          scope,
+          ts: new Date().toISOString(),
+        });
+        chatHistory = chatHistory.slice(-MAX_HISTORY_ITEMS);
+        saveChatHistory();
+        renderHistoryPanel();
+      }
+    }
+
+    function saveChatHistory() {
+      try {
+        localStorage.setItem(CHAT_HISTORY_KEY, JSON.stringify(chatHistory));
+      } catch (e) {
+        // no-op for browsers blocking storage
+      }
+    }
+
+    function loadChatHistory() {
+      try {
+        const raw = localStorage.getItem(CHAT_HISTORY_KEY);
+        if (!raw) return;
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed)) return;
+        chatHistory = parsed.slice(-MAX_HISTORY_ITEMS);
+      } catch (e) {
+        chatHistory = [];
+      }
+    }
+
+    async function syncHistoryFromServer() {
+      try {
+        const res = await fetch("/api/ai/chat/history");
+        if (!res.ok) return;
+        const json = await res.json();
+        if (!json.success) return;
+        conversationId = json.conversation_id || "";
+        if (
+          Array.isArray(json.conversation_history) &&
+          json.conversation_history.length
+        ) {
+          chatHistory = json.conversation_history.slice(-MAX_HISTORY_ITEMS);
+          saveChatHistory();
+        }
+      } catch (e) {
+        // no-op when offline/failing
+      }
+    }
+
+    function renderHistoryPanel() {
+      const userHistory = chatHistory
+        .filter((item) => item.type === "user")
+        .slice(-8)
+        .reverse();
+      if (!userHistory.length) {
+        chatHistoryList.innerHTML = "";
+        chatHistoryEmpty.style.display = "block";
+        return;
+      }
+
+      chatHistoryEmpty.style.display = "none";
+      chatHistoryList.innerHTML = userHistory
+        .map((item) => {
+          const dt = new Date(item.ts);
+          const when = Number.isNaN(dt.getTime())
+            ? ""
+            : dt.toLocaleString("pt-BR", {
+                day: "2-digit",
+                month: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit",
+              });
+          return `
+        <div class="ai-history-item">
+          <div class="ai-history-q">${item.text}</div>
+          <div class="ai-history-meta">Scope: ${item.scope || "global"} ${when ? `| ${when}` : ""}</div>
+        </div>
+      `;
+        })
+        .join("");
+    }
+
+    function renderContextPanel(contextItems) {
+      if (!Array.isArray(contextItems) || !contextItems.length) {
+        chatContextList.innerHTML = "";
+        chatContextEmpty.style.display = "block";
+        return;
+      }
+      chatContextEmpty.style.display = "none";
+      chatContextList.innerHTML = contextItems
+        .slice(0, 8)
+        .map(
+          (item) => `
+      <div class="ai-context-item">
+        <div class="ai-context-ref">${item.source || "data"} - ${item.reference || "N/A"}</div>
+        <div class="ai-context-summary">${item.summary || "No summary"}</div>
+        <div class="ai-context-meta">Score: ${item.score || 0}% | Status: ${item.status || "N/A"}</div>
+      </div>
+    `,
+        )
+        .join("");
+    }
+
+    function renderFollowupPanel(questions) {
+      if (!Array.isArray(questions) || !questions.length) {
+        chatFollowupList.innerHTML = "";
+        chatFollowupEmpty.style.display = "block";
+        return;
+      }
+      chatFollowupEmpty.style.display = "none";
+      chatFollowupList.innerHTML = questions
+        .slice(0, 5)
+        .map(
+          (question) =>
+            `<button type="button" class="ai-followup-item w-100 text-start" data-followup="${String(question).replace(/"/g, "&quot;")}">${question}</button>`,
+        )
+        .join("");
+
+      chatFollowupList.querySelectorAll("[data-followup]").forEach((button) => {
+        button.addEventListener("click", () => {
+          document.getElementById("chat-input").value =
+            button.dataset.followup || "";
+          document.getElementById("chat-send").click();
+        });
+      });
+    }
+
+    function renderLearningPanel(profile, deepInsight) {
+      if (!profile && !deepInsight) {
+        chatLearningProfile.innerHTML = "";
+        chatDeepInsight.innerHTML = "";
+        chatLearningEmpty.style.display = "block";
+        return;
+      }
+      chatLearningEmpty.style.display = "none";
+
+      if (profile) {
+        const chips = [
+          `Score ${profile.profile_score || 0}`,
+          `Stage ${profile.learning_stage || "beginner"}`,
+          `Scope ${profile.preferred_scope || "global"}`,
+          `Interactions ${profile.interaction_count || 0}`,
+          profile.focus_tail ? `Tail ${profile.focus_tail}` : null,
+          profile.focus_ata ? `ATA ${profile.focus_ata}` : null,
+          typeof profile.feedback_signal === "number"
+            ? `Feedback ${profile.feedback_signal}%`
+            : null,
+        ]
+          .filter(Boolean)
+          .map((item) => `<span class="ai-learning-chip">${item}</span>`)
+          .join("");
+        chatLearningProfile.innerHTML = chips;
+      } else {
+        chatLearningProfile.innerHTML = "";
+      }
+
+      if (deepInsight) {
+        const hypotheses = (deepInsight.hypotheses || [])
+          .map(
+            (h) => `
+          <div class="ai-hypothesis-item">
+            <div class="ai-hypothesis-title">${h.title} <span class="ai-pill">${h.confidence || 0}%</span></div>
+            <div class="ai-hypothesis-evidence">${h.evidence || ""}</div>
+          </div>
+        `,
+          )
+          .join("");
+
+        const gaps = (deepInsight.data_gaps || [])
+          .map((g) => `<li>${g}</li>`)
+          .join("");
+        const strategy = (deepInsight.follow_strategy || [])
+          .map((s) => `<li>${s}</li>`)
+          .join("");
+        const reasoning = (deepInsight.reasoning_trace || [])
+          .map((r) => `<li>${r}</li>`)
+          .join("");
+        const matrix = deepInsight.decision_matrix || {};
+
+        chatDeepInsight.innerHTML = `
+        <div class="small mb-2">
+          <strong>Mode:</strong> ${deepInsight.mode || "standard"} |
+          <strong>Prioridade:</strong> ${deepInsight.priority_label || "MEDIA"} (${deepInsight.priority_score || 0})
+        </div>
+        <div class="small mb-2">
+          <strong>Decision matrix:</strong>
+          <span class="ai-learning-chip">Safety ${matrix.safety || 0}</span>
+          <span class="ai-learning-chip">Operational ${matrix.operational || 0}</span>
+          <span class="ai-learning-chip">Maintenance ${matrix.maintenance || 0}</span>
+        </div>
+        <div>${hypotheses || '<div class="ai-panel-empty">No hypotheses generated.</div>'}</div>
+        <div class="small mt-2"><strong>Data gaps:</strong><ul class="mb-1">${gaps || "<li>No critical data gaps.</li>"}</ul></div>
+        <div class="small"><strong>Suggested strategy:</strong><ol class="mb-0">${strategy || "<li>No strategy available.</li>"}</ol></div>
+        <div class="small mt-2"><strong>Reasoning trace:</strong><ol class="mb-0">${reasoning || "<li>No reasoning trace available.</li>"}</ol></div>
+      `;
+      } else {
+        chatDeepInsight.innerHTML = "";
+      }
+    }
+
+    async function loadLearningBaseline() {
+      try {
+        const res = await fetchJsonWithTimeout("/api/ai/feedback/stats");
+        if (!res.success) return;
+        const stats = res.stats || {};
+        if (!stats.total_feedback) return;
+        renderLearningPanel(
+          {
+            profile_score: Math.min(100, (stats.total_feedback || 0) * 3),
+            learning_stage:
+              stats.total_feedback >= 30
+                ? "advanced"
+                : stats.total_feedback >= 12
+                  ? "intermediate"
+                  : "beginner",
+            preferred_scope: "global",
+            interaction_count: stats.total_feedback || 0,
+            feedback_signal: stats.acceptance_rate || 0,
+          },
+          {
+            mode: "baseline",
+            priority_label: "INFO",
+            priority_score: stats.acceptance_rate || 0,
+            hypotheses: (stats.top_ata_feedback || [])
+              .slice(0, 3)
+              .map((item) => ({
+                title: `ATA ${item.ata} with recurring feedback`,
+                confidence: item.acceptance || 0,
+                evidence: `${item.total} evaluated samples.`,
+              })),
+            data_gaps: [
+              "Use ATA-level feedback to improve recommendations continuously.",
+            ],
+            follow_strategy: [
+              "Run analysis on new cases and register helpful/unhelpful feedback.",
+              "Recalibrate periodically to strengthen high-accuracy ATA chapters.",
+            ],
+          },
+        );
+      } catch (e) {
+        // noop
+      }
+    }
+
+    function hydrateChatBoxFromHistory() {
+      chatBox.innerHTML = "";
+      chatHistory.slice(-12).forEach((entry) => {
+        addMessage(entry.type, entry.text, {
+          persist: false,
+          scope: entry.scope,
+        });
+      });
+      if (!chatBox.innerHTML) {
+        addMessage(
+          "bot",
+          "Technical copilot ready. Ask about ATA, tail, MEL, AOG, or trend patterns.",
+          { persist: false },
+        );
+      }
+    }
+
+    function setScope(scope) {
+      activeScope = scope;
+      document.querySelectorAll(".ai-scope-btn").forEach((button) => {
+        button.classList.toggle("active", button.dataset.scope === scope);
+      });
+      const labels = {
+        global: "Global",
+        logbook: "Logbook",
+        mel: "MEL",
+        aog: "AOG",
+        fleet: "Fleet",
+        tail: "Tail",
+      };
+      chatMeta.textContent = `Current scope: ${labels[scope] || "Global"}.`;
+    }
+
+    function renderAnalysis(data) {
+      lastAnalysis = data;
+      const confidence = data.confidence ?? 0;
+      const system = data.ata_info
+        ? `${data.matched_ata} - ${data.ata_info.system}`
+        : "Not identified";
+      const actions = data.quick_actions || [];
+      const steps = (data.troubleshooting_steps || []).slice(0, 6);
+      const manuals = (data.recommended_manuals || []).join(", ");
+      const tail = data.tail_metrics?.tail || "N/A";
+      const fh = data.tail_metrics?.fh ?? 0;
+      const fc = data.tail_metrics?.fc ?? 0;
+      const learningHint =
+        data.learning_hint || "No learning signal available yet.";
+      const intel = data.intelligence || {};
+      const projection = intel.projection || {};
+      const autoContext = data.auto_context || {};
+      const strategic = data.strategic_outlook || {};
+      const executiveOpinion =
+        strategic.executive_opinion || intel.executive_opinion || {};
+      const autonomy = strategic.autonomy || intel.autonomy || {};
+      const impact =
+        strategic.operational_impact || intel.operational_impact || {};
+      const riskLevel = (intel.risk_level || "medium").toLowerCase();
+      const riskScore = intel.risk_score ?? 0;
+      const similarCases = intel.similar_cases || [];
+      const similarHtml = similarCases.length
+        ? similarCases
+            .map(
+              (item) =>
+                `<tr>
+            <td>${item.id || "N/A"}</td>
+            <td>${item.tail || "N/A"}</td>
+            <td>${item.ata || "N/A"}</td>
+            <td>${item.similarity || 0}%</td>
+          </tr>`,
+            )
+            .join("")
+        : '<tr><td colspan="4" class="text-muted">No strong similar incidents found.</td></tr>';
+
+      const planHtml =
+        (intel.recommended_plan || [])
+          .map(
+            (p) =>
+              `<li><strong>${p.priority}</strong> - ${p.phase}: ${p.action}</li>`,
+          )
+          .join("") || "<li>No recommended plan generated.</li>";
+      const opinionHtml =
+        (executiveOpinion.why || [])
+          .map((line) => `<li>${line}</li>`)
+          .join("") || "<li>No executive rationale available.</li>";
+      const whatIfHtml =
+        (executiveOpinion.what_if || [])
+          .map(
+            (item) =>
+              `<div class="ai-hypothesis-item"><div class="ai-hypothesis-title">${item.name || "Scenario"}</div><div class="ai-hypothesis-evidence">${item.impact || ""}</div><div class="small mt-1"><strong>Action:</strong> ${item.action || "N/A"}</div></div>`,
+          )
+          .join("") ||
+        '<div class="text-muted small">No what-if scenarios generated.</div>';
+
+      renderMissionQueue(
+        strategic.mission_brief || intel.mission_brief || null,
+        strategic.intervention_queue || intel.intervention_queue || [],
+      );
+
+      analysisOutput.innerHTML = `
+      <div class="ai-depth-layer mb-2">
+        <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-2">
+          <div>
+            <strong>System:</strong> ${system}<br>
+            <strong>Confidence:</strong> ${confidence}%<br>
+            <strong>Severity:</strong> ${data.severity_estimate || "N/A"}<br>
+            <strong>Estimated Resolution:</strong> ${data.estimated_hours || "N/A"}h<br>
+            <strong>Manuals:</strong> ${manuals || "N/A"}<br>
+            <strong>Tail Metrics:</strong> ${tail} | FH ${fh} | FC ${fc}
+          </div>
+          <div>
+            <div><strong>Technical Risk</strong></div>
+            <div class="h5 mb-1">${riskScore}</div>
+            <span class="ai-risk-badge ${riskLevel}">${riskLevel}</span>
+          </div>
+        </div>
+        <div class="small text-muted mb-2">
+          Inspection depth: <strong>${intel.inspection_depth || "standard"}</strong> |
+          Tail recurrence: <strong>${intel.tail_recurrence || 0}</strong> |
+          ATA recurrence: <strong>${intel.ata_recurrence || 0}</strong> |
+          Feedback acceptance: <strong>${intel.feedback_acceptance || 0}%</strong>
+        </div>
+        <div class="small text-muted mb-2">
+          Forecast: <strong>${String(projection.trend_direction || "stable").toUpperCase()}</strong> |
+          Growth: <strong>${projection.growth_rate_pct || 0}%</strong> |
+          Expected next 30d: <strong>${projection.next_30d_expected || 0}</strong> |
+          Expected next 90d: <strong>${projection.next_90d_expected || 0}</strong>
+        </div>
+        <div class="small text-muted mb-2">
+          AI autonomy: <strong>${autonomy.score || 0}</strong> (${autonomy.level || "guided"}) |
+          Dispatch risk: <strong>${impact.dispatch_risk || "LOW"}</strong> |
+          Est. delay: <strong>${impact.estimated_delay_hours ?? 0}h</strong> |
+          Maintenance pressure: <strong>${impact.maintenance_pressure || 0}</strong>
+        </div>
+        ${autoContext.description_generated ? `<div class="alert alert-info py-1 px-2 small mb-2">Autonomous analysis executed with model/family context (${autoContext.effective_model_filter || "default"}) and inferred ATA ${autoContext.inferred_ata || "N/A"}.</div>` : ""}
+
+        <div class="row g-2">
+          <div class="col-md-6">
+            <div class="bg-white border rounded p-2 h-100">
+              <strong>Quick Actions</strong>
+              ${formatList(actions)}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="bg-white border rounded p-2 h-100">
+              <strong>Troubleshooting Steps</strong>
+              ${formatList(steps, "ol")}
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="bg-white border rounded p-2">
+              <strong>Recommended Technical Plan</strong>
+              <ol class="mb-2 mt-1">${planHtml}</ol>
+              <strong>Learning Insight:</strong> ${learningHint}
+              <br><strong>Projection Outlook:</strong> ${projection.narrative || "No projection narrative available."}
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="bg-white border rounded p-2">
+              <strong>Executive Opinion</strong>
+              <div class="small mb-1">Stance: <span class="ai-pill">${(executiveOpinion.stance || "monitor").toUpperCase()}</span> | Confidence ${executiveOpinion.confidence || 0}%</div>
+              <ul class="mb-0">${opinionHtml}</ul>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="bg-white border rounded p-2">
+              <strong>What-if Scenarios</strong>
+              <div class="mt-2">${whatIfHtml}</div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="bg-white border rounded p-2">
+              <strong>Most Similar Incidents</strong>
+              <div class="table-responsive mt-2">
+                <table class="table table-sm mb-0">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Tail</th>
+                      <th>ATA</th>
+                      <th>Similarity</th>
+                    </tr>
+                  </thead>
+                  <tbody>${similarHtml}</tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+      feedbackPanel.classList.remove("d-none");
+      feedbackStatus.textContent = "";
+    }
+
+    function renderTrendChart(monthlyTrend) {
+      const wrap = document.getElementById("trend-chart-wrap");
+      const placeholder = document.getElementById("trend-placeholder");
+      if (!monthlyTrend || !monthlyTrend.length) {
+        placeholder.textContent = "No monthly trend data available yet.";
+        return;
+      }
+      wrap.style.display = "block";
+      placeholder.style.display = "none";
+      const labels = monthlyTrend.map((d) => d.month);
+      const counts = monthlyTrend.map((d) => d.count);
+      if (trendChartInstance) {
+        trendChartInstance.destroy();
+      }
+      const ctx = document.getElementById("trend-chart").getContext("2d");
+      trendChartInstance = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels,
+          datasets: [
+            {
+              label: "Failures per month",
+              data: counts,
+              backgroundColor: "rgba(15, 109, 124, 0.55)",
+              borderColor: "#0f6d7c",
+              borderWidth: 1.5,
+              borderRadius: 4,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                title: (items) => `Month: ${items[0].label}`,
+              },
+            },
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: { font: { size: 11 } },
+            },
+            y: {
+              beginAtZero: true,
+              ticks: { stepSize: 1, font: { size: 11 } },
+            },
+          },
+        },
+      });
+    }
+
+    function renderProjectionCharts(signals) {
+      const projectionWrap = document.getElementById("projection-chart-wrap");
+      const hotspotWrap = document.getElementById("hotspot-chart-wrap");
+      const ataWrap = document.getElementById("ata-projection-chart-wrap");
+      const placeholder = document.getElementById("projection-placeholder");
+      const trendEl = document.getElementById("forecast-trend");
+      const growthEl = document.getElementById("forecast-growth");
+      const next30El = document.getElementById("forecast-next30");
+      const next90El = document.getElementById("forecast-next90");
+      const autonomyEl = document.getElementById("forecast-autonomy");
+      const dispatchEl = document.getElementById("impact-dispatch");
+      const delayEl = document.getElementById("impact-delay");
+      const pressureEl = document.getElementById("impact-pressure");
+      const chartBriefEl = document.getElementById("ai-chart-brief");
+
+      if (
+        !signals ||
+        !Array.isArray(signals.history) ||
+        !signals.history.length
+      ) {
+        projectionWrap.style.display = "none";
+        hotspotWrap.style.display = "none";
+        ataWrap.style.display = "none";
+        placeholder.style.display = "block";
+        trendEl.textContent = "—";
+        growthEl.textContent = "0%";
+        next30El.textContent = "0";
+        next90El.textContent = "0";
+        autonomyEl.textContent = "0";
+        dispatchEl.textContent = "LOW";
+        delayEl.textContent = "0.0";
+        pressureEl.textContent = "0";
+        if (chartBriefEl) {
+          chartBriefEl.innerHTML = `
+            <strong>AI Chart Brief</strong>
+            <div class="small text-muted mt-1">
+              Load summary or run analysis to let V10 choose the primary visual focus, explain the forecast and recommend the next operational move.
+            </div>
+          `;
+        }
+        return;
+      }
+
+      const history = signals.history || [];
+      const forecast = signals.forecast || [];
+      const hotspots = signals.hotspot_forecast || [];
+      const ataProjection = signals.ata_projection || {};
+      const autonomy = signals.autonomy || {};
+      const impact = signals.operational_impact || {};
+      const chartBrief = signals.chart_brief || {};
+      const suggestedVisuals = Array.isArray(signals.suggested_visuals)
+        ? signals.suggested_visuals
+        : [];
+      trendEl.textContent = String(
+        signals.trend_direction || "stable",
+      ).toUpperCase();
+      growthEl.textContent = `${signals.growth_rate_pct || 0}%`;
+      next30El.textContent = String(signals.next_30d_expected || 0);
+      next90El.textContent = String(signals.next_90d_expected || 0);
+      autonomyEl.textContent = `${autonomy.score || 0}`;
+      dispatchEl.textContent = String(
+        impact.dispatch_risk || "LOW",
+      ).toUpperCase();
+      delayEl.textContent = String(impact.estimated_delay_hours ?? 0.0);
+      pressureEl.textContent = String(impact.maintenance_pressure || 0);
+      if (chartBriefEl) {
+        const chipHtml = suggestedVisuals
+          .map((item) => `<span class="ai-learning-chip">${item}</span>`)
+          .join("");
+        chartBriefEl.innerHTML = `
+          <div class="d-flex flex-wrap justify-content-between align-items-start gap-2">
+            <div>
+              <strong>${chartBrief.headline || "AI Chart Brief"}</strong>
+              <div class="small mt-1">${chartBrief.why || "Forecast and exposure charts synchronized with current AI diagnosis."}</div>
+              <div class="small mt-2"><strong>Action:</strong> ${chartBrief.action || "Review hotspots, then validate ATA projection before dispatch decisions."}</div>
+            </div>
+            <div class="text-end small">
+              <div><strong>Primary visual:</strong> ${chartBrief.recommended_chart || "projection"}</div>
+              <div class="mt-1">${chipHtml || ""}</div>
+            </div>
+          </div>
+        `;
+      }
+
+      projectionWrap.style.display = "block";
+      hotspotWrap.style.display = "block";
+      ataWrap.style.display = "block";
+      placeholder.style.display = "none";
+
+      const hLabels = history.map((x) => x.month);
+      const hData = history.map((x) => x.count);
+      const fLabels = forecast.map((x) => x.month);
+      const fData = forecast.map((x) => x.count);
+      const allLabels = [...hLabels, ...fLabels];
+      const histSeries = [...hData, ...new Array(fData.length).fill(null)];
+      const foreSeries = [...new Array(hData.length).fill(null), ...fData];
+
+      if (projectionChartInstance) projectionChartInstance.destroy();
+      projectionChartInstance = new Chart(
+        document.getElementById("projection-chart").getContext("2d"),
+        {
+          type: "line",
+          data: {
+            labels: allLabels,
+            datasets: [
+              {
+                label: "Historical failures",
+                data: histSeries,
+                borderColor: "#0f6d7c",
+                backgroundColor: "rgba(15, 109, 124, 0.18)",
+                tension: 0.25,
+                pointRadius: 3,
+              },
+              {
+                label: "Projected failures",
+                data: foreSeries,
+                borderColor: "#ca8700",
+                backgroundColor: "rgba(202, 135, 0, 0.2)",
+                borderDash: [6, 4],
+                tension: 0.2,
+                pointRadius: 3,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: true, position: "bottom" } },
+            scales: { y: { beginAtZero: true } },
+          },
+        },
+      );
+
+      if (hotspotChartInstance) hotspotChartInstance.destroy();
+      hotspotChartInstance = new Chart(
+        document.getElementById("hotspot-chart").getContext("2d"),
+        {
+          type: "bar",
+          data: {
+            labels: hotspots.map((x) => `${x.tail} / ATA ${x.ata}`),
+            datasets: [
+              {
+                label: "Projected risk",
+                data: hotspots.map((x) => x.projected_risk_score || 0),
+                backgroundColor: "rgba(179, 0, 49, 0.6)",
+                borderColor: "#b30031",
+                borderWidth: 1.2,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            indexAxis: "y",
+            scales: { x: { beginAtZero: true } },
+          },
+        },
+      );
+
+      const ataHistory = ataProjection.history || [];
+      const ataForecast = ataProjection.forecast || [];
+      const ataLabels = [
+        ...ataHistory.map((x) => x.month),
+        ...ataForecast.map((x) => x.month),
+      ];
+      const ataHistValues = [
+        ...ataHistory.map((x) => x.count),
+        ...new Array(ataForecast.length).fill(null),
+      ];
+      const ataForeValues = [
+        ...new Array(ataHistory.length).fill(null),
+        ...ataForecast.map((x) => x.count),
+      ];
+      if (ataProjectionChartInstance) ataProjectionChartInstance.destroy();
+      ataProjectionChartInstance = new Chart(
+        document.getElementById("ata-projection-chart").getContext("2d"),
+        {
+          type: "line",
+          data: {
+            labels: ataLabels,
+            datasets: [
+              {
+                label: `ATA ${ataProjection.ata || "N/A"} history`,
+                data: ataHistValues,
+                borderColor: "#00327f",
+                backgroundColor: "rgba(0, 50, 127, 0.16)",
+                tension: 0.2,
+                pointRadius: 3,
+              },
+              {
+                label: `ATA ${ataProjection.ata || "N/A"} forecast`,
+                data: ataForeValues,
+                borderColor: "#6a1b9a",
+                backgroundColor: "rgba(106, 27, 154, 0.2)",
+                borderDash: [6, 4],
+                tension: 0.2,
+                pointRadius: 3,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: true, position: "bottom" } },
+            scales: { y: { beginAtZero: true } },
+          },
+        },
+      );
+    }
+
+    function renderSummaryPanel(summary) {
+      const s = summary || {};
+      const depth = s.intelligence_depth || {};
+      const topAta = s.most_common_ata || {};
+      const topTail = s.most_recurring_tail || {};
+      const selectedAta = String(
+        document.getElementById("chat-ata-filter")?.value ||
+          document.getElementById("ai-ata")?.value ||
+          "",
+      ).trim();
+      const exec = depth.executive_opinion || {};
+      const autonomy = depth.autonomy || {};
+      const impact = depth.operational_impact || {};
+      const familyRows = (depth.family_comparison || [])
+        .map(
+          (item) =>
+            `<tr><td><strong>${item.family}</strong></td><td>${item.total}</td><td>${item.open_rate}%</td><td>${item.avg_fh}</td><td>${item.avg_fc}</td><td>${item.tails}</td></tr>`,
+        )
+        .join("");
+      const execWhy = (exec.why || [])
+        .slice(0, 3)
+        .map((line) => `<li>${line}</li>`)
+        .join("");
+      summaryOutput.innerHTML = `
+        <div class="alert alert-secondary mb-0">
+          <strong>Most common failure keyword:</strong> ${s.most_common_failure_keyword || "N/A"}<br>
+          <strong>Most common ATA${selectedAta ? ` (current focus ATA ${selectedAta})` : ""}:</strong> ATA ${topAta.ata || "N/A"} - ${topAta.system || "N/A"}<br>
+          <strong>Most recurring tail:</strong> ${topTail.tail || "N/A"} (${topTail.count || 0})<br>
+          <strong>Feedback acceptance:</strong> ${depth.feedback_acceptance_rate || 0}% (${depth.feedback_samples || 0} samples)
+          <br><strong>Executive stance:</strong> ${(exec.stance || "monitor").toUpperCase()} (${exec.confidence || 0}% confidence)
+          <br><strong>AI autonomy:</strong> ${autonomy.score || 0} (${autonomy.level || "guided"})
+          <br><strong>Operational impact:</strong> Dispatch ${impact.dispatch_risk || "LOW"} | Delay ${impact.estimated_delay_hours ?? 0}h | Pressure ${impact.maintenance_pressure || 0}
+          <hr>
+          <strong>Recommended Actions</strong>
+          <ul class="mb-0 mt-2">${(s.recommended_actions || []).map((a) => `<li>${a}</li>`).join("")}</ul>
+          ${execWhy ? `<hr><strong>Executive rationale</strong><ul class="mb-0 mt-2">${execWhy}</ul>` : ""}
+          ${familyRows ? `<hr><strong>Family comparison</strong><div class="table-responsive mt-2"><table class="table table-sm mb-0"><thead><tr><th>Family</th><th>Records</th><th>Open rate</th><th>Avg FH</th><th>Avg FC</th><th>Tails</th></tr></thead><tbody>${familyRows}</tbody></table></div>` : ""}
+        </div>
+      `;
+
+      renderMissionQueue(
+        depth.mission_brief || null,
+        depth.intervention_queue || [],
+      );
+    }
+
+    function renderMissionQueue(missionBrief, queue) {
+      const missionEl = document.getElementById("mission-brief");
+      const body = document.getElementById("intervention-queue-body");
+      const brief = missionBrief || {};
+
+      missionEl.innerHTML = `
+        <div class="alert alert-light border mb-2">
+          <strong>Mission:</strong> ${brief.headline || "No mission headline available."}<br>
+          <strong>Autonomy:</strong> ${(brief.autonomy_level || "guided").toUpperCase()} |
+          <strong>Forecast drift:</strong> ${(brief.drift_status || "stable").toUpperCase()}<br>
+          <strong>Drift note:</strong> ${brief.drift_message || "No drift message."}<br>
+          <strong>Next action:</strong> ${brief.next_action || "Keep monitoring and refresh analytics daily."}
+        </div>
+      `;
+
+      if (!Array.isArray(queue) || !queue.length) {
+        body.innerHTML =
+          '<tr><td colspan="7" class="text-muted">No queue generated yet.</td></tr>';
+        return;
+      }
+
+      body.innerHTML = queue
+        .slice(0, 8)
+        .map(
+          (item) =>
+            `<tr>
+              <td>${item.rank || "-"}</td>
+              <td>${item.tail || "N/A"}</td>
+              <td>${item.ata || "N/A"}</td>
+              <td>${item.urgency_score || 0}</td>
+              <td><span class="ai-pill">${item.priority || "P3"}</span></td>
+              <td>${item.recommended_sla || "72h"}</td>
+              <td>${item.action || "N/A"}</td>
+            </tr>`,
+        )
+        .join("");
+    }
+
+    async function loadTechnicalSummary(options = {}) {
+      const silent = !!options.silent;
+      const summaryButton = document.getElementById("btn-summary");
+      summaryButton.disabled = true;
+      if (!silent) {
+        summaryOutput.innerHTML =
+          '<div class="text-muted">Loading summary...</div>';
+      }
+
+      try {
+        const params = new URLSearchParams();
+        const filterTail =
+          document.getElementById("chat-tail-filter")?.value?.trim() ||
+          document.getElementById("ai-tail")?.value?.trim() ||
+          "";
+        const filterModel = resolveActiveModelFilter();
+        const filterAta = String(
+          document.getElementById("chat-ata-filter")?.value ||
+            document.getElementById("ai-ata")?.value ||
+            "",
+        ).trim();
+        if (filterTail) params.set("tail", filterTail);
+        if (filterModel) params.set("model", filterModel);
+        if (filterAta) params.set("ata", filterAta);
+        const queryString = params.toString();
+        const summaryUrl = queryString
+          ? `/api/ai/summary?${queryString}`
+          : "/api/ai/summary";
+        const analyticsUrl = queryString
+          ? `/api/ai/analytics?${queryString}`
+          : "/api/ai/analytics";
+
+        const [json, analyticsJson] = await Promise.all([
+          fetchJsonWithTimeout(summaryUrl),
+          fetchJsonWithTimeout(analyticsUrl).catch(() => ({})),
+        ]);
+        if (!json.success) {
+          if (!silent) {
+            summaryOutput.innerHTML =
+              '<div class="alert alert-danger mb-0">Failed to load summary.</div>';
+          }
+          return;
+        }
+
+        const s = json.summary || {};
+        const priorities = s.fh_fc_priority || [];
+        const depth = s.intelligence_depth || {};
+        if (!silent) {
+          renderSummaryPanel(s);
+          if (fhfcPriority) {
+            if (priorities.length) {
+              fhfcPriority.innerHTML = priorities
+                .slice(0, 5)
+                .map(
+                  (p) =>
+                    `<div class="ai-depth-layer mb-1"><strong>${p.tail}</strong> — FH ${p.fh} / FC ${p.fc} | Priority ${p.priority_score ?? "N/A"}</div>`,
+                )
+                .join("");
+            } else {
+              fhfcPriority.textContent =
+                "No FH/FC data available for current filter.";
+            }
+          }
+        }
+        const monthlyTrend =
+          s.monthly_trend ||
+          (analyticsJson && analyticsJson.monthly_trend) ||
+          [];
+        renderTrendChart(monthlyTrend);
+        const projSignals = (depth && depth.projection_signals) || null;
+        if (projSignals) renderProjectionCharts(projSignals);
+      } catch (err) {
+        if (!silent) {
+          summaryOutput.innerHTML = `<div class="alert alert-danger mb-0">${err.message || "Summary request failed."}</div>`;
+        }
+      } finally {
+        summaryButton.disabled = false;
+      }
+    }
+
+    document
+      .getElementById("btn-analyze")
+      .addEventListener("click", async () => {
+        syncFiltersFromAnalysisInputs();
+        const payload = {
+          ata: document.getElementById("ai-ata").value,
+          tail: normalizeTail(document.getElementById("ai-tail").value),
+          model: document.getElementById("ai-model").value,
+          model_filter: resolveActiveModelFilter(),
+          category: document.getElementById("ai-category").value,
+          description: document.getElementById("ai-description").value,
+        };
+
+        const analyzeButton = document.getElementById("btn-analyze");
+        analyzeButton.disabled = true;
+        analysisOutput.innerHTML = '<div class="text-muted">Analyzing...</div>';
+        try {
+          const json = await fetchJsonWithTimeout("/api/ai/analyze_failure", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          if (!json.success) {
+            analysisOutput.innerHTML = `<div class="alert alert-danger mb-0">${json.error || "Analysis failed."}</div>`;
+            return;
+          }
+          renderAnalysis(json.data);
+          renderProjectionCharts(json.data.projection_signals || null);
+          await loadTechnicalSummary({ silent: true });
+        } catch (err) {
+          analysisOutput.innerHTML = `<div class="alert alert-danger mb-0">${err.message || "Analysis request failed."}</div>`;
+        } finally {
+          analyzeButton.disabled = false;
+        }
+      });
+
+    document
+      .getElementById("btn-summary")
+      .addEventListener("click", async () => {
+        await loadTechnicalSummary({ silent: false });
+      });
+
+    document.getElementById("chat-send").addEventListener("click", async () => {
+      const input = document.getElementById("chat-input");
+      const sendButton = document.getElementById("chat-send");
+      let query = input.value.trim();
+      if (!query) {
+        query = buildAutoCopilotPrompt();
+      }
+
+      const explicitAtaFocus = String(
+        document.getElementById("chat-ata-filter")?.value || "",
+      ).trim();
+      if (
+        explicitAtaFocus &&
+        !/(?:ata|chapter|capítulo)\s*[-]?(\d{2,3})\b/i.test(query)
+      ) {
+        query = `${query} Focus strictly on ATA ${explicitAtaFocus}.`;
+      }
+
+      const tailFilterEl = document.getElementById("chat-tail-filter");
+      if (tailFilterEl) {
+        tailFilterEl.value = normalizeTail(tailFilterEl.value);
+      }
+
+      if (activeScope === "global" && tailFilterEl?.value) {
+        setScope("tail");
+      }
+
+      addMessage("user", query);
+      input.value = "";
+
+      sendButton.disabled = true;
+      showTypingIndicator();
+      try {
+        const json = await fetchJsonWithTimeout("/api/ai/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            query,
+            scope: activeScope,
+            conversation_id: conversationId,
+            tail_filter: normalizeTail(
+              document.getElementById("chat-tail-filter")?.value || "",
+            ),
+            model_filter:
+              document.getElementById("chat-model-filter")?.value ||
+              resolveActiveModelFilter(),
+            deep_mode: !!chatDeepMode?.checked,
+          }),
+        });
+        if (!json.success) {
+          addMessage("bot", json.error || "Failed to process query.");
+          return;
+        }
+        let hydratedFromServer = false;
+        conversationId = json.data.conversation_id || conversationId;
+        if (
+          Array.isArray(json.data.conversation_history) &&
+          json.data.conversation_history.length
+        ) {
+          chatHistory =
+            json.data.conversation_history.slice(-MAX_HISTORY_ITEMS);
+          saveChatHistory();
+          renderHistoryPanel();
+          chatBox.innerHTML = "";
+          hydrateChatBoxFromHistory();
+          hydratedFromServer = true;
+        }
+        hideTypingIndicator();
+        if (!hydratedFromServer) {
+          addMessage("bot", json.data.response || "No response generated.", {
+            scope: activeScope,
+            confidence: json.data.confidence_score || null,
+            grade: json.data.confidence_grade || null,
+            suggestions: (json.data.next_questions || []).slice(0, 4),
+          });
+        }
+        const ops = json.data.ops_signals || {};
+        if (json.data.sources) {
+          const chips = [
+            `scope ${activeScope}`,
+            `logbook ${json.data.sources.records || 0}`,
+            `MEL ${json.data.sources.mel || 0}`,
+            `AOG ${json.data.sources.aog || 0}`,
+            `priority ${(ops.priority_label || "MEDIUM").toUpperCase()}`,
+            `score ${ops.priority_score || 0}`,
+            `trend ${String(ops.trend_direction || "stable").toUpperCase()}`,
+            `next30 ${ops.next_30d_expected || 0}`,
+            `autonomy ${ops.autonomy_score || 0}`,
+            `dispatch ${String(ops.dispatch_risk || "LOW").toUpperCase()}`,
+            json.data.structured_query?.ata_exact ? "ATA exact" : null,
+            json.data.structured_query?.tail_exact ? "tail exact" : null,
+            json.data.structured_query?.fuzzy_enabled === false
+              ? "fuzzy off"
+              : "fuzzy on",
+          ]
+            .filter(Boolean)
+            .map((item) => `<span class="ai-ops-chip">${item}</span>`)
+            .join("");
+          chatMeta.innerHTML = chips;
+        }
+        if (json.data.projection_signals) {
+          renderProjectionCharts(json.data.projection_signals);
+          renderMissionQueue(
+            (json.data.projection_signals || {}).mission_brief || null,
+            (json.data.projection_signals || {}).intervention_queue || [],
+          );
+        }
+        renderContextPanel(json.data.context_consulted || []);
+        renderFollowupPanel(json.data.next_questions || []);
+        renderLearningPanel(
+          json.data.learning_profile || null,
+          json.data.deep_insight || null,
+        );
+      } catch (err) {
+        hideTypingIndicator();
+        addMessage("bot", err.message || "Chat request failed.");
+      } finally {
+        hideTypingIndicator();
+        sendButton.disabled = false;
+      }
+    });
+
+    document
+      .getElementById("chat-input")
+      .addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          document.getElementById("chat-send").click();
+        }
+      });
+
+    document.querySelectorAll(".ai-scope-btn").forEach((button) => {
+      button.addEventListener("click", () => setScope(button.dataset.scope));
+    });
+
+    document
+      .getElementById("ai-family-filter")
+      ?.addEventListener("change", (event) => {
+        applyFamilyPreset(event.target.value, { force: true });
+      });
+
+    document
+      .getElementById("chat-family-filter")
+      ?.addEventListener("change", (event) => {
+        applyFamilyPreset(event.target.value, { force: false });
+      });
+
+    document.getElementById("ai-model")?.addEventListener("input", () => {
+      const aiModelInput = document.getElementById("ai-model");
+      if (aiModelInput) {
+        aiModelInput.dataset.autoManaged = "false";
+      }
+    });
+
+    document.querySelectorAll(".ai-prompt-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.getElementById("chat-input").value = button.dataset.prompt;
+        document.getElementById("chat-send").click();
+      });
+    });
+
+    document
+      .getElementById("cleanup-preview-btn")
+      ?.addEventListener("click", async () => {
+        try {
+          cleanupStatus.textContent = "Loading cleanup preview...";
+          await loadCleanupPreview();
+        } catch (err) {
+          cleanupStatus.textContent =
+            err.message || "Failed to load cleanup preview.";
+        }
+      });
+
+    document
+      .getElementById("cleanup-run-btn")
+      ?.addEventListener("click", async () => {
+        try {
+          await runCleanup();
+        } catch (err) {
+          cleanupStatus.textContent = err.message || "Cleanup request failed.";
+        }
+      });
+
+    chatHistoryClear.addEventListener("click", async () => {
+      chatHistory = [];
+      saveChatHistory();
+      renderHistoryPanel();
+      chatBox.innerHTML = "";
+      addMessage(
+        "bot",
+        "Local history cleared. You can start a new conversation.",
+        { persist: false },
+      );
+      conversationId = "";
+      try {
+        await fetch("/api/ai/chat/history", { method: "DELETE" });
+      } catch (_) {}
+    });
+
+    btnAiClearAll?.addEventListener("click", async () => {
+      await clearAiWorkspace();
+    });
+
+    async function sendFeedback(helpful) {
+      if (!lastAnalysis) {
+        feedbackStatus.textContent = "Run an analysis before sending feedback.";
+        return;
+      }
+      const payload = {
+        ata:
+          lastAnalysis.matched_ata ||
+          document.getElementById("ai-ata").value ||
+          "",
+        helpful,
+        query: document.getElementById("ai-description").value || "",
+        response_excerpt: (lastAnalysis.quick_actions || []).join(" | ") || "",
+        source: "ai_analysis_dashboard",
+      };
+      const res = await fetch("/api/ai/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const json = await res.json();
+      if (!json.success) {
+        feedbackStatus.textContent = json.error || "Failed to save feedback.";
+        return;
+      }
+      feedbackStatus.textContent =
+        "Feedback saved locally for offline learning.";
+    }
+
+    document
+      .getElementById("feedback-positive")
+      .addEventListener("click", () => sendFeedback(true));
+    document
+      .getElementById("feedback-negative")
+      .addEventListener("click", () => sendFeedback(false));
+
+    // --- ATA Quick Reference ---
+    document.querySelectorAll(".ata-ref-btn").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const ata = btn.dataset.ata;
+        ataRefDetail.style.display = "none";
+        ataRefDetail.innerHTML = '<span class="text-muted">Loading...</span>';
+        ataRefDetail.style.display = "block";
+        try {
+          const res = await fetch(`/api/ai/ata/${encodeURIComponent(ata)}`);
+          const json = await res.json();
+          if (!json.success) {
+            ataRefDetail.innerHTML = `<span class="text-danger">${json.error || "Not found."}</span>`;
+            return;
+          }
+          const d = json.data;
+          const steps = (d.troubleshooting_steps || [])
+            .map((s) => `<li>${s}</li>`)
+            .join("");
+          const actions = (d.quick_actions || [])
+            .map((a) => `<li>${a}</li>`)
+            .join("");
+          const manuals = (d.manuals || []).join(", ") || "N/A";
+          ataRefDetail.innerHTML = `
+          <div class="ai-depth-layer">
+            <strong>ATA ${ata} — ${d.system || "N/A"}</strong>
+            <div class="mt-2">
+              <strong>Quick Actions:</strong>
+              <ul class="mb-2">${actions || "<li>N/A</li>"}</ul>
+              <strong>Troubleshooting Steps:</strong>
+              <ol>${steps || "<li>N/A</li>"}</ol>
+              <div class="text-muted"><small>Manuals: ${manuals} | Est. ${d.typical_resolution_hours || "N/A"}h</small></div>
+            </div>
+          </div>
+        `;
+        } catch (e) {
+          ataRefDetail.innerHTML =
+            '<span class="text-danger">Request failed.</span>';
+        }
+      });
+    });
+
+    // --- AI Recalibration ---
+    document
+      .getElementById("btn-recalibrate")
+      .addEventListener("click", async () => {
+        recalibrateOutput.innerHTML =
+          '<span class="text-muted">Recalibrating...</span>';
+        try {
+          const res = await fetch("/api/ai/recalibrate", { method: "POST" });
+          const json = await res.json();
+          if (!json.success) {
+            recalibrateOutput.innerHTML = `<span class="text-danger">${json.error || "Recalibration failed."}</span>`;
+            return;
+          }
+          if (!json.total_samples_analyzed) {
+            recalibrateOutput.innerHTML =
+              '<span class="text-muted">No feedback samples available yet. Run analyses and submit feedback to build calibration data.</span>';
+            return;
+          }
+          const calMap = Object.values(json.calibration || {});
+          const signalColor = {
+            boost: "success",
+            stable: "secondary",
+            review: "danger",
+          };
+          const rows = calMap
+            .sort((a, b) => b.total_samples - a.total_samples)
+            .map(
+              (c) =>
+                `<tr>
+          <td><strong>ATA ${c.ata}</strong></td>
+          <td>${c.acceptance_rate}%</td>
+          <td>${c.total_samples}</td>
+          <td><span class="badge bg-${signalColor[c.signal] || "secondary"}">${c.signal}</span></td>
+        </tr>`,
+            )
+            .join("");
+          const reviewItems = (json.review_list || [])
+            .map(
+              (r) => `<li>ATA ${r.ata} — ${r.acceptance_rate}% acceptance</li>`,
+            )
+            .join("");
+          recalibrateOutput.innerHTML = `
+        <div class="mb-2">
+          <strong>Overall acceptance:</strong> ${json.overall_acceptance_pct}%
+          &nbsp;|&nbsp; <strong>Samples:</strong> ${json.total_samples_analyzed}
+          &nbsp;|&nbsp; <strong>ATA chapters:</strong> ${json.ata_count}
+          &nbsp;|&nbsp; <span class="text-danger"><strong>Review required:</strong> ${json.review_required_count}</span>
+        </div>
+        ${reviewItems ? `<div class="mb-2 text-danger"><strong>ATAs flagged for strategy review:</strong><ul class="mb-1">${reviewItems}</ul></div>` : ""}
+        <div class="table-responsive">
+          <table class="table table-sm mb-0">
+            <thead><tr><th>ATA</th><th>Acceptance</th><th>Samples</th><th>Signal</th></tr></thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>
+        <div class="text-muted mt-1"><small>Calibrated: ${json.calibration_timestamp}</small></div>
+      `;
+        } catch (e) {
+          recalibrateOutput.innerHTML =
+            '<span class="text-danger">Request failed.</span>';
+        }
+      });
+
+    async function bootstrapChat() {
+      const aiModelInput = document.getElementById("ai-model");
+      if (aiModelInput) {
+        aiModelInput.dataset.autoManaged = "true";
+      }
+      applyFamilyPreset("ALL_FLEET", { force: true });
+      loadChatHistory();
+      await syncHistoryFromServer();
+      syncFiltersFromAnalysisInputs();
+      renderHistoryPanel();
+      renderContextPanel([]);
+      renderFollowupPanel([]);
+      renderLearningPanel(null, null);
+      renderMissionQueue(null, []);
+      await loadLearningBaseline();
+
+      // IMPROVEMENT 10.1: Show user-controlled startup message instead of auto-loading ATA 49
+      summaryOutput.innerHTML = `
+        <div class="alert alert-info mb-0">
+          <strong>🎯 AI Analysis Control Panel</strong><br>
+          <small style="display:block; margin-top:0.5rem;">
+            Most common failure keyword: <strong>${document.getElementById("chart-ata-filter")?.querySelector("[data-value]")?.textContent || "Select below"}</strong><br>
+            Choose your scope: Select <strong>Tail</strong> (single aircraft), <strong>Model</strong> (family), or <strong>Global</strong> (all fleet).<br>
+            Then click <strong>Load Technical Summary</strong> to analyze.<br>
+            Or use the <strong>Chat</strong> panel to ask specific questions.
+          </small>
+        </div>
+      `;
+      hydrateChatBoxFromHistory();
+
+      const seedPrompt = new URLSearchParams(window.location.search).get(
+        "seed",
+      );
+      if (seedPrompt) {
+        const input = document.getElementById("chat-input");
+        if (input) {
+          input.value = seedPrompt;
+          document.getElementById("chat-send").click();
+        }
+        const cleanUrl = `${window.location.pathname}`;
+        window.history.replaceState({}, document.title, cleanUrl);
+      }
+    }
+
+    bootstrapChat();
+    window.__aiPrimaryRuntimeReady = true;
+
+    // V10 — Dark/light theme toggle com persistência localStorage
+    (function () {
+      const toggle = document.getElementById("ai-theme-toggle");
+      const icon = document.getElementById("ai-theme-icon");
+      const THEME_KEY = "fly_mexicana_theme_v10";
+      function applyTheme(dark) {
+        document.documentElement.setAttribute(
+          "data-theme",
+          dark ? "dark" : "light",
+        );
+        if (icon)
+          icon.className = dark ? "bi bi-sun-fill" : "bi bi-moon-stars-fill";
+        try {
+          localStorage.setItem(THEME_KEY, dark ? "dark" : "light");
+        } catch (e) {}
+      }
+      try {
+        if (localStorage.getItem(THEME_KEY) === "dark") applyTheme(true);
+      } catch (e) {}
+      if (toggle) {
+        toggle.addEventListener("click", () => {
+          applyTheme(
+            document.documentElement.getAttribute("data-theme") !== "dark",
+          );
+        });
+      }
+    })();
+  })();
+</script>
+<script>
+  (function () {
+    "use strict";
+
+    // Failsafe runtime binder: keeps key actions working even if another script errors.
+    if (window.__aiPrimaryRuntimeReady || window.__aiRuntimeFailsafeBound) {
+      return;
+    }
+    window.__aiRuntimeFailsafeBound = true;
+
+    const analysisOutput = document.getElementById("analysis-output");
+    const summaryOutput = document.getElementById("summary-output");
+    const chatBox = document.getElementById("chat-box");
+    const chatInput = document.getElementById("chat-input");
+    const btnAnalyze = document.getElementById("btn-analyze");
+    const btnSummary = document.getElementById("btn-summary");
+    const btnChatSend = document.getElementById("chat-send");
+
+    async function safeJson(url, options) {
+      const res = await fetch(url, options || {});
+      let data = {};
+      try {
+        data = await res.json();
+      } catch (e) {
+        data = { success: false, error: "Invalid server response." };
+      }
+      if (!res.ok && !data.success) {
+        throw new Error(data.error || `HTTP ${res.status}`);
+      }
+      return data;
+    }
+
+    function appendChat(role, text) {
+      if (!chatBox) return;
+      const wrap = document.createElement("div");
+      wrap.className =
+        role === "user" ? "ai-msg-wrapper user" : "ai-msg-wrapper bot";
+      const msg = document.createElement("div");
+      msg.className = role === "user" ? "ai-msg user" : "ai-msg bot";
+      msg.textContent = text || "(sem conteúdo)";
+      wrap.appendChild(msg);
+      chatBox.appendChild(wrap);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    async function runSummary() {
+      if (!summaryOutput) return;
+      summaryOutput.innerHTML =
+        '<div class="text-muted">Loading summary...</div>';
+      try {
+        const json = await safeJson("/api/ai/summary");
+        const summary = (json && json.summary) || {};
+        const trend = Array.isArray(summary.monthly_trend)
+          ? summary.monthly_trend.length
+          : 0;
+        const queue =
+          (summary.intelligence_depth &&
+            summary.intelligence_depth.intervention_queue) ||
+          [];
+        summaryOutput.innerHTML = `
+              <div class="ai-depth-layer">
+                <strong>Summary loaded</strong><br>
+                Records: ${json.records_count || 0}<br>
+                Monthly trend points: ${trend}<br>
+                Mission queue items: ${Array.isArray(queue) ? queue.length : 0}
+              </div>
+            `;
+      } catch (err) {
+        summaryOutput.innerHTML = `<div class="alert alert-danger mb-0">${err.message || "Summary request failed."}</div>`;
+      }
+    }
+
+    if (btnAnalyze) {
+      btnAnalyze.addEventListener("click", async function () {
+        const ata = document.getElementById("ai-ata")?.value || "";
+        const tail = document.getElementById("ai-tail")?.value || "";
+        const model = document.getElementById("ai-model")?.value || "ALL_FLEET";
+        const category =
+          document.getElementById("ai-category")?.value || "performance";
+        const description =
+          document.getElementById("ai-description")?.value || "";
+
+        if (analysisOutput) {
+          analysisOutput.innerHTML =
+            '<div class="text-muted">Analyzing...</div>';
+        }
+        btnAnalyze.disabled = true;
+        try {
+          const json = await safeJson("/api/ai/analyze_failure", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ata, tail, model, category, description }),
+          });
+          const d = json.data || {};
+          if (analysisOutput) {
+            analysisOutput.innerHTML = `
+                  <div class="ai-depth-layer">
+                    <strong>Analysis complete</strong><br>
+                    Priority score: ${d.priority_score ?? "N/A"}<br>
+                    Confidence: ${d.confidence ?? "N/A"}<br>
+                    Actions: ${Array.isArray(d.recommended_actions) ? d.recommended_actions.length : 0}
+                  </div>
+                `;
+          }
+          await runSummary();
+        } catch (err) {
+          if (analysisOutput) {
+            analysisOutput.innerHTML = `<div class="alert alert-danger mb-0">${err.message || "Analysis request failed."}</div>`;
+          }
+        } finally {
+          btnAnalyze.disabled = false;
+        }
+      });
+    }
+
+    if (btnSummary) {
+      btnSummary.addEventListener("click", async function () {
+        btnSummary.disabled = true;
+        try {
+          await runSummary();
+        } finally {
+          btnSummary.disabled = false;
+        }
+      });
+    }
+
+    if (btnChatSend) {
+      btnChatSend.addEventListener("click", async function () {
+        let query = String(chatInput?.value || "").trim();
+        if (!query) {
+          query =
+            "Provide a concise maintenance copilot answer for the current case.";
+        }
+        appendChat("user", query);
+        if (chatInput) chatInput.value = "";
+        btnChatSend.disabled = true;
+        try {
+          const json = await safeJson("/api/ai/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ query, scope: "global", deep_mode: true }),
+          });
+          const data = json.data || {};
+          const history = Array.isArray(data.conversation_history)
+            ? data.conversation_history
+            : [];
+          const lastBot = history.length
+            ? [...history]
+                .reverse()
+                .find(
+                  (item) => String(item?.type || "").toLowerCase() === "bot",
+                )
+            : null;
+          const answer = (
+            data.answer ||
+            data.response ||
+            data.text ||
+            lastBot?.text ||
+            "No answer returned."
+          ).toString();
+          appendChat("bot", answer);
+        } catch (err) {
+          appendChat("bot", "Erro no AI Copilot: " + (err.message || err));
+        } finally {
+          btnChatSend.disabled = false;
+        }
+      });
+    }
+
+    const btnMissionLoad = document.getElementById("btn-mission-load");
+    const btnMissionPush = document.getElementById("btn-mission-push");
+    const btnMissionClear = document.getElementById("btn-mission-clear");
+    const missionStatus = document.getElementById("mission-queue-status");
+
+    function setMissionStatus(msg, isError) {
+      if (!missionStatus) return;
+      missionStatus.style.display = "";
+      missionStatus.className =
+        "small mb-2 " + (isError ? "text-danger" : "text-success");
+      missionStatus.textContent = msg;
+    }
+
+    if (btnMissionLoad) {
+      btnMissionLoad.addEventListener("click", async function () {
+        try {
+          const json = await safeJson("/api/mission/queue");
+          setMissionStatus(`Queue loaded: ${json.count || 0} item(s).`, false);
+        } catch (err) {
+          setMissionStatus(
+            "Failed to load queue: " + (err.message || err),
+            true,
+          );
+        }
+      });
+    }
+
+    if (btnMissionPush) {
+      btnMissionPush.addEventListener("click", async function () {
+        setMissionStatus(
+          "Use Analyze + Summary first to generate queue items before pushing.",
+          false,
+        );
+      });
+    }
+
+    if (btnMissionClear) {
+      btnMissionClear.addEventListener("click", async function () {
+        setMissionStatus(
+          "Clear queue action is available after loading queue items.",
+          false,
+        );
+      });
+    }
+  })();
+</script>
+
+  </body>
+</html>
+

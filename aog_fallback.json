@@ -1,0 +1,67 @@
+[
+  {
+    "id": 83,
+    "date": "2026-04-23",
+    "tail": "XA-MXB",
+    "interruption_type": "AOG ",
+    "ata": "72",
+    "fail_code": "732123M0009",
+    "location": "NLU",
+    "event_description": "ENG 2 CONTROL FAULT with message of the BURNER PR HI SNSR DISAG [E2], message NO go ",
+    "maintenance_actions": "Maintenance requested EBPS \n\n[RETURN] replaced the EBSP robed from XA-MXF",
+    "expected_return": null,
+    "release_date": "2026-05-03"
+  },
+  {
+    "id": 82,
+    "date": "2026-04-11",
+    "tail": "XA-MXC",
+    "interruption_type": "AOG ",
+    "ata": "30",
+    "fail_code": "\t 341301M0024",
+    "location": "GDL",
+    "event_description": "ADS 1 HTR FAIL with ADSP4 LW RH/ADSP1 UP LH [FCS] FAULT",
+    "maintenance_actions": "Will replace de ADSP1 and ADSP4\n\n[RETURN] replaced the ADS1 and 4 and pending replacement of the CB ADSP 1 MT",
+    "expected_return": "2026-04-15",
+    "release_date": "2026-04-14"
+  },
+  {
+    "id": 81,
+    "date": "2026-03-29",
+    "tail": "XA-MXB",
+    "interruption_type": "AOG ",
+    "ata": "24",
+    "fail_code": "314104M4145",
+    "location": "NLU",
+    "event_description": "AVNX MAU 2B FAIL with MAU2 NIC4 ACTIVITY [CMC] FAULT",
+    "maintenance_actions": "troubleshooting on going, first step replacement of the Power Supply \n\n[RETURN] replaced the Power Supply 1 of the  MAU 2",
+    "expected_return": null,
+    "release_date": "2026-03-31"
+  },
+  {
+    "id": 12,
+    "date": "2026-02-10",
+    "tail": "XA-MXB",
+    "interruption_type": "AOG",
+    "ata": "05",
+    "fail_code": "00",
+    "location": "NLU",
+    "event_description": "During the pushback operation, the ground crew detected that the safety fuse pin of the NLG shear pin was found broken.",
+    "maintenance_actions": "Maintenance carries out the inspection in accordance with AMM 05-50-34 and l replace the pin as per AIPC 32-21-14, position 70. Pending action \r\n\r\n\r\n\r\nHowever, Mexicana does not have the required jacks to perform subtask 710-002-A",
+    "expected_return": "2026-02-20",
+    "release_date": "2026-02-20"
+  },
+  {
+    "id": 11,
+    "date": "2026-01-02",
+    "tail": "XA-MXC",
+    "interruption_type": "Air turn back",
+    "ata": "29",
+    "fail_code": "293101M0002",
+    "location": "NLU",
+    "event_description": "HYD 1 LOW PRESS with HYD 1 PRESS XDCR/WRG FAULT message (pressure transducer requested).",
+    "maintenance_actions": "Maintenance requested a Manifold assembly",
+    "expected_return": "2026-01-07",
+    "release_date": "2026-01-07"
+  }
+]

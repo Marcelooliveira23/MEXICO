@@ -1,0 +1,35 @@
+{
+  "admin": {
+    "id": 1,
+    "username": "admin",
+    "email": "admin@mexicana.com",
+    "password_hash": "scrypt:32768:8:1$RjJPbcmIZ8aQqq0M$ed34fc7b1dd15029dd58f326dbae221d134df6f62b0810542aeb54412ef9aabec139d4ef676dd28257ae4cceb73e61029063a0cfd666c50e5592bd8803ef1c5e",
+    "role": "Admin",
+    "is_active": true,
+    "created_at": "2025-11-13T08:54:20",
+    "password": "scrypt:32768:8:1$RjJPbcmIZ8aQqq0M$ed34fc7b1dd15029dd58f326dbae221d134df6f62b0810542aeb54412ef9aabec139d4ef676dd28257ae4cceb73e61029063a0cfd666c50e5592bd8803ef1c5e",
+    "access_level": "Admin"
+  },
+  "technician": {
+    "id": 2,
+    "username": "technician",
+    "email": "technician@mexicana.com",
+    "password_hash": "scrypt:32768:8:1$QljKy5XOWTPMvp6C$1525a26afd6eeaf8cdc80657494e1eebeaf2b89b83a88443d92e7b04b92ac1eaac6224eefccc4cd7b907d19b381099a11381ecbf1e1fc59ca6c3e8306e3b7cf1",
+    "role": "Technician",
+    "is_active": true,
+    "created_at": "2025-11-13T08:54:20",
+    "password": "scrypt:32768:8:1$QljKy5XOWTPMvp6C$1525a26afd6eeaf8cdc80657494e1eebeaf2b89b83a88443d92e7b04b92ac1eaac6224eefccc4cd7b907d19b381099a11381ecbf1e1fc59ca6c3e8306e3b7cf1",
+    "access_level": "Technician"
+  },
+  "pilot": {
+    "id": 3,
+    "username": "pilot",
+    "email": "pilot@mexicana.com",
+    "password_hash": "scrypt:32768:8:1$2QvKN5yuIhnwbAov$69214b8466f92a887519126c9017dc6fd34e4f551889f5cb003ad8077c162e0bd03f2484126b3019e28c8aa71f25fa2945ce1adfecd7d52c8285df959d0f7273",
+    "role": "Pilot",
+    "is_active": true,
+    "created_at": "2025-11-13T08:54:20",
+    "password": "scrypt:32768:8:1$2QvKN5yuIhnwbAov$69214b8466f92a887519126c9017dc6fd34e4f551889f5cb003ad8077c162e0bd03f2484126b3019e28c8aa71f25fa2945ce1adfecd7d52c8285df959d0f7273",
+    "access_level": "Pilot"
+  }
+}

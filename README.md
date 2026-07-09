@@ -1,5 +1,3 @@
-# MEXICO
-
 # Troubleshooting System - Guia da Ferramenta
 
 Sistema web para suporte a manutencao aeronautica, com foco em registro de falhas, acompanhamento de frota, AOG, MEL, ETD, LRU e analise assistida por IA.
@@ -30,24 +28,24 @@ O sistema opera com MySQL como base principal e possui mecanismo de fallback em 
 
 As paginas principais renderizadas pelo backend sao:
 
-| Rota                      | Template                      | Finalidade                                 |
-| ------------------------- | ----------------------------- | ------------------------------------------ |
-| /login                    | login.html                    | Autenticacao de usuarios                   |
-| /menu                     | menu.html                     | Navegacao central do sistema               |
-| /change_password          | change_password.html          | Alteracao de senha                         |
-| /user_management          | user_management.html          | Administracao de usuarios                  |
-| /cadastro                 | cadastro.html                 | Cadastro de falhas/manutencao              |
-| /horas_ciclos             | horas_ciclos.html             | Controle de FH/FC                          |
-| /fleet_status_report      | fleet_status_report.html      | Situacao operacional da frota              |
-| /logbook_data             | logbook_data.html             | Consulta de registros e exportacao         |
-| /out_of_service           | out_of_service.html           | Controle AOG / aeronave fora de servico    |
-| /tail_cadastro            | tail_cadastro.html            | Cadastro e consolidacao de tails           |
-| /mel_itens                | mel_itens.html                | Gestao de itens MEL                        |
-| /etd                      | etd.html                      | Gestao ETD e compliance                    |
-| /lru_removal_installation | lru_removal_installation.html | Historico de remocao/instalacao LRU        |
-| /ai_analysis              | ai_analysis.html              | Dashboard de analise com IA                |
-| /ui/v10                   | ui_v10_professional.html      | Interface profissional de copiloto IA      |
-| /exceedance_analysis      | exceedance_analysis.html      | Analise de exceedance com apoio documental |
+| Rota | Template | Finalidade |
+|---|---|---|
+| /login | login.html | Autenticacao de usuarios |
+| /menu | menu.html | Navegacao central do sistema |
+| /change_password | change_password.html | Alteracao de senha |
+| /user_management | user_management.html | Administracao de usuarios |
+| /cadastro | cadastro.html | Cadastro de falhas/manutencao |
+| /horas_ciclos | horas_ciclos.html | Controle de FH/FC |
+| /fleet_status_report | fleet_status_report.html | Situacao operacional da frota |
+| /logbook_data | logbook_data.html | Consulta de registros e exportacao |
+| /out_of_service | out_of_service.html | Controle AOG / aeronave fora de servico |
+| /tail_cadastro | tail_cadastro.html | Cadastro e consolidacao de tails |
+| /mel_itens | mel_itens.html | Gestao de itens MEL |
+| /etd | etd.html | Gestao ETD e compliance |
+| /lru_removal_installation | lru_removal_installation.html | Historico de remocao/instalacao LRU |
+| /ai_analysis | ai_analysis.html | Dashboard de analise com IA |
+| /ui/v10 | ui_v10_professional.html | Interface profissional de copiloto IA |
+| /exceedance_analysis | exceedance_analysis.html | Analise de exceedance com apoio documental |
 
 Paginas auxiliares:
 

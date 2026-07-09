@@ -1,0 +1,38 @@
+[
+  {
+    "ata": "",
+    "helpful": false,
+    "query": "fleet status",
+    "response_excerpt": "",
+    "source": "ai_analysis_dashboard",
+    "timestamp": "2026-03-25T15:55:15.113363+00:00",
+    "id": 1
+  },
+  {
+    "ata": "",
+    "helpful": false,
+    "query": "Model E195-E2",
+    "response_excerpt": "",
+    "source": "ai_analysis_dashboard",
+    "timestamp": "2026-03-25T17:17:39.969579+00:00",
+    "id": 2
+  },
+  {
+    "ata": "49",
+    "helpful": false,
+    "query": "quantity of the ATA 49 and solution performed",
+    "response_excerpt": "APUC BITE | APU oil level | Inlet door inspection | Starter motor test",
+    "source": "ai_analysis_dashboard",
+    "timestamp": "2026-03-29T19:08:29.792773+00:00",
+    "id": 3
+  },
+  {
+    "ata": "49",
+    "helpful": true,
+    "query": "ATA com maior numero de falhas",
+    "response_excerpt": "APUC BITE | APU oil level | Inlet door inspection | Starter motor test",
+    "source": "ai_analysis_dashboard",
+    "timestamp": "2026-04-02T18:48:07.753568+00:00",
+    "id": 4
+  }
+]

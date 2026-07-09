@@ -1,0 +1,51 @@
+[
+  {
+    "tail": "XA-MXA",
+    "serial": "20186",
+    "fh": "1821.84",
+    "fc": "1288",
+    "data_cadastro": "2026-06-19"
+  },
+  {
+    "tail": "XA-MXB",
+    "serial": "20189",
+    "fh": "1543.70",
+    "fc": "1128",
+    "data_cadastro": "2026-06-19"
+  },
+  {
+    "tail": "XA-MXC",
+    "serial": "20193",
+    "fh": "1526.48",
+    "fc": "1044",
+    "data_cadastro": "2026-06-19"
+  },
+  {
+    "tail": "XA-MXD",
+    "serial": "20210",
+    "fh": "1232.42",
+    "fc": "895",
+    "data_cadastro": "2026-06-19"
+  },
+  {
+    "tail": "XA-MXE",
+    "serial": "20210",
+    "fh": "1283.58",
+    "fc": "880",
+    "data_cadastro": "2026-06-19"
+  },
+  {
+    "tail": "XA-MXF",
+    "serial": "20219",
+    "fh": "50.00",
+    "fc": "31",
+    "data_cadastro": "2026-06-19"
+  },
+  {
+    "tail": "XA-MXG",
+    "serial": "20224",
+    "fh": "3.00",
+    "fc": "3",
+    "data_cadastro": "2026-06-19"
+  }
+]
