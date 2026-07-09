@@ -1,0 +1,9 @@
+{
+  "powerquery.client.additionalSymbolsDirectories": [
+    "e:/New folder (2)/Troubleshooting/.vscode/excel-pq-symbols"
+  ],
+  "protobuf.buf.path": "c:\\Users\\MEEOLIVE\\AppData\\Roaming\\Code\\User\\globalStorage\\drblury.protobuf-vsc\\bin\\buf.exe",
+  "protobuf.externalLinter.bufPath": "c:\\Users\\MEEOLIVE\\AppData\\Roaming\\Code\\User\\globalStorage\\drblury.protobuf-vsc\\bin\\buf.exe",
+  "python-envs.defaultEnvManager": "ms-python.python:system",
+  "chat.agent.maxRequests": 501
+}
