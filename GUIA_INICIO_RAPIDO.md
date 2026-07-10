@@ -1,4 +1,4 @@
-# 🚀 GUIA DE INÍCIO RÁPIDO - Mexicana Troubleshooting System v2.0
+# GUIA DE INÍCIO RÁPIDO - Mexicana Troubleshooting System v2.0
 
 **Status**: ✅ Concluida  
 **Atualizado**: 21 de Março de 2026  
