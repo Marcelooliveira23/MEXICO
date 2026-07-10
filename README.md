@@ -174,4 +174,4 @@ Recomendacao: alterar senhas em ambiente real.
 
 ---
 
-Este README descreve a ferramenta com foco funcional e operacional. Se quiser, posso gerar tambem uma versao executiva curta (1 pagina) e outra tecnica detalhada para equipe de desenvolvimento.
+
